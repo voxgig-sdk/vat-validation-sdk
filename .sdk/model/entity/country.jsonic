@@ -1,0 +1,97 @@
+# Entity: country
+
+main: kit: entity: country: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "capital"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "currency"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "emoji"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "iso2"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "iso3"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "latitude"
+      req: true
+      type: "`$NUMBER`"
+    }
+    {
+      name: "longitude"
+      req: true
+      type: "`$NUMBER`"
+    }
+    {
+      name: "name"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "numeric_code"
+      req: true
+      type: "`$INTEGER`"
+    }
+    {
+      name: "phone_code"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "region"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "subregion"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "tld"
+      req: true
+      type: "`$STRING`"
+    }
+  ]
+
+  name: "country"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          method: "GET"
+          orig: "/countries"
+          parts: [
+            "countries"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

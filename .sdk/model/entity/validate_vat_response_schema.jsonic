@@ -1,0 +1,73 @@
+# Entity: validate_vat_response_schema
+
+main: kit: entity: validate_vat_response_schema: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "address"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "country_code"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "name"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "valid"
+      req: true
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "vat_number"
+      req: true
+      type: "`$STRING`"
+    }
+  ]
+
+  name: "validate_vat_response_schema"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            query: [
+              {
+                kind: "query"
+                name: "vat_number"
+                orig: "vat_number"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/vat"
+          parts: [
+            "vat"
+          ]
+          select: {
+            exist: [
+              "vat_number"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

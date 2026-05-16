@@ -1,0 +1,28 @@
+# BasicValidateIbanResponseSchemaFlow
+
+main: kit: flow: BasicValidateIbanResponseSchemaFlow:
+{
+  entity: "validate_iban_response_schema",
+  kind: "basic",
+  name: "BasicValidateIbanResponseSchemaFlow",
+  step: [
+    {
+      input: {
+        ref: "validate_iban_response_schema_ref01",
+        srcdatavar: "validate_iban_response_schema_ref01_data",
+        suffix: "_dt0"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-validate_iban_response_schema_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicValidateIbanResponseSchemaFlow"
+}

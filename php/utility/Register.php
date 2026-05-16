@@ -1,0 +1,67 @@
+<?php
+declare(strict_types=1);
+
+// VatValidation SDK utility registration
+
+require_once __DIR__ . '/../core/UtilityType.php';
+require_once __DIR__ . '/Clean.php';
+require_once __DIR__ . '/Done.php';
+require_once __DIR__ . '/MakeError.php';
+require_once __DIR__ . '/FeatureAdd.php';
+require_once __DIR__ . '/FeatureHook.php';
+require_once __DIR__ . '/FeatureInit.php';
+require_once __DIR__ . '/Fetcher.php';
+require_once __DIR__ . '/MakeFetchDef.php';
+require_once __DIR__ . '/MakeContext.php';
+require_once __DIR__ . '/MakeOptions.php';
+require_once __DIR__ . '/MakeRequest.php';
+require_once __DIR__ . '/MakeResponse.php';
+require_once __DIR__ . '/MakeResult.php';
+require_once __DIR__ . '/MakePoint.php';
+require_once __DIR__ . '/MakeSpec.php';
+require_once __DIR__ . '/MakeUrl.php';
+require_once __DIR__ . '/Param.php';
+require_once __DIR__ . '/PrepareAuth.php';
+require_once __DIR__ . '/PrepareBody.php';
+require_once __DIR__ . '/PrepareHeaders.php';
+require_once __DIR__ . '/PrepareMethod.php';
+require_once __DIR__ . '/PrepareParams.php';
+require_once __DIR__ . '/PreparePath.php';
+require_once __DIR__ . '/PrepareQuery.php';
+require_once __DIR__ . '/ResultBasic.php';
+require_once __DIR__ . '/ResultBody.php';
+require_once __DIR__ . '/ResultHeaders.php';
+require_once __DIR__ . '/TransformRequest.php';
+require_once __DIR__ . '/TransformResponse.php';
+
+VatValidationUtility::setRegistrar(function (VatValidationUtility $u): void {
+    $u->clean = [VatValidationClean::class, 'call'];
+    $u->done = [VatValidationDone::class, 'call'];
+    $u->make_error = [VatValidationMakeError::class, 'call'];
+    $u->feature_add = [VatValidationFeatureAdd::class, 'call'];
+    $u->feature_hook = [VatValidationFeatureHook::class, 'call'];
+    $u->feature_init = [VatValidationFeatureInit::class, 'call'];
+    $u->fetcher = [VatValidationFetcher::class, 'call'];
+    $u->make_fetch_def = [VatValidationMakeFetchDef::class, 'call'];
+    $u->make_context = [VatValidationMakeContext::class, 'call'];
+    $u->make_options = [VatValidationMakeOptions::class, 'call'];
+    $u->make_request = [VatValidationMakeRequest::class, 'call'];
+    $u->make_response = [VatValidationMakeResponse::class, 'call'];
+    $u->make_result = [VatValidationMakeResult::class, 'call'];
+    $u->make_point = [VatValidationMakePoint::class, 'call'];
+    $u->make_spec = [VatValidationMakeSpec::class, 'call'];
+    $u->make_url = [VatValidationMakeUrl::class, 'call'];
+    $u->param = [VatValidationParam::class, 'call'];
+    $u->prepare_auth = [VatValidationPrepareAuth::class, 'call'];
+    $u->prepare_body = [VatValidationPrepareBody::class, 'call'];
+    $u->prepare_headers = [VatValidationPrepareHeaders::class, 'call'];
+    $u->prepare_method = [VatValidationPrepareMethod::class, 'call'];
+    $u->prepare_params = [VatValidationPrepareParams::class, 'call'];
+    $u->prepare_path = [VatValidationPreparePath::class, 'call'];
+    $u->prepare_query = [VatValidationPrepareQuery::class, 'call'];
+    $u->result_basic = [VatValidationResultBasic::class, 'call'];
+    $u->result_body = [VatValidationResultBody::class, 'call'];
+    $u->result_headers = [VatValidationResultHeaders::class, 'call'];
+    $u->transform_request = [VatValidationTransformRequest::class, 'call'];
+    $u->transform_response = [VatValidationTransformResponse::class, 'call'];
+});

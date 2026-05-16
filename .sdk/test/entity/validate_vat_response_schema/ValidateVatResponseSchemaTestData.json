@@ -1,0 +1,38 @@
+{
+  "existing": {
+    "validate_vat_response_schema": {
+      "VALIDATE_VAT_RESPONSE_SCHEMA00": {
+        "address": "s32",
+        "country_code": "s33",
+        "name": "s34",
+        "valid": false,
+        "vat_number": "s36"
+      },
+      "VALIDATE_VAT_RESPONSE_SCHEMA01": {
+        "address": "s64",
+        "country_code": "s65",
+        "name": "s66",
+        "valid": false,
+        "vat_number": "s68"
+      },
+      "VALIDATE_VAT_RESPONSE_SCHEMA02": {
+        "address": "s96",
+        "country_code": "s97",
+        "name": "s98",
+        "valid": false,
+        "vat_number": "s9a"
+      }
+    }
+  },
+  "new": {
+    "validate_vat_response_schema": {
+      "validate_vat_response_schema_ref01": {
+        "address": "sc8",
+        "country_code": "sc9",
+        "name": "sca",
+        "valid": false,
+        "vat_number": "scc"
+      }
+    }
+  }
+}

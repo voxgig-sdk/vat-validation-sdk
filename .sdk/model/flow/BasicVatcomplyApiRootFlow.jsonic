@@ -1,0 +1,28 @@
+# BasicVatcomplyApiRootFlow
+
+main: kit: flow: BasicVatcomplyApiRootFlow:
+{
+  entity: "vatcomply_api_root",
+  kind: "basic",
+  name: "BasicVatcomplyApiRootFlow",
+  step: [
+    {
+      input: {
+        ref: "vatcomply_api_root_ref01",
+        srcdatavar: "vatcomply_api_root_ref01_data",
+        suffix: "_dt0"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-vatcomply_api_root_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicVatcomplyApiRootFlow"
+}

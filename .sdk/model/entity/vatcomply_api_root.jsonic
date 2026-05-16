@@ -1,0 +1,64 @@
+# Entity: vatcomply_api_root
+
+main: kit: entity: vatcomply_api_root: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "contact"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "description"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "documentation"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "endpoint"
+      req: true
+      type: "`$OBJECT`"
+    }
+    {
+      name: "name"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "status"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "version"
+      req: true
+      type: "`$STRING`"
+    }
+  ]
+
+  name: "vatcomply_api_root"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          method: "GET"
+          orig: "/"
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

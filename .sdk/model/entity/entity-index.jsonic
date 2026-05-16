@@ -1,0 +1,9 @@
+# Entity Models
+
+@"country.jsonic"
+@"currency.jsonic"
+@"geolocate.jsonic"
+@"rate.jsonic"
+@"validate_iban_response_schema.jsonic"
+@"validate_vat_response_schema.jsonic"
+@"vatcomply_api_root.jsonic"

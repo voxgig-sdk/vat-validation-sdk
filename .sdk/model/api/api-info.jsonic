@@ -1,0 +1,28 @@
+# API Information
+
+
+main: {
+  kit: {
+    info: {
+      contact: {
+        email: "support@vatcomply.com"
+        name: "VATcomply"
+        url: "https://www.vatcomply.com"
+      }
+      description: "API for automated VAT compliance and currency conversion."
+      license: {
+        name: "MIT License"
+        url: "https://github.com/madisvain/vatcomply/blob/master/LICENSE"
+      }
+      servers: [
+        {
+          url: "https://api.vatcomply.com"
+        }
+      ]
+      title: "Vatcomply API"
+      version: "1.0.0"
+    }
+  }
+}
+
+}

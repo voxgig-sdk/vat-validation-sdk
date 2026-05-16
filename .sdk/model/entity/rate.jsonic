@@ -1,0 +1,80 @@
+# Entity: rate
+
+main: kit: entity: rate: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "base"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "date"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "rate"
+      req: true
+      type: "`$OBJECT`"
+    }
+  ]
+
+  name: "rate"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            query: [
+              {
+                example: "EUR"
+                kind: "query"
+                name: "base"
+                orig: "base"
+                reqd: false
+                type: "`$ANY`"
+              }
+              {
+                kind: "query"
+                name: "date"
+                orig: "date"
+                reqd: false
+                type: "`$ANY`"
+              }
+              {
+                kind: "query"
+                name: "symbol"
+                orig: "symbol"
+                reqd: false
+                type: "`$ANY`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/rates"
+          parts: [
+            "rates"
+          ]
+          select: {
+            exist: [
+              "base"
+              "date"
+              "symbol"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

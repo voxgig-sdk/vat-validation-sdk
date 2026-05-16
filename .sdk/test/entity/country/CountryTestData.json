@@ -1,0 +1,70 @@
+{
+  "existing": {
+    "country": {
+      "COUNTRY00": {
+        "capital": "s82",
+        "currency": "s83",
+        "emoji": "s84",
+        "iso2": "s85",
+        "iso3": "s86",
+        "latitude": 135,
+        "longitude": 136,
+        "name": "s89",
+        "numeric_code": "s8a",
+        "phone_code": "s8b",
+        "region": "s8c",
+        "subregion": "s8d",
+        "tld": "s8e"
+      },
+      "COUNTRY01": {
+        "capital": "s104",
+        "currency": "s105",
+        "emoji": "s106",
+        "iso2": "s107",
+        "iso3": "s108",
+        "latitude": 265,
+        "longitude": 266,
+        "name": "s10b",
+        "numeric_code": "s10c",
+        "phone_code": "s10d",
+        "region": "s10e",
+        "subregion": "s10f",
+        "tld": "s110"
+      },
+      "COUNTRY02": {
+        "capital": "s186",
+        "currency": "s187",
+        "emoji": "s188",
+        "iso2": "s189",
+        "iso3": "s18a",
+        "latitude": 395,
+        "longitude": 396,
+        "name": "s18d",
+        "numeric_code": "s18e",
+        "phone_code": "s18f",
+        "region": "s190",
+        "subregion": "s191",
+        "tld": "s192"
+      }
+    }
+  },
+  "new": {
+    "country": {
+      "country_ref01": {
+        "capital": "s208",
+        "currency": "s209",
+        "emoji": "s20a",
+        "iso2": "s20b",
+        "iso3": "s20c",
+        "latitude": 525,
+        "longitude": 526,
+        "name": "s20f",
+        "numeric_code": "s210",
+        "phone_code": "s211",
+        "region": "s212",
+        "subregion": "s213",
+        "tld": "s214"
+      }
+    }
+  }
+}

@@ -1,0 +1,50 @@
+# Guide
+
+guide: {
+  metrics: count: entity: 7
+  metrics: count: path: 7
+  metrics: count: method: 7
+
+  entity: country: {
+    path: "/countries": {
+      op: list: method: *GET
+    }
+  }
+
+  entity: currency: {
+    path: "/currencies": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: geolocate: {
+    path: "/geolocate": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: rate: {
+    path: "/rates": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: validate_iban_response_schema: {
+    path: "/iban": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: validate_vat_response_schema: {
+    path: "/vat": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: vatcomply_api_root: {
+    path: "/": {
+      op: load: method: *GET
+    }
+  }
+
+}

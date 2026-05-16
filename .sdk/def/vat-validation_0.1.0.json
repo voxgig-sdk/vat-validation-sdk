@@ -1,0 +1,780 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Vatcomply API",
+    "version": "1.0.0",
+    "description": "API for automated VAT compliance and currency conversion.",
+    "contact": {
+      "name": "VATcomply",
+      "url": "https://www.vatcomply.com",
+      "email": "support@vatcomply.com"
+    },
+    "license": {
+      "name": "MIT License",
+      "url": "https://github.com/madisvain/vatcomply/blob/master/LICENSE"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.vatcomply.com"
+    }
+  ],
+  "paths": {
+    "/countries": {
+      "get": {
+        "operationId": "vatcomply_api_countries",
+        "summary": "Get list of countries",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/CountrySchema"
+                  },
+                  "title": "Response",
+                  "type": "array"
+                }
+              }
+            }
+          }
+        },
+        "description": "Fetches a list of countries with their details."
+      }
+    },
+    "/currencies": {
+      "get": {
+        "operationId": "vatcomply_api_get_currencies",
+        "summary": "Get list of supported currencies",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": {
+                    "$ref": "#/components/schemas/CurrencySchema"
+                  },
+                  "title": "Response",
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/geolocate": {
+      "get": {
+        "operationId": "vatcomply_api_geolocate",
+        "summary": "Geolocate by IP",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GeolocateResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/iban": {
+      "get": {
+        "operationId": "vatcomply_api_validate_iban",
+        "summary": "Validate Iban",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "iban",
+            "schema": {
+              "maxLength": 34,
+              "title": "IBAN",
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidateIBANResponseSchema"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/vat": {
+      "get": {
+        "operationId": "vatcomply_api_validate_vat",
+        "summary": "Validate Vat",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "vat_number",
+            "schema": {
+              "title": "Vat Number",
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidateVATResponseSchema"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rates": {
+      "get": {
+        "operationId": "vatcomply_api_rates",
+        "summary": "Rates",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "base",
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": "EUR",
+              "title": "Base"
+            },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "symbols",
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Symbols"
+            },
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "date",
+            "schema": {
+              "anyOf": [
+                {
+                  "format": "date",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Date"
+            },
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RatesResponseSchema"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/": {
+      "get": {
+        "operationId": "vatcomply_api_root",
+        "summary": "API Information",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RootResponseSchema"
+                }
+              }
+            }
+          }
+        },
+        "description": "Returns general information about the API, its status, and available endpoints."
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CountrySchema": {
+        "properties": {
+          "iso2": {
+            "title": "Iso2",
+            "type": "string"
+          },
+          "iso3": {
+            "title": "Iso3",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "numeric_code": {
+            "title": "Numeric Code",
+            "type": "integer"
+          },
+          "phone_code": {
+            "title": "Phone Code",
+            "type": "string"
+          },
+          "capital": {
+            "title": "Capital",
+            "type": "string"
+          },
+          "currency": {
+            "title": "Currency",
+            "type": "string"
+          },
+          "tld": {
+            "title": "Tld",
+            "type": "string"
+          },
+          "region": {
+            "title": "Region",
+            "type": "string"
+          },
+          "subregion": {
+            "title": "Subregion",
+            "type": "string"
+          },
+          "latitude": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "title": "Latitude"
+          },
+          "longitude": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "title": "Longitude"
+          },
+          "emoji": {
+            "title": "Emoji",
+            "type": "string"
+          }
+        },
+        "required": [
+          "iso2",
+          "iso3",
+          "name",
+          "numeric_code",
+          "phone_code",
+          "capital",
+          "currency",
+          "tld",
+          "region",
+          "subregion",
+          "latitude",
+          "longitude",
+          "emoji"
+        ],
+        "title": "CountrySchema",
+        "type": "object"
+      },
+      "CurrencySchema": {
+        "properties": {
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "symbol": {
+            "$ref": "#/components/schemas/CurrencySymbol"
+          }
+        },
+        "required": [
+          "name",
+          "symbol"
+        ],
+        "title": "CurrencySchema",
+        "type": "object"
+      },
+      "CurrencySymbol": {
+        "enum": [
+          "EUR",
+          "USD",
+          "JPY",
+          "BGN",
+          "CZK",
+          "DKK",
+          "GBP",
+          "HUF",
+          "PLN",
+          "RON",
+          "SEK",
+          "CHF",
+          "ISK",
+          "NOK",
+          "HRK",
+          "RUB",
+          "TRY",
+          "AUD",
+          "BRL",
+          "CAD",
+          "CNY",
+          "HKD",
+          "IDR",
+          "ILS",
+          "INR",
+          "KRW",
+          "MXN",
+          "MYR",
+          "NZD",
+          "PHP",
+          "SGD",
+          "THB",
+          "ZAR"
+        ],
+        "title": "CurrencySymbol",
+        "type": "string"
+      },
+      "GeolocateResponse": {
+        "properties": {
+          "iso2": {
+            "title": "Iso2",
+            "type": "string"
+          },
+          "iso3": {
+            "title": "Iso3",
+            "type": "string"
+          },
+          "country_code": {
+            "title": "Country Code",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "numeric_code": {
+            "title": "Numeric Code",
+            "type": "integer"
+          },
+          "phone_code": {
+            "title": "Phone Code",
+            "type": "string"
+          },
+          "capital": {
+            "title": "Capital",
+            "type": "string"
+          },
+          "currency": {
+            "title": "Currency",
+            "type": "string"
+          },
+          "tld": {
+            "title": "Tld",
+            "type": "string"
+          },
+          "region": {
+            "title": "Region",
+            "type": "string"
+          },
+          "subregion": {
+            "title": "Subregion",
+            "type": "string"
+          },
+          "latitude": {
+            "title": "Latitude",
+            "type": "number"
+          },
+          "longitude": {
+            "title": "Longitude",
+            "type": "number"
+          },
+          "emoji": {
+            "title": "Emoji",
+            "type": "string"
+          },
+          "ip": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ip"
+          }
+        },
+        "required": [
+          "iso2",
+          "iso3",
+          "country_code",
+          "name",
+          "numeric_code",
+          "phone_code",
+          "capital",
+          "currency",
+          "tld",
+          "region",
+          "subregion",
+          "latitude",
+          "longitude",
+          "emoji",
+          "ip"
+        ],
+        "title": "GeolocateResponse",
+        "type": "object"
+      },
+      "ErrorResponse": {
+        "properties": {
+          "error": {
+            "title": "Error",
+            "type": "string"
+          }
+        },
+        "required": [
+          "error"
+        ],
+        "title": "ErrorResponse",
+        "type": "object"
+      },
+      "IBANQueryParamsSchema": {
+        "properties": {
+          "iban": {
+            "maxLength": 34,
+            "title": "IBAN",
+            "type": "string"
+          }
+        },
+        "required": [
+          "iban"
+        ],
+        "title": "IBANQueryParamsSchema",
+        "type": "object"
+      },
+      "ValidateIBANResponseSchema": {
+        "properties": {
+          "valid": {
+            "title": "Valid",
+            "type": "boolean"
+          },
+          "iban": {
+            "maxLength": 34,
+            "title": "IBAN",
+            "type": "string"
+          },
+          "bank_name": {
+            "title": "Bank Name",
+            "type": "string"
+          },
+          "bic": {
+            "title": "Bic",
+            "type": "string"
+          },
+          "country_code": {
+            "title": "Country Code",
+            "type": "string"
+          },
+          "country_name": {
+            "title": "Country Name",
+            "type": "string"
+          },
+          "checksum_digits": {
+            "title": "Checksum Digits",
+            "type": "string"
+          },
+          "bank_code": {
+            "title": "Bank Code",
+            "type": "string"
+          },
+          "branch_code": {
+            "title": "Branch Code",
+            "type": "string"
+          },
+          "account_number": {
+            "title": "Account Number",
+            "type": "string"
+          },
+          "bban": {
+            "title": "Bban",
+            "type": "string"
+          },
+          "in_sepa_zone": {
+            "title": "In Sepa Zone",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "valid",
+          "iban",
+          "bank_name",
+          "bic",
+          "country_code",
+          "country_name",
+          "checksum_digits",
+          "bank_code",
+          "branch_code",
+          "account_number",
+          "bban",
+          "in_sepa_zone"
+        ],
+        "title": "ValidateIBANResponseSchema",
+        "type": "object"
+      },
+      "VATQueryParamsSchema": {
+        "properties": {
+          "vat_number": {
+            "title": "Vat Number",
+            "type": "string"
+          }
+        },
+        "required": [
+          "vat_number"
+        ],
+        "title": "VATQueryParamsSchema",
+        "type": "object"
+      },
+      "ValidateVATResponseSchema": {
+        "properties": {
+          "valid": {
+            "title": "Valid",
+            "type": "boolean"
+          },
+          "vat_number": {
+            "title": "Vat Number",
+            "type": "string"
+          },
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name"
+          },
+          "address": {
+            "default": "",
+            "title": "Address",
+            "type": "string"
+          },
+          "country_code": {
+            "title": "Country Code",
+            "type": "string"
+          }
+        },
+        "required": [
+          "valid",
+          "vat_number",
+          "country_code"
+        ],
+        "title": "ValidateVATResponseSchema",
+        "type": "object"
+      },
+      "RatesQueryParamsSchema": {
+        "properties": {
+          "base": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": "EUR",
+            "title": "Base"
+          },
+          "symbols": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Symbols"
+          },
+          "date": {
+            "anyOf": [
+              {
+                "format": "date",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Date"
+          }
+        },
+        "title": "RatesQueryParamsSchema",
+        "type": "object"
+      },
+      "RatesResponseSchema": {
+        "properties": {
+          "date": {
+            "title": "Date",
+            "type": "string"
+          },
+          "base": {
+            "$ref": "#/components/schemas/CurrencySymbol"
+          },
+          "rates": {
+            "additionalProperties": {
+              "type": "number"
+            },
+            "title": "Rates",
+            "type": "object"
+          }
+        },
+        "required": [
+          "date",
+          "base",
+          "rates"
+        ],
+        "title": "RatesResponseSchema",
+        "type": "object"
+      },
+      "RootResponseSchema": {
+        "properties": {
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "version": {
+            "title": "Version",
+            "type": "string"
+          },
+          "status": {
+            "title": "Status",
+            "type": "string"
+          },
+          "description": {
+            "title": "Description",
+            "type": "string"
+          },
+          "documentation": {
+            "title": "Documentation",
+            "type": "string"
+          },
+          "endpoints": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "title": "Endpoints",
+            "type": "object"
+          },
+          "contact": {
+            "title": "Contact",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "version",
+          "status",
+          "description",
+          "documentation",
+          "endpoints",
+          "contact"
+        ],
+        "title": "RootResponseSchema",
+        "type": "object"
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Report a bug or request a feature",
+    "url": "https://github.com/madisvain/vatcomply/issues"
+  }
+}

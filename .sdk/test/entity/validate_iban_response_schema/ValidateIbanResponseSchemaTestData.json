@@ -1,0 +1,66 @@
+{
+  "existing": {
+    "validate_iban_response_schema": {
+      "VALIDATE_IBAN_RESPONSE_SCHEMA00": {
+        "account_number": "s78",
+        "bank_code": "s79",
+        "bank_name": "s7a",
+        "bban": "s7b",
+        "bic": "s7c",
+        "branch_code": "s7d",
+        "checksum_digit": "s7e",
+        "country_code": "s7f",
+        "country_name": "s80",
+        "iban": "s81",
+        "in_sepa_zone": true,
+        "valid": false
+      },
+      "VALIDATE_IBAN_RESPONSE_SCHEMA01": {
+        "account_number": "sf0",
+        "bank_code": "sf1",
+        "bank_name": "sf2",
+        "bban": "sf3",
+        "bic": "sf4",
+        "branch_code": "sf5",
+        "checksum_digit": "sf6",
+        "country_code": "sf7",
+        "country_name": "sf8",
+        "iban": "sf9",
+        "in_sepa_zone": true,
+        "valid": false
+      },
+      "VALIDATE_IBAN_RESPONSE_SCHEMA02": {
+        "account_number": "s168",
+        "bank_code": "s169",
+        "bank_name": "s16a",
+        "bban": "s16b",
+        "bic": "s16c",
+        "branch_code": "s16d",
+        "checksum_digit": "s16e",
+        "country_code": "s16f",
+        "country_name": "s170",
+        "iban": "s171",
+        "in_sepa_zone": true,
+        "valid": false
+      }
+    }
+  },
+  "new": {
+    "validate_iban_response_schema": {
+      "validate_iban_response_schema_ref01": {
+        "account_number": "s1e0",
+        "bank_code": "s1e1",
+        "bank_name": "s1e2",
+        "bban": "s1e3",
+        "bic": "s1e4",
+        "branch_code": "s1e5",
+        "checksum_digit": "s1e6",
+        "country_code": "s1e7",
+        "country_name": "s1e8",
+        "iban": "s1e9",
+        "in_sepa_zone": true,
+        "valid": false
+      }
+    }
+  }
+}
