@@ -6,8 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	sdk "github.com/voxgig-sdk/vat-validation-sdk"
-	"github.com/voxgig-sdk/vat-validation-sdk/core"
+	sdk "github.com/voxgig-sdk/vat-validation-sdk/go"
+	"github.com/voxgig-sdk/vat-validation-sdk/go/core"
 )
 
 func TestValidateIbanResponseSchemaDirect(t *testing.T) {

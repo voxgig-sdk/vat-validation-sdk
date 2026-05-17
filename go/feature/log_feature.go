@@ -4,7 +4,7 @@ import (
 	"log/slog"
 	"os"
 
-	"github.com/voxgig-sdk/vat-validation-sdk/core"
+	"github.com/voxgig-sdk/vat-validation-sdk/go/core"
 )
 
 type LogFeature struct {

@@ -1,7 +1,7 @@
 package feature
 
 import (
-	"github.com/voxgig-sdk/vat-validation-sdk/core"
+	"github.com/voxgig-sdk/vat-validation-sdk/go/core"
 )
 
 type BaseFeature struct {

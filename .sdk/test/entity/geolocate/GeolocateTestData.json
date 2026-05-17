@@ -16,7 +16,8 @@
         "phone_code": "sa1",
         "region": "sa2",
         "subregion": "sa3",
-        "tld": "sa4"
+        "tld": "sa4",
+        "id": "GEOLOCATE00"
       },
       "GEOLOCATE01": {
         "capital": "s12c",
@@ -33,7 +34,8 @@
         "phone_code": "s137",
         "region": "s138",
         "subregion": "s139",
-        "tld": "s13a"
+        "tld": "s13a",
+        "id": "GEOLOCATE01"
       },
       "GEOLOCATE02": {
         "capital": "s1c2",
@@ -50,7 +52,8 @@
         "phone_code": "s1cd",
         "region": "s1ce",
         "subregion": "s1cf",
-        "tld": "s1d0"
+        "tld": "s1d0",
+        "id": "GEOLOCATE02"
       }
     }
   },

@@ -1,10 +1,10 @@
 package voxgigvatvalidationsdk
 
 import (
-	"github.com/voxgig-sdk/vat-validation-sdk/core"
-	"github.com/voxgig-sdk/vat-validation-sdk/entity"
-	"github.com/voxgig-sdk/vat-validation-sdk/feature"
-	_ "github.com/voxgig-sdk/vat-validation-sdk/utility"
+	"github.com/voxgig-sdk/vat-validation-sdk/go/core"
+	"github.com/voxgig-sdk/vat-validation-sdk/go/entity"
+	"github.com/voxgig-sdk/vat-validation-sdk/go/feature"
+	_ "github.com/voxgig-sdk/vat-validation-sdk/go/utility"
 )
 
 // Type aliases preserve external API.

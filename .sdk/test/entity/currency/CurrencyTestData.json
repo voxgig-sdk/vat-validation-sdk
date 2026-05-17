@@ -3,15 +3,18 @@
     "currency": {
       "CURRENCY00": {
         "name": "s14",
-        "symbol": "s15"
+        "symbol": "s15",
+        "id": "CURRENCY00"
       },
       "CURRENCY01": {
         "name": "s28",
-        "symbol": "s29"
+        "symbol": "s29",
+        "id": "CURRENCY01"
       },
       "CURRENCY02": {
         "name": "s3c",
-        "symbol": "s3d"
+        "symbol": "s3d",
+        "id": "CURRENCY02"
       }
     }
   },

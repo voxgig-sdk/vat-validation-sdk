@@ -4,17 +4,20 @@
       "RATE00": {
         "base": "s1e",
         "date": "s1f",
-        "rate": {}
+        "rate": {},
+        "id": "RATE00"
       },
       "RATE01": {
         "base": "s3c",
         "date": "s3d",
-        "rate": {}
+        "rate": {},
+        "id": "RATE01"
       },
       "RATE02": {
         "base": "s5a",
         "date": "s5b",
-        "rate": {}
+        "rate": {},
+        "id": "RATE02"
       }
     }
   },

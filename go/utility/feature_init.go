@@ -1,9 +1,9 @@
 package utility
 
 import (
-	vs "github.com/voxgig/struct"
+	vs "github.com/voxgig-sdk/vat-validation-sdk/go/utility/struct"
 
-	"github.com/voxgig-sdk/vat-validation-sdk/core"
+	"github.com/voxgig-sdk/vat-validation-sdk/go/core"
 )
 
 func featureInitUtil(ctx *core.Context, f core.Feature) {

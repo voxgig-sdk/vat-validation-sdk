@@ -9,10 +9,10 @@ import (
 	"testing"
 	"time"
 
-	sdk "github.com/voxgig-sdk/vat-validation-sdk"
-	"github.com/voxgig-sdk/vat-validation-sdk/core"
+	sdk "github.com/voxgig-sdk/vat-validation-sdk/go"
+	"github.com/voxgig-sdk/vat-validation-sdk/go/core"
 
-	vs "github.com/voxgig/struct"
+	vs "github.com/voxgig-sdk/vat-validation-sdk/go/utility/struct"
 )
 
 func TestValidateVatResponseSchemaEntity(t *testing.T) {

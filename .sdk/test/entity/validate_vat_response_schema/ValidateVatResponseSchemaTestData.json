@@ -6,21 +6,24 @@
         "country_code": "s33",
         "name": "s34",
         "valid": false,
-        "vat_number": "s36"
+        "vat_number": "s36",
+        "id": "VALIDATE_VAT_RESPONSE_SCHEMA00"
       },
       "VALIDATE_VAT_RESPONSE_SCHEMA01": {
         "address": "s64",
         "country_code": "s65",
         "name": "s66",
         "valid": false,
-        "vat_number": "s68"
+        "vat_number": "s68",
+        "id": "VALIDATE_VAT_RESPONSE_SCHEMA01"
       },
       "VALIDATE_VAT_RESPONSE_SCHEMA02": {
         "address": "s96",
         "country_code": "s97",
         "name": "s98",
         "valid": false,
-        "vat_number": "s9a"
+        "vat_number": "s9a",
+        "id": "VALIDATE_VAT_RESPONSE_SCHEMA02"
       }
     }
   },

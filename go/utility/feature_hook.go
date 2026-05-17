@@ -3,7 +3,7 @@ package utility
 import (
 	"reflect"
 
-	"github.com/voxgig-sdk/vat-validation-sdk/core"
+	"github.com/voxgig-sdk/vat-validation-sdk/go/core"
 )
 
 func featureHookUtil(ctx *core.Context, name string) {

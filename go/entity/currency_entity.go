@@ -1,9 +1,9 @@
 package entity
 
 import (
-	"github.com/voxgig-sdk/vat-validation-sdk/core"
+	"github.com/voxgig-sdk/vat-validation-sdk/go/core"
 
-	vs "github.com/voxgig/struct"
+	vs "github.com/voxgig-sdk/vat-validation-sdk/go/utility/struct"
 )
 
 type CurrencyEntity struct {

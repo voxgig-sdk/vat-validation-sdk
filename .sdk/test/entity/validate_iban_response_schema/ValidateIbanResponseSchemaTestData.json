@@ -13,7 +13,8 @@
         "country_name": "s80",
         "iban": "s81",
         "in_sepa_zone": true,
-        "valid": false
+        "valid": false,
+        "id": "VALIDATE_IBAN_RESPONSE_SCHEMA00"
       },
       "VALIDATE_IBAN_RESPONSE_SCHEMA01": {
         "account_number": "sf0",
@@ -27,7 +28,8 @@
         "country_name": "sf8",
         "iban": "sf9",
         "in_sepa_zone": true,
-        "valid": false
+        "valid": false,
+        "id": "VALIDATE_IBAN_RESPONSE_SCHEMA01"
       },
       "VALIDATE_IBAN_RESPONSE_SCHEMA02": {
         "account_number": "s168",
@@ -41,7 +43,8 @@
         "country_name": "s170",
         "iban": "s171",
         "in_sepa_zone": true,
-        "valid": false
+        "valid": false,
+        "id": "VALIDATE_IBAN_RESPONSE_SCHEMA02"
       }
     }
   },
