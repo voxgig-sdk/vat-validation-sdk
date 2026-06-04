@@ -61,14 +61,12 @@ def currency_direct_setup(mockres)
   env = Runner.env_override({
     "VATVALIDATION_TEST_CURRENCY_ENTID" => {},
     "VATVALIDATION_TEST_LIVE" => "FALSE",
-    "VATVALIDATION_APIKEY" => "NONE",
   })
 
   live = env["VATVALIDATION_TEST_LIVE"] == "TRUE"
 
   if live
     merged_opts = {
-      "apikey" => env["VATVALIDATION_APIKEY"],
     }
     client = VatValidationSDK.new(merged_opts)
     return {

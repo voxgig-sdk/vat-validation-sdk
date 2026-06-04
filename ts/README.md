@@ -17,9 +17,7 @@ loading a specific record.
 ```ts
 import { VatValidationSDK } from 'vat-validation'
 
-const client = new VatValidationSDK({
-  apikey: process.env.VAT-VALIDATION_APIKEY,
-})
+const client = new VatValidationSDK({})
 ```
 
 ### 2. List countrys
@@ -84,7 +82,7 @@ const result = await client.Planet().load({ id: 'test01' })
 You can also use the instance method:
 
 ```ts
-const client = new VatValidationSDK({ apikey: '...' })
+const client = new VatValidationSDK()
 const testClient = client.tester()
 ```
 
@@ -120,7 +118,6 @@ const logger = {
 }
 
 const client = new VatValidationSDK({
-  apikey: '...',
   extend: [logger],
 })
 ```
@@ -131,7 +128,6 @@ Create a `.env.local` file at the project root:
 
 ```
 VAT-VALIDATION_TEST_LIVE=TRUE
-VAT-VALIDATION_APIKEY=<your-key>
 ```
 
 Then run:
@@ -149,7 +145,6 @@ cd ts && npm test
 
 ```ts
 new VatValidationSDK(options?: {
-  apikey?: string
   base?: string
   prefix?: string
   suffix?: string
@@ -160,7 +155,6 @@ new VatValidationSDK(options?: {
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |

@@ -74,14 +74,12 @@ function directSetup(mockres?: any) {
   const env = envOverride({
     'VATVALIDATION_TEST_GEOLOCATE_ENTID': {},
     'VATVALIDATION_TEST_LIVE': 'FALSE',
-    'VATVALIDATION_APIKEY': 'NONE',
   })
 
   const live = 'TRUE' === env.VATVALIDATION_TEST_LIVE
 
   if (live) {
     const client = new VatValidationSDK({
-      apikey: env.VATVALIDATION_APIKEY,
     })
 
     let idmap: any = env['VATVALIDATION_TEST_GEOLOCATE_ENTID']

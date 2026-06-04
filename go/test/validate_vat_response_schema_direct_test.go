@@ -99,14 +99,12 @@ func validate_vat_response_schemaDirectSetup(mockres any) *validate_vat_response
 	env := envOverride(map[string]any{
 		"VATVALIDATION_TEST_VALIDATE_VAT_RESPONSE_SCHEMA_ENTID": map[string]any{},
 		"VATVALIDATION_TEST_LIVE":    "FALSE",
-		"VATVALIDATION_APIKEY":       "NONE",
 	})
 
 	live := env["VATVALIDATION_TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
-			"apikey": env["VATVALIDATION_APIKEY"],
 		}
 		client := sdk.NewVatValidationSDK(mergedOpts)
 

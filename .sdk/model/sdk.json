@@ -21,7 +21,23 @@
           }
         ],
         "title": "Vatcomply API",
-        "version": "1.0.0"
+        "version": "1.0.0",
+        "tagline": "Validate VAT numbers, look up IBANs, geolocate visitors, and fetch ECB exchange rates",
+        "homepage": "https://www.vatcomply.com",
+        "docs_url": "https://api.vatcomply.com/docs",
+        "license_short": "MIT License (per slug metadata); API is publicly accessible without authentication.",
+        "license_md": "- Project is distributed under the MIT License per slug metadata.\n- The API is publicly accessible; no API key is documented.\n- Exchange-rate data is derived from the European Central Bank (ECB) reference rates; check ECB's terms when redistributing.\n- No rate limits, SLAs, or guarantees are documented in the public OpenAPI spec.",
+        "about_md": "[VATComply](https://www.vatcomply.com) is a small public web service for VAT compliance work. It exposes a JSON HTTP API at `https://api.vatcomply.com` (version 1.0.0) covering VAT number validation, IBAN validation, country and currency reference data, IP geolocation, and currency exchange rates sourced from the European Central Bank.\n\nWhat you get from the API:\n\n- VAT number validation against EU registries.\n- IBAN validation for international bank account numbers.\n- Country and currency reference data lists.\n- Geolocation of the caller's IP address.\n- Current and historical exchange rates (ECB reference rates, with EUR as the default base and historical data reaching back to 1999).\n\nThe service is publicly reachable, returns JSON, and does not document an authentication scheme. Interactive documentation and the OpenAPI schema are available at `/docs` and `/docs/openapi.json`.",
+        "entity_desc": {
+          "country": "Reference list of countries supported by the API, useful for cross-referencing VAT country codes.",
+          "currency": "Reference list of currencies supported for exchange-rate conversions.",
+          "geolocate": "Geolocation of the caller's IP address, returning country and related metadata.",
+          "rate": "Current and historical currency exchange rates sourced from the European Central Bank, with optional base-currency selection.",
+          "validate_iban_response_schema": "Response shape for the IBAN validation endpoint, indicating whether a supplied IBAN is well-formed and parsed components.",
+          "validate_vat_response_schema": "Response shape for the VAT number validation endpoint, indicating registration status and associated trader details where available.",
+          "vatcomply_api_root": "Root endpoint of the VATComply API, describing the service and linking to the interactive docs at `/docs`."
+        },
+        "auth": false
       },
       "config": {
         "auth": {
@@ -29,7 +45,15 @@
         },
         "headers": {
           "content-type": "application/json"
-        }
+        },
+        "docs_order": [
+          "ts",
+          "py",
+          "php",
+          "go",
+          "rb",
+          "lua"
+        ]
       },
       "entity": {
         "country": {

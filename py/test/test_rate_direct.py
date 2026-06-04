@@ -59,14 +59,12 @@ def _rate_direct_setup(mockres):
     env = runner.env_override({
         "VATVALIDATION_TEST_RATE_ENTID": {},
         "VATVALIDATION_TEST_LIVE": "FALSE",
-        "VATVALIDATION_APIKEY": "NONE",
     })
 
     live = env.get("VATVALIDATION_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {
-            "apikey": env.get("VATVALIDATION_APIKEY"),
         }
         client = VatValidationSDK(merged_opts)
         return {
