@@ -10,7 +10,7 @@ The TypeScript SDK for the VatValidation API — a type-safe, entity-oriented cl
 
 ## Install
 ```bash
-npm install vat-validation
+npm install @voxgig-sdk/vat-validation
 ```
 ## Tutorial: your first API call
 

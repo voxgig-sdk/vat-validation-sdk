@@ -10,13 +10,13 @@ The Ruby SDK for the VatValidation API — an entity-oriented client using idiom
 
 ## Install
 ```bash
-gem install vat-validation-sdk
+gem install voxgig-sdk-vat-validation
 ```
 
 Or add to your `Gemfile`:
 
 ```ruby
-gem "vat-validation-sdk"
+gem "voxgig-sdk-vat-validation"
 ```
 
 Then run:

@@ -10,7 +10,7 @@ The Python SDK for the VatValidation API — an entity-oriented client following
 
 ## Install
 ```bash
-pip install vat-validation-sdk
+pip install voxgig-sdk-vat-validation
 ```
 
 Or install from source:
