@@ -1,22 +1,8 @@
 # VatValidation SDK
 
-Validate VAT numbers, look up IBANs, geolocate visitors, and fetch ECB exchange rates
+Vatcomply API client, generated from the OpenAPI spec.
 
 > TypeScript, Python, PHP, Golang, Ruby, Lua SDKs, a CLI, an interactive REPL, and an MCP server for AI agents — all generated from one OpenAPI spec by [@voxgig/sdkgen](https://github.com/voxgig/sdkgen).
-
-## About Vatcomply API
-
-[VATComply](https://www.vatcomply.com) is a small public web service for VAT compliance work. It exposes a JSON HTTP API at `https://api.vatcomply.com` (version 1.0.0) covering VAT number validation, IBAN validation, country and currency reference data, IP geolocation, and currency exchange rates sourced from the European Central Bank.
-
-What you get from the API:
-
-- VAT number validation against EU registries.
-- IBAN validation for international bank account numbers.
-- Country and currency reference data lists.
-- Geolocation of the caller's IP address.
-- Current and historical exchange rates (ECB reference rates, with EUR as the default base and historical data reaching back to 1999).
-
-The service is publicly reachable, returns JSON, and does not document an authentication scheme. Interactive documentation and the OpenAPI schema are available at `/docs` and `/docs/openapi.json`.
 
 ## Try it
 
@@ -50,29 +36,31 @@ gem install vat-validation-sdk
 luarocks install vat-validation-sdk
 ```
 
-## 30-second quickstart
+## Quickstart
 
 ### TypeScript
 
 ```ts
 import { VatValidationSDK } from 'vat-validation'
 
-const client = new VatValidationSDK({})
+const client = new VatValidationSDK({
+  apikey: process.env.VAT-VALIDATION_APIKEY,
+})
 
 // List all countrys
 const countrys = await client.Country().list()
+console.log(countrys.data)
 ```
 
-See the [TypeScript README](ts/README.md) for the
-full guide, or scroll down for the same example in other languages.
+See the [TypeScript README](ts/README.md) for the full guide.
 
-## What's in the box
+## Surfaces
 
-| Surface | Use it for | Path |
-| --- | --- | --- |
-| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | App integration | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
-| **CLI** | Scripts, CI, ops, one-off API calls | `go-cli/` |
-| **MCP server** | AI agents (Claude, Cursor, Cline) | `go-mcp/` |
+| Surface | Path |
+| --- | --- |
+| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
+| **CLI** | `go-cli/` |
+| **MCP server** | `go-mcp/` |
 
 ## Use it from an AI agent (MCP)
 
@@ -102,13 +90,13 @@ The API exposes 7 entities:
 
 | Entity | Description | API path |
 | --- | --- | --- |
-| **Country** | Reference list of countries supported by the API, useful for cross-referencing VAT country codes. | `/countries` |
-| **Currency** | Reference list of currencies supported for exchange-rate conversions. | `/currencies` |
-| **Geolocate** | Geolocation of the caller's IP address, returning country and related metadata. | `/geolocate` |
-| **Rate** | Current and historical currency exchange rates sourced from the European Central Bank, with optional base-currency selection. | `/rates` |
-| **ValidateIbanResponseSchema** | Response shape for the IBAN validation endpoint, indicating whether a supplied IBAN is well-formed and parsed components. | `/iban` |
-| **ValidateVatResponseSchema** | Response shape for the VAT number validation endpoint, indicating registration status and associated trader details where available. | `/vat` |
-| **VatcomplyApiRoot** | Root endpoint of the VATComply API, describing the service and linking to the interactive docs at `/docs`. | `/` |
+| **Country** |  | `/countries` |
+| **Currency** |  | `/currencies` |
+| **Geolocate** |  | `/geolocate` |
+| **Rate** |  | `/rates` |
+| **ValidateIbanResponseSchema** |  | `/iban` |
+| **ValidateVatResponseSchema** |  | `/vat` |
+| **VatcomplyApiRoot** |  | `/` |
 
 Each entity supports the following operations where available: **load**,
 **list**, **create**, **update**, and **remove**.
@@ -118,12 +106,16 @@ Each entity supports the following operations where available: **load**,
 ### Python
 
 ```python
+import os
 from vatvalidation_sdk import VatValidationSDK
 
-client = VatValidationSDK({})
+client = VatValidationSDK({
+    "apikey": os.environ.get("VAT-VALIDATION_APIKEY"),
+})
 
 # List all countrys
-countrys, err = client.Country(None).list(None, None)
+countrys, err = client.Country().list()
+print(countrys)
 ```
 
 ### PHP
@@ -132,10 +124,13 @@ countrys, err = client.Country(None).list(None, None)
 <?php
 require_once 'vatvalidation_sdk.php';
 
-$client = new VatValidationSDK([]);
+$client = new VatValidationSDK([
+    "apikey" => getenv("VAT-VALIDATION_APIKEY"),
+]);
 
 // List all countrys
-[$countrys, $err] = $client->Country(null)->list(null, null);
+[$countrys, $err] = $client->Country()->list();
+print_r($countrys);
 ```
 
 ### Golang
@@ -143,10 +138,13 @@ $client = new VatValidationSDK([]);
 ```go
 import sdk "github.com/voxgig-sdk/vat-validation-sdk/go"
 
-client := sdk.NewVatValidationSDK(map[string]any{})
+client := sdk.NewVatValidationSDK(map[string]any{
+    "apikey": os.Getenv("VAT-VALIDATION_APIKEY"),
+})
 
 // List all countrys
 countrys, err := client.Country(nil).List(nil, nil)
+fmt.Println(countrys)
 ```
 
 ### Ruby
@@ -154,10 +152,13 @@ countrys, err := client.Country(nil).List(nil, nil)
 ```ruby
 require_relative "VatValidation_sdk"
 
-client = VatValidationSDK.new({})
+client = VatValidationSDK.new({
+  "apikey" => ENV["VAT-VALIDATION_APIKEY"],
+})
 
 # List all countrys
-countrys, err = client.Country(nil).list(nil, nil)
+countrys, err = client.Country().list
+puts countrys
 ```
 
 ### Lua
@@ -165,10 +166,13 @@ countrys, err = client.Country(nil).list(nil, nil)
 ```lua
 local sdk = require("vat-validation_sdk")
 
-local client = sdk.new({})
+local client = sdk.new({
+  apikey = os.getenv("VAT-VALIDATION_APIKEY"),
+})
 
 -- List all countrys
-local countrys, err = client:Country(nil):list(nil, nil)
+local countrys, err = client:Country():list()
+print(countrys)
 ```
 
 ## Unit testing in offline mode
@@ -187,25 +191,21 @@ const result = await client.Country().load({ id: 'test01' })
 ### Python
 
 ```python
-client = VatValidationSDK.test(None, None)
-result, err = client.Country(None).load(
-    {"id": "test01"}, None
-)
+client = VatValidationSDK.test()
+result, err = client.Country().load({"id": "test01"})
 ```
 
 ### PHP
 
 ```php
-$client = VatValidationSDK::test(null, null);
-[$result, $err] = $client->Country(null)->load(
-    ["id" => "test01"], null
-);
+$client = VatValidationSDK::test();
+[$result, $err] = $client->Country()->load(["id" => "test01"]);
 ```
 
 ### Golang
 
 ```go
-client := sdk.TestSDK(nil, nil)
+client := sdk.Test()
 result, err := client.Country(nil).Load(
     map[string]any{"id": "test01"}, nil,
 )
@@ -214,19 +214,15 @@ result, err := client.Country(nil).Load(
 ### Ruby
 
 ```ruby
-client = VatValidationSDK.test(nil, nil)
-result, err = client.Country(nil).load(
-  { "id" => "test01" }, nil
-)
+client = VatValidationSDK.test
+result, err = client.Country().load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
-local client = sdk.test(nil, nil)
-local result, err = client:Country(nil):load(
-  { id = "test01" }, nil
-)
+local client = sdk.test()
+local result, err = client:Country():load({ id = "test01" })
 ```
 
 ## How it works
@@ -330,16 +326,6 @@ local result, err = client:direct({
 - [Golang](go/README.md)
 - [Ruby](rb/README.md)
 - [Lua](lua/README.md)
-
-## Using the Vatcomply API
-
-- Upstream: [https://www.vatcomply.com](https://www.vatcomply.com)
-- API docs: [https://api.vatcomply.com/docs](https://api.vatcomply.com/docs)
-
-- Project is distributed under the MIT License per slug metadata.
-- The API is publicly accessible; no API key is documented.
-- Exchange-rate data is derived from the European Central Bank (ECB) reference rates; check ECB's terms when redistributing.
-- No rate limits, SLAs, or guarantees are documented in the public OpenAPI spec.
 
 ---
 

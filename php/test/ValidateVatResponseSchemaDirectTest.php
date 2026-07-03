@@ -67,12 +67,14 @@ function validate_vat_response_schema_direct_setup($mockres)
     $env = Runner::env_override([
         "VATVALIDATION_TEST_VALIDATE_VAT_RESPONSE_SCHEMA_ENTID" => [],
         "VATVALIDATION_TEST_LIVE" => "FALSE",
+        "VATVALIDATION_APIKEY" => "NONE",
     ]);
 
     $live = $env["VATVALIDATION_TEST_LIVE"] === "TRUE";
 
     if ($live) {
         $merged_opts = [
+            "apikey" => $env["VATVALIDATION_APIKEY"],
         ];
         $client = new VatValidationSDK($merged_opts);
         return [

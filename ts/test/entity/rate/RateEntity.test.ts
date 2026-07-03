@@ -113,6 +113,7 @@ function basicSetup(extra?: any) {
     'VAT_VALIDATION_TEST_RATE_ENTID': idmap,
     'VAT_VALIDATION_TEST_LIVE': 'FALSE',
     'VAT_VALIDATION_TEST_EXPLAIN': 'FALSE',
+    'VAT_VALIDATION_APIKEY': 'NONE',
   })
 
   idmap = env['VAT_VALIDATION_TEST_RATE_ENTID']
@@ -122,6 +123,7 @@ function basicSetup(extra?: any) {
   if (live) {
     client = new VatValidationSDK(merge([
       {
+        apikey: env.VAT_VALIDATION_APIKEY,
       },
       extra
     ]))

@@ -117,6 +117,7 @@ func currencyBasicSetup(extra map[string]any) *entityTestSetup {
 		"VATVALIDATION_TEST_CURRENCY_ENTID": idmap,
 		"VATVALIDATION_TEST_LIVE":      "FALSE",
 		"VATVALIDATION_TEST_EXPLAIN":   "FALSE",
+		"VATVALIDATION_APIKEY":         "NONE",
 	})
 
 	idmapResolved := core.ToMapAny(env["VATVALIDATION_TEST_CURRENCY_ENTID"])
@@ -127,6 +128,7 @@ func currencyBasicSetup(extra map[string]any) *entityTestSetup {
 	if env["VATVALIDATION_TEST_LIVE"] == "TRUE" {
 		mergedOpts := vs.Merge([]any{
 			map[string]any{
+				"apikey": env["VATVALIDATION_APIKEY"],
 			},
 			extra,
 		})

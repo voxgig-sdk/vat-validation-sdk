@@ -83,6 +83,7 @@ def country_basic_setup(extra)
     "VATVALIDATION_TEST_COUNTRY_ENTID" => idmap,
     "VATVALIDATION_TEST_LIVE" => "FALSE",
     "VATVALIDATION_TEST_EXPLAIN" => "FALSE",
+    "VATVALIDATION_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -94,6 +95,7 @@ def country_basic_setup(extra)
   if env["VATVALIDATION_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
+        "apikey" => env["VATVALIDATION_APIKEY"],
       },
       extra || {},
     ])

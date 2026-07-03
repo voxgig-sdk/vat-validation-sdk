@@ -99,12 +99,14 @@ func validate_iban_response_schemaDirectSetup(mockres any) *validate_iban_respon
 	env := envOverride(map[string]any{
 		"VATVALIDATION_TEST_VALIDATE_IBAN_RESPONSE_SCHEMA_ENTID": map[string]any{},
 		"VATVALIDATION_TEST_LIVE":    "FALSE",
+		"VATVALIDATION_APIKEY":       "NONE",
 	})
 
 	live := env["VATVALIDATION_TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
+			"apikey": env["VATVALIDATION_APIKEY"],
 		}
 		client := sdk.NewVatValidationSDK(mergedOpts)
 

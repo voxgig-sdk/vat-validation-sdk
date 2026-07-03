@@ -30,12 +30,12 @@ Create a new SDK client instance.
 
 ### Static Methods
 
-#### `sdk.test(testopts, sdkopts)`
+#### `sdk.test(testopts?, sdkopts?)`
 
-Create a test client with mock features active. Both arguments may be `nil`.
+Create a test client with mock features active. Both arguments are optional.
 
 ```lua
-local client = sdk.test(nil, nil)
+local client = sdk.test()
 ```
 
 
@@ -136,7 +136,7 @@ local country = client:Country(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:Country(nil):list(nil, nil)
+local results, err = client:Country():list()
 ```
 
 ### Common Methods
@@ -189,7 +189,7 @@ local currency = client:Currency(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Currency(nil):load({ id = "currency_id" }, nil)
+local result, err = client:Currency():load({ id = "currency_id" })
 ```
 
 ### Common Methods
@@ -255,7 +255,7 @@ local geolocate = client:Geolocate(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Geolocate(nil):load({ id = "geolocate_id" }, nil)
+local result, err = client:Geolocate():load({ id = "geolocate_id" })
 ```
 
 ### Common Methods
@@ -309,7 +309,7 @@ local rate = client:Rate(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Rate(nil):load({ id = "rate_id" }, nil)
+local result, err = client:Rate():load({ id = "rate_id" })
 ```
 
 ### Common Methods
@@ -372,7 +372,7 @@ local validate_iban_response_schema = client:ValidateIbanResponseSchema(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:ValidateIbanResponseSchema(nil):load({ id = "validate_iban_response_schema_id" }, nil)
+local result, err = client:ValidateIbanResponseSchema():load({ id = "validate_iban_response_schema_id" })
 ```
 
 ### Common Methods
@@ -428,7 +428,7 @@ local validate_vat_response_schema = client:ValidateVatResponseSchema(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:ValidateVatResponseSchema(nil):load({ id = "validate_vat_response_schema_id" }, nil)
+local result, err = client:ValidateVatResponseSchema():load({ id = "validate_vat_response_schema_id" })
 ```
 
 ### Common Methods
@@ -486,7 +486,7 @@ local vatcomply_api_root = client:VatcomplyApiRoot(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:VatcomplyApiRoot(nil):load({ id = "vatcomply_api_root_id" }, nil)
+local result, err = client:VatcomplyApiRoot():load({ id = "vatcomply_api_root_id" })
 ```
 
 ### Common Methods

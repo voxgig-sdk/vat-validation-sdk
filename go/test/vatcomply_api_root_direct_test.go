@@ -99,12 +99,14 @@ func vatcomply_api_rootDirectSetup(mockres any) *vatcomply_api_rootDirectSetupRe
 	env := envOverride(map[string]any{
 		"VATVALIDATION_TEST_VATCOMPLY_API_ROOT_ENTID": map[string]any{},
 		"VATVALIDATION_TEST_LIVE":    "FALSE",
+		"VATVALIDATION_APIKEY":       "NONE",
 	})
 
 	live := env["VATVALIDATION_TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
+			"apikey": env["VATVALIDATION_APIKEY"],
 		}
 		client := sdk.NewVatValidationSDK(mergedOpts)
 
