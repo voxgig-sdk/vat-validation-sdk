@@ -220,121 +220,51 @@ class VatValidationSDK:
         }
 
 
-    @property
-    def country(self):
-        """Idiomatic facade: client.country.list() / client.country.load({"id": ...})."""
-        from entity.country_entity import CountryEntity
-        cached = getattr(self, "_country", None)
-        if cached is None:
-            cached = CountryEntity(self, None)
-            self._country = cached
-        return cached
-
-    def Country(self, data=None):
-        # Deprecated: use client.country instead.
+    def Country(self, data=None) -> "CountryEntity":
+        """Entity factory: client.Country().list({}) / client.Country().load({"id": ...})."""
         from entity.country_entity import CountryEntity
         return CountryEntity(self, data)
 
 
-    @property
-    def currency(self):
-        """Idiomatic facade: client.currency.list() / client.currency.load({"id": ...})."""
-        from entity.currency_entity import CurrencyEntity
-        cached = getattr(self, "_currency", None)
-        if cached is None:
-            cached = CurrencyEntity(self, None)
-            self._currency = cached
-        return cached
-
-    def Currency(self, data=None):
-        # Deprecated: use client.currency instead.
+    def Currency(self, data=None) -> "CurrencyEntity":
+        """Entity factory: client.Currency().list({}) / client.Currency().load({"id": ...})."""
         from entity.currency_entity import CurrencyEntity
         return CurrencyEntity(self, data)
 
 
-    @property
-    def geolocate(self):
-        """Idiomatic facade: client.geolocate.list() / client.geolocate.load({"id": ...})."""
-        from entity.geolocate_entity import GeolocateEntity
-        cached = getattr(self, "_geolocate", None)
-        if cached is None:
-            cached = GeolocateEntity(self, None)
-            self._geolocate = cached
-        return cached
-
-    def Geolocate(self, data=None):
-        # Deprecated: use client.geolocate instead.
+    def Geolocate(self, data=None) -> "GeolocateEntity":
+        """Entity factory: client.Geolocate().list({}) / client.Geolocate().load({"id": ...})."""
         from entity.geolocate_entity import GeolocateEntity
         return GeolocateEntity(self, data)
 
 
-    @property
-    def rate(self):
-        """Idiomatic facade: client.rate.list() / client.rate.load({"id": ...})."""
-        from entity.rate_entity import RateEntity
-        cached = getattr(self, "_rate", None)
-        if cached is None:
-            cached = RateEntity(self, None)
-            self._rate = cached
-        return cached
-
-    def Rate(self, data=None):
-        # Deprecated: use client.rate instead.
+    def Rate(self, data=None) -> "RateEntity":
+        """Entity factory: client.Rate().list({}) / client.Rate().load({"id": ...})."""
         from entity.rate_entity import RateEntity
         return RateEntity(self, data)
 
 
-    @property
-    def validate_iban_response_schema(self):
-        """Idiomatic facade: client.validate_iban_response_schema.list() / client.validate_iban_response_schema.load({"id": ...})."""
-        from entity.validate_iban_response_schema_entity import ValidateIbanResponseSchemaEntity
-        cached = getattr(self, "_validate_iban_response_schema", None)
-        if cached is None:
-            cached = ValidateIbanResponseSchemaEntity(self, None)
-            self._validate_iban_response_schema = cached
-        return cached
-
-    def ValidateIbanResponseSchema(self, data=None):
-        # Deprecated: use client.validate_iban_response_schema instead.
+    def ValidateIbanResponseSchema(self, data=None) -> "ValidateIbanResponseSchemaEntity":
+        """Entity factory: client.ValidateIbanResponseSchema().list({}) / client.ValidateIbanResponseSchema().load({"id": ...})."""
         from entity.validate_iban_response_schema_entity import ValidateIbanResponseSchemaEntity
         return ValidateIbanResponseSchemaEntity(self, data)
 
 
-    @property
-    def validate_vat_response_schema(self):
-        """Idiomatic facade: client.validate_vat_response_schema.list() / client.validate_vat_response_schema.load({"id": ...})."""
-        from entity.validate_vat_response_schema_entity import ValidateVatResponseSchemaEntity
-        cached = getattr(self, "_validate_vat_response_schema", None)
-        if cached is None:
-            cached = ValidateVatResponseSchemaEntity(self, None)
-            self._validate_vat_response_schema = cached
-        return cached
-
-    def ValidateVatResponseSchema(self, data=None):
-        # Deprecated: use client.validate_vat_response_schema instead.
+    def ValidateVatResponseSchema(self, data=None) -> "ValidateVatResponseSchemaEntity":
+        """Entity factory: client.ValidateVatResponseSchema().list({}) / client.ValidateVatResponseSchema().load({"id": ...})."""
         from entity.validate_vat_response_schema_entity import ValidateVatResponseSchemaEntity
         return ValidateVatResponseSchemaEntity(self, data)
 
 
-    @property
-    def vatcomply_api_root(self):
-        """Idiomatic facade: client.vatcomply_api_root.list() / client.vatcomply_api_root.load({"id": ...})."""
-        from entity.vatcomply_api_root_entity import VatcomplyApiRootEntity
-        cached = getattr(self, "_vatcomply_api_root", None)
-        if cached is None:
-            cached = VatcomplyApiRootEntity(self, None)
-            self._vatcomply_api_root = cached
-        return cached
-
-    def VatcomplyApiRoot(self, data=None):
-        # Deprecated: use client.vatcomply_api_root instead.
+    def VatcomplyApiRoot(self, data=None) -> "VatcomplyApiRootEntity":
+        """Entity factory: client.VatcomplyApiRoot().list({}) / client.VatcomplyApiRoot().load({"id": ...})."""
         from entity.vatcomply_api_root_entity import VatcomplyApiRootEntity
         return VatcomplyApiRootEntity(self, data)
 
 
 
     @classmethod
-    def test(cls, testopts=None, sdkopts=None):
+    def test(cls, testopts=None, sdkopts=None) -> "VatValidationSDK":
         if sdkopts is None:
             sdkopts = {}
         sdkopts = vs.clone(sdkopts)
@@ -354,3 +284,15 @@ class VatValidationSDK:
         sdk.mode = "test"
 
         return sdk
+
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from entity.country_entity import CountryEntity
+    from entity.currency_entity import CurrencyEntity
+    from entity.geolocate_entity import GeolocateEntity
+    from entity.rate_entity import RateEntity
+    from entity.validate_iban_response_schema_entity import ValidateIbanResponseSchemaEntity
+    from entity.validate_vat_response_schema_entity import ValidateVatResponseSchemaEntity
+    from entity.vatcomply_api_root_entity import VatcomplyApiRootEntity

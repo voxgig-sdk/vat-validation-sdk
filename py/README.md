@@ -31,14 +31,16 @@ from vatvalidation_sdk import VatValidationSDK
 client = VatValidationSDK()
 ```
 
-### 2. List countrys
+### 2. List country records
+
+`list()` returns a `list` of records (each a `dict`) and raises on
+error — iterate it directly.
 
 ```python
 try:
-    result = client.country.list()
-    for item in result:
-        d = item.data_get()
-        print(d["id"], d["name"])
+    countrys = client.Country().list({})
+    for country in countrys:
+        print(country)
 except Exception as err:
     print(f"list failed: {err}")
 ```
@@ -86,8 +88,9 @@ Create a mock client for unit testing — no server required:
 ```python
 client = VatValidationSDK.test()
 
-result = client.country.load({"id": "test01"})
-# result contains mock response data
+# Entity ops return the bare record and raise on error.
+country = client.Country().load({"id": "test01"})
+# country contains the mock response record
 ```
 
 ### Use a custom fetch function
@@ -336,7 +339,7 @@ API path: `/`
 
 ### Country
 
-Create an instance: `const country = client.country`
+Create an instance: `country = client.Country()`
 
 #### Operations
 
@@ -364,14 +367,14 @@ Create an instance: `const country = client.country`
 
 #### Example: List
 
-```ts
-const countrys = await client.country.list()
+```python
+countrys = client.Country().list({})
 ```
 
 
 ### Currency
 
-Create an instance: `const currency = client.currency`
+Create an instance: `currency = client.Currency()`
 
 #### Operations
 
@@ -388,14 +391,14 @@ Create an instance: `const currency = client.currency`
 
 #### Example: Load
 
-```ts
-const currency = await client.currency.load({ id: 'currency_id' })
+```python
+currency = client.Currency().load({"id": "currency_id"})
 ```
 
 
 ### Geolocate
 
-Create an instance: `const geolocate = client.geolocate`
+Create an instance: `geolocate = client.Geolocate()`
 
 #### Operations
 
@@ -425,14 +428,14 @@ Create an instance: `const geolocate = client.geolocate`
 
 #### Example: Load
 
-```ts
-const geolocate = await client.geolocate.load({ id: 'geolocate_id' })
+```python
+geolocate = client.Geolocate().load({"id": "geolocate_id"})
 ```
 
 
 ### Rate
 
-Create an instance: `const rate = client.rate`
+Create an instance: `rate = client.Rate()`
 
 #### Operations
 
@@ -450,14 +453,14 @@ Create an instance: `const rate = client.rate`
 
 #### Example: Load
 
-```ts
-const rate = await client.rate.load({ id: 'rate_id' })
+```python
+rate = client.Rate().load({"id": "rate_id"})
 ```
 
 
 ### ValidateIbanResponseSchema
 
-Create an instance: `const validate_iban_response_schema = client.validate_iban_response_schema`
+Create an instance: `validate_iban_response_schema = client.ValidateIbanResponseSchema()`
 
 #### Operations
 
@@ -484,14 +487,14 @@ Create an instance: `const validate_iban_response_schema = client.validate_iban_
 
 #### Example: Load
 
-```ts
-const validate_iban_response_schema = await client.validate_iban_response_schema.load({ id: 'validate_iban_response_schema_id' })
+```python
+validate_iban_response_schema = client.ValidateIbanResponseSchema().load({"id": "validate_iban_response_schema_id"})
 ```
 
 
 ### ValidateVatResponseSchema
 
-Create an instance: `const validate_vat_response_schema = client.validate_vat_response_schema`
+Create an instance: `validate_vat_response_schema = client.ValidateVatResponseSchema()`
 
 #### Operations
 
@@ -511,14 +514,14 @@ Create an instance: `const validate_vat_response_schema = client.validate_vat_re
 
 #### Example: Load
 
-```ts
-const validate_vat_response_schema = await client.validate_vat_response_schema.load({ id: 'validate_vat_response_schema_id' })
+```python
+validate_vat_response_schema = client.ValidateVatResponseSchema().load({"id": "validate_vat_response_schema_id"})
 ```
 
 
 ### VatcomplyApiRoot
 
-Create an instance: `const vatcomply_api_root = client.vatcomply_api_root`
+Create an instance: `vatcomply_api_root = client.VatcomplyApiRoot()`
 
 #### Operations
 
@@ -540,8 +543,8 @@ Create an instance: `const vatcomply_api_root = client.vatcomply_api_root`
 
 #### Example: Load
 
-```ts
-const vatcomply_api_root = await client.vatcomply_api_root.load({ id: 'vatcomply_api_root_id' })
+```python
+vatcomply_api_root = client.VatcomplyApiRoot().load({"id": "vatcomply_api_root_id"})
 ```
 
 
@@ -615,7 +618,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-country = client.country
+country = client.Country()
 country.load({"id": "example_id"})
 
 # country.data_get() now returns the loaded country data

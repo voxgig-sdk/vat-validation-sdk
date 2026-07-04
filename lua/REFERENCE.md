@@ -107,7 +107,7 @@ same parameters as `direct()`.
 ## CountryEntity
 
 ```lua
-local country = client:country(nil)
+local country = client:Country(nil)
 ```
 
 ### Fields
@@ -135,7 +135,7 @@ local country = client:country(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:country():list()
+local results, err = client:Country():list()
 ```
 
 ### Common Methods
@@ -171,7 +171,7 @@ Return the entity name.
 ## CurrencyEntity
 
 ```lua
-local currency = client:currency(nil)
+local currency = client:Currency(nil)
 ```
 
 ### Fields
@@ -188,7 +188,7 @@ local currency = client:currency(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:currency():load({ id = "currency_id" })
+local result, err = client:Currency():load({ id = "currency_id" })
 ```
 
 ### Common Methods
@@ -224,7 +224,7 @@ Return the entity name.
 ## GeolocateEntity
 
 ```lua
-local geolocate = client:geolocate(nil)
+local geolocate = client:Geolocate(nil)
 ```
 
 ### Fields
@@ -254,7 +254,7 @@ local geolocate = client:geolocate(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:geolocate():load({ id = "geolocate_id" })
+local result, err = client:Geolocate():load({ id = "geolocate_id" })
 ```
 
 ### Common Methods
@@ -290,7 +290,7 @@ Return the entity name.
 ## RateEntity
 
 ```lua
-local rate = client:rate(nil)
+local rate = client:Rate(nil)
 ```
 
 ### Fields
@@ -308,7 +308,7 @@ local rate = client:rate(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:rate():load({ id = "rate_id" })
+local result, err = client:Rate():load({ id = "rate_id" })
 ```
 
 ### Common Methods
@@ -344,7 +344,7 @@ Return the entity name.
 ## ValidateIbanResponseSchemaEntity
 
 ```lua
-local validate_iban_response_schema = client:validate_iban_response_schema(nil)
+local validate_iban_response_schema = client:ValidateIbanResponseSchema(nil)
 ```
 
 ### Fields
@@ -371,7 +371,7 @@ local validate_iban_response_schema = client:validate_iban_response_schema(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:validate_iban_response_schema():load({ id = "validate_iban_response_schema_id" })
+local result, err = client:ValidateIbanResponseSchema():load({ id = "validate_iban_response_schema_id" })
 ```
 
 ### Common Methods
@@ -407,7 +407,7 @@ Return the entity name.
 ## ValidateVatResponseSchemaEntity
 
 ```lua
-local validate_vat_response_schema = client:validate_vat_response_schema(nil)
+local validate_vat_response_schema = client:ValidateVatResponseSchema(nil)
 ```
 
 ### Fields
@@ -427,7 +427,7 @@ local validate_vat_response_schema = client:validate_vat_response_schema(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:validate_vat_response_schema():load({ id = "validate_vat_response_schema_id" })
+local result, err = client:ValidateVatResponseSchema():load({ id = "validate_vat_response_schema_id" })
 ```
 
 ### Common Methods
@@ -463,7 +463,7 @@ Return the entity name.
 ## VatcomplyApiRootEntity
 
 ```lua
-local vatcomply_api_root = client:vatcomply_api_root(nil)
+local vatcomply_api_root = client:VatcomplyApiRoot(nil)
 ```
 
 ### Fields
@@ -485,7 +485,7 @@ local vatcomply_api_root = client:vatcomply_api_root(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:vatcomply_api_root():load({ id = "vatcomply_api_root_id" })
+local result, err = client:VatcomplyApiRoot():load({ id = "vatcomply_api_root_id" })
 ```
 
 ### Common Methods

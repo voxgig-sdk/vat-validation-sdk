@@ -29,18 +29,16 @@ require_once 'vatvalidation_sdk.php';
 $client = new VatValidationSDK();
 ```
 
-### 2. List countrys
+### 2. List country records
 
 ```php
 try {
-    $result = $client->country()->list();
-    if (is_array($result)) {
-        foreach ($result as $item) {
-            $d = $item->data_get();
-            echo $d["id"] . " " . $d["name"] . "\n";
-        }
+    // list() returns an array of Country records — iterate directly.
+    $countrys = $client->Country()->list();
+    foreach ($countrys as $item) {
+        echo $item["id"] . " " . $item["name"] . "\n";
     }
-} catch (\Exception $err) {
+} catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
 ```
@@ -86,13 +84,17 @@ print_r($fetchdef["headers"]);
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```php
-$client = VatValidationSDK::test();
+$client = VatValidationSDK::test([
+    "entity" => ["country" => ["test01" => ["id" => "test01"]]],
+]);
 
-$result = $client->country()->load(["id" => "test01"]);
-// $result contains mock response data
+// load() returns the bare mock record (throws on error).
+$country = $client->Country()->load(["id" => "test01"]);
+print_r($country);
 ```
 
 ### Use a custom fetch function
@@ -344,7 +346,7 @@ API path: `/`
 
 ### Country
 
-Create an instance: `const country = client.country`
+Create an instance: `$country = $client->Country();`
 
 #### Operations
 
@@ -372,14 +374,15 @@ Create an instance: `const country = client.country`
 
 #### Example: List
 
-```ts
-const countrys = await client.country.list()
+```php
+// list() returns an array of Country records (throws on error).
+$countrys = $client->Country()->list();
 ```
 
 
 ### Currency
 
-Create an instance: `const currency = client.currency`
+Create an instance: `$currency = $client->Currency();`
 
 #### Operations
 
@@ -396,14 +399,15 @@ Create an instance: `const currency = client.currency`
 
 #### Example: Load
 
-```ts
-const currency = await client.currency.load({ id: 'currency_id' })
+```php
+// load() returns the bare Currency record (throws on error).
+$currency = $client->Currency()->load(["id" => "currency_id"]);
 ```
 
 
 ### Geolocate
 
-Create an instance: `const geolocate = client.geolocate`
+Create an instance: `$geolocate = $client->Geolocate();`
 
 #### Operations
 
@@ -433,14 +437,15 @@ Create an instance: `const geolocate = client.geolocate`
 
 #### Example: Load
 
-```ts
-const geolocate = await client.geolocate.load({ id: 'geolocate_id' })
+```php
+// load() returns the bare Geolocate record (throws on error).
+$geolocate = $client->Geolocate()->load(["id" => "geolocate_id"]);
 ```
 
 
 ### Rate
 
-Create an instance: `const rate = client.rate`
+Create an instance: `$rate = $client->Rate();`
 
 #### Operations
 
@@ -458,14 +463,15 @@ Create an instance: `const rate = client.rate`
 
 #### Example: Load
 
-```ts
-const rate = await client.rate.load({ id: 'rate_id' })
+```php
+// load() returns the bare Rate record (throws on error).
+$rate = $client->Rate()->load(["id" => "rate_id"]);
 ```
 
 
 ### ValidateIbanResponseSchema
 
-Create an instance: `const validate_iban_response_schema = client.validate_iban_response_schema`
+Create an instance: `$validate_iban_response_schema = $client->ValidateIbanResponseSchema();`
 
 #### Operations
 
@@ -492,14 +498,15 @@ Create an instance: `const validate_iban_response_schema = client.validate_iban_
 
 #### Example: Load
 
-```ts
-const validate_iban_response_schema = await client.validate_iban_response_schema.load({ id: 'validate_iban_response_schema_id' })
+```php
+// load() returns the bare ValidateIbanResponseSchema record (throws on error).
+$validate_iban_response_schema = $client->ValidateIbanResponseSchema()->load(["id" => "validate_iban_response_schema_id"]);
 ```
 
 
 ### ValidateVatResponseSchema
 
-Create an instance: `const validate_vat_response_schema = client.validate_vat_response_schema`
+Create an instance: `$validate_vat_response_schema = $client->ValidateVatResponseSchema();`
 
 #### Operations
 
@@ -519,14 +526,15 @@ Create an instance: `const validate_vat_response_schema = client.validate_vat_re
 
 #### Example: Load
 
-```ts
-const validate_vat_response_schema = await client.validate_vat_response_schema.load({ id: 'validate_vat_response_schema_id' })
+```php
+// load() returns the bare ValidateVatResponseSchema record (throws on error).
+$validate_vat_response_schema = $client->ValidateVatResponseSchema()->load(["id" => "validate_vat_response_schema_id"]);
 ```
 
 
 ### VatcomplyApiRoot
 
-Create an instance: `const vatcomply_api_root = client.vatcomply_api_root`
+Create an instance: `$vatcomply_api_root = $client->VatcomplyApiRoot();`
 
 #### Operations
 
@@ -548,8 +556,9 @@ Create an instance: `const vatcomply_api_root = client.vatcomply_api_root`
 
 #### Example: Load
 
-```ts
-const vatcomply_api_root = await client.vatcomply_api_root.load({ id: 'vatcomply_api_root_id' })
+```php
+// load() returns the bare VatcomplyApiRoot record (throws on error).
+$vatcomply_api_root = $client->VatcomplyApiRoot()->load(["id" => "vatcomply_api_root_id"]);
 ```
 
 
@@ -624,7 +633,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$country = $client->country();
+$country = $client->Country();
 $country->load(["id" => "example_id"]);
 
 // $country->dataGet() now returns the loaded country data

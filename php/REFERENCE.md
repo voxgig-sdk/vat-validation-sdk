@@ -109,7 +109,7 @@ Prepare a fetch definition without sending the request. Returns the
 ## CountryEntity
 
 ```php
-$country = $client->country();
+$country = $client->Country();
 ```
 
 ### Fields
@@ -137,7 +137,7 @@ $country = $client->country();
 List entities matching the given criteria. Returns an array. Throws on error.
 
 ```php
-$results = $client->country()->list([]);
+$results = $client->Country()->list([]);
 ```
 
 ### Common Methods
@@ -173,7 +173,7 @@ Return the entity name.
 ## CurrencyEntity
 
 ```php
-$currency = $client->currency();
+$currency = $client->Currency();
 ```
 
 ### Fields
@@ -190,7 +190,7 @@ $currency = $client->currency();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->currency()->load(["id" => "currency_id"]);
+$result = $client->Currency()->load(["id" => "currency_id"]);
 ```
 
 ### Common Methods
@@ -226,7 +226,7 @@ Return the entity name.
 ## GeolocateEntity
 
 ```php
-$geolocate = $client->geolocate();
+$geolocate = $client->Geolocate();
 ```
 
 ### Fields
@@ -256,7 +256,7 @@ $geolocate = $client->geolocate();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->geolocate()->load(["id" => "geolocate_id"]);
+$result = $client->Geolocate()->load(["id" => "geolocate_id"]);
 ```
 
 ### Common Methods
@@ -292,7 +292,7 @@ Return the entity name.
 ## RateEntity
 
 ```php
-$rate = $client->rate();
+$rate = $client->Rate();
 ```
 
 ### Fields
@@ -310,7 +310,7 @@ $rate = $client->rate();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->rate()->load(["id" => "rate_id"]);
+$result = $client->Rate()->load(["id" => "rate_id"]);
 ```
 
 ### Common Methods
@@ -346,7 +346,7 @@ Return the entity name.
 ## ValidateIbanResponseSchemaEntity
 
 ```php
-$validate_iban_response_schema = $client->validate_iban_response_schema();
+$validate_iban_response_schema = $client->ValidateIbanResponseSchema();
 ```
 
 ### Fields
@@ -373,7 +373,7 @@ $validate_iban_response_schema = $client->validate_iban_response_schema();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->validate_iban_response_schema()->load(["id" => "validate_iban_response_schema_id"]);
+$result = $client->ValidateIbanResponseSchema()->load(["id" => "validate_iban_response_schema_id"]);
 ```
 
 ### Common Methods
@@ -409,7 +409,7 @@ Return the entity name.
 ## ValidateVatResponseSchemaEntity
 
 ```php
-$validate_vat_response_schema = $client->validate_vat_response_schema();
+$validate_vat_response_schema = $client->ValidateVatResponseSchema();
 ```
 
 ### Fields
@@ -429,7 +429,7 @@ $validate_vat_response_schema = $client->validate_vat_response_schema();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->validate_vat_response_schema()->load(["id" => "validate_vat_response_schema_id"]);
+$result = $client->ValidateVatResponseSchema()->load(["id" => "validate_vat_response_schema_id"]);
 ```
 
 ### Common Methods
@@ -465,7 +465,7 @@ Return the entity name.
 ## VatcomplyApiRootEntity
 
 ```php
-$vatcomply_api_root = $client->vatcomply_api_root();
+$vatcomply_api_root = $client->VatcomplyApiRoot();
 ```
 
 ### Fields
@@ -487,7 +487,7 @@ $vatcomply_api_root = $client->vatcomply_api_root();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->vatcomply_api_root()->load(["id" => "vatcomply_api_root_id"]);
+$result = $client->VatcomplyApiRoot()->load(["id" => "vatcomply_api_root_id"]);
 ```
 
 ### Common Methods

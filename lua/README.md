@@ -31,17 +31,17 @@ local sdk = require("vat-validation_sdk")
 local client = sdk.new()
 ```
 
-### 2. List countrys
+### 2. List country records
+
+Entity operations return `(value, err)`. For `list`, `value` is the
+array of records itself — iterate it directly (there is no wrapper).
 
 ```lua
-local result, err = client:country():list()
+local countrys, err = client:Country():list()
 if err then error(err) end
 
-if type(result) == "table" then
-  for _, item in ipairs(result) do
-    local d = item:data_get()
-    print(d["id"], d["name"])
-  end
+for _, item in ipairs(countrys) do
+  print(item["id"], item["name"])
 end
 ```
 
@@ -88,8 +88,8 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:country():load({ id = "test01" })
--- result contains mock response data
+local result, err = client:Country():load({ id = "test01" })
+-- result is the loaded data; err is set on failure
 ```
 
 ### Use a custom fetch function
@@ -195,17 +195,22 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return `(any, err)`. The first value is a
-`table` with these keys:
+Entity operations return `(value, err)`. The `value` is the operation's
+data **directly** — there is no wrapper:
 
-| Key | Type | Description |
-| --- | --- | --- |
-| `ok` | `boolean` | `true` if the HTTP status is 2xx. |
-| `status` | `number` | HTTP status code. |
-| `headers` | `table` | Response headers. |
-| `data` | `any` | Parsed JSON response body. |
+| Operation | `value` |
+| --- | --- |
+| `load` / `create` / `update` / `remove` | the entity record (a `table`) |
+| `list` | an array (`table`) of entity records |
 
-On error, `ok` is `false` and `err` contains the error value.
+Check `err` first (it is non-`nil` on failure), then use `value`:
+
+    local country, err = client:Country():load({ id = "example_id" })
+    if err then error(err) end
+    -- country is the loaded record
+
+Only `direct()` returns a response envelope — a `table` with `ok`,
+`status`, `headers`, and `data` keys.
 
 ### Entities
 
@@ -336,7 +341,7 @@ API path: `/`
 
 ### Country
 
-Create an instance: `const country = client.country`
+Create an instance: `local country = client:Country(nil)`
 
 #### Operations
 
@@ -364,14 +369,14 @@ Create an instance: `const country = client.country`
 
 #### Example: List
 
-```ts
-const countrys = await client.country.list()
+```lua
+local countrys, err = client:Country():list()
 ```
 
 
 ### Currency
 
-Create an instance: `const currency = client.currency`
+Create an instance: `local currency = client:Currency(nil)`
 
 #### Operations
 
@@ -388,14 +393,14 @@ Create an instance: `const currency = client.currency`
 
 #### Example: Load
 
-```ts
-const currency = await client.currency.load({ id: 'currency_id' })
+```lua
+local currency, err = client:Currency():load({ id = "currency_id" })
 ```
 
 
 ### Geolocate
 
-Create an instance: `const geolocate = client.geolocate`
+Create an instance: `local geolocate = client:Geolocate(nil)`
 
 #### Operations
 
@@ -425,14 +430,14 @@ Create an instance: `const geolocate = client.geolocate`
 
 #### Example: Load
 
-```ts
-const geolocate = await client.geolocate.load({ id: 'geolocate_id' })
+```lua
+local geolocate, err = client:Geolocate():load({ id = "geolocate_id" })
 ```
 
 
 ### Rate
 
-Create an instance: `const rate = client.rate`
+Create an instance: `local rate = client:Rate(nil)`
 
 #### Operations
 
@@ -450,14 +455,14 @@ Create an instance: `const rate = client.rate`
 
 #### Example: Load
 
-```ts
-const rate = await client.rate.load({ id: 'rate_id' })
+```lua
+local rate, err = client:Rate():load({ id = "rate_id" })
 ```
 
 
 ### ValidateIbanResponseSchema
 
-Create an instance: `const validate_iban_response_schema = client.validate_iban_response_schema`
+Create an instance: `local validate_iban_response_schema = client:ValidateIbanResponseSchema(nil)`
 
 #### Operations
 
@@ -484,14 +489,14 @@ Create an instance: `const validate_iban_response_schema = client.validate_iban_
 
 #### Example: Load
 
-```ts
-const validate_iban_response_schema = await client.validate_iban_response_schema.load({ id: 'validate_iban_response_schema_id' })
+```lua
+local validate_iban_response_schema, err = client:ValidateIbanResponseSchema():load({ id = "validate_iban_response_schema_id" })
 ```
 
 
 ### ValidateVatResponseSchema
 
-Create an instance: `const validate_vat_response_schema = client.validate_vat_response_schema`
+Create an instance: `local validate_vat_response_schema = client:ValidateVatResponseSchema(nil)`
 
 #### Operations
 
@@ -511,14 +516,14 @@ Create an instance: `const validate_vat_response_schema = client.validate_vat_re
 
 #### Example: Load
 
-```ts
-const validate_vat_response_schema = await client.validate_vat_response_schema.load({ id: 'validate_vat_response_schema_id' })
+```lua
+local validate_vat_response_schema, err = client:ValidateVatResponseSchema():load({ id = "validate_vat_response_schema_id" })
 ```
 
 
 ### VatcomplyApiRoot
 
-Create an instance: `const vatcomply_api_root = client.vatcomply_api_root`
+Create an instance: `local vatcomply_api_root = client:VatcomplyApiRoot(nil)`
 
 #### Operations
 
@@ -540,8 +545,8 @@ Create an instance: `const vatcomply_api_root = client.vatcomply_api_root`
 
 #### Example: Load
 
-```ts
-const vatcomply_api_root = await client.vatcomply_api_root.load({ id: 'vatcomply_api_root_id' })
+```lua
+local vatcomply_api_root, err = client:VatcomplyApiRoot():load({ id = "vatcomply_api_root_id" })
 ```
 
 
@@ -616,7 +621,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local country = client:country()
+local country = client:Country()
 country:load({ id = "example_id" })
 
 -- country:data_get() now returns the loaded country data

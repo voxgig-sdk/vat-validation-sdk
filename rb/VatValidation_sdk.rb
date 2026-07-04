@@ -208,91 +208,49 @@ class VatValidationSDK
   end
 
 
-  # Idiomatic facade: client.country.list / client.country.load({ "id" => ... })
-  def country
-    require_relative 'entity/country_entity'
-    @country ||= CountryEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.country instead.
+  # Canonical facade: client.Country.list / client.Country.load({ "id" => ... })
   def Country(data = nil)
     require_relative 'entity/country_entity'
     CountryEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.currency.list / client.currency.load({ "id" => ... })
-  def currency
-    require_relative 'entity/currency_entity'
-    @currency ||= CurrencyEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.currency instead.
+  # Canonical facade: client.Currency.list / client.Currency.load({ "id" => ... })
   def Currency(data = nil)
     require_relative 'entity/currency_entity'
     CurrencyEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.geolocate.list / client.geolocate.load({ "id" => ... })
-  def geolocate
-    require_relative 'entity/geolocate_entity'
-    @geolocate ||= GeolocateEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.geolocate instead.
+  # Canonical facade: client.Geolocate.list / client.Geolocate.load({ "id" => ... })
   def Geolocate(data = nil)
     require_relative 'entity/geolocate_entity'
     GeolocateEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.rate.list / client.rate.load({ "id" => ... })
-  def rate
-    require_relative 'entity/rate_entity'
-    @rate ||= RateEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.rate instead.
+  # Canonical facade: client.Rate.list / client.Rate.load({ "id" => ... })
   def Rate(data = nil)
     require_relative 'entity/rate_entity'
     RateEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.validate_iban_response_schema.list / client.validate_iban_response_schema.load({ "id" => ... })
-  def validate_iban_response_schema
-    require_relative 'entity/validate_iban_response_schema_entity'
-    @validate_iban_response_schema ||= ValidateIbanResponseSchemaEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.validate_iban_response_schema instead.
+  # Canonical facade: client.ValidateIbanResponseSchema.list / client.ValidateIbanResponseSchema.load({ "id" => ... })
   def ValidateIbanResponseSchema(data = nil)
     require_relative 'entity/validate_iban_response_schema_entity'
     ValidateIbanResponseSchemaEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.validate_vat_response_schema.list / client.validate_vat_response_schema.load({ "id" => ... })
-  def validate_vat_response_schema
-    require_relative 'entity/validate_vat_response_schema_entity'
-    @validate_vat_response_schema ||= ValidateVatResponseSchemaEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.validate_vat_response_schema instead.
+  # Canonical facade: client.ValidateVatResponseSchema.list / client.ValidateVatResponseSchema.load({ "id" => ... })
   def ValidateVatResponseSchema(data = nil)
     require_relative 'entity/validate_vat_response_schema_entity'
     ValidateVatResponseSchemaEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.vatcomply_api_root.list / client.vatcomply_api_root.load({ "id" => ... })
-  def vatcomply_api_root
-    require_relative 'entity/vatcomply_api_root_entity'
-    @vatcomply_api_root ||= VatcomplyApiRootEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.vatcomply_api_root instead.
+  # Canonical facade: client.VatcomplyApiRoot.list / client.VatcomplyApiRoot.load({ "id" => ... })
   def VatcomplyApiRoot(data = nil)
     require_relative 'entity/vatcomply_api_root_entity'
     VatcomplyApiRootEntity.new(self, data)

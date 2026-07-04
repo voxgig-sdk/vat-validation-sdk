@@ -210,98 +210,49 @@ class VatValidationSDK {
 
 
 
-  _country?: CountryEntity
-
-  // Idiomatic facade: `client.country.list()` / `client.country.load({ id })`.
-  get country(): CountryEntity {
-    return (this._country ??= new CountryEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.country` instead. */
+  // Entity access: `client.Country().list()` / `client.Country().load({ id })`.
   Country(data?: any) {
     const self = this
     return new CountryEntity(self,data)
   }
 
 
-  _currency?: CurrencyEntity
-
-  // Idiomatic facade: `client.currency.list()` / `client.currency.load({ id })`.
-  get currency(): CurrencyEntity {
-    return (this._currency ??= new CurrencyEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.currency` instead. */
+  // Entity access: `client.Currency().list()` / `client.Currency().load({ id })`.
   Currency(data?: any) {
     const self = this
     return new CurrencyEntity(self,data)
   }
 
 
-  _geolocate?: GeolocateEntity
-
-  // Idiomatic facade: `client.geolocate.list()` / `client.geolocate.load({ id })`.
-  get geolocate(): GeolocateEntity {
-    return (this._geolocate ??= new GeolocateEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.geolocate` instead. */
+  // Entity access: `client.Geolocate().list()` / `client.Geolocate().load({ id })`.
   Geolocate(data?: any) {
     const self = this
     return new GeolocateEntity(self,data)
   }
 
 
-  _rate?: RateEntity
-
-  // Idiomatic facade: `client.rate.list()` / `client.rate.load({ id })`.
-  get rate(): RateEntity {
-    return (this._rate ??= new RateEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.rate` instead. */
+  // Entity access: `client.Rate().list()` / `client.Rate().load({ id })`.
   Rate(data?: any) {
     const self = this
     return new RateEntity(self,data)
   }
 
 
-  _validate_iban_response_schema?: ValidateIbanResponseSchemaEntity
-
-  // Idiomatic facade: `client.validate_iban_response_schema.list()` / `client.validate_iban_response_schema.load({ id })`.
-  get validate_iban_response_schema(): ValidateIbanResponseSchemaEntity {
-    return (this._validate_iban_response_schema ??= new ValidateIbanResponseSchemaEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.validate_iban_response_schema` instead. */
+  // Entity access: `client.ValidateIbanResponseSchema().list()` / `client.ValidateIbanResponseSchema().load({ id })`.
   ValidateIbanResponseSchema(data?: any) {
     const self = this
     return new ValidateIbanResponseSchemaEntity(self,data)
   }
 
 
-  _validate_vat_response_schema?: ValidateVatResponseSchemaEntity
-
-  // Idiomatic facade: `client.validate_vat_response_schema.list()` / `client.validate_vat_response_schema.load({ id })`.
-  get validate_vat_response_schema(): ValidateVatResponseSchemaEntity {
-    return (this._validate_vat_response_schema ??= new ValidateVatResponseSchemaEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.validate_vat_response_schema` instead. */
+  // Entity access: `client.ValidateVatResponseSchema().list()` / `client.ValidateVatResponseSchema().load({ id })`.
   ValidateVatResponseSchema(data?: any) {
     const self = this
     return new ValidateVatResponseSchemaEntity(self,data)
   }
 
 
-  _vatcomply_api_root?: VatcomplyApiRootEntity
-
-  // Idiomatic facade: `client.vatcomply_api_root.list()` / `client.vatcomply_api_root.load({ id })`.
-  get vatcomply_api_root(): VatcomplyApiRootEntity {
-    return (this._vatcomply_api_root ??= new VatcomplyApiRootEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.vatcomply_api_root` instead. */
+  // Entity access: `client.VatcomplyApiRoot().list()` / `client.VatcomplyApiRoot().load({ id })`.
   VatcomplyApiRoot(data?: any) {
     const self = this
     return new VatcomplyApiRootEntity(self,data)

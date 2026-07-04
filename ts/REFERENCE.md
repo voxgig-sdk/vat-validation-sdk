@@ -181,7 +181,7 @@ Alias for `VatValidationSDK.test()`.
 ## CountryEntity
 
 ```ts
-const country = client.country
+const country = client.Country()
 ```
 
 ### Fields
@@ -209,7 +209,7 @@ const country = client.country
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.country.list()
+const results = await client.Country().list()
 ```
 
 ### Common Methods
@@ -243,7 +243,7 @@ Return a copy of the entity options.
 ## CurrencyEntity
 
 ```ts
-const currency = client.currency
+const currency = client.Currency()
 ```
 
 ### Fields
@@ -260,7 +260,7 @@ const currency = client.currency
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.currency.load({ id: 'currency_id' })
+const result = await client.Currency().load({ id: 'currency_id' })
 ```
 
 ### Common Methods
@@ -294,7 +294,7 @@ Return a copy of the entity options.
 ## GeolocateEntity
 
 ```ts
-const geolocate = client.geolocate
+const geolocate = client.Geolocate()
 ```
 
 ### Fields
@@ -324,7 +324,7 @@ const geolocate = client.geolocate
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.geolocate.load({ id: 'geolocate_id' })
+const result = await client.Geolocate().load({ id: 'geolocate_id' })
 ```
 
 ### Common Methods
@@ -358,7 +358,7 @@ Return a copy of the entity options.
 ## RateEntity
 
 ```ts
-const rate = client.rate
+const rate = client.Rate()
 ```
 
 ### Fields
@@ -376,7 +376,7 @@ const rate = client.rate
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.rate.load({ id: 'rate_id' })
+const result = await client.Rate().load({ id: 'rate_id' })
 ```
 
 ### Common Methods
@@ -410,7 +410,7 @@ Return a copy of the entity options.
 ## ValidateIbanResponseSchemaEntity
 
 ```ts
-const validate_iban_response_schema = client.validate_iban_response_schema
+const validate_iban_response_schema = client.ValidateIbanResponseSchema()
 ```
 
 ### Fields
@@ -437,7 +437,7 @@ const validate_iban_response_schema = client.validate_iban_response_schema
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.validate_iban_response_schema.load({ id: 'validate_iban_response_schema_id' })
+const result = await client.ValidateIbanResponseSchema().load({ id: 'validate_iban_response_schema_id' })
 ```
 
 ### Common Methods
@@ -471,7 +471,7 @@ Return a copy of the entity options.
 ## ValidateVatResponseSchemaEntity
 
 ```ts
-const validate_vat_response_schema = client.validate_vat_response_schema
+const validate_vat_response_schema = client.ValidateVatResponseSchema()
 ```
 
 ### Fields
@@ -491,7 +491,7 @@ const validate_vat_response_schema = client.validate_vat_response_schema
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.validate_vat_response_schema.load({ id: 'validate_vat_response_schema_id' })
+const result = await client.ValidateVatResponseSchema().load({ id: 'validate_vat_response_schema_id' })
 ```
 
 ### Common Methods
@@ -525,7 +525,7 @@ Return a copy of the entity options.
 ## VatcomplyApiRootEntity
 
 ```ts
-const vatcomply_api_root = client.vatcomply_api_root
+const vatcomply_api_root = client.VatcomplyApiRoot()
 ```
 
 ### Fields
@@ -547,7 +547,7 @@ const vatcomply_api_root = client.vatcomply_api_root
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.vatcomply_api_root.load({ id: 'vatcomply_api_root_id' })
+const result = await client.VatcomplyApiRoot().load({ id: 'vatcomply_api_root_id' })
 ```
 
 ### Common Methods

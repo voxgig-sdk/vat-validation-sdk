@@ -30,37 +30,33 @@ go mod edit -replace github.com/voxgig-sdk/vat-validation-sdk/go=../vat-validati
 This tutorial walks through creating a client, listing entities, and
 loading a specific record.
 
-### 1. Create a client
+### Quickstart
+
+A complete program: create a client, then call the entity operations.
+Each operation returns `(value, error)` — the value is the data itself
+(there is no `{ok, data}` wrapper), so check `err` and use the value
+directly.
 
 ```go
 package main
 
 import (
     "fmt"
-
     sdk "github.com/voxgig-sdk/vat-validation-sdk/go"
-    "github.com/voxgig-sdk/vat-validation-sdk/go/core"
 )
 
 func main() {
     client := sdk.New()
-```
 
-### 2. List countrys
-
-```go
-    result, err := client.Country(nil).List(nil, nil)
+    // List country records — the value is the array of records itself.
+    countrys, err := client.Country(nil).List(nil, nil)
     if err != nil {
         panic(err)
     }
-
-    rm := core.ToMapAny(result)
-    if rm["ok"] == true {
-        for _, item := range rm["data"].([]any) {
-            p := core.ToMapAny(item)
-            fmt.Println(p["id"], p["name"])
-        }
+    for _, item := range countrys.([]any) {
+        fmt.Println(item)
     }
+}
 ```
 
 
@@ -110,10 +106,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-result, err := client.Country(nil).Load(
+country, err := client.Country(nil).Load(
     map[string]any{"id": "test01"}, nil,
 )
-// result contains mock response data
+if err != nil {
+    panic(err)
+}
+fmt.Println(country) // the loaded mock data
 ```
 
 ### Use a custom fetch function
@@ -216,17 +215,24 @@ All entities implement the `VatValidationEntity` interface.
 
 ### Result shape
 
-Entity operations return `(any, error)`. The `any` value is a
-`map[string]any` with these keys:
+Entity operations return `(value, error)`. The `value` is the
+operation's data **directly** — there is no wrapper:
 
-| Key | Type | Description |
-| --- | --- | --- |
-| `"ok"` | `bool` | `true` if the HTTP status is 2xx. |
-| `"status"` | `int` | HTTP status code. |
-| `"headers"` | `map[string]any` | Response headers. |
-| `"data"` | `any` | Parsed JSON response body. |
+| Operation | `value` |
+| --- | --- |
+| `Load` / `Create` / `Update` / `Remove` | the entity record (`map[string]any`) |
+| `List` | a `[]any` of entity records |
 
-On error, `"ok"` is `false` and `"err"` contains the error value.
+Check `err` first, then use the value directly (or the typed
+`...Typed` variants, which return the entity's model struct and a typed
+slice):
+
+    country, err := client.Country(nil).Load(map[string]any{"id": "example_id"}, nil)
+    if err != nil { /* handle */ }
+    // country is the loaded record
+
+Only `Direct()` returns a response envelope — a `map[string]any` with
+`"ok"`, `"status"`, `"headers"`, and `"data"` keys.
 
 ### Entities
 
@@ -386,7 +392,11 @@ Create an instance: `country := client.Country(nil)`
 #### Example: List
 
 ```go
-results, err := client.Country(nil).List(nil, nil)
+countrys, err := client.Country(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(countrys) // the array of records
 ```
 
 
@@ -410,7 +420,11 @@ Create an instance: `currency := client.Currency(nil)`
 #### Example: Load
 
 ```go
-result, err := client.Currency(nil).Load(map[string]any{"id": "currency_id"}, nil)
+currency, err := client.Currency(nil).Load(map[string]any{"id": "currency_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(currency) // the loaded record
 ```
 
 
@@ -447,7 +461,11 @@ Create an instance: `geolocate := client.Geolocate(nil)`
 #### Example: Load
 
 ```go
-result, err := client.Geolocate(nil).Load(map[string]any{"id": "geolocate_id"}, nil)
+geolocate, err := client.Geolocate(nil).Load(map[string]any{"id": "geolocate_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(geolocate) // the loaded record
 ```
 
 
@@ -472,7 +490,11 @@ Create an instance: `rate := client.Rate(nil)`
 #### Example: Load
 
 ```go
-result, err := client.Rate(nil).Load(map[string]any{"id": "rate_id"}, nil)
+rate, err := client.Rate(nil).Load(map[string]any{"id": "rate_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(rate) // the loaded record
 ```
 
 
@@ -506,7 +528,11 @@ Create an instance: `validate_iban_response_schema := client.ValidateIbanRespons
 #### Example: Load
 
 ```go
-result, err := client.ValidateIbanResponseSchema(nil).Load(map[string]any{"id": "validate_iban_response_schema_id"}, nil)
+validate_iban_response_schema, err := client.ValidateIbanResponseSchema(nil).Load(map[string]any{"id": "validate_iban_response_schema_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(validate_iban_response_schema) // the loaded record
 ```
 
 
@@ -533,7 +559,11 @@ Create an instance: `validate_vat_response_schema := client.ValidateVatResponseS
 #### Example: Load
 
 ```go
-result, err := client.ValidateVatResponseSchema(nil).Load(map[string]any{"id": "validate_vat_response_schema_id"}, nil)
+validate_vat_response_schema, err := client.ValidateVatResponseSchema(nil).Load(map[string]any{"id": "validate_vat_response_schema_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(validate_vat_response_schema) // the loaded record
 ```
 
 
@@ -562,7 +592,11 @@ Create an instance: `vatcomply_api_root := client.VatcomplyApiRoot(nil)`
 #### Example: Load
 
 ```go
-result, err := client.VatcomplyApiRoot(nil).Load(map[string]any{"id": "vatcomply_api_root_id"}, nil)
+vatcomply_api_root, err := client.VatcomplyApiRoot(nil).Load(map[string]any{"id": "vatcomply_api_root_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(vatcomply_api_root) // the loaded record
 ```
 
 

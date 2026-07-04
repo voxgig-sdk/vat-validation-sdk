@@ -233,10 +233,10 @@ class VatValidationSDK
 
     private $_country = null;
 
-    // Idiomatic facade: $client->country()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Country() (PHP method
-    // names are case-insensitive).
-    public function country($data = null)
+    // Canonical facade: $client->Country()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->country()
+    // resolves here too.
+    public function Country($data = null)
     {
         require_once __DIR__ . '/entity/country_entity.php';
         if ($data === null) {
@@ -251,10 +251,10 @@ class VatValidationSDK
 
     private $_currency = null;
 
-    // Idiomatic facade: $client->currency()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Currency() (PHP method
-    // names are case-insensitive).
-    public function currency($data = null)
+    // Canonical facade: $client->Currency()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->currency()
+    // resolves here too.
+    public function Currency($data = null)
     {
         require_once __DIR__ . '/entity/currency_entity.php';
         if ($data === null) {
@@ -269,10 +269,10 @@ class VatValidationSDK
 
     private $_geolocate = null;
 
-    // Idiomatic facade: $client->geolocate()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Geolocate() (PHP method
-    // names are case-insensitive).
-    public function geolocate($data = null)
+    // Canonical facade: $client->Geolocate()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->geolocate()
+    // resolves here too.
+    public function Geolocate($data = null)
     {
         require_once __DIR__ . '/entity/geolocate_entity.php';
         if ($data === null) {
@@ -287,10 +287,10 @@ class VatValidationSDK
 
     private $_rate = null;
 
-    // Idiomatic facade: $client->rate()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Rate() (PHP method
-    // names are case-insensitive).
-    public function rate($data = null)
+    // Canonical facade: $client->Rate()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->rate()
+    // resolves here too.
+    public function Rate($data = null)
     {
         require_once __DIR__ . '/entity/rate_entity.php';
         if ($data === null) {
@@ -305,10 +305,10 @@ class VatValidationSDK
 
     private $_validate_iban_response_schema = null;
 
-    // Idiomatic facade: $client->validate_iban_response_schema()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias ValidateIbanResponseSchema() (PHP method
-    // names are case-insensitive).
-    public function validate_iban_response_schema($data = null)
+    // Canonical facade: $client->ValidateIbanResponseSchema()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->validate_iban_response_schema()
+    // resolves here too.
+    public function ValidateIbanResponseSchema($data = null)
     {
         require_once __DIR__ . '/entity/validate_iban_response_schema_entity.php';
         if ($data === null) {
@@ -323,10 +323,10 @@ class VatValidationSDK
 
     private $_validate_vat_response_schema = null;
 
-    // Idiomatic facade: $client->validate_vat_response_schema()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias ValidateVatResponseSchema() (PHP method
-    // names are case-insensitive).
-    public function validate_vat_response_schema($data = null)
+    // Canonical facade: $client->ValidateVatResponseSchema()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->validate_vat_response_schema()
+    // resolves here too.
+    public function ValidateVatResponseSchema($data = null)
     {
         require_once __DIR__ . '/entity/validate_vat_response_schema_entity.php';
         if ($data === null) {
@@ -341,10 +341,10 @@ class VatValidationSDK
 
     private $_vatcomply_api_root = null;
 
-    // Idiomatic facade: $client->vatcomply_api_root()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias VatcomplyApiRoot() (PHP method
-    // names are case-insensitive).
-    public function vatcomply_api_root($data = null)
+    // Canonical facade: $client->VatcomplyApiRoot()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->vatcomply_api_root()
+    // resolves here too.
+    public function VatcomplyApiRoot($data = null)
     {
         require_once __DIR__ . '/entity/vatcomply_api_root_entity.php';
         if ($data === null) {

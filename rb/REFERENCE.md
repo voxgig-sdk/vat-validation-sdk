@@ -110,7 +110,7 @@ same parameters as `direct()`. Raises on error.
 ## CountryEntity
 
 ```ruby
-country = client.country
+country = client.Country
 ```
 
 ### Fields
@@ -138,7 +138,7 @@ country = client.country
 List entities matching the given criteria. Returns an array. Raises on error.
 
 ```ruby
-results = client.country.list(nil)
+results = client.Country.list(nil)
 ```
 
 ### Common Methods
@@ -174,7 +174,7 @@ Return the entity name.
 ## CurrencyEntity
 
 ```ruby
-currency = client.currency
+currency = client.Currency
 ```
 
 ### Fields
@@ -191,7 +191,7 @@ currency = client.currency
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.currency.load({ "id" => "currency_id" })
+result = client.Currency.load({ "id" => "currency_id" })
 ```
 
 ### Common Methods
@@ -227,7 +227,7 @@ Return the entity name.
 ## GeolocateEntity
 
 ```ruby
-geolocate = client.geolocate
+geolocate = client.Geolocate
 ```
 
 ### Fields
@@ -257,7 +257,7 @@ geolocate = client.geolocate
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.geolocate.load({ "id" => "geolocate_id" })
+result = client.Geolocate.load({ "id" => "geolocate_id" })
 ```
 
 ### Common Methods
@@ -293,7 +293,7 @@ Return the entity name.
 ## RateEntity
 
 ```ruby
-rate = client.rate
+rate = client.Rate
 ```
 
 ### Fields
@@ -311,7 +311,7 @@ rate = client.rate
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.rate.load({ "id" => "rate_id" })
+result = client.Rate.load({ "id" => "rate_id" })
 ```
 
 ### Common Methods
@@ -347,7 +347,7 @@ Return the entity name.
 ## ValidateIbanResponseSchemaEntity
 
 ```ruby
-validate_iban_response_schema = client.validate_iban_response_schema
+validate_iban_response_schema = client.ValidateIbanResponseSchema
 ```
 
 ### Fields
@@ -374,7 +374,7 @@ validate_iban_response_schema = client.validate_iban_response_schema
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.validate_iban_response_schema.load({ "id" => "validate_iban_response_schema_id" })
+result = client.ValidateIbanResponseSchema.load({ "id" => "validate_iban_response_schema_id" })
 ```
 
 ### Common Methods
@@ -410,7 +410,7 @@ Return the entity name.
 ## ValidateVatResponseSchemaEntity
 
 ```ruby
-validate_vat_response_schema = client.validate_vat_response_schema
+validate_vat_response_schema = client.ValidateVatResponseSchema
 ```
 
 ### Fields
@@ -430,7 +430,7 @@ validate_vat_response_schema = client.validate_vat_response_schema
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.validate_vat_response_schema.load({ "id" => "validate_vat_response_schema_id" })
+result = client.ValidateVatResponseSchema.load({ "id" => "validate_vat_response_schema_id" })
 ```
 
 ### Common Methods
@@ -466,7 +466,7 @@ Return the entity name.
 ## VatcomplyApiRootEntity
 
 ```ruby
-vatcomply_api_root = client.vatcomply_api_root
+vatcomply_api_root = client.VatcomplyApiRoot
 ```
 
 ### Fields
@@ -488,7 +488,7 @@ vatcomply_api_root = client.vatcomply_api_root
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.vatcomply_api_root.load({ "id" => "vatcomply_api_root_id" })
+result = client.VatcomplyApiRoot.load({ "id" => "vatcomply_api_root_id" })
 ```
 
 ### Common Methods

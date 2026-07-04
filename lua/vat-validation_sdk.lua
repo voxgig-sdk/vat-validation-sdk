@@ -244,8 +244,9 @@ end
 
 
 
--- Idiomatic facade: client:country():list() / client:country():load({ id = ... })
-function VatValidationSDK:country(data)
+-- Idiomatic facade: client:Country():list() / client:Country():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function VatValidationSDK:Country(data)
   local EntityMod = require("entity.country_entity")
   if data == nil then
     if self._country == nil then
@@ -256,15 +257,10 @@ function VatValidationSDK:country(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:country() instead.
-function VatValidationSDK:Country(data)
-  local EntityMod = require("entity.country_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:currency():list() / client:currency():load({ id = ... })
-function VatValidationSDK:currency(data)
+-- Idiomatic facade: client:Currency():list() / client:Currency():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function VatValidationSDK:Currency(data)
   local EntityMod = require("entity.currency_entity")
   if data == nil then
     if self._currency == nil then
@@ -275,15 +271,10 @@ function VatValidationSDK:currency(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:currency() instead.
-function VatValidationSDK:Currency(data)
-  local EntityMod = require("entity.currency_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:geolocate():list() / client:geolocate():load({ id = ... })
-function VatValidationSDK:geolocate(data)
+-- Idiomatic facade: client:Geolocate():list() / client:Geolocate():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function VatValidationSDK:Geolocate(data)
   local EntityMod = require("entity.geolocate_entity")
   if data == nil then
     if self._geolocate == nil then
@@ -294,15 +285,10 @@ function VatValidationSDK:geolocate(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:geolocate() instead.
-function VatValidationSDK:Geolocate(data)
-  local EntityMod = require("entity.geolocate_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:rate():list() / client:rate():load({ id = ... })
-function VatValidationSDK:rate(data)
+-- Idiomatic facade: client:Rate():list() / client:Rate():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function VatValidationSDK:Rate(data)
   local EntityMod = require("entity.rate_entity")
   if data == nil then
     if self._rate == nil then
@@ -313,15 +299,10 @@ function VatValidationSDK:rate(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:rate() instead.
-function VatValidationSDK:Rate(data)
-  local EntityMod = require("entity.rate_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:validate_iban_response_schema():list() / client:validate_iban_response_schema():load({ id = ... })
-function VatValidationSDK:validate_iban_response_schema(data)
+-- Idiomatic facade: client:ValidateIbanResponseSchema():list() / client:ValidateIbanResponseSchema():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function VatValidationSDK:ValidateIbanResponseSchema(data)
   local EntityMod = require("entity.validate_iban_response_schema_entity")
   if data == nil then
     if self._validate_iban_response_schema == nil then
@@ -332,15 +313,10 @@ function VatValidationSDK:validate_iban_response_schema(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:validate_iban_response_schema() instead.
-function VatValidationSDK:ValidateIbanResponseSchema(data)
-  local EntityMod = require("entity.validate_iban_response_schema_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:validate_vat_response_schema():list() / client:validate_vat_response_schema():load({ id = ... })
-function VatValidationSDK:validate_vat_response_schema(data)
+-- Idiomatic facade: client:ValidateVatResponseSchema():list() / client:ValidateVatResponseSchema():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function VatValidationSDK:ValidateVatResponseSchema(data)
   local EntityMod = require("entity.validate_vat_response_schema_entity")
   if data == nil then
     if self._validate_vat_response_schema == nil then
@@ -351,15 +327,10 @@ function VatValidationSDK:validate_vat_response_schema(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:validate_vat_response_schema() instead.
-function VatValidationSDK:ValidateVatResponseSchema(data)
-  local EntityMod = require("entity.validate_vat_response_schema_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:vatcomply_api_root():list() / client:vatcomply_api_root():load({ id = ... })
-function VatValidationSDK:vatcomply_api_root(data)
+-- Idiomatic facade: client:VatcomplyApiRoot():list() / client:VatcomplyApiRoot():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function VatValidationSDK:VatcomplyApiRoot(data)
   local EntityMod = require("entity.vatcomply_api_root_entity")
   if data == nil then
     if self._vatcomply_api_root == nil then
@@ -367,12 +338,6 @@ function VatValidationSDK:vatcomply_api_root(data)
     end
     return self._vatcomply_api_root
   end
-  return EntityMod.new(self, data)
-end
-
--- Deprecated: use client:vatcomply_api_root() instead.
-function VatValidationSDK:VatcomplyApiRoot(data)
-  local EntityMod = require("entity.vatcomply_api_root_entity")
   return EntityMod.new(self, data)
 end
 
