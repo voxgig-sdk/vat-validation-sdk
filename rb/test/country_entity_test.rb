@@ -43,8 +43,7 @@ class CountryEntityTest < Minitest::Test
     country_ref01_ent = client.Country(nil)
     country_ref01_match = {}
 
-    country_ref01_list_result, err = country_ref01_ent.list(country_ref01_match, nil)
-    assert_nil err
+    country_ref01_list_result = country_ref01_ent.list(country_ref01_match, nil)
     assert country_ref01_list_result.is_a?(Array)
 
   end
@@ -83,7 +82,6 @@ def country_basic_setup(extra)
     "VATVALIDATION_TEST_COUNTRY_ENTID" => idmap,
     "VATVALIDATION_TEST_LIVE" => "FALSE",
     "VATVALIDATION_TEST_EXPLAIN" => "FALSE",
-    "VATVALIDATION_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -95,7 +93,6 @@ def country_basic_setup(extra)
   if env["VATVALIDATION_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["VATVALIDATION_APIKEY"],
       },
       extra || {},
     ])

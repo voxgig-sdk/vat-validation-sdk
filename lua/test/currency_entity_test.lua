@@ -91,7 +91,6 @@ function currency_basic_setup(extra)
     ["VATVALIDATION_TEST_CURRENCY_ENTID"] = idmap,
     ["VATVALIDATION_TEST_LIVE"] = "FALSE",
     ["VATVALIDATION_TEST_EXPLAIN"] = "FALSE",
-    ["VATVALIDATION_APIKEY"] = "NONE",
   })
 
   local idmap_resolved = helpers.to_map(
@@ -103,7 +102,6 @@ function currency_basic_setup(extra)
   if env["VATVALIDATION_TEST_LIVE"] == "TRUE" then
     local merged_opts = vs.merge({
       {
-        apikey = env["VATVALIDATION_APIKEY"],
       },
       extra or {},
     })

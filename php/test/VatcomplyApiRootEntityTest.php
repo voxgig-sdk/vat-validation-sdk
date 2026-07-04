@@ -49,8 +49,7 @@ class VatcomplyApiRootEntityTest extends TestCase
         // LOAD
         $vatcomply_api_root_ref01_ent = $client->VatcomplyApiRoot(null);
         $vatcomply_api_root_ref01_match_dt0 = [];
-        [$vatcomply_api_root_ref01_data_dt0_loaded, $err] = $vatcomply_api_root_ref01_ent->load($vatcomply_api_root_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $vatcomply_api_root_ref01_data_dt0_loaded = $vatcomply_api_root_ref01_ent->load($vatcomply_api_root_ref01_match_dt0, null);
         $this->assertNotNull($vatcomply_api_root_ref01_data_dt0_loaded);
 
     }
@@ -85,7 +84,6 @@ function vatcomply_api_root_basic_setup($extra)
         "VATVALIDATION_TEST_VATCOMPLY_API_ROOT_ENTID" => $idmap,
         "VATVALIDATION_TEST_LIVE" => "FALSE",
         "VATVALIDATION_TEST_EXPLAIN" => "FALSE",
-        "VATVALIDATION_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -97,7 +95,6 @@ function vatcomply_api_root_basic_setup($extra)
     if ($env["VATVALIDATION_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["VATVALIDATION_APIKEY"],
             ],
             $extra ?? [],
         ]);

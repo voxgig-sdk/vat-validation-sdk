@@ -42,8 +42,7 @@ class ValidateIbanResponseSchemaEntityTest < Minitest::Test
     # LOAD
     validate_iban_response_schema_ref01_ent = client.ValidateIbanResponseSchema(nil)
     validate_iban_response_schema_ref01_match_dt0 = {}
-    validate_iban_response_schema_ref01_data_dt0_loaded, err = validate_iban_response_schema_ref01_ent.load(validate_iban_response_schema_ref01_match_dt0, nil)
-    assert_nil err
+    validate_iban_response_schema_ref01_data_dt0_loaded = validate_iban_response_schema_ref01_ent.load(validate_iban_response_schema_ref01_match_dt0, nil)
     assert !validate_iban_response_schema_ref01_data_dt0_loaded.nil?
 
   end
@@ -82,7 +81,6 @@ def validate_iban_response_schema_basic_setup(extra)
     "VATVALIDATION_TEST_VALIDATE_IBAN_RESPONSE_SCHEMA_ENTID" => idmap,
     "VATVALIDATION_TEST_LIVE" => "FALSE",
     "VATVALIDATION_TEST_EXPLAIN" => "FALSE",
-    "VATVALIDATION_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -94,7 +92,6 @@ def validate_iban_response_schema_basic_setup(extra)
   if env["VATVALIDATION_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["VATVALIDATION_APIKEY"],
       },
       extra || {},
     ])

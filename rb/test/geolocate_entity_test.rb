@@ -42,8 +42,7 @@ class GeolocateEntityTest < Minitest::Test
     # LOAD
     geolocate_ref01_ent = client.Geolocate(nil)
     geolocate_ref01_match_dt0 = {}
-    geolocate_ref01_data_dt0_loaded, err = geolocate_ref01_ent.load(geolocate_ref01_match_dt0, nil)
-    assert_nil err
+    geolocate_ref01_data_dt0_loaded = geolocate_ref01_ent.load(geolocate_ref01_match_dt0, nil)
     assert !geolocate_ref01_data_dt0_loaded.nil?
 
   end
@@ -82,7 +81,6 @@ def geolocate_basic_setup(extra)
     "VATVALIDATION_TEST_GEOLOCATE_ENTID" => idmap,
     "VATVALIDATION_TEST_LIVE" => "FALSE",
     "VATVALIDATION_TEST_EXPLAIN" => "FALSE",
-    "VATVALIDATION_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -94,7 +92,6 @@ def geolocate_basic_setup(extra)
   if env["VATVALIDATION_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["VATVALIDATION_APIKEY"],
       },
       extra || {},
     ])

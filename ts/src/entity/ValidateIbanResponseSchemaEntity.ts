@@ -14,9 +14,13 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  ValidateIbanResponseSchema,
+  ValidateIbanResponseSchemaLoadMatch,
+} from '../VatValidationTypes'
 
 // TODO: needs Entity superclass
-class ValidateIbanResponseSchemaEntity extends VatValidationEntityBase {
+class ValidateIbanResponseSchemaEntity extends VatValidationEntityBase<ValidateIbanResponseSchema> {
 
   constructor(client: VatValidationSDK, entopts: any) {
     super(client, entopts)
@@ -32,7 +36,7 @@ class ValidateIbanResponseSchemaEntity extends VatValidationEntityBase {
 
 
 
-  async load(this: any, reqmatch?: any, ctrl?: Control) {
+  async load(this: any, reqmatch?: ValidateIbanResponseSchemaLoadMatch, ctrl?: Control): Promise<ValidateIbanResponseSchema> {
 
     const utility = this._utility
 
@@ -136,7 +140,9 @@ class ValidateIbanResponseSchemaEntity extends VatValidationEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<ValidateIbanResponseSchema> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

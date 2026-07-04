@@ -18,7 +18,6 @@ Create a new SDK client instance.
 | Name | Type | Description |
 | --- | --- | --- |
 | `options` | `object` | SDK configuration options. |
-| `options.apikey` | `string` | API key for authentication. |
 | `options.base` | `string` | Base URL for API requests. |
 | `options.prefix` | `string` | URL prefix appended after base. |
 | `options.suffix` | `string` | URL suffix appended after path. |
@@ -182,7 +181,7 @@ Alias for `VatValidationSDK.test()`.
 ## CountryEntity
 
 ```ts
-const country = client.Country()
+const country = client.country
 ```
 
 ### Fields
@@ -210,7 +209,7 @@ const country = client.Country()
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.Country().list()
+const results = await client.country.list()
 ```
 
 ### Common Methods
@@ -244,7 +243,7 @@ Return a copy of the entity options.
 ## CurrencyEntity
 
 ```ts
-const currency = client.Currency()
+const currency = client.currency
 ```
 
 ### Fields
@@ -261,7 +260,7 @@ const currency = client.Currency()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Currency().load({ id: 'currency_id' })
+const result = await client.currency.load({ id: 'currency_id' })
 ```
 
 ### Common Methods
@@ -295,7 +294,7 @@ Return a copy of the entity options.
 ## GeolocateEntity
 
 ```ts
-const geolocate = client.Geolocate()
+const geolocate = client.geolocate
 ```
 
 ### Fields
@@ -325,7 +324,7 @@ const geolocate = client.Geolocate()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Geolocate().load({ id: 'geolocate_id' })
+const result = await client.geolocate.load({ id: 'geolocate_id' })
 ```
 
 ### Common Methods
@@ -359,7 +358,7 @@ Return a copy of the entity options.
 ## RateEntity
 
 ```ts
-const rate = client.Rate()
+const rate = client.rate
 ```
 
 ### Fields
@@ -377,7 +376,7 @@ const rate = client.Rate()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Rate().load({ id: 'rate_id' })
+const result = await client.rate.load({ id: 'rate_id' })
 ```
 
 ### Common Methods
@@ -411,7 +410,7 @@ Return a copy of the entity options.
 ## ValidateIbanResponseSchemaEntity
 
 ```ts
-const validate_iban_response_schema = client.ValidateIbanResponseSchema()
+const validate_iban_response_schema = client.validate_iban_response_schema
 ```
 
 ### Fields
@@ -438,7 +437,7 @@ const validate_iban_response_schema = client.ValidateIbanResponseSchema()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.ValidateIbanResponseSchema().load({ id: 'validate_iban_response_schema_id' })
+const result = await client.validate_iban_response_schema.load({ id: 'validate_iban_response_schema_id' })
 ```
 
 ### Common Methods
@@ -472,7 +471,7 @@ Return a copy of the entity options.
 ## ValidateVatResponseSchemaEntity
 
 ```ts
-const validate_vat_response_schema = client.ValidateVatResponseSchema()
+const validate_vat_response_schema = client.validate_vat_response_schema
 ```
 
 ### Fields
@@ -492,7 +491,7 @@ const validate_vat_response_schema = client.ValidateVatResponseSchema()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.ValidateVatResponseSchema().load({ id: 'validate_vat_response_schema_id' })
+const result = await client.validate_vat_response_schema.load({ id: 'validate_vat_response_schema_id' })
 ```
 
 ### Common Methods
@@ -526,7 +525,7 @@ Return a copy of the entity options.
 ## VatcomplyApiRootEntity
 
 ```ts
-const vatcomply_api_root = client.VatcomplyApiRoot()
+const vatcomply_api_root = client.vatcomply_api_root
 ```
 
 ### Fields
@@ -548,7 +547,7 @@ const vatcomply_api_root = client.VatcomplyApiRoot()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.VatcomplyApiRoot().load({ id: 'vatcomply_api_root_id' })
+const result = await client.vatcomply_api_root.load({ id: 'vatcomply_api_root_id' })
 ```
 
 ### Common Methods

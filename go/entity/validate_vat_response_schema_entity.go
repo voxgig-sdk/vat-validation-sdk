@@ -85,6 +85,27 @@ func (e *ValidateVatResponseSchemaEntity) Match(args ...any) any {
 	return out
 }
 
+// DataTyped is the statically-typed accessor for this entity's data. With no
+// argument it returns the current data as an ValidateVatResponseSchema; with an argument it
+// sets the data and returns the stored value. It delegates to the untyped Data
+// (identical runtime) and converts at the typed boundary.
+func (e *ValidateVatResponseSchemaEntity) DataTyped(data ...ValidateVatResponseSchema) ValidateVatResponseSchema {
+	if len(data) > 0 {
+		return typedFrom[ValidateVatResponseSchema](e.Data(asMap(data[0])))
+	}
+	return typedFrom[ValidateVatResponseSchema](e.Data())
+}
+
+// MatchTyped mirrors DataTyped for the entity's match filter. The match is a
+// partial of the entity, so it round-trips through ValidateVatResponseSchema (all fields
+// optional at the wire level).
+func (e *ValidateVatResponseSchemaEntity) MatchTyped(match ...ValidateVatResponseSchema) ValidateVatResponseSchema {
+	if len(match) > 0 {
+		return typedFrom[ValidateVatResponseSchema](e.Match(asMap(match[0])))
+	}
+	return typedFrom[ValidateVatResponseSchema](e.Match())
+}
+
 
 func (e *ValidateVatResponseSchemaEntity) Load(reqmatch map[string]any, ctrl map[string]any) (any, error) {
 	utility := e.utility
@@ -109,6 +130,17 @@ func (e *ValidateVatResponseSchemaEntity) Load(reqmatch map[string]any, ctrl map
 			}
 		}
 	})
+}
+
+// LoadTyped is the statically-typed variant of Load: it takes an
+// ValidateVatResponseSchemaLoadMatch and returns an ValidateVatResponseSchema. It delegates to the untyped
+// Load (identical runtime) and converts at the typed boundary.
+func (e *ValidateVatResponseSchemaEntity) LoadTyped(reqmatch ValidateVatResponseSchemaLoadMatch, ctrl map[string]any) (ValidateVatResponseSchema, error) {
+	res, err := e.Load(asMap(reqmatch), ctrl)
+	if err != nil {
+		return ValidateVatResponseSchema{}, err
+	}
+	return typedFrom[ValidateVatResponseSchema](res), nil
 }
 
 

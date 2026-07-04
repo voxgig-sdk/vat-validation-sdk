@@ -99,14 +99,12 @@ func currencyDirectSetup(mockres any) *currencyDirectSetupResult {
 	env := envOverride(map[string]any{
 		"VATVALIDATION_TEST_CURRENCY_ENTID": map[string]any{},
 		"VATVALIDATION_TEST_LIVE":    "FALSE",
-		"VATVALIDATION_APIKEY":       "NONE",
 	})
 
 	live := env["VATVALIDATION_TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
-			"apikey": env["VATVALIDATION_APIKEY"],
 		}
 		client := sdk.NewVatValidationSDK(mergedOpts)
 

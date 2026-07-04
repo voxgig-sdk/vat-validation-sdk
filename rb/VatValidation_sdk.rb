@@ -13,6 +13,9 @@ require_relative 'config'
 require_relative 'feature/base_feature'
 require_relative 'features'
 
+# Load typed models (Struct value objects).
+require_relative 'VatValidation_types'
+
 
 class VatValidationSDK
   attr_accessor :mode, :features, :options
@@ -131,7 +134,7 @@ class VatValidationSDK
     end
 
     _, err = utility.prepare_auth.call(ctx)
-    return nil, err if err
+    raise err if err
 
     utility.make_fetch_def.call(ctx)
   end
@@ -139,8 +142,14 @@ class VatValidationSDK
   def direct(fetchargs = {})
     utility = @_utility
 
-    fetchdef, err = prepare(fetchargs)
-    return { "ok" => false, "err" => err }, nil if err
+    # direct() is the raw-HTTP escape hatch: it always returns a result hash
+    # ({ "ok" => ..., ... }) and never raises. prepare() raises on error, so
+    # trap that and surface it in the hash.
+    begin
+      fetchdef = prepare(fetchargs)
+    rescue VatValidationError => err
+      return { "ok" => false, "err" => err }
+    end
 
     fetchargs ||= {}
     ctrl = VatValidationHelpers.to_map(VoxgigStruct.getprop(fetchargs, "ctrl")) || {}
@@ -153,13 +162,13 @@ class VatValidationSDK
     url = fetchdef["url"] || ""
     fetched, fetch_err = utility.fetcher.call(ctx, url, fetchdef)
 
-    return { "ok" => false, "err" => fetch_err }, nil if fetch_err
+    return { "ok" => false, "err" => fetch_err } if fetch_err
 
     if fetched.nil?
       return {
         "ok" => false,
         "err" => ctx.make_error("direct_no_response", "response: undefined"),
-      }, nil
+      }
     end
 
     if fetched.is_a?(Hash)
@@ -189,52 +198,101 @@ class VatValidationSDK
         "status" => status,
         "headers" => headers,
         "data" => json_data,
-      }, nil
+      }
     end
 
     return {
       "ok" => false,
       "err" => ctx.make_error("direct_invalid", "invalid response type"),
-    }, nil
+    }
   end
 
 
+  # Idiomatic facade: client.country.list / client.country.load({ "id" => ... })
+  def country
+    require_relative 'entity/country_entity'
+    @country ||= CountryEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.country instead.
   def Country(data = nil)
     require_relative 'entity/country_entity'
     CountryEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.currency.list / client.currency.load({ "id" => ... })
+  def currency
+    require_relative 'entity/currency_entity'
+    @currency ||= CurrencyEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.currency instead.
   def Currency(data = nil)
     require_relative 'entity/currency_entity'
     CurrencyEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.geolocate.list / client.geolocate.load({ "id" => ... })
+  def geolocate
+    require_relative 'entity/geolocate_entity'
+    @geolocate ||= GeolocateEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.geolocate instead.
   def Geolocate(data = nil)
     require_relative 'entity/geolocate_entity'
     GeolocateEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.rate.list / client.rate.load({ "id" => ... })
+  def rate
+    require_relative 'entity/rate_entity'
+    @rate ||= RateEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.rate instead.
   def Rate(data = nil)
     require_relative 'entity/rate_entity'
     RateEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.validate_iban_response_schema.list / client.validate_iban_response_schema.load({ "id" => ... })
+  def validate_iban_response_schema
+    require_relative 'entity/validate_iban_response_schema_entity'
+    @validate_iban_response_schema ||= ValidateIbanResponseSchemaEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.validate_iban_response_schema instead.
   def ValidateIbanResponseSchema(data = nil)
     require_relative 'entity/validate_iban_response_schema_entity'
     ValidateIbanResponseSchemaEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.validate_vat_response_schema.list / client.validate_vat_response_schema.load({ "id" => ... })
+  def validate_vat_response_schema
+    require_relative 'entity/validate_vat_response_schema_entity'
+    @validate_vat_response_schema ||= ValidateVatResponseSchemaEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.validate_vat_response_schema instead.
   def ValidateVatResponseSchema(data = nil)
     require_relative 'entity/validate_vat_response_schema_entity'
     ValidateVatResponseSchemaEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.vatcomply_api_root.list / client.vatcomply_api_root.load({ "id" => ... })
+  def vatcomply_api_root
+    require_relative 'entity/vatcomply_api_root_entity'
+    @vatcomply_api_root ||= VatcomplyApiRootEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.vatcomply_api_root instead.
   def VatcomplyApiRoot(data = nil)
     require_relative 'entity/vatcomply_api_root_entity'
     VatcomplyApiRootEntity.new(self, data)

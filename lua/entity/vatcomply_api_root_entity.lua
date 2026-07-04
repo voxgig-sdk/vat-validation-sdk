@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch VatcomplyApiRootLoadMatch
+---@param ctrl? table
+---@return VatcomplyApiRoot
+---@return string? err
 function VatcomplyApiRootEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

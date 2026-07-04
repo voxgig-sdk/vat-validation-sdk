@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch GeolocateLoadMatch
+---@param ctrl? table
+---@return Geolocate
+---@return string? err
 function GeolocateEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

@@ -245,36 +245,57 @@ func (sdk *VatValidationSDK) Direct(fetchargs map[string]any) (map[string]any, e
 }
 
 
+// Country returns a Country entity bound to this client.
+// Idiomatic usage: client.Country(nil).List(nil, nil) or
+// client.Country(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *VatValidationSDK) Country(data map[string]any) VatValidationEntity {
 	return NewCountryEntityFunc(sdk, data)
 }
 
 
+// Currency returns a Currency entity bound to this client.
+// Idiomatic usage: client.Currency(nil).List(nil, nil) or
+// client.Currency(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *VatValidationSDK) Currency(data map[string]any) VatValidationEntity {
 	return NewCurrencyEntityFunc(sdk, data)
 }
 
 
+// Geolocate returns a Geolocate entity bound to this client.
+// Idiomatic usage: client.Geolocate(nil).List(nil, nil) or
+// client.Geolocate(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *VatValidationSDK) Geolocate(data map[string]any) VatValidationEntity {
 	return NewGeolocateEntityFunc(sdk, data)
 }
 
 
+// Rate returns a Rate entity bound to this client.
+// Idiomatic usage: client.Rate(nil).List(nil, nil) or
+// client.Rate(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *VatValidationSDK) Rate(data map[string]any) VatValidationEntity {
 	return NewRateEntityFunc(sdk, data)
 }
 
 
+// ValidateIbanResponseSchema returns a ValidateIbanResponseSchema entity bound to this client.
+// Idiomatic usage: client.ValidateIbanResponseSchema(nil).List(nil, nil) or
+// client.ValidateIbanResponseSchema(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *VatValidationSDK) ValidateIbanResponseSchema(data map[string]any) VatValidationEntity {
 	return NewValidateIbanResponseSchemaEntityFunc(sdk, data)
 }
 
 
+// ValidateVatResponseSchema returns a ValidateVatResponseSchema entity bound to this client.
+// Idiomatic usage: client.ValidateVatResponseSchema(nil).List(nil, nil) or
+// client.ValidateVatResponseSchema(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *VatValidationSDK) ValidateVatResponseSchema(data map[string]any) VatValidationEntity {
 	return NewValidateVatResponseSchemaEntityFunc(sdk, data)
 }
 
 
+// VatcomplyApiRoot returns a VatcomplyApiRoot entity bound to this client.
+// Idiomatic usage: client.VatcomplyApiRoot(nil).List(nil, nil) or
+// client.VatcomplyApiRoot(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *VatValidationSDK) VatcomplyApiRoot(data map[string]any) VatValidationEntity {
 	return NewVatcomplyApiRootEntityFunc(sdk, data)
 }

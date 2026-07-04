@@ -20,7 +20,6 @@ Create a new SDK client instance.
 | Name | Type | Description |
 | --- | --- | --- |
 | `$options` | `array` | SDK configuration options. |
-| `$options["apikey"]` | `string` | API key for authentication. |
 | `$options["base"]` | `string` | Base URL for API requests. |
 | `$options["prefix"]` | `string` | URL prefix appended after base. |
 | `$options["suffix"]` | `string` | URL suffix appended after path. |
@@ -80,7 +79,10 @@ Return a copy of the SDK utility object.
 
 #### `direct(array $fetchargs = []): array`
 
-Make a direct HTTP request to any API endpoint. Returns `[$result, $err]`.
+Make a direct HTTP request to any API endpoint. This is the raw-HTTP escape
+hatch: it does **not** throw. It returns a result array
+`["ok" => bool, "status" => int, "headers" => array, "data" => mixed]`, or
+`["ok" => false, "err" => \Exception]` on failure. Branch on `$result["ok"]`.
 
 **Parameters:**
 
@@ -94,11 +96,12 @@ Make a direct HTTP request to any API endpoint. Returns `[$result, $err]`.
 | `$fetchargs["body"]` | `mixed` | Request body (arrays are JSON-serialized). |
 | `$fetchargs["ctrl"]` | `array` | Control options. |
 
-**Returns:** `array [$result, $err]`
+**Returns:** `array` — the result dict (see above); never throws.
 
-#### `prepare(array $fetchargs = []): array`
+#### `prepare(array $fetchargs = []): mixed`
 
-Prepare a fetch definition without sending the request. Returns `[$fetchdef, $err]`.
+Prepare a fetch definition without sending the request. Returns the
+`$fetchdef` array. Throws on error.
 
 
 ---
@@ -106,7 +109,7 @@ Prepare a fetch definition without sending the request. Returns `[$fetchdef, $er
 ## CountryEntity
 
 ```php
-$country = $client->Country();
+$country = $client->country();
 ```
 
 ### Fields
@@ -129,12 +132,12 @@ $country = $client->Country();
 
 ### Operations
 
-#### `list(array $reqmatch, ?array $ctrl = null): array`
+#### `list(array $reqmatch, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns an array. Throws on error.
 
 ```php
-[$results, $err] = $client->Country()->list([]);
+$results = $client->country()->list([]);
 ```
 
 ### Common Methods
@@ -170,7 +173,7 @@ Return the entity name.
 ## CurrencyEntity
 
 ```php
-$currency = $client->Currency();
+$currency = $client->currency();
 ```
 
 ### Fields
@@ -182,12 +185,12 @@ $currency = $client->Currency();
 
 ### Operations
 
-#### `load(array $reqmatch, ?array $ctrl = null): array`
+#### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Throws on error.
 
 ```php
-[$result, $err] = $client->Currency()->load(["id" => "currency_id"]);
+$result = $client->currency()->load(["id" => "currency_id"]);
 ```
 
 ### Common Methods
@@ -223,7 +226,7 @@ Return the entity name.
 ## GeolocateEntity
 
 ```php
-$geolocate = $client->Geolocate();
+$geolocate = $client->geolocate();
 ```
 
 ### Fields
@@ -248,12 +251,12 @@ $geolocate = $client->Geolocate();
 
 ### Operations
 
-#### `load(array $reqmatch, ?array $ctrl = null): array`
+#### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Throws on error.
 
 ```php
-[$result, $err] = $client->Geolocate()->load(["id" => "geolocate_id"]);
+$result = $client->geolocate()->load(["id" => "geolocate_id"]);
 ```
 
 ### Common Methods
@@ -289,7 +292,7 @@ Return the entity name.
 ## RateEntity
 
 ```php
-$rate = $client->Rate();
+$rate = $client->rate();
 ```
 
 ### Fields
@@ -302,12 +305,12 @@ $rate = $client->Rate();
 
 ### Operations
 
-#### `load(array $reqmatch, ?array $ctrl = null): array`
+#### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Throws on error.
 
 ```php
-[$result, $err] = $client->Rate()->load(["id" => "rate_id"]);
+$result = $client->rate()->load(["id" => "rate_id"]);
 ```
 
 ### Common Methods
@@ -343,7 +346,7 @@ Return the entity name.
 ## ValidateIbanResponseSchemaEntity
 
 ```php
-$validate_iban_response_schema = $client->ValidateIbanResponseSchema();
+$validate_iban_response_schema = $client->validate_iban_response_schema();
 ```
 
 ### Fields
@@ -365,12 +368,12 @@ $validate_iban_response_schema = $client->ValidateIbanResponseSchema();
 
 ### Operations
 
-#### `load(array $reqmatch, ?array $ctrl = null): array`
+#### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Throws on error.
 
 ```php
-[$result, $err] = $client->ValidateIbanResponseSchema()->load(["id" => "validate_iban_response_schema_id"]);
+$result = $client->validate_iban_response_schema()->load(["id" => "validate_iban_response_schema_id"]);
 ```
 
 ### Common Methods
@@ -406,7 +409,7 @@ Return the entity name.
 ## ValidateVatResponseSchemaEntity
 
 ```php
-$validate_vat_response_schema = $client->ValidateVatResponseSchema();
+$validate_vat_response_schema = $client->validate_vat_response_schema();
 ```
 
 ### Fields
@@ -421,12 +424,12 @@ $validate_vat_response_schema = $client->ValidateVatResponseSchema();
 
 ### Operations
 
-#### `load(array $reqmatch, ?array $ctrl = null): array`
+#### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Throws on error.
 
 ```php
-[$result, $err] = $client->ValidateVatResponseSchema()->load(["id" => "validate_vat_response_schema_id"]);
+$result = $client->validate_vat_response_schema()->load(["id" => "validate_vat_response_schema_id"]);
 ```
 
 ### Common Methods
@@ -462,7 +465,7 @@ Return the entity name.
 ## VatcomplyApiRootEntity
 
 ```php
-$vatcomply_api_root = $client->VatcomplyApiRoot();
+$vatcomply_api_root = $client->vatcomply_api_root();
 ```
 
 ### Fields
@@ -479,12 +482,12 @@ $vatcomply_api_root = $client->VatcomplyApiRoot();
 
 ### Operations
 
-#### `load(array $reqmatch, ?array $ctrl = null): array`
+#### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Throws on error.
 
 ```php
-[$result, $err] = $client->VatcomplyApiRoot()->load(["id" => "vatcomply_api_root_id"]);
+$result = $client->vatcomply_api_root()->load(["id" => "vatcomply_api_root_id"]);
 ```
 
 ### Common Methods

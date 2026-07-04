@@ -62,14 +62,12 @@ function rate_direct_setup(mockres)
   local env = runner.env_override({
     ["VATVALIDATION_TEST_RATE_ENTID"] = {},
     ["VATVALIDATION_TEST_LIVE"] = "FALSE",
-    ["VATVALIDATION_APIKEY"] = "NONE",
   })
 
   local live = env["VATVALIDATION_TEST_LIVE"] == "TRUE"
 
   if live then
     local merged_opts = {
-      apikey = env["VATVALIDATION_APIKEY"],
     }
     local client = sdk.new(merged_opts)
     return {

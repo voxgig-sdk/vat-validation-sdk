@@ -103,7 +103,7 @@ class VatValidationSDK
         return $this->_rootctx;
     }
 
-    public function prepare(array $fetchargs = []): array
+    public function prepare(array $fetchargs = []): mixed
     {
         $utility = $this->_utility;
         $fetchargs = $fetchargs ?? [];
@@ -149,19 +149,27 @@ class VatValidationSDK
 
         [$_, $err] = ($utility->prepare_auth)($ctx);
         if ($err) {
-            return [null, $err];
+            return ($utility->make_error)($ctx, $err);
         }
 
-        return ($utility->make_fetch_def)($ctx);
+        [$fetchdef, $fd_err] = ($utility->make_fetch_def)($ctx);
+        if ($fd_err) {
+            return ($utility->make_error)($ctx, $fd_err);
+        }
+        return $fetchdef;
     }
 
-    public function direct(array $fetchargs = []): array
+    public function direct(array $fetchargs = []): mixed
     {
         $utility = $this->_utility;
 
-        [$fetchdef, $err] = $this->prepare($fetchargs);
-        if ($err) {
-            return [["ok" => false, "err" => $err], null];
+        // direct() is the raw-HTTP escape hatch: it never throws, it returns
+        // an {ok, err, ...} dict. prepare() now raises on error, so catch it
+        // and surface the failure through the dict instead.
+        try {
+            $fetchdef = $this->prepare($fetchargs);
+        } catch (\Throwable $err) {
+            return ["ok" => false, "err" => $err];
         }
 
         $fetchargs = $fetchargs ?? [];
@@ -176,14 +184,14 @@ class VatValidationSDK
         [$fetched, $fetch_err] = ($utility->fetcher)($ctx, $url, $fetchdef);
 
         if ($fetch_err) {
-            return [["ok" => false, "err" => $fetch_err], null];
+            return ["ok" => false, "err" => $fetch_err];
         }
 
         if ($fetched === null) {
-            return [[
+            return [
                 "ok" => false,
                 "err" => $ctx->make_error("direct_no_response", "response: undefined"),
-            ], null];
+            ];
         }
 
         if (is_array($fetched)) {
@@ -208,66 +216,143 @@ class VatValidationSDK
                 }
             }
 
-            return [[
+            return [
                 "ok" => $status >= 200 && $status < 300,
                 "status" => $status,
                 "headers" => Struct::getprop($fetched, "headers"),
                 "data" => $json_data,
-            ], null];
+            ];
         }
 
-        return [[
+        return [
             "ok" => false,
             "err" => $ctx->make_error("direct_invalid", "invalid response type"),
-        ], null];
+        ];
     }
 
 
-    public function Country($data = null)
+    private $_country = null;
+
+    // Idiomatic facade: $client->country()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Country() (PHP method
+    // names are case-insensitive).
+    public function country($data = null)
     {
         require_once __DIR__ . '/entity/country_entity.php';
+        if ($data === null) {
+            if ($this->_country === null) {
+                $this->_country = new CountryEntity($this, null);
+            }
+            return $this->_country;
+        }
         return new CountryEntity($this, $data);
     }
 
 
-    public function Currency($data = null)
+    private $_currency = null;
+
+    // Idiomatic facade: $client->currency()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Currency() (PHP method
+    // names are case-insensitive).
+    public function currency($data = null)
     {
         require_once __DIR__ . '/entity/currency_entity.php';
+        if ($data === null) {
+            if ($this->_currency === null) {
+                $this->_currency = new CurrencyEntity($this, null);
+            }
+            return $this->_currency;
+        }
         return new CurrencyEntity($this, $data);
     }
 
 
-    public function Geolocate($data = null)
+    private $_geolocate = null;
+
+    // Idiomatic facade: $client->geolocate()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Geolocate() (PHP method
+    // names are case-insensitive).
+    public function geolocate($data = null)
     {
         require_once __DIR__ . '/entity/geolocate_entity.php';
+        if ($data === null) {
+            if ($this->_geolocate === null) {
+                $this->_geolocate = new GeolocateEntity($this, null);
+            }
+            return $this->_geolocate;
+        }
         return new GeolocateEntity($this, $data);
     }
 
 
-    public function Rate($data = null)
+    private $_rate = null;
+
+    // Idiomatic facade: $client->rate()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Rate() (PHP method
+    // names are case-insensitive).
+    public function rate($data = null)
     {
         require_once __DIR__ . '/entity/rate_entity.php';
+        if ($data === null) {
+            if ($this->_rate === null) {
+                $this->_rate = new RateEntity($this, null);
+            }
+            return $this->_rate;
+        }
         return new RateEntity($this, $data);
     }
 
 
-    public function ValidateIbanResponseSchema($data = null)
+    private $_validate_iban_response_schema = null;
+
+    // Idiomatic facade: $client->validate_iban_response_schema()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias ValidateIbanResponseSchema() (PHP method
+    // names are case-insensitive).
+    public function validate_iban_response_schema($data = null)
     {
         require_once __DIR__ . '/entity/validate_iban_response_schema_entity.php';
+        if ($data === null) {
+            if ($this->_validate_iban_response_schema === null) {
+                $this->_validate_iban_response_schema = new ValidateIbanResponseSchemaEntity($this, null);
+            }
+            return $this->_validate_iban_response_schema;
+        }
         return new ValidateIbanResponseSchemaEntity($this, $data);
     }
 
 
-    public function ValidateVatResponseSchema($data = null)
+    private $_validate_vat_response_schema = null;
+
+    // Idiomatic facade: $client->validate_vat_response_schema()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias ValidateVatResponseSchema() (PHP method
+    // names are case-insensitive).
+    public function validate_vat_response_schema($data = null)
     {
         require_once __DIR__ . '/entity/validate_vat_response_schema_entity.php';
+        if ($data === null) {
+            if ($this->_validate_vat_response_schema === null) {
+                $this->_validate_vat_response_schema = new ValidateVatResponseSchemaEntity($this, null);
+            }
+            return $this->_validate_vat_response_schema;
+        }
         return new ValidateVatResponseSchemaEntity($this, $data);
     }
 
 
-    public function VatcomplyApiRoot($data = null)
+    private $_vatcomply_api_root = null;
+
+    // Idiomatic facade: $client->vatcomply_api_root()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias VatcomplyApiRoot() (PHP method
+    // names are case-insensitive).
+    public function vatcomply_api_root($data = null)
     {
         require_once __DIR__ . '/entity/vatcomply_api_root_entity.php';
+        if ($data === null) {
+            if ($this->_vatcomply_api_root === null) {
+                $this->_vatcomply_api_root = new VatcomplyApiRootEntity($this, null);
+            }
+            return $this->_vatcomply_api_root;
+        }
         return new VatcomplyApiRootEntity($this, $data);
     }
 

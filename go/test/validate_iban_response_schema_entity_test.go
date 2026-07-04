@@ -117,7 +117,6 @@ func validate_iban_response_schemaBasicSetup(extra map[string]any) *entityTestSe
 		"VATVALIDATION_TEST_VALIDATE_IBAN_RESPONSE_SCHEMA_ENTID": idmap,
 		"VATVALIDATION_TEST_LIVE":      "FALSE",
 		"VATVALIDATION_TEST_EXPLAIN":   "FALSE",
-		"VATVALIDATION_APIKEY":         "NONE",
 	})
 
 	idmapResolved := core.ToMapAny(env["VATVALIDATION_TEST_VALIDATE_IBAN_RESPONSE_SCHEMA_ENTID"])
@@ -128,7 +127,6 @@ func validate_iban_response_schemaBasicSetup(extra map[string]any) *entityTestSe
 	if env["VATVALIDATION_TEST_LIVE"] == "TRUE" {
 		mergedOpts := vs.Merge([]any{
 			map[string]any{
-				"apikey": env["VATVALIDATION_APIKEY"],
 			},
 			extra,
 		})

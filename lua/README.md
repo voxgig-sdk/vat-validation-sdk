@@ -9,12 +9,9 @@ The Lua SDK for the VatValidation API — an entity-oriented client using Lua co
 
 
 ## Install
-```bash
-luarocks install voxgig-sdk-vat-validation
-```
-
-If the module is not yet published, add the source directory to
-your `LUA_PATH`:
+This package is not yet published to LuaRocks. Install it from the
+GitHub release tag (`lua/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/vat-validation-sdk/releases)),
+or add the source directory to your `LUA_PATH`:
 
 ```bash
 export LUA_PATH="path/to/lua/?.lua;path/to/lua/?/init.lua;;"
@@ -31,15 +28,13 @@ loading a specific record.
 ```lua
 local sdk = require("vat-validation_sdk")
 
-local client = sdk.new({
-  apikey = os.getenv("VAT-VALIDATION_APIKEY"),
-})
+local client = sdk.new()
 ```
 
 ### 2. List countrys
 
 ```lua
-local result, err = client:Country():list()
+local result, err = client:country():list()
 if err then error(err) end
 
 if type(result) == "table" then
@@ -93,7 +88,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:VatValidation():load({ id = "test01" })
+local result, err = client:country():load({ id = "test01" })
 -- result contains mock response data
 ```
 
@@ -126,8 +121,7 @@ local client = sdk.new({
 Create a `.env.local` file at the project root:
 
 ```
-VAT-VALIDATION_TEST_LIVE=TRUE
-VAT-VALIDATION_APIKEY=<your-key>
+VAT_VALIDATION_TEST_LIVE=TRUE
 ```
 
 Then run:
@@ -150,7 +144,6 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |
@@ -343,7 +336,7 @@ API path: `/`
 
 ### Country
 
-Create an instance: `const country = client.Country()`
+Create an instance: `const country = client.country`
 
 #### Operations
 
@@ -372,13 +365,13 @@ Create an instance: `const country = client.Country()`
 #### Example: List
 
 ```ts
-const countrys = await client.Country().list()
+const countrys = await client.country.list()
 ```
 
 
 ### Currency
 
-Create an instance: `const currency = client.Currency()`
+Create an instance: `const currency = client.currency`
 
 #### Operations
 
@@ -396,13 +389,13 @@ Create an instance: `const currency = client.Currency()`
 #### Example: Load
 
 ```ts
-const currency = await client.Currency().load({ id: 'currency_id' })
+const currency = await client.currency.load({ id: 'currency_id' })
 ```
 
 
 ### Geolocate
 
-Create an instance: `const geolocate = client.Geolocate()`
+Create an instance: `const geolocate = client.geolocate`
 
 #### Operations
 
@@ -433,13 +426,13 @@ Create an instance: `const geolocate = client.Geolocate()`
 #### Example: Load
 
 ```ts
-const geolocate = await client.Geolocate().load({ id: 'geolocate_id' })
+const geolocate = await client.geolocate.load({ id: 'geolocate_id' })
 ```
 
 
 ### Rate
 
-Create an instance: `const rate = client.Rate()`
+Create an instance: `const rate = client.rate`
 
 #### Operations
 
@@ -458,13 +451,13 @@ Create an instance: `const rate = client.Rate()`
 #### Example: Load
 
 ```ts
-const rate = await client.Rate().load({ id: 'rate_id' })
+const rate = await client.rate.load({ id: 'rate_id' })
 ```
 
 
 ### ValidateIbanResponseSchema
 
-Create an instance: `const validate_iban_response_schema = client.ValidateIbanResponseSchema()`
+Create an instance: `const validate_iban_response_schema = client.validate_iban_response_schema`
 
 #### Operations
 
@@ -492,13 +485,13 @@ Create an instance: `const validate_iban_response_schema = client.ValidateIbanRe
 #### Example: Load
 
 ```ts
-const validate_iban_response_schema = await client.ValidateIbanResponseSchema().load({ id: 'validate_iban_response_schema_id' })
+const validate_iban_response_schema = await client.validate_iban_response_schema.load({ id: 'validate_iban_response_schema_id' })
 ```
 
 
 ### ValidateVatResponseSchema
 
-Create an instance: `const validate_vat_response_schema = client.ValidateVatResponseSchema()`
+Create an instance: `const validate_vat_response_schema = client.validate_vat_response_schema`
 
 #### Operations
 
@@ -519,13 +512,13 @@ Create an instance: `const validate_vat_response_schema = client.ValidateVatResp
 #### Example: Load
 
 ```ts
-const validate_vat_response_schema = await client.ValidateVatResponseSchema().load({ id: 'validate_vat_response_schema_id' })
+const validate_vat_response_schema = await client.validate_vat_response_schema.load({ id: 'validate_vat_response_schema_id' })
 ```
 
 
 ### VatcomplyApiRoot
 
-Create an instance: `const vatcomply_api_root = client.VatcomplyApiRoot()`
+Create an instance: `const vatcomply_api_root = client.vatcomply_api_root`
 
 #### Operations
 
@@ -548,7 +541,7 @@ Create an instance: `const vatcomply_api_root = client.VatcomplyApiRoot()`
 #### Example: Load
 
 ```ts
-const vatcomply_api_root = await client.VatcomplyApiRoot().load({ id: 'vatcomply_api_root_id' })
+const vatcomply_api_root = await client.vatcomply_api_root.load({ id: 'vatcomply_api_root_id' })
 ```
 
 
@@ -623,11 +616,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local moon = client:Moon(nil)
-moon:load({ planet_id = "earth", id = "luna" }, nil)
+local country = client:country()
+country:load({ id = "example_id" })
 
--- moon:data_get() now returns the loaded moon data
--- moon:match_get() returns the last match criteria
+-- country:data_get() now returns the loaded country data
+-- country:match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

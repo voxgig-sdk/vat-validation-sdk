@@ -14,9 +14,13 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  Geolocate,
+  GeolocateLoadMatch,
+} from '../VatValidationTypes'
 
 // TODO: needs Entity superclass
-class GeolocateEntity extends VatValidationEntityBase {
+class GeolocateEntity extends VatValidationEntityBase<Geolocate> {
 
   constructor(client: VatValidationSDK, entopts: any) {
     super(client, entopts)
@@ -32,7 +36,7 @@ class GeolocateEntity extends VatValidationEntityBase {
 
 
 
-  async load(this: any, reqmatch?: any, ctrl?: Control) {
+  async load(this: any, reqmatch?: GeolocateLoadMatch, ctrl?: Control): Promise<Geolocate> {
 
     const utility = this._utility
 
@@ -136,7 +140,9 @@ class GeolocateEntity extends VatValidationEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Geolocate> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

@@ -49,8 +49,7 @@ class TestRateEntity:
         # LOAD
         rate_ref01_ent = client.Rate(None)
         rate_ref01_match_dt0 = {}
-        rate_ref01_data_dt0_loaded, err = rate_ref01_ent.load(rate_ref01_match_dt0, None)
-        assert err is None
+        rate_ref01_data_dt0_loaded = rate_ref01_ent.load(rate_ref01_match_dt0, None)
         assert rate_ref01_data_dt0_loaded is not None
 
 
@@ -91,7 +90,6 @@ def _rate_basic_setup(extra):
         "VATVALIDATION_TEST_RATE_ENTID": idmap,
         "VATVALIDATION_TEST_LIVE": "FALSE",
         "VATVALIDATION_TEST_EXPLAIN": "FALSE",
-        "VATVALIDATION_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -102,7 +100,6 @@ def _rate_basic_setup(extra):
     if env.get("VATVALIDATION_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("VATVALIDATION_APIKEY"),
             },
             extra or {},
         ])

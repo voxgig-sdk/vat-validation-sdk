@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch ValidateIbanResponseSchemaLoadMatch
+---@param ctrl? table
+---@return ValidateIbanResponseSchema
+---@return string? err
 function ValidateIbanResponseSchemaEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

@@ -49,8 +49,7 @@ class TestGeolocateEntity:
         # LOAD
         geolocate_ref01_ent = client.Geolocate(None)
         geolocate_ref01_match_dt0 = {}
-        geolocate_ref01_data_dt0_loaded, err = geolocate_ref01_ent.load(geolocate_ref01_match_dt0, None)
-        assert err is None
+        geolocate_ref01_data_dt0_loaded = geolocate_ref01_ent.load(geolocate_ref01_match_dt0, None)
         assert geolocate_ref01_data_dt0_loaded is not None
 
 
@@ -91,7 +90,6 @@ def _geolocate_basic_setup(extra):
         "VATVALIDATION_TEST_GEOLOCATE_ENTID": idmap,
         "VATVALIDATION_TEST_LIVE": "FALSE",
         "VATVALIDATION_TEST_EXPLAIN": "FALSE",
-        "VATVALIDATION_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -102,7 +100,6 @@ def _geolocate_basic_setup(extra):
     if env.get("VATVALIDATION_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("VATVALIDATION_APIKEY"),
             },
             extra or {},
         ])

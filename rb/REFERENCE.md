@@ -20,7 +20,6 @@ Create a new SDK client instance.
 | Name | Type | Description |
 | --- | --- | --- |
 | `options` | `Hash` | SDK configuration options. |
-| `options["apikey"]` | `String` | API key for authentication. |
 | `options["base"]` | `String` | Base URL for API requests. |
 | `options["prefix"]` | `String` | URL prefix appended after base. |
 | `options["suffix"]` | `String` | URL suffix appended after path. |
@@ -78,9 +77,11 @@ Return a deep copy of the current SDK options.
 
 Return a copy of the SDK utility object.
 
-#### `direct(fetchargs = {}) -> Hash, err`
+#### `direct(fetchargs = {}) -> Hash`
 
-Make a direct HTTP request to any API endpoint.
+Make a direct HTTP request to any API endpoint. Returns a result hash
+(`{ "ok" => ..., "status" => ..., "data" => ..., "err" => ... }`); it
+does not raise — inspect `result["ok"]`.
 
 **Parameters:**
 
@@ -94,14 +95,14 @@ Make a direct HTTP request to any API endpoint.
 | `fetchargs["body"]` | `any` | Request body (hashes are JSON-serialized). |
 | `fetchargs["ctrl"]` | `Hash` | Control options (e.g. `{ "explain" => true }`). |
 
-**Returns:** `Hash, err`
+**Returns:** `Hash`
 
-#### `prepare(fetchargs = {}) -> Hash, err`
+#### `prepare(fetchargs = {}) -> Hash`
 
 Prepare a fetch definition without sending the request. Accepts the
-same parameters as `direct()`.
+same parameters as `direct()`. Raises on error.
 
-**Returns:** `Hash, err`
+**Returns:** `Hash` (the fetch definition; raises on error)
 
 
 ---
@@ -109,7 +110,7 @@ same parameters as `direct()`.
 ## CountryEntity
 
 ```ruby
-country = client.Country
+country = client.country
 ```
 
 ### Fields
@@ -132,12 +133,12 @@ country = client.Country
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> result, err`
+#### `list(reqmatch, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns an array. Raises on error.
 
 ```ruby
-results, err = client.Country.list(nil)
+results = client.country.list(nil)
 ```
 
 ### Common Methods
@@ -173,7 +174,7 @@ Return the entity name.
 ## CurrencyEntity
 
 ```ruby
-currency = client.Currency
+currency = client.currency
 ```
 
 ### Fields
@@ -185,12 +186,12 @@ currency = client.Currency
 
 ### Operations
 
-#### `load(reqmatch, ctrl = nil) -> result, err`
+#### `load(reqmatch, ctrl = nil) -> result`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result, err = client.Currency.load({ "id" => "currency_id" })
+result = client.currency.load({ "id" => "currency_id" })
 ```
 
 ### Common Methods
@@ -226,7 +227,7 @@ Return the entity name.
 ## GeolocateEntity
 
 ```ruby
-geolocate = client.Geolocate
+geolocate = client.geolocate
 ```
 
 ### Fields
@@ -251,12 +252,12 @@ geolocate = client.Geolocate
 
 ### Operations
 
-#### `load(reqmatch, ctrl = nil) -> result, err`
+#### `load(reqmatch, ctrl = nil) -> result`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result, err = client.Geolocate.load({ "id" => "geolocate_id" })
+result = client.geolocate.load({ "id" => "geolocate_id" })
 ```
 
 ### Common Methods
@@ -292,7 +293,7 @@ Return the entity name.
 ## RateEntity
 
 ```ruby
-rate = client.Rate
+rate = client.rate
 ```
 
 ### Fields
@@ -305,12 +306,12 @@ rate = client.Rate
 
 ### Operations
 
-#### `load(reqmatch, ctrl = nil) -> result, err`
+#### `load(reqmatch, ctrl = nil) -> result`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result, err = client.Rate.load({ "id" => "rate_id" })
+result = client.rate.load({ "id" => "rate_id" })
 ```
 
 ### Common Methods
@@ -346,7 +347,7 @@ Return the entity name.
 ## ValidateIbanResponseSchemaEntity
 
 ```ruby
-validate_iban_response_schema = client.ValidateIbanResponseSchema
+validate_iban_response_schema = client.validate_iban_response_schema
 ```
 
 ### Fields
@@ -368,12 +369,12 @@ validate_iban_response_schema = client.ValidateIbanResponseSchema
 
 ### Operations
 
-#### `load(reqmatch, ctrl = nil) -> result, err`
+#### `load(reqmatch, ctrl = nil) -> result`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result, err = client.ValidateIbanResponseSchema.load({ "id" => "validate_iban_response_schema_id" })
+result = client.validate_iban_response_schema.load({ "id" => "validate_iban_response_schema_id" })
 ```
 
 ### Common Methods
@@ -409,7 +410,7 @@ Return the entity name.
 ## ValidateVatResponseSchemaEntity
 
 ```ruby
-validate_vat_response_schema = client.ValidateVatResponseSchema
+validate_vat_response_schema = client.validate_vat_response_schema
 ```
 
 ### Fields
@@ -424,12 +425,12 @@ validate_vat_response_schema = client.ValidateVatResponseSchema
 
 ### Operations
 
-#### `load(reqmatch, ctrl = nil) -> result, err`
+#### `load(reqmatch, ctrl = nil) -> result`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result, err = client.ValidateVatResponseSchema.load({ "id" => "validate_vat_response_schema_id" })
+result = client.validate_vat_response_schema.load({ "id" => "validate_vat_response_schema_id" })
 ```
 
 ### Common Methods
@@ -465,7 +466,7 @@ Return the entity name.
 ## VatcomplyApiRootEntity
 
 ```ruby
-vatcomply_api_root = client.VatcomplyApiRoot
+vatcomply_api_root = client.vatcomply_api_root
 ```
 
 ### Fields
@@ -482,12 +483,12 @@ vatcomply_api_root = client.VatcomplyApiRoot
 
 ### Operations
 
-#### `load(reqmatch, ctrl = nil) -> result, err`
+#### `load(reqmatch, ctrl = nil) -> result`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result, err = client.VatcomplyApiRoot.load({ "id" => "vatcomply_api_root_id" })
+result = client.vatcomply_api_root.load({ "id" => "vatcomply_api_root_id" })
 ```
 
 ### Common Methods

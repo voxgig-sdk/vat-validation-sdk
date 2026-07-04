@@ -45,6 +45,7 @@ class GeolocateEntity
     end
   end
 
+  # @return [Geolocate, Hash] the current Geolocate data
   def data_get
     @_utility.feature_hook.call(@_entctx, "GetData")
     VoxgigStruct.clone(@_data)
@@ -57,12 +58,18 @@ class GeolocateEntity
     end
   end
 
+  # @return [Hash] the current match filter (any subset of Geolocate fields)
   def match_get
     @_utility.feature_hook.call(@_entctx, "GetMatch")
     VoxgigStruct.clone(@_match)
   end
 
   
+  # Load a single Geolocate.
+  #
+  # @param reqmatch [GeolocateLoadMatch, Hash, nil] match criteria (id/query fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Geolocate, Hash] the loaded Geolocate; raises VatValidationError on failure
   def load(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({

@@ -49,8 +49,7 @@ class ValidateVatResponseSchemaEntityTest extends TestCase
         // LOAD
         $validate_vat_response_schema_ref01_ent = $client->ValidateVatResponseSchema(null);
         $validate_vat_response_schema_ref01_match_dt0 = [];
-        [$validate_vat_response_schema_ref01_data_dt0_loaded, $err] = $validate_vat_response_schema_ref01_ent->load($validate_vat_response_schema_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $validate_vat_response_schema_ref01_data_dt0_loaded = $validate_vat_response_schema_ref01_ent->load($validate_vat_response_schema_ref01_match_dt0, null);
         $this->assertNotNull($validate_vat_response_schema_ref01_data_dt0_loaded);
 
     }
@@ -85,7 +84,6 @@ function validate_vat_response_schema_basic_setup($extra)
         "VATVALIDATION_TEST_VALIDATE_VAT_RESPONSE_SCHEMA_ENTID" => $idmap,
         "VATVALIDATION_TEST_LIVE" => "FALSE",
         "VATVALIDATION_TEST_EXPLAIN" => "FALSE",
-        "VATVALIDATION_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -97,7 +95,6 @@ function validate_vat_response_schema_basic_setup($extra)
     if ($env["VATVALIDATION_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["VATVALIDATION_APIKEY"],
             ],
             $extra ?? [],
         ]);

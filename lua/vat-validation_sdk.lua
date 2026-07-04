@@ -244,42 +244,133 @@ end
 
 
 
+-- Idiomatic facade: client:country():list() / client:country():load({ id = ... })
+function VatValidationSDK:country(data)
+  local EntityMod = require("entity.country_entity")
+  if data == nil then
+    if self._country == nil then
+      self._country = EntityMod.new(self, nil)
+    end
+    return self._country
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:country() instead.
 function VatValidationSDK:Country(data)
   local EntityMod = require("entity.country_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:currency():list() / client:currency():load({ id = ... })
+function VatValidationSDK:currency(data)
+  local EntityMod = require("entity.currency_entity")
+  if data == nil then
+    if self._currency == nil then
+      self._currency = EntityMod.new(self, nil)
+    end
+    return self._currency
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:currency() instead.
 function VatValidationSDK:Currency(data)
   local EntityMod = require("entity.currency_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:geolocate():list() / client:geolocate():load({ id = ... })
+function VatValidationSDK:geolocate(data)
+  local EntityMod = require("entity.geolocate_entity")
+  if data == nil then
+    if self._geolocate == nil then
+      self._geolocate = EntityMod.new(self, nil)
+    end
+    return self._geolocate
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:geolocate() instead.
 function VatValidationSDK:Geolocate(data)
   local EntityMod = require("entity.geolocate_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:rate():list() / client:rate():load({ id = ... })
+function VatValidationSDK:rate(data)
+  local EntityMod = require("entity.rate_entity")
+  if data == nil then
+    if self._rate == nil then
+      self._rate = EntityMod.new(self, nil)
+    end
+    return self._rate
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:rate() instead.
 function VatValidationSDK:Rate(data)
   local EntityMod = require("entity.rate_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:validate_iban_response_schema():list() / client:validate_iban_response_schema():load({ id = ... })
+function VatValidationSDK:validate_iban_response_schema(data)
+  local EntityMod = require("entity.validate_iban_response_schema_entity")
+  if data == nil then
+    if self._validate_iban_response_schema == nil then
+      self._validate_iban_response_schema = EntityMod.new(self, nil)
+    end
+    return self._validate_iban_response_schema
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:validate_iban_response_schema() instead.
 function VatValidationSDK:ValidateIbanResponseSchema(data)
   local EntityMod = require("entity.validate_iban_response_schema_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:validate_vat_response_schema():list() / client:validate_vat_response_schema():load({ id = ... })
+function VatValidationSDK:validate_vat_response_schema(data)
+  local EntityMod = require("entity.validate_vat_response_schema_entity")
+  if data == nil then
+    if self._validate_vat_response_schema == nil then
+      self._validate_vat_response_schema = EntityMod.new(self, nil)
+    end
+    return self._validate_vat_response_schema
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:validate_vat_response_schema() instead.
 function VatValidationSDK:ValidateVatResponseSchema(data)
   local EntityMod = require("entity.validate_vat_response_schema_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:vatcomply_api_root():list() / client:vatcomply_api_root():load({ id = ... })
+function VatValidationSDK:vatcomply_api_root(data)
+  local EntityMod = require("entity.vatcomply_api_root_entity")
+  if data == nil then
+    if self._vatcomply_api_root == nil then
+      self._vatcomply_api_root = EntityMod.new(self, nil)
+    end
+    return self._vatcomply_api_root
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:vatcomply_api_root() instead.
 function VatValidationSDK:VatcomplyApiRoot(data)
   local EntityMod = require("entity.vatcomply_api_root_entity")
   return EntityMod.new(self, data)

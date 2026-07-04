@@ -14,9 +14,13 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  VatcomplyApiRoot,
+  VatcomplyApiRootLoadMatch,
+} from '../VatValidationTypes'
 
 // TODO: needs Entity superclass
-class VatcomplyApiRootEntity extends VatValidationEntityBase {
+class VatcomplyApiRootEntity extends VatValidationEntityBase<VatcomplyApiRoot> {
 
   constructor(client: VatValidationSDK, entopts: any) {
     super(client, entopts)
@@ -32,7 +36,7 @@ class VatcomplyApiRootEntity extends VatValidationEntityBase {
 
 
 
-  async load(this: any, reqmatch?: any, ctrl?: Control) {
+  async load(this: any, reqmatch?: VatcomplyApiRootLoadMatch, ctrl?: Control): Promise<VatcomplyApiRoot> {
 
     const utility = this._utility
 
@@ -136,7 +140,9 @@ class VatcomplyApiRootEntity extends VatValidationEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<VatcomplyApiRoot> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

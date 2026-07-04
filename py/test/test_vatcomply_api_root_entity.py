@@ -49,8 +49,7 @@ class TestVatcomplyApiRootEntity:
         # LOAD
         vatcomply_api_root_ref01_ent = client.VatcomplyApiRoot(None)
         vatcomply_api_root_ref01_match_dt0 = {}
-        vatcomply_api_root_ref01_data_dt0_loaded, err = vatcomply_api_root_ref01_ent.load(vatcomply_api_root_ref01_match_dt0, None)
-        assert err is None
+        vatcomply_api_root_ref01_data_dt0_loaded = vatcomply_api_root_ref01_ent.load(vatcomply_api_root_ref01_match_dt0, None)
         assert vatcomply_api_root_ref01_data_dt0_loaded is not None
 
 
@@ -91,7 +90,6 @@ def _vatcomply_api_root_basic_setup(extra):
         "VATVALIDATION_TEST_VATCOMPLY_API_ROOT_ENTID": idmap,
         "VATVALIDATION_TEST_LIVE": "FALSE",
         "VATVALIDATION_TEST_EXPLAIN": "FALSE",
-        "VATVALIDATION_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -102,7 +100,6 @@ def _vatcomply_api_root_basic_setup(extra):
     if env.get("VATVALIDATION_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("VATVALIDATION_APIKEY"),
             },
             extra or {},
         ])

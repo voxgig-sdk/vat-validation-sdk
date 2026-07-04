@@ -20,7 +20,6 @@ Create a new SDK client instance.
 | Name | Type | Description |
 | --- | --- | --- |
 | `options` | `dict` | SDK configuration options. |
-| `options["apikey"]` | `str` | API key for authentication. |
 | `options["base"]` | `str` | Base URL for API requests. |
 | `options["prefix"]` | `str` | URL prefix appended after base. |
 | `options["suffix"]` | `str` | URL suffix appended after path. |
@@ -78,9 +77,9 @@ Return a deep copy of the current SDK options.
 
 Return a copy of the SDK utility object.
 
-#### `direct(fetchargs=None) -> tuple`
+#### `direct(fetchargs=None) -> dict`
 
-Make a direct HTTP request to any API endpoint. Returns `(result, err)`.
+Make a direct HTTP request to any API endpoint. Returns a result `dict` with `ok`, `status`, `headers`, and `data` (or `err` on failure). This escape hatch never raises — branch on `result["ok"]`.
 
 **Parameters:**
 
@@ -93,11 +92,11 @@ Make a direct HTTP request to any API endpoint. Returns `(result, err)`.
 | `fetchargs["headers"]` | `dict` | Request headers (merged with defaults). |
 | `fetchargs["body"]` | `any` | Request body (dicts are JSON-serialized). |
 
-**Returns:** `(result_dict, err)`
+**Returns:** `result_dict`
 
-#### `prepare(fetchargs=None) -> tuple`
+#### `prepare(fetchargs=None) -> dict`
 
-Prepare a fetch definition without sending. Returns `(fetchdef, err)`.
+Prepare a fetch definition without sending. Returns the `fetchdef` and raises on error.
 
 
 ---
@@ -105,7 +104,7 @@ Prepare a fetch definition without sending. Returns `(fetchdef, err)`.
 ## CountryEntity
 
 ```python
-country = client.Country()
+country = client.country
 ```
 
 ### Fields
@@ -128,12 +127,12 @@ country = client.Country()
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> tuple`
+#### `list(reqmatch, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results, err = client.Country().list({})
+results = client.country.list({})
 ```
 
 ### Common Methods
@@ -168,7 +167,7 @@ Return the entity name.
 ## CurrencyEntity
 
 ```python
-currency = client.Currency()
+currency = client.currency
 ```
 
 ### Fields
@@ -180,12 +179,12 @@ currency = client.Currency()
 
 ### Operations
 
-#### `load(reqmatch, ctrl=None) -> tuple`
+#### `load(reqmatch, ctrl=None) -> dict`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result, err = client.Currency().load({"id": "currency_id"})
+result = client.currency.load({"id": "currency_id"})
 ```
 
 ### Common Methods
@@ -220,7 +219,7 @@ Return the entity name.
 ## GeolocateEntity
 
 ```python
-geolocate = client.Geolocate()
+geolocate = client.geolocate
 ```
 
 ### Fields
@@ -245,12 +244,12 @@ geolocate = client.Geolocate()
 
 ### Operations
 
-#### `load(reqmatch, ctrl=None) -> tuple`
+#### `load(reqmatch, ctrl=None) -> dict`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result, err = client.Geolocate().load({"id": "geolocate_id"})
+result = client.geolocate.load({"id": "geolocate_id"})
 ```
 
 ### Common Methods
@@ -285,7 +284,7 @@ Return the entity name.
 ## RateEntity
 
 ```python
-rate = client.Rate()
+rate = client.rate
 ```
 
 ### Fields
@@ -298,12 +297,12 @@ rate = client.Rate()
 
 ### Operations
 
-#### `load(reqmatch, ctrl=None) -> tuple`
+#### `load(reqmatch, ctrl=None) -> dict`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result, err = client.Rate().load({"id": "rate_id"})
+result = client.rate.load({"id": "rate_id"})
 ```
 
 ### Common Methods
@@ -338,7 +337,7 @@ Return the entity name.
 ## ValidateIbanResponseSchemaEntity
 
 ```python
-validate_iban_response_schema = client.ValidateIbanResponseSchema()
+validate_iban_response_schema = client.validate_iban_response_schema
 ```
 
 ### Fields
@@ -360,12 +359,12 @@ validate_iban_response_schema = client.ValidateIbanResponseSchema()
 
 ### Operations
 
-#### `load(reqmatch, ctrl=None) -> tuple`
+#### `load(reqmatch, ctrl=None) -> dict`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result, err = client.ValidateIbanResponseSchema().load({"id": "validate_iban_response_schema_id"})
+result = client.validate_iban_response_schema.load({"id": "validate_iban_response_schema_id"})
 ```
 
 ### Common Methods
@@ -400,7 +399,7 @@ Return the entity name.
 ## ValidateVatResponseSchemaEntity
 
 ```python
-validate_vat_response_schema = client.ValidateVatResponseSchema()
+validate_vat_response_schema = client.validate_vat_response_schema
 ```
 
 ### Fields
@@ -415,12 +414,12 @@ validate_vat_response_schema = client.ValidateVatResponseSchema()
 
 ### Operations
 
-#### `load(reqmatch, ctrl=None) -> tuple`
+#### `load(reqmatch, ctrl=None) -> dict`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result, err = client.ValidateVatResponseSchema().load({"id": "validate_vat_response_schema_id"})
+result = client.validate_vat_response_schema.load({"id": "validate_vat_response_schema_id"})
 ```
 
 ### Common Methods
@@ -455,7 +454,7 @@ Return the entity name.
 ## VatcomplyApiRootEntity
 
 ```python
-vatcomply_api_root = client.VatcomplyApiRoot()
+vatcomply_api_root = client.vatcomply_api_root
 ```
 
 ### Fields
@@ -472,12 +471,12 @@ vatcomply_api_root = client.VatcomplyApiRoot()
 
 ### Operations
 
-#### `load(reqmatch, ctrl=None) -> tuple`
+#### `load(reqmatch, ctrl=None) -> dict`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result, err = client.VatcomplyApiRoot().load({"id": "vatcomply_api_root_id"})
+result = client.vatcomply_api_root.load({"id": "vatcomply_api_root_id"})
 ```
 
 ### Common Methods

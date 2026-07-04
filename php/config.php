@@ -20,9 +20,6 @@ class VatValidationConfig
             ],
             "options" => [
                 "base" => "https://api.vatcomply.com",
-                "auth" => [
-                    "prefix" => "Bearer",
-                ],
                 "headers" => [
           'content-type' => 'application/json',
         ],

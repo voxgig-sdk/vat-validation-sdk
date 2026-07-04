@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch ValidateVatResponseSchemaLoadMatch
+---@param ctrl? table
+---@return ValidateVatResponseSchema
+---@return string? err
 function ValidateVatResponseSchemaEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({
