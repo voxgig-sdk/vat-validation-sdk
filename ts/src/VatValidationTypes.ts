@@ -21,14 +21,31 @@ export interface Country {
   tld: string
 }
 
-export type CountryListMatch = Partial<Country>
+export interface CountryListMatch {
+  capital?: string
+  currency?: string
+  emoji?: string
+  iso2?: string
+  iso3?: string
+  latitude?: number
+  longitude?: number
+  name?: string
+  numeric_code?: number
+  phone_code?: string
+  region?: string
+  subregion?: string
+  tld?: string
+}
 
 export interface Currency {
   name: string
   symbol: string
 }
 
-export type CurrencyLoadMatch = Partial<Currency>
+export interface CurrencyLoadMatch {
+  name?: string
+  symbol?: string
+}
 
 export interface Geolocate {
   capital: string
@@ -48,7 +65,23 @@ export interface Geolocate {
   tld: string
 }
 
-export type GeolocateLoadMatch = Partial<Geolocate>
+export interface GeolocateLoadMatch {
+  capital?: string
+  country_code?: string
+  currency?: string
+  emoji?: string
+  ip?: any
+  iso2?: string
+  iso3?: string
+  latitude?: number
+  longitude?: number
+  name?: string
+  numeric_code?: number
+  phone_code?: string
+  region?: string
+  subregion?: string
+  tld?: string
+}
 
 export interface Rate {
   base: string
@@ -56,7 +89,11 @@ export interface Rate {
   rate: Record<string, any>
 }
 
-export type RateLoadMatch = Partial<Rate>
+export interface RateLoadMatch {
+  base?: string
+  date?: string
+  rate?: Record<string, any>
+}
 
 export interface ValidateIbanResponseSchema {
   account_number: string
@@ -73,7 +110,20 @@ export interface ValidateIbanResponseSchema {
   valid: boolean
 }
 
-export type ValidateIbanResponseSchemaLoadMatch = Partial<ValidateIbanResponseSchema>
+export interface ValidateIbanResponseSchemaLoadMatch {
+  account_number?: string
+  bank_code?: string
+  bank_name?: string
+  bban?: string
+  bic?: string
+  branch_code?: string
+  checksum_digit?: string
+  country_code?: string
+  country_name?: string
+  iban?: string
+  in_sepa_zone?: boolean
+  valid?: boolean
+}
 
 export interface ValidateVatResponseSchema {
   address?: string
@@ -83,7 +133,13 @@ export interface ValidateVatResponseSchema {
   vat_number: string
 }
 
-export type ValidateVatResponseSchemaLoadMatch = Partial<ValidateVatResponseSchema>
+export interface ValidateVatResponseSchemaLoadMatch {
+  address?: string
+  country_code?: string
+  name?: string
+  valid?: boolean
+  vat_number?: string
+}
 
 export interface VatcomplyApiRoot {
   contact: string
@@ -95,5 +151,13 @@ export interface VatcomplyApiRoot {
   version: string
 }
 
-export type VatcomplyApiRootLoadMatch = Partial<VatcomplyApiRoot>
+export interface VatcomplyApiRootLoadMatch {
+  contact?: string
+  description?: string
+  documentation?: string
+  endpoint?: Record<string, any>
+  name?: string
+  status?: string
+  version?: string
+}
 

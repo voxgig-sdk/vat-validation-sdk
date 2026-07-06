@@ -17,8 +17,6 @@ go build -o vat-validation-cli ./...
 ```sh
 # One-shot: arguments form a single AQL expression
 ./vat-validation-cli list country
-./vat-validation-cli load 1 country
-./vat-validation-cli load '{id:1}' country
 
 # REPL
 ./vat-validation-cli
@@ -30,7 +28,6 @@ go build -o vat-validation-cli ./...
 |----------|----------------------------------------------|----------------------------|
 | `list`   | `[entity]` · `[query entity]`                | List records               |
 | `load`   | `[entity]` · `[query entity]`                | Load a single record       |
-| `update` | `[entity]` · `[query entity]`                | Update a record            |
 
 `query` is either a Map (`{id:1}`) or a Scalar (`1`, treated as `{id:1}`).
 `entity` is one of the SDK's entity names (auto-quoted as an atom).

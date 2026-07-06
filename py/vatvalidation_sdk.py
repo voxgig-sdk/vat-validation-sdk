@@ -221,43 +221,43 @@ class VatValidationSDK:
 
 
     def Country(self, data=None) -> "CountryEntity":
-        """Entity factory: client.Country().list({}) / client.Country().load({"id": ...})."""
+        """Entity factory: client.Country().list() / client.Country().load({"id": ...})."""
         from entity.country_entity import CountryEntity
         return CountryEntity(self, data)
 
 
     def Currency(self, data=None) -> "CurrencyEntity":
-        """Entity factory: client.Currency().list({}) / client.Currency().load({"id": ...})."""
+        """Entity factory: client.Currency().list() / client.Currency().load({"id": ...})."""
         from entity.currency_entity import CurrencyEntity
         return CurrencyEntity(self, data)
 
 
     def Geolocate(self, data=None) -> "GeolocateEntity":
-        """Entity factory: client.Geolocate().list({}) / client.Geolocate().load({"id": ...})."""
+        """Entity factory: client.Geolocate().list() / client.Geolocate().load({"id": ...})."""
         from entity.geolocate_entity import GeolocateEntity
         return GeolocateEntity(self, data)
 
 
     def Rate(self, data=None) -> "RateEntity":
-        """Entity factory: client.Rate().list({}) / client.Rate().load({"id": ...})."""
+        """Entity factory: client.Rate().list() / client.Rate().load({"id": ...})."""
         from entity.rate_entity import RateEntity
         return RateEntity(self, data)
 
 
     def ValidateIbanResponseSchema(self, data=None) -> "ValidateIbanResponseSchemaEntity":
-        """Entity factory: client.ValidateIbanResponseSchema().list({}) / client.ValidateIbanResponseSchema().load({"id": ...})."""
+        """Entity factory: client.ValidateIbanResponseSchema().list() / client.ValidateIbanResponseSchema().load({"id": ...})."""
         from entity.validate_iban_response_schema_entity import ValidateIbanResponseSchemaEntity
         return ValidateIbanResponseSchemaEntity(self, data)
 
 
     def ValidateVatResponseSchema(self, data=None) -> "ValidateVatResponseSchemaEntity":
-        """Entity factory: client.ValidateVatResponseSchema().list({}) / client.ValidateVatResponseSchema().load({"id": ...})."""
+        """Entity factory: client.ValidateVatResponseSchema().list() / client.ValidateVatResponseSchema().load({"id": ...})."""
         from entity.validate_vat_response_schema_entity import ValidateVatResponseSchemaEntity
         return ValidateVatResponseSchemaEntity(self, data)
 
 
     def VatcomplyApiRoot(self, data=None) -> "VatcomplyApiRootEntity":
-        """Entity factory: client.VatcomplyApiRoot().list({}) / client.VatcomplyApiRoot().load({"id": ...})."""
+        """Entity factory: client.VatcomplyApiRoot().list() / client.VatcomplyApiRoot().load({"id": ...})."""
         from entity.vatcomply_api_root_entity import VatcomplyApiRootEntity
         return VatcomplyApiRootEntity(self, data)
 

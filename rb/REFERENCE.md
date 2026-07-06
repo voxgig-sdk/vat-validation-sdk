@@ -8,7 +8,7 @@ Complete API reference for the VatValidation Ruby SDK.
 ### Constructor
 
 ```ruby
-require_relative 'vat-validation_sdk'
+require_relative 'VatValidation_sdk'
 
 client = VatValidationSDK.new(options)
 ```
@@ -117,28 +117,28 @@ country = client.Country
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `capital` | ``$STRING`` | Yes |  |
-| `currency` | ``$STRING`` | Yes |  |
-| `emoji` | ``$STRING`` | Yes |  |
-| `iso2` | ``$STRING`` | Yes |  |
-| `iso3` | ``$STRING`` | Yes |  |
-| `latitude` | ``$NUMBER`` | Yes |  |
-| `longitude` | ``$NUMBER`` | Yes |  |
-| `name` | ``$STRING`` | Yes |  |
-| `numeric_code` | ``$INTEGER`` | Yes |  |
-| `phone_code` | ``$STRING`` | Yes |  |
-| `region` | ``$STRING`` | Yes |  |
-| `subregion` | ``$STRING`` | Yes |  |
-| `tld` | ``$STRING`` | Yes |  |
+| `capital` | `String` | Yes |  |
+| `currency` | `String` | Yes |  |
+| `emoji` | `String` | Yes |  |
+| `iso2` | `String` | Yes |  |
+| `iso3` | `String` | Yes |  |
+| `latitude` | `Float` | Yes |  |
+| `longitude` | `Float` | Yes |  |
+| `name` | `String` | Yes |  |
+| `numeric_code` | `Integer` | Yes |  |
+| `phone_code` | `String` | Yes |  |
+| `region` | `String` | Yes |  |
+| `subregion` | `String` | Yes |  |
+| `tld` | `String` | Yes |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.Country.list(nil)
+results = client.Country.list
 ```
 
 ### Common Methods
@@ -181,8 +181,8 @@ currency = client.Currency
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `name` | ``$STRING`` | Yes |  |
-| `symbol` | ``$STRING`` | Yes |  |
+| `name` | `String` | Yes |  |
+| `symbol` | `String` | Yes |  |
 
 ### Operations
 
@@ -191,7 +191,7 @@ currency = client.Currency
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.Currency.load({ "id" => "currency_id" })
+result = client.Currency.load()
 ```
 
 ### Common Methods
@@ -234,21 +234,21 @@ geolocate = client.Geolocate
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `capital` | ``$STRING`` | Yes |  |
-| `country_code` | ``$STRING`` | Yes |  |
-| `currency` | ``$STRING`` | Yes |  |
-| `emoji` | ``$STRING`` | Yes |  |
-| `ip` | ``$ANY`` | Yes |  |
-| `iso2` | ``$STRING`` | Yes |  |
-| `iso3` | ``$STRING`` | Yes |  |
-| `latitude` | ``$NUMBER`` | Yes |  |
-| `longitude` | ``$NUMBER`` | Yes |  |
-| `name` | ``$STRING`` | Yes |  |
-| `numeric_code` | ``$INTEGER`` | Yes |  |
-| `phone_code` | ``$STRING`` | Yes |  |
-| `region` | ``$STRING`` | Yes |  |
-| `subregion` | ``$STRING`` | Yes |  |
-| `tld` | ``$STRING`` | Yes |  |
+| `capital` | `String` | Yes |  |
+| `country_code` | `String` | Yes |  |
+| `currency` | `String` | Yes |  |
+| `emoji` | `String` | Yes |  |
+| `ip` | `Object` | Yes |  |
+| `iso2` | `String` | Yes |  |
+| `iso3` | `String` | Yes |  |
+| `latitude` | `Float` | Yes |  |
+| `longitude` | `Float` | Yes |  |
+| `name` | `String` | Yes |  |
+| `numeric_code` | `Integer` | Yes |  |
+| `phone_code` | `String` | Yes |  |
+| `region` | `String` | Yes |  |
+| `subregion` | `String` | Yes |  |
+| `tld` | `String` | Yes |  |
 
 ### Operations
 
@@ -257,7 +257,7 @@ geolocate = client.Geolocate
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.Geolocate.load({ "id" => "geolocate_id" })
+result = client.Geolocate.load()
 ```
 
 ### Common Methods
@@ -300,9 +300,9 @@ rate = client.Rate
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `base` | ``$STRING`` | Yes |  |
-| `date` | ``$STRING`` | Yes |  |
-| `rate` | ``$OBJECT`` | Yes |  |
+| `base` | `String` | Yes |  |
+| `date` | `String` | Yes |  |
+| `rate` | `Hash` | Yes |  |
 
 ### Operations
 
@@ -311,7 +311,7 @@ rate = client.Rate
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.Rate.load({ "id" => "rate_id" })
+result = client.Rate.load()
 ```
 
 ### Common Methods
@@ -354,18 +354,18 @@ validate_iban_response_schema = client.ValidateIbanResponseSchema
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `account_number` | ``$STRING`` | Yes |  |
-| `bank_code` | ``$STRING`` | Yes |  |
-| `bank_name` | ``$STRING`` | Yes |  |
-| `bban` | ``$STRING`` | Yes |  |
-| `bic` | ``$STRING`` | Yes |  |
-| `branch_code` | ``$STRING`` | Yes |  |
-| `checksum_digit` | ``$STRING`` | Yes |  |
-| `country_code` | ``$STRING`` | Yes |  |
-| `country_name` | ``$STRING`` | Yes |  |
-| `iban` | ``$STRING`` | Yes |  |
-| `in_sepa_zone` | ``$BOOLEAN`` | Yes |  |
-| `valid` | ``$BOOLEAN`` | Yes |  |
+| `account_number` | `String` | Yes |  |
+| `bank_code` | `String` | Yes |  |
+| `bank_name` | `String` | Yes |  |
+| `bban` | `String` | Yes |  |
+| `bic` | `String` | Yes |  |
+| `branch_code` | `String` | Yes |  |
+| `checksum_digit` | `String` | Yes |  |
+| `country_code` | `String` | Yes |  |
+| `country_name` | `String` | Yes |  |
+| `iban` | `String` | Yes |  |
+| `in_sepa_zone` | `Boolean` | Yes |  |
+| `valid` | `Boolean` | Yes |  |
 
 ### Operations
 
@@ -374,7 +374,7 @@ validate_iban_response_schema = client.ValidateIbanResponseSchema
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.ValidateIbanResponseSchema.load({ "id" => "validate_iban_response_schema_id" })
+result = client.ValidateIbanResponseSchema.load()
 ```
 
 ### Common Methods
@@ -417,11 +417,11 @@ validate_vat_response_schema = client.ValidateVatResponseSchema
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `address` | ``$STRING`` | No |  |
-| `country_code` | ``$STRING`` | Yes |  |
-| `name` | ``$STRING`` | No |  |
-| `valid` | ``$BOOLEAN`` | Yes |  |
-| `vat_number` | ``$STRING`` | Yes |  |
+| `address` | `String` | No |  |
+| `country_code` | `String` | Yes |  |
+| `name` | `String` | No |  |
+| `valid` | `Boolean` | Yes |  |
+| `vat_number` | `String` | Yes |  |
 
 ### Operations
 
@@ -430,7 +430,7 @@ validate_vat_response_schema = client.ValidateVatResponseSchema
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.ValidateVatResponseSchema.load({ "id" => "validate_vat_response_schema_id" })
+result = client.ValidateVatResponseSchema.load()
 ```
 
 ### Common Methods
@@ -473,13 +473,13 @@ vatcomply_api_root = client.VatcomplyApiRoot
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `contact` | ``$STRING`` | Yes |  |
-| `description` | ``$STRING`` | Yes |  |
-| `documentation` | ``$STRING`` | Yes |  |
-| `endpoint` | ``$OBJECT`` | Yes |  |
-| `name` | ``$STRING`` | Yes |  |
-| `status` | ``$STRING`` | Yes |  |
-| `version` | ``$STRING`` | Yes |  |
+| `contact` | `String` | Yes |  |
+| `description` | `String` | Yes |  |
+| `documentation` | `String` | Yes |  |
+| `endpoint` | `Hash` | Yes |  |
+| `name` | `String` | Yes |  |
+| `status` | `String` | Yes |  |
+| `version` | `String` | Yes |  |
 
 ### Operations
 
@@ -488,7 +488,7 @@ vatcomply_api_root = client.VatcomplyApiRoot
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.VatcomplyApiRoot.load({ "id" => "vatcomply_api_root_id" })
+result = client.VatcomplyApiRoot.load()
 ```
 
 ### Common Methods

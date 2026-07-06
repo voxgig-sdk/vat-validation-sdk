@@ -188,19 +188,19 @@ const country = client.Country()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `capital` | ``$STRING`` | Yes |  |
-| `currency` | ``$STRING`` | Yes |  |
-| `emoji` | ``$STRING`` | Yes |  |
-| `iso2` | ``$STRING`` | Yes |  |
-| `iso3` | ``$STRING`` | Yes |  |
-| `latitude` | ``$NUMBER`` | Yes |  |
-| `longitude` | ``$NUMBER`` | Yes |  |
-| `name` | ``$STRING`` | Yes |  |
-| `numeric_code` | ``$INTEGER`` | Yes |  |
-| `phone_code` | ``$STRING`` | Yes |  |
-| `region` | ``$STRING`` | Yes |  |
-| `subregion` | ``$STRING`` | Yes |  |
-| `tld` | ``$STRING`` | Yes |  |
+| `capital` | `string` | Yes |  |
+| `currency` | `string` | Yes |  |
+| `emoji` | `string` | Yes |  |
+| `iso2` | `string` | Yes |  |
+| `iso3` | `string` | Yes |  |
+| `latitude` | `number` | Yes |  |
+| `longitude` | `number` | Yes |  |
+| `name` | `string` | Yes |  |
+| `numeric_code` | `number` | Yes |  |
+| `phone_code` | `string` | Yes |  |
+| `region` | `string` | Yes |  |
+| `subregion` | `string` | Yes |  |
+| `tld` | `string` | Yes |  |
 
 ### Operations
 
@@ -250,8 +250,8 @@ const currency = client.Currency()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `name` | ``$STRING`` | Yes |  |
-| `symbol` | ``$STRING`` | Yes |  |
+| `name` | `string` | Yes |  |
+| `symbol` | `string` | Yes |  |
 
 ### Operations
 
@@ -260,7 +260,7 @@ const currency = client.Currency()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Currency().load({ id: 'currency_id' })
+const result = await client.Currency().load()
 ```
 
 ### Common Methods
@@ -301,21 +301,21 @@ const geolocate = client.Geolocate()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `capital` | ``$STRING`` | Yes |  |
-| `country_code` | ``$STRING`` | Yes |  |
-| `currency` | ``$STRING`` | Yes |  |
-| `emoji` | ``$STRING`` | Yes |  |
-| `ip` | ``$ANY`` | Yes |  |
-| `iso2` | ``$STRING`` | Yes |  |
-| `iso3` | ``$STRING`` | Yes |  |
-| `latitude` | ``$NUMBER`` | Yes |  |
-| `longitude` | ``$NUMBER`` | Yes |  |
-| `name` | ``$STRING`` | Yes |  |
-| `numeric_code` | ``$INTEGER`` | Yes |  |
-| `phone_code` | ``$STRING`` | Yes |  |
-| `region` | ``$STRING`` | Yes |  |
-| `subregion` | ``$STRING`` | Yes |  |
-| `tld` | ``$STRING`` | Yes |  |
+| `capital` | `string` | Yes |  |
+| `country_code` | `string` | Yes |  |
+| `currency` | `string` | Yes |  |
+| `emoji` | `string` | Yes |  |
+| `ip` | `any` | Yes |  |
+| `iso2` | `string` | Yes |  |
+| `iso3` | `string` | Yes |  |
+| `latitude` | `number` | Yes |  |
+| `longitude` | `number` | Yes |  |
+| `name` | `string` | Yes |  |
+| `numeric_code` | `number` | Yes |  |
+| `phone_code` | `string` | Yes |  |
+| `region` | `string` | Yes |  |
+| `subregion` | `string` | Yes |  |
+| `tld` | `string` | Yes |  |
 
 ### Operations
 
@@ -324,7 +324,7 @@ const geolocate = client.Geolocate()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Geolocate().load({ id: 'geolocate_id' })
+const result = await client.Geolocate().load()
 ```
 
 ### Common Methods
@@ -365,9 +365,9 @@ const rate = client.Rate()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `base` | ``$STRING`` | Yes |  |
-| `date` | ``$STRING`` | Yes |  |
-| `rate` | ``$OBJECT`` | Yes |  |
+| `base` | `string` | Yes |  |
+| `date` | `string` | Yes |  |
+| `rate` | `Record<string, any>` | Yes |  |
 
 ### Operations
 
@@ -376,7 +376,7 @@ const rate = client.Rate()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Rate().load({ id: 'rate_id' })
+const result = await client.Rate().load()
 ```
 
 ### Common Methods
@@ -417,18 +417,18 @@ const validate_iban_response_schema = client.ValidateIbanResponseSchema()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `account_number` | ``$STRING`` | Yes |  |
-| `bank_code` | ``$STRING`` | Yes |  |
-| `bank_name` | ``$STRING`` | Yes |  |
-| `bban` | ``$STRING`` | Yes |  |
-| `bic` | ``$STRING`` | Yes |  |
-| `branch_code` | ``$STRING`` | Yes |  |
-| `checksum_digit` | ``$STRING`` | Yes |  |
-| `country_code` | ``$STRING`` | Yes |  |
-| `country_name` | ``$STRING`` | Yes |  |
-| `iban` | ``$STRING`` | Yes |  |
-| `in_sepa_zone` | ``$BOOLEAN`` | Yes |  |
-| `valid` | ``$BOOLEAN`` | Yes |  |
+| `account_number` | `string` | Yes |  |
+| `bank_code` | `string` | Yes |  |
+| `bank_name` | `string` | Yes |  |
+| `bban` | `string` | Yes |  |
+| `bic` | `string` | Yes |  |
+| `branch_code` | `string` | Yes |  |
+| `checksum_digit` | `string` | Yes |  |
+| `country_code` | `string` | Yes |  |
+| `country_name` | `string` | Yes |  |
+| `iban` | `string` | Yes |  |
+| `in_sepa_zone` | `boolean` | Yes |  |
+| `valid` | `boolean` | Yes |  |
 
 ### Operations
 
@@ -437,7 +437,7 @@ const validate_iban_response_schema = client.ValidateIbanResponseSchema()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.ValidateIbanResponseSchema().load({ id: 'validate_iban_response_schema_id' })
+const result = await client.ValidateIbanResponseSchema().load()
 ```
 
 ### Common Methods
@@ -478,11 +478,11 @@ const validate_vat_response_schema = client.ValidateVatResponseSchema()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `address` | ``$STRING`` | No |  |
-| `country_code` | ``$STRING`` | Yes |  |
-| `name` | ``$STRING`` | No |  |
-| `valid` | ``$BOOLEAN`` | Yes |  |
-| `vat_number` | ``$STRING`` | Yes |  |
+| `address` | `string` | No |  |
+| `country_code` | `string` | Yes |  |
+| `name` | `string` | No |  |
+| `valid` | `boolean` | Yes |  |
+| `vat_number` | `string` | Yes |  |
 
 ### Operations
 
@@ -491,7 +491,7 @@ const validate_vat_response_schema = client.ValidateVatResponseSchema()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.ValidateVatResponseSchema().load({ id: 'validate_vat_response_schema_id' })
+const result = await client.ValidateVatResponseSchema().load()
 ```
 
 ### Common Methods
@@ -532,13 +532,13 @@ const vatcomply_api_root = client.VatcomplyApiRoot()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `contact` | ``$STRING`` | Yes |  |
-| `description` | ``$STRING`` | Yes |  |
-| `documentation` | ``$STRING`` | Yes |  |
-| `endpoint` | ``$OBJECT`` | Yes |  |
-| `name` | ``$STRING`` | Yes |  |
-| `status` | ``$STRING`` | Yes |  |
-| `version` | ``$STRING`` | Yes |  |
+| `contact` | `string` | Yes |  |
+| `description` | `string` | Yes |  |
+| `documentation` | `string` | Yes |  |
+| `endpoint` | `Record<string, any>` | Yes |  |
+| `name` | `string` | Yes |  |
+| `status` | `string` | Yes |  |
+| `version` | `string` | Yes |  |
 
 ### Operations
 
@@ -547,7 +547,7 @@ const vatcomply_api_root = client.VatcomplyApiRoot()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.VatcomplyApiRoot().load({ id: 'vatcomply_api_root_id' })
+const result = await client.VatcomplyApiRoot().load()
 ```
 
 ### Common Methods

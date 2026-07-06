@@ -4,6 +4,8 @@
 
 The Lua SDK for the VatValidation API — an entity-oriented client using Lua conventions.
 
+It exposes the API as capitalised, semantic **Entities** — e.g. `client:Country()` — each with the same small set of operations (`list`, `load`) instead of raw URL paths and query strings. You call meaning, not endpoints, which keeps the cognitive load low.
+
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
 
@@ -41,8 +43,30 @@ local countrys, err = client:Country():list()
 if err then error(err) end
 
 for _, item in ipairs(countrys) do
-  print(item["id"], item["name"])
+  print(item["capital"])
 end
+```
+
+
+## Error handling
+
+Entity operations return `(value, err)`. Check `err` before using
+the value:
+
+```lua
+local countrys, err = client:Country():list()
+if err then error(err) end
+```
+
+`direct` follows the same `(value, err)` convention:
+
+```lua
+local result, err = client:direct({
+  path = "/api/resource/{id}",
+  method = "GET",
+  params = { id = "example_id" },
+})
+if err then error(err) end
 ```
 
 
@@ -88,8 +112,8 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:Country():load({ id = "test01" })
--- result is the loaded data; err is set on failure
+local result, err = client:Country():list()
+-- result is the returned data; err is set on failure
 ```
 
 ### Use a custom fetch function
@@ -183,9 +207,6 @@ All entities share the same interface.
 | --- | --- | --- |
 | `load` | `(reqmatch, ctrl) -> any, err` | Load a single entity by match criteria. |
 | `list` | `(reqmatch, ctrl) -> any, err` | List entities matching the criteria. |
-| `create` | `(reqdata, ctrl) -> any, err` | Create a new entity. |
-| `update` | `(reqdata, ctrl) -> any, err` | Update an existing entity. |
-| `remove` | `(reqmatch, ctrl) -> any, err` | Remove an entity. |
 | `data_get` | `() -> table` | Get entity data. |
 | `data_set` | `(data)` | Set entity data. |
 | `match_get` | `() -> table` | Get entity match criteria. |
@@ -200,12 +221,12 @@ data **directly** — there is no wrapper:
 
 | Operation | `value` |
 | --- | --- |
-| `load` / `create` / `update` / `remove` | the entity record (a `table`) |
+| `load` | the entity record (a `table`) |
 | `list` | an array (`table`) of entity records |
 
 Check `err` first (it is non-`nil` on failure), then use `value`:
 
-    local country, err = client:Country():load({ id = "example_id" })
+    local country, err = client:Country():load()
     if err then error(err) end
     -- country is the loaded record
 
@@ -353,19 +374,19 @@ Create an instance: `local country = client:Country(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `capital` | ``$STRING`` |  |
-| `currency` | ``$STRING`` |  |
-| `emoji` | ``$STRING`` |  |
-| `iso2` | ``$STRING`` |  |
-| `iso3` | ``$STRING`` |  |
-| `latitude` | ``$NUMBER`` |  |
-| `longitude` | ``$NUMBER`` |  |
-| `name` | ``$STRING`` |  |
-| `numeric_code` | ``$INTEGER`` |  |
-| `phone_code` | ``$STRING`` |  |
-| `region` | ``$STRING`` |  |
-| `subregion` | ``$STRING`` |  |
-| `tld` | ``$STRING`` |  |
+| `capital` | `string` |  |
+| `currency` | `string` |  |
+| `emoji` | `string` |  |
+| `iso2` | `string` |  |
+| `iso3` | `string` |  |
+| `latitude` | `number` |  |
+| `longitude` | `number` |  |
+| `name` | `string` |  |
+| `numeric_code` | `number` |  |
+| `phone_code` | `string` |  |
+| `region` | `string` |  |
+| `subregion` | `string` |  |
+| `tld` | `string` |  |
 
 #### Example: List
 
@@ -388,13 +409,13 @@ Create an instance: `local currency = client:Currency(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `name` | ``$STRING`` |  |
-| `symbol` | ``$STRING`` |  |
+| `name` | `string` |  |
+| `symbol` | `string` |  |
 
 #### Example: Load
 
 ```lua
-local currency, err = client:Currency():load({ id = "currency_id" })
+local currency, err = client:Currency():load()
 ```
 
 
@@ -412,26 +433,26 @@ Create an instance: `local geolocate = client:Geolocate(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `capital` | ``$STRING`` |  |
-| `country_code` | ``$STRING`` |  |
-| `currency` | ``$STRING`` |  |
-| `emoji` | ``$STRING`` |  |
-| `ip` | ``$ANY`` |  |
-| `iso2` | ``$STRING`` |  |
-| `iso3` | ``$STRING`` |  |
-| `latitude` | ``$NUMBER`` |  |
-| `longitude` | ``$NUMBER`` |  |
-| `name` | ``$STRING`` |  |
-| `numeric_code` | ``$INTEGER`` |  |
-| `phone_code` | ``$STRING`` |  |
-| `region` | ``$STRING`` |  |
-| `subregion` | ``$STRING`` |  |
-| `tld` | ``$STRING`` |  |
+| `capital` | `string` |  |
+| `country_code` | `string` |  |
+| `currency` | `string` |  |
+| `emoji` | `string` |  |
+| `ip` | `any` |  |
+| `iso2` | `string` |  |
+| `iso3` | `string` |  |
+| `latitude` | `number` |  |
+| `longitude` | `number` |  |
+| `name` | `string` |  |
+| `numeric_code` | `number` |  |
+| `phone_code` | `string` |  |
+| `region` | `string` |  |
+| `subregion` | `string` |  |
+| `tld` | `string` |  |
 
 #### Example: Load
 
 ```lua
-local geolocate, err = client:Geolocate():load({ id = "geolocate_id" })
+local geolocate, err = client:Geolocate():load()
 ```
 
 
@@ -449,14 +470,14 @@ Create an instance: `local rate = client:Rate(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `base` | ``$STRING`` |  |
-| `date` | ``$STRING`` |  |
-| `rate` | ``$OBJECT`` |  |
+| `base` | `string` |  |
+| `date` | `string` |  |
+| `rate` | `table` |  |
 
 #### Example: Load
 
 ```lua
-local rate, err = client:Rate():load({ id = "rate_id" })
+local rate, err = client:Rate():load()
 ```
 
 
@@ -474,23 +495,23 @@ Create an instance: `local validate_iban_response_schema = client:ValidateIbanRe
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `account_number` | ``$STRING`` |  |
-| `bank_code` | ``$STRING`` |  |
-| `bank_name` | ``$STRING`` |  |
-| `bban` | ``$STRING`` |  |
-| `bic` | ``$STRING`` |  |
-| `branch_code` | ``$STRING`` |  |
-| `checksum_digit` | ``$STRING`` |  |
-| `country_code` | ``$STRING`` |  |
-| `country_name` | ``$STRING`` |  |
-| `iban` | ``$STRING`` |  |
-| `in_sepa_zone` | ``$BOOLEAN`` |  |
-| `valid` | ``$BOOLEAN`` |  |
+| `account_number` | `string` |  |
+| `bank_code` | `string` |  |
+| `bank_name` | `string` |  |
+| `bban` | `string` |  |
+| `bic` | `string` |  |
+| `branch_code` | `string` |  |
+| `checksum_digit` | `string` |  |
+| `country_code` | `string` |  |
+| `country_name` | `string` |  |
+| `iban` | `string` |  |
+| `in_sepa_zone` | `boolean` |  |
+| `valid` | `boolean` |  |
 
 #### Example: Load
 
 ```lua
-local validate_iban_response_schema, err = client:ValidateIbanResponseSchema():load({ id = "validate_iban_response_schema_id" })
+local validate_iban_response_schema, err = client:ValidateIbanResponseSchema():load()
 ```
 
 
@@ -508,16 +529,16 @@ Create an instance: `local validate_vat_response_schema = client:ValidateVatResp
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `address` | ``$STRING`` |  |
-| `country_code` | ``$STRING`` |  |
-| `name` | ``$STRING`` |  |
-| `valid` | ``$BOOLEAN`` |  |
-| `vat_number` | ``$STRING`` |  |
+| `address` | `string` |  |
+| `country_code` | `string` |  |
+| `name` | `string` |  |
+| `valid` | `boolean` |  |
+| `vat_number` | `string` |  |
 
 #### Example: Load
 
 ```lua
-local validate_vat_response_schema, err = client:ValidateVatResponseSchema():load({ id = "validate_vat_response_schema_id" })
+local validate_vat_response_schema, err = client:ValidateVatResponseSchema():load()
 ```
 
 
@@ -535,27 +556,31 @@ Create an instance: `local vatcomply_api_root = client:VatcomplyApiRoot(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `contact` | ``$STRING`` |  |
-| `description` | ``$STRING`` |  |
-| `documentation` | ``$STRING`` |  |
-| `endpoint` | ``$OBJECT`` |  |
-| `name` | ``$STRING`` |  |
-| `status` | ``$STRING`` |  |
-| `version` | ``$STRING`` |  |
+| `contact` | `string` |  |
+| `description` | `string` |  |
+| `documentation` | `string` |  |
+| `endpoint` | `table` |  |
+| `name` | `string` |  |
+| `status` | `string` |  |
+| `version` | `string` |  |
 
 #### Example: Load
 
 ```lua
-local vatcomply_api_root, err = client:VatcomplyApiRoot():load({ id = "vatcomply_api_root_id" })
+local vatcomply_api_root, err = client:VatcomplyApiRoot():load()
 ```
 
 
-## Explanation
+## Advanced
+
+> The sections above cover everyday use. The material below explains the
+> SDK's internals — useful when extending it with custom features, but not
+> needed for normal use.
 
 ### The operation pipeline
 
-Every entity operation (load, list, create, update, remove) follows a
-six-stage pipeline. Each stage fires a feature hook before executing:
+Every entity operation follows a six-stage pipeline. Each stage fires a
+feature hook before executing:
 
 ```
 PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
@@ -572,8 +597,9 @@ PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
 - **PreDone**: Final stage before returning to the caller. Entity
   state (match, data) is updated here.
 
-If any stage returns an error, the pipeline short-circuits and the
-error is returned to the caller as a second return value.
+If any stage errors, the pipeline short-circuits and the error surfaces
+to the caller — see [Error handling](#error-handling) for how that looks
+in this language.
 
 ### Features and hooks
 
@@ -617,14 +643,14 @@ when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `load`, the entity
+Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
 local country = client:Country()
-country:load({ id = "example_id" })
+country:list()
 
--- country:data_get() now returns the loaded country data
+-- country:data_get() now returns the country data from the last list
 -- country:match_get() returns the last match criteria
 ```
 

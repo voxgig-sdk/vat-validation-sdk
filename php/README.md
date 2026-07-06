@@ -4,6 +4,8 @@
 
 The PHP SDK for the VatValidation API — an entity-oriented client using PHP conventions.
 
+The SDK exposes the API as capitalised, semantic **Entities** — for example `$client->Country()` — with named operations (`list`/`load`) instead of raw URL paths and query strings. Working with resources and verbs keeps call sites self-describing and reduces cognitive load.
+
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
 
@@ -36,10 +38,41 @@ try {
     // list() returns an array of Country records — iterate directly.
     $countrys = $client->Country()->list();
     foreach ($countrys as $item) {
-        echo $item["id"] . " " . $item["name"] . "\n";
+        echo $item["capital"] . "\n";
     }
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
+}
+```
+
+
+## Error handling
+
+Entity operations throw a `\Throwable` on failure, so wrap them in
+`try` / `catch`:
+
+```php
+try {
+    $countrys = $client->Country()->list();
+} catch (\Throwable $err) {
+    echo "Error: " . $err->getMessage();
+}
+```
+
+`direct()` does **not** throw — it returns the result array. Branch on
+`ok`; on failure `status` holds the HTTP status (for error responses) and
+`err` holds a transport error, so read both defensively:
+
+```php
+$result = $client->direct([
+    "path" => "/api/resource/{id}",
+    "method" => "GET",
+    "params" => ["id" => "example_id"],
+]);
+
+if (! $result["ok"]) {
+    $err = $result["err"] ?? null;
+    echo "request failed: " . ($err ? $err->getMessage() : "HTTP " . $result["status"]);
 }
 ```
 
@@ -63,7 +96,10 @@ if ($result["ok"]) {
     echo $result["status"];  // 200
     print_r($result["data"]);  // response body
 } else {
-    echo "Error: " . $result["err"]->getMessage();
+    // On an HTTP error status there is no err (only a transport failure sets
+    // it), so fall back to the status code.
+    $err = $result["err"] ?? null;
+    echo "Error: " . ($err ? $err->getMessage() : "HTTP " . $result["status"]);
 }
 ```
 
@@ -84,16 +120,13 @@ print_r($fetchdef["headers"]);
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required. Seed fixture
-data via the `entity` option so offline calls resolve without a live server:
+Create a mock client for unit testing — no server required:
 
 ```php
-$client = VatValidationSDK::test([
-    "entity" => ["country" => ["test01" => ["id" => "test01"]]],
-]);
+$client = VatValidationSDK::test();
 
-// load() returns the bare mock record (throws on error).
-$country = $client->Country()->load(["id" => "test01"]);
+// Entity ops return the bare mock record (throws on error).
+$country = $client->Country()->list();
 print_r($country);
 ```
 
@@ -188,10 +221,7 @@ All entities share the same interface.
 | Method | Signature | Description |
 | --- | --- | --- |
 | `load` | `($reqmatch, $ctrl): array` | Load a single entity by match criteria. |
-| `list` | `($reqmatch, $ctrl): array` | List entities matching the criteria. |
-| `create` | `($reqdata, $ctrl): array` | Create a new entity. |
-| `update` | `($reqdata, $ctrl): array` | Update an existing entity. |
-| `remove` | `($reqmatch, $ctrl): array` | Remove an entity. |
+| `list` | `(?array $reqmatch = null, $ctrl): array` | List entities matching the criteria (call with no argument to list all). |
 | `data_get` | `(): array` | Get entity data. |
 | `data_set` | `($data): void` | Set entity data. |
 | `match_get` | `(): array` | Get entity match criteria. |
@@ -358,19 +388,19 @@ Create an instance: `$country = $client->Country();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `capital` | ``$STRING`` |  |
-| `currency` | ``$STRING`` |  |
-| `emoji` | ``$STRING`` |  |
-| `iso2` | ``$STRING`` |  |
-| `iso3` | ``$STRING`` |  |
-| `latitude` | ``$NUMBER`` |  |
-| `longitude` | ``$NUMBER`` |  |
-| `name` | ``$STRING`` |  |
-| `numeric_code` | ``$INTEGER`` |  |
-| `phone_code` | ``$STRING`` |  |
-| `region` | ``$STRING`` |  |
-| `subregion` | ``$STRING`` |  |
-| `tld` | ``$STRING`` |  |
+| `capital` | `string` |  |
+| `currency` | `string` |  |
+| `emoji` | `string` |  |
+| `iso2` | `string` |  |
+| `iso3` | `string` |  |
+| `latitude` | `float` |  |
+| `longitude` | `float` |  |
+| `name` | `string` |  |
+| `numeric_code` | `int` |  |
+| `phone_code` | `string` |  |
+| `region` | `string` |  |
+| `subregion` | `string` |  |
+| `tld` | `string` |  |
 
 #### Example: List
 
@@ -394,14 +424,14 @@ Create an instance: `$currency = $client->Currency();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `name` | ``$STRING`` |  |
-| `symbol` | ``$STRING`` |  |
+| `name` | `string` |  |
+| `symbol` | `string` |  |
 
 #### Example: Load
 
 ```php
 // load() returns the bare Currency record (throws on error).
-$currency = $client->Currency()->load(["id" => "currency_id"]);
+$currency = $client->Currency()->load();
 ```
 
 
@@ -419,27 +449,27 @@ Create an instance: `$geolocate = $client->Geolocate();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `capital` | ``$STRING`` |  |
-| `country_code` | ``$STRING`` |  |
-| `currency` | ``$STRING`` |  |
-| `emoji` | ``$STRING`` |  |
-| `ip` | ``$ANY`` |  |
-| `iso2` | ``$STRING`` |  |
-| `iso3` | ``$STRING`` |  |
-| `latitude` | ``$NUMBER`` |  |
-| `longitude` | ``$NUMBER`` |  |
-| `name` | ``$STRING`` |  |
-| `numeric_code` | ``$INTEGER`` |  |
-| `phone_code` | ``$STRING`` |  |
-| `region` | ``$STRING`` |  |
-| `subregion` | ``$STRING`` |  |
-| `tld` | ``$STRING`` |  |
+| `capital` | `string` |  |
+| `country_code` | `string` |  |
+| `currency` | `string` |  |
+| `emoji` | `string` |  |
+| `ip` | `mixed` |  |
+| `iso2` | `string` |  |
+| `iso3` | `string` |  |
+| `latitude` | `float` |  |
+| `longitude` | `float` |  |
+| `name` | `string` |  |
+| `numeric_code` | `int` |  |
+| `phone_code` | `string` |  |
+| `region` | `string` |  |
+| `subregion` | `string` |  |
+| `tld` | `string` |  |
 
 #### Example: Load
 
 ```php
 // load() returns the bare Geolocate record (throws on error).
-$geolocate = $client->Geolocate()->load(["id" => "geolocate_id"]);
+$geolocate = $client->Geolocate()->load();
 ```
 
 
@@ -457,15 +487,15 @@ Create an instance: `$rate = $client->Rate();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `base` | ``$STRING`` |  |
-| `date` | ``$STRING`` |  |
-| `rate` | ``$OBJECT`` |  |
+| `base` | `string` |  |
+| `date` | `string` |  |
+| `rate` | `array` |  |
 
 #### Example: Load
 
 ```php
 // load() returns the bare Rate record (throws on error).
-$rate = $client->Rate()->load(["id" => "rate_id"]);
+$rate = $client->Rate()->load();
 ```
 
 
@@ -483,24 +513,24 @@ Create an instance: `$validate_iban_response_schema = $client->ValidateIbanRespo
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `account_number` | ``$STRING`` |  |
-| `bank_code` | ``$STRING`` |  |
-| `bank_name` | ``$STRING`` |  |
-| `bban` | ``$STRING`` |  |
-| `bic` | ``$STRING`` |  |
-| `branch_code` | ``$STRING`` |  |
-| `checksum_digit` | ``$STRING`` |  |
-| `country_code` | ``$STRING`` |  |
-| `country_name` | ``$STRING`` |  |
-| `iban` | ``$STRING`` |  |
-| `in_sepa_zone` | ``$BOOLEAN`` |  |
-| `valid` | ``$BOOLEAN`` |  |
+| `account_number` | `string` |  |
+| `bank_code` | `string` |  |
+| `bank_name` | `string` |  |
+| `bban` | `string` |  |
+| `bic` | `string` |  |
+| `branch_code` | `string` |  |
+| `checksum_digit` | `string` |  |
+| `country_code` | `string` |  |
+| `country_name` | `string` |  |
+| `iban` | `string` |  |
+| `in_sepa_zone` | `bool` |  |
+| `valid` | `bool` |  |
 
 #### Example: Load
 
 ```php
 // load() returns the bare ValidateIbanResponseSchema record (throws on error).
-$validate_iban_response_schema = $client->ValidateIbanResponseSchema()->load(["id" => "validate_iban_response_schema_id"]);
+$validate_iban_response_schema = $client->ValidateIbanResponseSchema()->load();
 ```
 
 
@@ -518,17 +548,17 @@ Create an instance: `$validate_vat_response_schema = $client->ValidateVatRespons
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `address` | ``$STRING`` |  |
-| `country_code` | ``$STRING`` |  |
-| `name` | ``$STRING`` |  |
-| `valid` | ``$BOOLEAN`` |  |
-| `vat_number` | ``$STRING`` |  |
+| `address` | `string` |  |
+| `country_code` | `string` |  |
+| `name` | `string` |  |
+| `valid` | `bool` |  |
+| `vat_number` | `string` |  |
 
 #### Example: Load
 
 ```php
 // load() returns the bare ValidateVatResponseSchema record (throws on error).
-$validate_vat_response_schema = $client->ValidateVatResponseSchema()->load(["id" => "validate_vat_response_schema_id"]);
+$validate_vat_response_schema = $client->ValidateVatResponseSchema()->load();
 ```
 
 
@@ -546,28 +576,32 @@ Create an instance: `$vatcomply_api_root = $client->VatcomplyApiRoot();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `contact` | ``$STRING`` |  |
-| `description` | ``$STRING`` |  |
-| `documentation` | ``$STRING`` |  |
-| `endpoint` | ``$OBJECT`` |  |
-| `name` | ``$STRING`` |  |
-| `status` | ``$STRING`` |  |
-| `version` | ``$STRING`` |  |
+| `contact` | `string` |  |
+| `description` | `string` |  |
+| `documentation` | `string` |  |
+| `endpoint` | `array` |  |
+| `name` | `string` |  |
+| `status` | `string` |  |
+| `version` | `string` |  |
 
 #### Example: Load
 
 ```php
 // load() returns the bare VatcomplyApiRoot record (throws on error).
-$vatcomply_api_root = $client->VatcomplyApiRoot()->load(["id" => "vatcomply_api_root_id"]);
+$vatcomply_api_root = $client->VatcomplyApiRoot()->load();
 ```
 
 
-## Explanation
+## Advanced
+
+> The sections above cover everyday use. The material below explains the
+> SDK's internals — useful when extending it with custom features, but not
+> needed for normal use.
 
 ### The operation pipeline
 
-Every entity operation (load, list, create, update, remove) follows a
-six-stage pipeline. Each stage fires a feature hook before executing:
+Every entity operation follows a six-stage pipeline. Each stage fires a
+feature hook before executing:
 
 ```
 PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
@@ -584,8 +618,9 @@ PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
 - **PreDone**: Final stage before returning to the caller. Entity
   state (match, data) is updated here.
 
-If any stage returns an error, the pipeline short-circuits and the
-error is returned to the caller as the second element in the return array.
+If any stage errors, the pipeline short-circuits and the error surfaces
+to the caller — see [Error handling](#error-handling) for how that looks
+in this language.
 
 ### Features and hooks
 
@@ -629,15 +664,15 @@ when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `load`, the entity
+Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```php
 $country = $client->Country();
-$country->load(["id" => "example_id"]);
+$country->list();
 
-// $country->dataGet() now returns the loaded country data
-// $country->matchGet() returns the last match criteria
+// $country->data_get() now returns the country data from the last list
+// $country->match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

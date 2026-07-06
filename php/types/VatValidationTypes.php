@@ -30,7 +30,7 @@ class Country
     public string $tld;
 }
 
-/** Match filter for Country#list (any subset of Country fields). */
+/** Request payload for Country#list. */
 class CountryListMatch
 {
     public ?string $capital = null;
@@ -55,7 +55,7 @@ class Currency
     public string $symbol;
 }
 
-/** Match filter for Currency#load (any subset of Currency fields). */
+/** Request payload for Currency#load. */
 class CurrencyLoadMatch
 {
     public ?string $name = null;
@@ -82,7 +82,7 @@ class Geolocate
     public string $tld;
 }
 
-/** Match filter for Geolocate#load (any subset of Geolocate fields). */
+/** Request payload for Geolocate#load. */
 class GeolocateLoadMatch
 {
     public ?string $capital = null;
@@ -110,7 +110,7 @@ class Rate
     public array $rate;
 }
 
-/** Match filter for Rate#load (any subset of Rate fields). */
+/** Request payload for Rate#load. */
 class RateLoadMatch
 {
     public ?string $base = null;
@@ -135,7 +135,7 @@ class ValidateIbanResponseSchema
     public bool $valid;
 }
 
-/** Match filter for ValidateIbanResponseSchema#load (any subset of ValidateIbanResponseSchema fields). */
+/** Request payload for ValidateIbanResponseSchema#load. */
 class ValidateIbanResponseSchemaLoadMatch
 {
     public ?string $account_number = null;
@@ -162,7 +162,7 @@ class ValidateVatResponseSchema
     public string $vat_number;
 }
 
-/** Match filter for ValidateVatResponseSchema#load (any subset of ValidateVatResponseSchema fields). */
+/** Request payload for ValidateVatResponseSchema#load. */
 class ValidateVatResponseSchemaLoadMatch
 {
     public ?string $address = null;
@@ -184,7 +184,7 @@ class VatcomplyApiRoot
     public string $version;
 }
 
-/** Match filter for VatcomplyApiRoot#load (any subset of VatcomplyApiRoot fields). */
+/** Request payload for VatcomplyApiRoot#load. */
 class VatcomplyApiRootLoadMatch
 {
     public ?string $contact = null;

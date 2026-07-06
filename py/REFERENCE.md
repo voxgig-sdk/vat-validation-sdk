@@ -8,7 +8,7 @@ Complete API reference for the VatValidation Python SDK.
 ### Constructor
 
 ```python
-from vat-validation_sdk import VatValidationSDK
+from vatvalidation_sdk import VatValidationSDK
 
 client = VatValidationSDK(options)
 ```
@@ -111,28 +111,28 @@ country = client.Country()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `capital` | ``$STRING`` | Yes |  |
-| `currency` | ``$STRING`` | Yes |  |
-| `emoji` | ``$STRING`` | Yes |  |
-| `iso2` | ``$STRING`` | Yes |  |
-| `iso3` | ``$STRING`` | Yes |  |
-| `latitude` | ``$NUMBER`` | Yes |  |
-| `longitude` | ``$NUMBER`` | Yes |  |
-| `name` | ``$STRING`` | Yes |  |
-| `numeric_code` | ``$INTEGER`` | Yes |  |
-| `phone_code` | ``$STRING`` | Yes |  |
-| `region` | ``$STRING`` | Yes |  |
-| `subregion` | ``$STRING`` | Yes |  |
-| `tld` | ``$STRING`` | Yes |  |
+| `capital` | `str` | Yes |  |
+| `currency` | `str` | Yes |  |
+| `emoji` | `str` | Yes |  |
+| `iso2` | `str` | Yes |  |
+| `iso3` | `str` | Yes |  |
+| `latitude` | `float` | Yes |  |
+| `longitude` | `float` | Yes |  |
+| `name` | `str` | Yes |  |
+| `numeric_code` | `int` | Yes |  |
+| `phone_code` | `str` | Yes |  |
+| `region` | `str` | Yes |  |
+| `subregion` | `str` | Yes |  |
+| `tld` | `str` | Yes |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.Country().list({})
+results = client.Country().list()
 for country in results:
     print(country)
 ```
@@ -176,8 +176,8 @@ currency = client.Currency()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `name` | ``$STRING`` | Yes |  |
-| `symbol` | ``$STRING`` | Yes |  |
+| `name` | `str` | Yes |  |
+| `symbol` | `str` | Yes |  |
 
 ### Operations
 
@@ -186,7 +186,7 @@ currency = client.Currency()
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.Currency().load({"id": "currency_id"})
+result = client.Currency().load()
 ```
 
 ### Common Methods
@@ -228,21 +228,21 @@ geolocate = client.Geolocate()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `capital` | ``$STRING`` | Yes |  |
-| `country_code` | ``$STRING`` | Yes |  |
-| `currency` | ``$STRING`` | Yes |  |
-| `emoji` | ``$STRING`` | Yes |  |
-| `ip` | ``$ANY`` | Yes |  |
-| `iso2` | ``$STRING`` | Yes |  |
-| `iso3` | ``$STRING`` | Yes |  |
-| `latitude` | ``$NUMBER`` | Yes |  |
-| `longitude` | ``$NUMBER`` | Yes |  |
-| `name` | ``$STRING`` | Yes |  |
-| `numeric_code` | ``$INTEGER`` | Yes |  |
-| `phone_code` | ``$STRING`` | Yes |  |
-| `region` | ``$STRING`` | Yes |  |
-| `subregion` | ``$STRING`` | Yes |  |
-| `tld` | ``$STRING`` | Yes |  |
+| `capital` | `str` | Yes |  |
+| `country_code` | `str` | Yes |  |
+| `currency` | `str` | Yes |  |
+| `emoji` | `str` | Yes |  |
+| `ip` | `Any` | Yes |  |
+| `iso2` | `str` | Yes |  |
+| `iso3` | `str` | Yes |  |
+| `latitude` | `float` | Yes |  |
+| `longitude` | `float` | Yes |  |
+| `name` | `str` | Yes |  |
+| `numeric_code` | `int` | Yes |  |
+| `phone_code` | `str` | Yes |  |
+| `region` | `str` | Yes |  |
+| `subregion` | `str` | Yes |  |
+| `tld` | `str` | Yes |  |
 
 ### Operations
 
@@ -251,7 +251,7 @@ geolocate = client.Geolocate()
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.Geolocate().load({"id": "geolocate_id"})
+result = client.Geolocate().load()
 ```
 
 ### Common Methods
@@ -293,9 +293,9 @@ rate = client.Rate()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `base` | ``$STRING`` | Yes |  |
-| `date` | ``$STRING`` | Yes |  |
-| `rate` | ``$OBJECT`` | Yes |  |
+| `base` | `str` | Yes |  |
+| `date` | `str` | Yes |  |
+| `rate` | `dict` | Yes |  |
 
 ### Operations
 
@@ -304,7 +304,7 @@ rate = client.Rate()
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.Rate().load({"id": "rate_id"})
+result = client.Rate().load()
 ```
 
 ### Common Methods
@@ -346,18 +346,18 @@ validate_iban_response_schema = client.ValidateIbanResponseSchema()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `account_number` | ``$STRING`` | Yes |  |
-| `bank_code` | ``$STRING`` | Yes |  |
-| `bank_name` | ``$STRING`` | Yes |  |
-| `bban` | ``$STRING`` | Yes |  |
-| `bic` | ``$STRING`` | Yes |  |
-| `branch_code` | ``$STRING`` | Yes |  |
-| `checksum_digit` | ``$STRING`` | Yes |  |
-| `country_code` | ``$STRING`` | Yes |  |
-| `country_name` | ``$STRING`` | Yes |  |
-| `iban` | ``$STRING`` | Yes |  |
-| `in_sepa_zone` | ``$BOOLEAN`` | Yes |  |
-| `valid` | ``$BOOLEAN`` | Yes |  |
+| `account_number` | `str` | Yes |  |
+| `bank_code` | `str` | Yes |  |
+| `bank_name` | `str` | Yes |  |
+| `bban` | `str` | Yes |  |
+| `bic` | `str` | Yes |  |
+| `branch_code` | `str` | Yes |  |
+| `checksum_digit` | `str` | Yes |  |
+| `country_code` | `str` | Yes |  |
+| `country_name` | `str` | Yes |  |
+| `iban` | `str` | Yes |  |
+| `in_sepa_zone` | `bool` | Yes |  |
+| `valid` | `bool` | Yes |  |
 
 ### Operations
 
@@ -366,7 +366,7 @@ validate_iban_response_schema = client.ValidateIbanResponseSchema()
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.ValidateIbanResponseSchema().load({"id": "validate_iban_response_schema_id"})
+result = client.ValidateIbanResponseSchema().load()
 ```
 
 ### Common Methods
@@ -408,11 +408,11 @@ validate_vat_response_schema = client.ValidateVatResponseSchema()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `address` | ``$STRING`` | No |  |
-| `country_code` | ``$STRING`` | Yes |  |
-| `name` | ``$STRING`` | No |  |
-| `valid` | ``$BOOLEAN`` | Yes |  |
-| `vat_number` | ``$STRING`` | Yes |  |
+| `address` | `str` | No |  |
+| `country_code` | `str` | Yes |  |
+| `name` | `str` | No |  |
+| `valid` | `bool` | Yes |  |
+| `vat_number` | `str` | Yes |  |
 
 ### Operations
 
@@ -421,7 +421,7 @@ validate_vat_response_schema = client.ValidateVatResponseSchema()
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.ValidateVatResponseSchema().load({"id": "validate_vat_response_schema_id"})
+result = client.ValidateVatResponseSchema().load()
 ```
 
 ### Common Methods
@@ -463,13 +463,13 @@ vatcomply_api_root = client.VatcomplyApiRoot()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `contact` | ``$STRING`` | Yes |  |
-| `description` | ``$STRING`` | Yes |  |
-| `documentation` | ``$STRING`` | Yes |  |
-| `endpoint` | ``$OBJECT`` | Yes |  |
-| `name` | ``$STRING`` | Yes |  |
-| `status` | ``$STRING`` | Yes |  |
-| `version` | ``$STRING`` | Yes |  |
+| `contact` | `str` | Yes |  |
+| `description` | `str` | Yes |  |
+| `documentation` | `str` | Yes |  |
+| `endpoint` | `dict` | Yes |  |
+| `name` | `str` | Yes |  |
+| `status` | `str` | Yes |  |
+| `version` | `str` | Yes |  |
 
 ### Operations
 
@@ -478,7 +478,7 @@ vatcomply_api_root = client.VatcomplyApiRoot()
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.VatcomplyApiRoot().load({"id": "vatcomply_api_root_id"})
+result = client.VatcomplyApiRoot().load()
 ```
 
 ### Common Methods

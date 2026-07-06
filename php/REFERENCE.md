@@ -8,7 +8,7 @@ Complete API reference for the VatValidation PHP SDK.
 ### Constructor
 
 ```php
-require_once __DIR__ . '/vat-validation_sdk.php';
+require_once __DIR__ . '/vatvalidation_sdk.php';
 
 $client = new VatValidationSDK($options);
 ```
@@ -69,11 +69,11 @@ Create a new `ValidateVatResponseSchemaEntity` instance. Pass `null` for no init
 
 Create a new `VatcomplyApiRootEntity` instance. Pass `null` for no initial data.
 
-#### `optionsMap(): array`
+#### `options_map(): array`
 
 Return a deep copy of the current SDK options.
 
-#### `getUtility(): ProjectNameUtility`
+#### `get_utility(): VatValidationUtility`
 
 Return a copy of the SDK utility object.
 
@@ -116,45 +116,45 @@ $country = $client->Country();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `capital` | ``$STRING`` | Yes |  |
-| `currency` | ``$STRING`` | Yes |  |
-| `emoji` | ``$STRING`` | Yes |  |
-| `iso2` | ``$STRING`` | Yes |  |
-| `iso3` | ``$STRING`` | Yes |  |
-| `latitude` | ``$NUMBER`` | Yes |  |
-| `longitude` | ``$NUMBER`` | Yes |  |
-| `name` | ``$STRING`` | Yes |  |
-| `numeric_code` | ``$INTEGER`` | Yes |  |
-| `phone_code` | ``$STRING`` | Yes |  |
-| `region` | ``$STRING`` | Yes |  |
-| `subregion` | ``$STRING`` | Yes |  |
-| `tld` | ``$STRING`` | Yes |  |
+| `capital` | `string` | Yes |  |
+| `currency` | `string` | Yes |  |
+| `emoji` | `string` | Yes |  |
+| `iso2` | `string` | Yes |  |
+| `iso3` | `string` | Yes |  |
+| `latitude` | `float` | Yes |  |
+| `longitude` | `float` | Yes |  |
+| `name` | `string` | Yes |  |
+| `numeric_code` | `int` | Yes |  |
+| `phone_code` | `string` | Yes |  |
+| `region` | `string` | Yes |  |
+| `subregion` | `string` | Yes |  |
+| `tld` | `string` | Yes |  |
 
 ### Operations
 
-#### `list(array $reqmatch, ?array $ctrl = null): mixed`
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
 
 ```php
-$results = $client->Country()->list([]);
+$results = $client->Country()->list();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -163,7 +163,7 @@ Set the entity match criteria.
 Create a new `CountryEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -180,8 +180,8 @@ $currency = $client->Currency();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `name` | ``$STRING`` | Yes |  |
-| `symbol` | ``$STRING`` | Yes |  |
+| `name` | `string` | Yes |  |
+| `symbol` | `string` | Yes |  |
 
 ### Operations
 
@@ -190,24 +190,24 @@ $currency = $client->Currency();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->Currency()->load(["id" => "currency_id"]);
+$result = $client->Currency()->load();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -216,7 +216,7 @@ Set the entity match criteria.
 Create a new `CurrencyEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -233,21 +233,21 @@ $geolocate = $client->Geolocate();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `capital` | ``$STRING`` | Yes |  |
-| `country_code` | ``$STRING`` | Yes |  |
-| `currency` | ``$STRING`` | Yes |  |
-| `emoji` | ``$STRING`` | Yes |  |
-| `ip` | ``$ANY`` | Yes |  |
-| `iso2` | ``$STRING`` | Yes |  |
-| `iso3` | ``$STRING`` | Yes |  |
-| `latitude` | ``$NUMBER`` | Yes |  |
-| `longitude` | ``$NUMBER`` | Yes |  |
-| `name` | ``$STRING`` | Yes |  |
-| `numeric_code` | ``$INTEGER`` | Yes |  |
-| `phone_code` | ``$STRING`` | Yes |  |
-| `region` | ``$STRING`` | Yes |  |
-| `subregion` | ``$STRING`` | Yes |  |
-| `tld` | ``$STRING`` | Yes |  |
+| `capital` | `string` | Yes |  |
+| `country_code` | `string` | Yes |  |
+| `currency` | `string` | Yes |  |
+| `emoji` | `string` | Yes |  |
+| `ip` | `mixed` | Yes |  |
+| `iso2` | `string` | Yes |  |
+| `iso3` | `string` | Yes |  |
+| `latitude` | `float` | Yes |  |
+| `longitude` | `float` | Yes |  |
+| `name` | `string` | Yes |  |
+| `numeric_code` | `int` | Yes |  |
+| `phone_code` | `string` | Yes |  |
+| `region` | `string` | Yes |  |
+| `subregion` | `string` | Yes |  |
+| `tld` | `string` | Yes |  |
 
 ### Operations
 
@@ -256,24 +256,24 @@ $geolocate = $client->Geolocate();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->Geolocate()->load(["id" => "geolocate_id"]);
+$result = $client->Geolocate()->load();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -282,7 +282,7 @@ Set the entity match criteria.
 Create a new `GeolocateEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -299,9 +299,9 @@ $rate = $client->Rate();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `base` | ``$STRING`` | Yes |  |
-| `date` | ``$STRING`` | Yes |  |
-| `rate` | ``$OBJECT`` | Yes |  |
+| `base` | `string` | Yes |  |
+| `date` | `string` | Yes |  |
+| `rate` | `array` | Yes |  |
 
 ### Operations
 
@@ -310,24 +310,24 @@ $rate = $client->Rate();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->Rate()->load(["id" => "rate_id"]);
+$result = $client->Rate()->load();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -336,7 +336,7 @@ Set the entity match criteria.
 Create a new `RateEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -353,18 +353,18 @@ $validate_iban_response_schema = $client->ValidateIbanResponseSchema();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `account_number` | ``$STRING`` | Yes |  |
-| `bank_code` | ``$STRING`` | Yes |  |
-| `bank_name` | ``$STRING`` | Yes |  |
-| `bban` | ``$STRING`` | Yes |  |
-| `bic` | ``$STRING`` | Yes |  |
-| `branch_code` | ``$STRING`` | Yes |  |
-| `checksum_digit` | ``$STRING`` | Yes |  |
-| `country_code` | ``$STRING`` | Yes |  |
-| `country_name` | ``$STRING`` | Yes |  |
-| `iban` | ``$STRING`` | Yes |  |
-| `in_sepa_zone` | ``$BOOLEAN`` | Yes |  |
-| `valid` | ``$BOOLEAN`` | Yes |  |
+| `account_number` | `string` | Yes |  |
+| `bank_code` | `string` | Yes |  |
+| `bank_name` | `string` | Yes |  |
+| `bban` | `string` | Yes |  |
+| `bic` | `string` | Yes |  |
+| `branch_code` | `string` | Yes |  |
+| `checksum_digit` | `string` | Yes |  |
+| `country_code` | `string` | Yes |  |
+| `country_name` | `string` | Yes |  |
+| `iban` | `string` | Yes |  |
+| `in_sepa_zone` | `bool` | Yes |  |
+| `valid` | `bool` | Yes |  |
 
 ### Operations
 
@@ -373,24 +373,24 @@ $validate_iban_response_schema = $client->ValidateIbanResponseSchema();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->ValidateIbanResponseSchema()->load(["id" => "validate_iban_response_schema_id"]);
+$result = $client->ValidateIbanResponseSchema()->load();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -399,7 +399,7 @@ Set the entity match criteria.
 Create a new `ValidateIbanResponseSchemaEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -416,11 +416,11 @@ $validate_vat_response_schema = $client->ValidateVatResponseSchema();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `address` | ``$STRING`` | No |  |
-| `country_code` | ``$STRING`` | Yes |  |
-| `name` | ``$STRING`` | No |  |
-| `valid` | ``$BOOLEAN`` | Yes |  |
-| `vat_number` | ``$STRING`` | Yes |  |
+| `address` | `string` | No |  |
+| `country_code` | `string` | Yes |  |
+| `name` | `string` | No |  |
+| `valid` | `bool` | Yes |  |
+| `vat_number` | `string` | Yes |  |
 
 ### Operations
 
@@ -429,24 +429,24 @@ $validate_vat_response_schema = $client->ValidateVatResponseSchema();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->ValidateVatResponseSchema()->load(["id" => "validate_vat_response_schema_id"]);
+$result = $client->ValidateVatResponseSchema()->load();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -455,7 +455,7 @@ Set the entity match criteria.
 Create a new `ValidateVatResponseSchemaEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -472,13 +472,13 @@ $vatcomply_api_root = $client->VatcomplyApiRoot();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `contact` | ``$STRING`` | Yes |  |
-| `description` | ``$STRING`` | Yes |  |
-| `documentation` | ``$STRING`` | Yes |  |
-| `endpoint` | ``$OBJECT`` | Yes |  |
-| `name` | ``$STRING`` | Yes |  |
-| `status` | ``$STRING`` | Yes |  |
-| `version` | ``$STRING`` | Yes |  |
+| `contact` | `string` | Yes |  |
+| `description` | `string` | Yes |  |
+| `documentation` | `string` | Yes |  |
+| `endpoint` | `array` | Yes |  |
+| `name` | `string` | Yes |  |
+| `status` | `string` | Yes |  |
+| `version` | `string` | Yes |  |
 
 ### Operations
 
@@ -487,24 +487,24 @@ $vatcomply_api_root = $client->VatcomplyApiRoot();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->VatcomplyApiRoot()->load(["id" => "vatcomply_api_root_id"]);
+$result = $client->VatcomplyApiRoot()->load();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -513,7 +513,7 @@ Set the entity match criteria.
 Create a new `VatcomplyApiRootEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 

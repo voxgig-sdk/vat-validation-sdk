@@ -25,8 +25,7 @@ type Country struct {
 	Tld string `json:"tld"`
 }
 
-// CountryListMatch mirrors the country fields as an all-optional match
-// filter (Go analog of Partial<Country>).
+// CountryListMatch is the typed request payload for Country.ListTyped.
 type CountryListMatch struct {
 	Capital *string `json:"capital,omitempty"`
 	Currency *string `json:"currency,omitempty"`
@@ -49,8 +48,7 @@ type Currency struct {
 	Symbol string `json:"symbol"`
 }
 
-// CurrencyLoadMatch mirrors the currency fields as an all-optional match
-// filter (Go analog of Partial<Currency>).
+// CurrencyLoadMatch is the typed request payload for Currency.LoadTyped.
 type CurrencyLoadMatch struct {
 	Name *string `json:"name,omitempty"`
 	Symbol *string `json:"symbol,omitempty"`
@@ -75,8 +73,7 @@ type Geolocate struct {
 	Tld string `json:"tld"`
 }
 
-// GeolocateLoadMatch mirrors the geolocate fields as an all-optional match
-// filter (Go analog of Partial<Geolocate>).
+// GeolocateLoadMatch is the typed request payload for Geolocate.LoadTyped.
 type GeolocateLoadMatch struct {
 	Capital *string `json:"capital,omitempty"`
 	CountryCode *string `json:"country_code,omitempty"`
@@ -102,8 +99,7 @@ type Rate struct {
 	Rate map[string]any `json:"rate"`
 }
 
-// RateLoadMatch mirrors the rate fields as an all-optional match
-// filter (Go analog of Partial<Rate>).
+// RateLoadMatch is the typed request payload for Rate.LoadTyped.
 type RateLoadMatch struct {
 	Base *string `json:"base,omitempty"`
 	Date *string `json:"date,omitempty"`
@@ -126,8 +122,7 @@ type ValidateIbanResponseSchema struct {
 	Valid bool `json:"valid"`
 }
 
-// ValidateIbanResponseSchemaLoadMatch mirrors the validate_iban_response_schema fields as an all-optional match
-// filter (Go analog of Partial<ValidateIbanResponseSchema>).
+// ValidateIbanResponseSchemaLoadMatch is the typed request payload for ValidateIbanResponseSchema.LoadTyped.
 type ValidateIbanResponseSchemaLoadMatch struct {
 	AccountNumber *string `json:"account_number,omitempty"`
 	BankCode *string `json:"bank_code,omitempty"`
@@ -152,8 +147,7 @@ type ValidateVatResponseSchema struct {
 	VatNumber string `json:"vat_number"`
 }
 
-// ValidateVatResponseSchemaLoadMatch mirrors the validate_vat_response_schema fields as an all-optional match
-// filter (Go analog of Partial<ValidateVatResponseSchema>).
+// ValidateVatResponseSchemaLoadMatch is the typed request payload for ValidateVatResponseSchema.LoadTyped.
 type ValidateVatResponseSchemaLoadMatch struct {
 	Address *string `json:"address,omitempty"`
 	CountryCode *string `json:"country_code,omitempty"`
@@ -173,8 +167,7 @@ type VatcomplyApiRoot struct {
 	Version string `json:"version"`
 }
 
-// VatcomplyApiRootLoadMatch mirrors the vatcomply_api_root fields as an all-optional match
-// filter (Go analog of Partial<VatcomplyApiRoot>).
+// VatcomplyApiRootLoadMatch is the typed request payload for VatcomplyApiRoot.LoadTyped.
 type VatcomplyApiRootLoadMatch struct {
 	Contact *string `json:"contact,omitempty"`
 	Description *string `json:"description,omitempty"`

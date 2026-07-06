@@ -4,6 +4,8 @@
 
 The Ruby SDK for the VatValidation API — an entity-oriented client using idiomatic Ruby conventions.
 
+The SDK exposes the API as capitalised, semantic **Entities** — for example `client.Country` — with named operations (`list`/`load`) instead of raw URL paths and query strings. Working with resources and verbs keeps call sites self-describing and reduces cognitive load.
+
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
 
@@ -35,11 +37,38 @@ begin
   # list returns an Array of Country records — iterate directly.
   countrys = client.Country.list
   countrys.each do |item|
-    puts "#{item["id"]} #{item["name"]}"
+    puts "#{item["capital"]}"
   end
 rescue => err
   warn "list failed: #{err}"
 end
+```
+
+
+## Error handling
+
+Entity operations raise on failure, so rescue them:
+
+```ruby
+begin
+  countrys = client.Country.list()
+rescue => err
+  warn "list failed: #{err}"
+end
+```
+
+`direct` does **not** raise — it returns the result hash. Branch on
+`ok`; on failure `status` holds the HTTP status (for error responses) and
+`err` holds a transport error, so read both defensively:
+
+```ruby
+result = client.direct({
+  "path" => "/api/resource/{id}",
+  "method" => "GET",
+  "params" => { "id" => "example_id" },
+})
+
+warn "request failed: #{result["err"] || "HTTP #{result["status"]}"}" unless result["ok"]
 ```
 
 
@@ -60,7 +89,9 @@ if result["ok"]
   puts result["status"]  # 200
   puts result["data"]    # response body
 else
-  warn result["err"]
+  # On an HTTP error status there is no err (only a transport failure sets
+  # it), so fall back to the status code.
+  warn(result["err"] || "HTTP #{result["status"]}")
 end
 ```
 
@@ -83,16 +114,13 @@ end
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required. Seed fixture
-data via the `entity` option so offline calls resolve without a live server:
+Create a mock client for unit testing — no server required:
 
 ```ruby
-client = VatValidationSDK.test({
-  "entity" => { "country" => { "test01" => { "id" => "test01" } } },
-})
+client = VatValidationSDK.test
 
-# load returns the bare mock record (raises on error).
-country = client.Country.load({ "id" => "test01" })
+# Entity ops return the bare mock record (raises on error).
+country = client.Country.list()
 puts country
 ```
 
@@ -184,10 +212,7 @@ All entities share the same interface.
 | Method | Signature | Description |
 | --- | --- | --- |
 | `load` | `(reqmatch, ctrl) -> any` | Load a single entity by match criteria. Raises on error. |
-| `list` | `(reqmatch, ctrl) -> Array` | List entities matching the criteria. Raises on error. |
-| `create` | `(reqdata, ctrl) -> any` | Create a new entity. Raises on error. |
-| `update` | `(reqdata, ctrl) -> any` | Update an existing entity. Raises on error. |
-| `remove` | `(reqmatch, ctrl) -> any` | Remove an entity. Raises on error. |
+| `list` | `(reqmatch = nil, ctrl) -> Array` | List entities matching the criteria (call with no argument to list all). Raises on error. |
 | `data_get` | `() -> Hash` | Get entity data. |
 | `data_set` | `(data)` | Set entity data. |
 | `match_get` | `() -> Hash` | Get entity match criteria. |
@@ -353,19 +378,19 @@ Create an instance: `country = client.Country`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `capital` | ``$STRING`` |  |
-| `currency` | ``$STRING`` |  |
-| `emoji` | ``$STRING`` |  |
-| `iso2` | ``$STRING`` |  |
-| `iso3` | ``$STRING`` |  |
-| `latitude` | ``$NUMBER`` |  |
-| `longitude` | ``$NUMBER`` |  |
-| `name` | ``$STRING`` |  |
-| `numeric_code` | ``$INTEGER`` |  |
-| `phone_code` | ``$STRING`` |  |
-| `region` | ``$STRING`` |  |
-| `subregion` | ``$STRING`` |  |
-| `tld` | ``$STRING`` |  |
+| `capital` | `String` |  |
+| `currency` | `String` |  |
+| `emoji` | `String` |  |
+| `iso2` | `String` |  |
+| `iso3` | `String` |  |
+| `latitude` | `Float` |  |
+| `longitude` | `Float` |  |
+| `name` | `String` |  |
+| `numeric_code` | `Integer` |  |
+| `phone_code` | `String` |  |
+| `region` | `String` |  |
+| `subregion` | `String` |  |
+| `tld` | `String` |  |
 
 #### Example: List
 
@@ -389,14 +414,14 @@ Create an instance: `currency = client.Currency`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `name` | ``$STRING`` |  |
-| `symbol` | ``$STRING`` |  |
+| `name` | `String` |  |
+| `symbol` | `String` |  |
 
 #### Example: Load
 
 ```ruby
 # load returns the bare Currency record (raises on error).
-currency = client.Currency.load({ "id" => "currency_id" })
+currency = client.Currency.load()
 ```
 
 
@@ -414,27 +439,27 @@ Create an instance: `geolocate = client.Geolocate`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `capital` | ``$STRING`` |  |
-| `country_code` | ``$STRING`` |  |
-| `currency` | ``$STRING`` |  |
-| `emoji` | ``$STRING`` |  |
-| `ip` | ``$ANY`` |  |
-| `iso2` | ``$STRING`` |  |
-| `iso3` | ``$STRING`` |  |
-| `latitude` | ``$NUMBER`` |  |
-| `longitude` | ``$NUMBER`` |  |
-| `name` | ``$STRING`` |  |
-| `numeric_code` | ``$INTEGER`` |  |
-| `phone_code` | ``$STRING`` |  |
-| `region` | ``$STRING`` |  |
-| `subregion` | ``$STRING`` |  |
-| `tld` | ``$STRING`` |  |
+| `capital` | `String` |  |
+| `country_code` | `String` |  |
+| `currency` | `String` |  |
+| `emoji` | `String` |  |
+| `ip` | `Object` |  |
+| `iso2` | `String` |  |
+| `iso3` | `String` |  |
+| `latitude` | `Float` |  |
+| `longitude` | `Float` |  |
+| `name` | `String` |  |
+| `numeric_code` | `Integer` |  |
+| `phone_code` | `String` |  |
+| `region` | `String` |  |
+| `subregion` | `String` |  |
+| `tld` | `String` |  |
 
 #### Example: Load
 
 ```ruby
 # load returns the bare Geolocate record (raises on error).
-geolocate = client.Geolocate.load({ "id" => "geolocate_id" })
+geolocate = client.Geolocate.load()
 ```
 
 
@@ -452,15 +477,15 @@ Create an instance: `rate = client.Rate`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `base` | ``$STRING`` |  |
-| `date` | ``$STRING`` |  |
-| `rate` | ``$OBJECT`` |  |
+| `base` | `String` |  |
+| `date` | `String` |  |
+| `rate` | `Hash` |  |
 
 #### Example: Load
 
 ```ruby
 # load returns the bare Rate record (raises on error).
-rate = client.Rate.load({ "id" => "rate_id" })
+rate = client.Rate.load()
 ```
 
 
@@ -478,24 +503,24 @@ Create an instance: `validate_iban_response_schema = client.ValidateIbanResponse
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `account_number` | ``$STRING`` |  |
-| `bank_code` | ``$STRING`` |  |
-| `bank_name` | ``$STRING`` |  |
-| `bban` | ``$STRING`` |  |
-| `bic` | ``$STRING`` |  |
-| `branch_code` | ``$STRING`` |  |
-| `checksum_digit` | ``$STRING`` |  |
-| `country_code` | ``$STRING`` |  |
-| `country_name` | ``$STRING`` |  |
-| `iban` | ``$STRING`` |  |
-| `in_sepa_zone` | ``$BOOLEAN`` |  |
-| `valid` | ``$BOOLEAN`` |  |
+| `account_number` | `String` |  |
+| `bank_code` | `String` |  |
+| `bank_name` | `String` |  |
+| `bban` | `String` |  |
+| `bic` | `String` |  |
+| `branch_code` | `String` |  |
+| `checksum_digit` | `String` |  |
+| `country_code` | `String` |  |
+| `country_name` | `String` |  |
+| `iban` | `String` |  |
+| `in_sepa_zone` | `Boolean` |  |
+| `valid` | `Boolean` |  |
 
 #### Example: Load
 
 ```ruby
 # load returns the bare ValidateIbanResponseSchema record (raises on error).
-validate_iban_response_schema = client.ValidateIbanResponseSchema.load({ "id" => "validate_iban_response_schema_id" })
+validate_iban_response_schema = client.ValidateIbanResponseSchema.load()
 ```
 
 
@@ -513,17 +538,17 @@ Create an instance: `validate_vat_response_schema = client.ValidateVatResponseSc
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `address` | ``$STRING`` |  |
-| `country_code` | ``$STRING`` |  |
-| `name` | ``$STRING`` |  |
-| `valid` | ``$BOOLEAN`` |  |
-| `vat_number` | ``$STRING`` |  |
+| `address` | `String` |  |
+| `country_code` | `String` |  |
+| `name` | `String` |  |
+| `valid` | `Boolean` |  |
+| `vat_number` | `String` |  |
 
 #### Example: Load
 
 ```ruby
 # load returns the bare ValidateVatResponseSchema record (raises on error).
-validate_vat_response_schema = client.ValidateVatResponseSchema.load({ "id" => "validate_vat_response_schema_id" })
+validate_vat_response_schema = client.ValidateVatResponseSchema.load()
 ```
 
 
@@ -541,28 +566,32 @@ Create an instance: `vatcomply_api_root = client.VatcomplyApiRoot`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `contact` | ``$STRING`` |  |
-| `description` | ``$STRING`` |  |
-| `documentation` | ``$STRING`` |  |
-| `endpoint` | ``$OBJECT`` |  |
-| `name` | ``$STRING`` |  |
-| `status` | ``$STRING`` |  |
-| `version` | ``$STRING`` |  |
+| `contact` | `String` |  |
+| `description` | `String` |  |
+| `documentation` | `String` |  |
+| `endpoint` | `Hash` |  |
+| `name` | `String` |  |
+| `status` | `String` |  |
+| `version` | `String` |  |
 
 #### Example: Load
 
 ```ruby
 # load returns the bare VatcomplyApiRoot record (raises on error).
-vatcomply_api_root = client.VatcomplyApiRoot.load({ "id" => "vatcomply_api_root_id" })
+vatcomply_api_root = client.VatcomplyApiRoot.load()
 ```
 
 
-## Explanation
+## Advanced
+
+> The sections above cover everyday use. The material below explains the
+> SDK's internals — useful when extending it with custom features, but not
+> needed for normal use.
 
 ### The operation pipeline
 
-Every entity operation (load, list, create, update, remove) follows a
-six-stage pipeline. Each stage fires a feature hook before executing:
+Every entity operation follows a six-stage pipeline. Each stage fires a
+feature hook before executing:
 
 ```
 PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
@@ -579,8 +608,9 @@ PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
 - **PreDone**: Final stage before returning to the caller. Entity
   state (match, data) is updated here.
 
-If any stage returns an error, the pipeline short-circuits and the
-error is returned to the caller as a second return value.
+If any stage errors, the pipeline short-circuits and the error surfaces
+to the caller — see [Error handling](#error-handling) for how that looks
+in this language.
 
 ### Features and hooks
 
@@ -624,14 +654,14 @@ when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `load`, the entity
+Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
 country = client.Country
-country.load({ "id" => "example_id" })
+country.list()
 
-# country.data_get now returns the loaded country data
+# country.data_get now returns the country data from the last list
 # country.match_get returns the last match criteria
 ```
 

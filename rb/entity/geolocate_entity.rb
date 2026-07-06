@@ -67,10 +67,12 @@ class GeolocateEntity
   
   # Load a single Geolocate.
   #
-  # @param reqmatch [GeolocateLoadMatch, Hash, nil] match criteria (id/query fields)
+  # @param reqmatch [GeolocateLoadMatch, Hash, nil] match criteria (id/query fields);
+  #   optional — an entity with no id-like key loads with no match (nil is treated
+  #   as an empty match, so client.Geolocate.load works with no args).
   # @param ctrl [Object, nil] optional per-call control
   # @return [Geolocate, Hash] the loaded Geolocate; raises VatValidationError on failure
-  def load(reqmatch, ctrl = nil)
+  def load(reqmatch = nil, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({
       "opname" => "load",

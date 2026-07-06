@@ -121,19 +121,19 @@ country := client.Country(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `capital` | ``$STRING`` | Yes |  |
-| `currency` | ``$STRING`` | Yes |  |
-| `emoji` | ``$STRING`` | Yes |  |
-| `iso2` | ``$STRING`` | Yes |  |
-| `iso3` | ``$STRING`` | Yes |  |
-| `latitude` | ``$NUMBER`` | Yes |  |
-| `longitude` | ``$NUMBER`` | Yes |  |
-| `name` | ``$STRING`` | Yes |  |
-| `numeric_code` | ``$INTEGER`` | Yes |  |
-| `phone_code` | ``$STRING`` | Yes |  |
-| `region` | ``$STRING`` | Yes |  |
-| `subregion` | ``$STRING`` | Yes |  |
-| `tld` | ``$STRING`` | Yes |  |
+| `capital` | `string` | Yes |  |
+| `currency` | `string` | Yes |  |
+| `emoji` | `string` | Yes |  |
+| `iso2` | `string` | Yes |  |
+| `iso3` | `string` | Yes |  |
+| `latitude` | `float64` | Yes |  |
+| `longitude` | `float64` | Yes |  |
+| `name` | `string` | Yes |  |
+| `numeric_code` | `int` | Yes |  |
+| `phone_code` | `string` | Yes |  |
+| `region` | `string` | Yes |  |
+| `subregion` | `string` | Yes |  |
+| `tld` | `string` | Yes |  |
 
 ### Operations
 
@@ -179,8 +179,8 @@ currency := client.Currency(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `name` | ``$STRING`` | Yes |  |
-| `symbol` | ``$STRING`` | Yes |  |
+| `name` | `string` | Yes |  |
+| `symbol` | `string` | Yes |  |
 
 ### Operations
 
@@ -189,7 +189,7 @@ currency := client.Currency(nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.Currency(nil).Load(map[string]any{"id": "currency_id"}, nil)
+result, err := client.Currency(nil).Load(nil, nil)
 ```
 
 ### Common Methods
@@ -226,21 +226,21 @@ geolocate := client.Geolocate(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `capital` | ``$STRING`` | Yes |  |
-| `country_code` | ``$STRING`` | Yes |  |
-| `currency` | ``$STRING`` | Yes |  |
-| `emoji` | ``$STRING`` | Yes |  |
-| `ip` | ``$ANY`` | Yes |  |
-| `iso2` | ``$STRING`` | Yes |  |
-| `iso3` | ``$STRING`` | Yes |  |
-| `latitude` | ``$NUMBER`` | Yes |  |
-| `longitude` | ``$NUMBER`` | Yes |  |
-| `name` | ``$STRING`` | Yes |  |
-| `numeric_code` | ``$INTEGER`` | Yes |  |
-| `phone_code` | ``$STRING`` | Yes |  |
-| `region` | ``$STRING`` | Yes |  |
-| `subregion` | ``$STRING`` | Yes |  |
-| `tld` | ``$STRING`` | Yes |  |
+| `capital` | `string` | Yes |  |
+| `country_code` | `string` | Yes |  |
+| `currency` | `string` | Yes |  |
+| `emoji` | `string` | Yes |  |
+| `ip` | `any` | Yes |  |
+| `iso2` | `string` | Yes |  |
+| `iso3` | `string` | Yes |  |
+| `latitude` | `float64` | Yes |  |
+| `longitude` | `float64` | Yes |  |
+| `name` | `string` | Yes |  |
+| `numeric_code` | `int` | Yes |  |
+| `phone_code` | `string` | Yes |  |
+| `region` | `string` | Yes |  |
+| `subregion` | `string` | Yes |  |
+| `tld` | `string` | Yes |  |
 
 ### Operations
 
@@ -249,7 +249,7 @@ geolocate := client.Geolocate(nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.Geolocate(nil).Load(map[string]any{"id": "geolocate_id"}, nil)
+result, err := client.Geolocate(nil).Load(nil, nil)
 ```
 
 ### Common Methods
@@ -286,9 +286,9 @@ rate := client.Rate(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `base` | ``$STRING`` | Yes |  |
-| `date` | ``$STRING`` | Yes |  |
-| `rate` | ``$OBJECT`` | Yes |  |
+| `base` | `string` | Yes |  |
+| `date` | `string` | Yes |  |
+| `rate` | `map[string]any` | Yes |  |
 
 ### Operations
 
@@ -297,7 +297,7 @@ rate := client.Rate(nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.Rate(nil).Load(map[string]any{"id": "rate_id"}, nil)
+result, err := client.Rate(nil).Load(nil, nil)
 ```
 
 ### Common Methods
@@ -334,18 +334,18 @@ validate_iban_response_schema := client.ValidateIbanResponseSchema(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `account_number` | ``$STRING`` | Yes |  |
-| `bank_code` | ``$STRING`` | Yes |  |
-| `bank_name` | ``$STRING`` | Yes |  |
-| `bban` | ``$STRING`` | Yes |  |
-| `bic` | ``$STRING`` | Yes |  |
-| `branch_code` | ``$STRING`` | Yes |  |
-| `checksum_digit` | ``$STRING`` | Yes |  |
-| `country_code` | ``$STRING`` | Yes |  |
-| `country_name` | ``$STRING`` | Yes |  |
-| `iban` | ``$STRING`` | Yes |  |
-| `in_sepa_zone` | ``$BOOLEAN`` | Yes |  |
-| `valid` | ``$BOOLEAN`` | Yes |  |
+| `account_number` | `string` | Yes |  |
+| `bank_code` | `string` | Yes |  |
+| `bank_name` | `string` | Yes |  |
+| `bban` | `string` | Yes |  |
+| `bic` | `string` | Yes |  |
+| `branch_code` | `string` | Yes |  |
+| `checksum_digit` | `string` | Yes |  |
+| `country_code` | `string` | Yes |  |
+| `country_name` | `string` | Yes |  |
+| `iban` | `string` | Yes |  |
+| `in_sepa_zone` | `bool` | Yes |  |
+| `valid` | `bool` | Yes |  |
 
 ### Operations
 
@@ -354,7 +354,7 @@ validate_iban_response_schema := client.ValidateIbanResponseSchema(nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.ValidateIbanResponseSchema(nil).Load(map[string]any{"id": "validate_iban_response_schema_id"}, nil)
+result, err := client.ValidateIbanResponseSchema(nil).Load(nil, nil)
 ```
 
 ### Common Methods
@@ -391,11 +391,11 @@ validate_vat_response_schema := client.ValidateVatResponseSchema(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `address` | ``$STRING`` | No |  |
-| `country_code` | ``$STRING`` | Yes |  |
-| `name` | ``$STRING`` | No |  |
-| `valid` | ``$BOOLEAN`` | Yes |  |
-| `vat_number` | ``$STRING`` | Yes |  |
+| `address` | `string` | No |  |
+| `country_code` | `string` | Yes |  |
+| `name` | `string` | No |  |
+| `valid` | `bool` | Yes |  |
+| `vat_number` | `string` | Yes |  |
 
 ### Operations
 
@@ -404,7 +404,7 @@ validate_vat_response_schema := client.ValidateVatResponseSchema(nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.ValidateVatResponseSchema(nil).Load(map[string]any{"id": "validate_vat_response_schema_id"}, nil)
+result, err := client.ValidateVatResponseSchema(nil).Load(nil, nil)
 ```
 
 ### Common Methods
@@ -441,13 +441,13 @@ vatcomply_api_root := client.VatcomplyApiRoot(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `contact` | ``$STRING`` | Yes |  |
-| `description` | ``$STRING`` | Yes |  |
-| `documentation` | ``$STRING`` | Yes |  |
-| `endpoint` | ``$OBJECT`` | Yes |  |
-| `name` | ``$STRING`` | Yes |  |
-| `status` | ``$STRING`` | Yes |  |
-| `version` | ``$STRING`` | Yes |  |
+| `contact` | `string` | Yes |  |
+| `description` | `string` | Yes |  |
+| `documentation` | `string` | Yes |  |
+| `endpoint` | `map[string]any` | Yes |  |
+| `name` | `string` | Yes |  |
+| `status` | `string` | Yes |  |
+| `version` | `string` | Yes |  |
 
 ### Operations
 
@@ -456,7 +456,7 @@ vatcomply_api_root := client.VatcomplyApiRoot(nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.VatcomplyApiRoot(nil).Load(map[string]any{"id": "vatcomply_api_root_id"}, nil)
+result, err := client.VatcomplyApiRoot(nil).Load(nil, nil)
 ```
 
 ### Common Methods

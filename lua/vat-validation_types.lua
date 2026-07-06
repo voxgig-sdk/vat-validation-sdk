@@ -22,12 +22,27 @@
 ---@field tld string
 
 ---@class CountryListMatch
+---@field capital? string
+---@field currency? string
+---@field emoji? string
+---@field iso2? string
+---@field iso3? string
+---@field latitude? number
+---@field longitude? number
+---@field name? string
+---@field numeric_code? number
+---@field phone_code? string
+---@field region? string
+---@field subregion? string
+---@field tld? string
 
 ---@class Currency
 ---@field name string
 ---@field symbol string
 
 ---@class CurrencyLoadMatch
+---@field name? string
+---@field symbol? string
 
 ---@class Geolocate
 ---@field capital string
@@ -47,6 +62,21 @@
 ---@field tld string
 
 ---@class GeolocateLoadMatch
+---@field capital? string
+---@field country_code? string
+---@field currency? string
+---@field emoji? string
+---@field ip? any
+---@field iso2? string
+---@field iso3? string
+---@field latitude? number
+---@field longitude? number
+---@field name? string
+---@field numeric_code? number
+---@field phone_code? string
+---@field region? string
+---@field subregion? string
+---@field tld? string
 
 ---@class Rate
 ---@field base string
@@ -54,6 +84,9 @@
 ---@field rate table
 
 ---@class RateLoadMatch
+---@field base? string
+---@field date? string
+---@field rate? table
 
 ---@class ValidateIbanResponseSchema
 ---@field account_number string
@@ -70,6 +103,18 @@
 ---@field valid boolean
 
 ---@class ValidateIbanResponseSchemaLoadMatch
+---@field account_number? string
+---@field bank_code? string
+---@field bank_name? string
+---@field bban? string
+---@field bic? string
+---@field branch_code? string
+---@field checksum_digit? string
+---@field country_code? string
+---@field country_name? string
+---@field iban? string
+---@field in_sepa_zone? boolean
+---@field valid? boolean
 
 ---@class ValidateVatResponseSchema
 ---@field address? string
@@ -79,6 +124,11 @@
 ---@field vat_number string
 
 ---@class ValidateVatResponseSchemaLoadMatch
+---@field address? string
+---@field country_code? string
+---@field name? string
+---@field valid? boolean
+---@field vat_number? string
 
 ---@class VatcomplyApiRoot
 ---@field contact string
@@ -90,6 +140,13 @@
 ---@field version string
 
 ---@class VatcomplyApiRootLoadMatch
+---@field contact? string
+---@field description? string
+---@field documentation? string
+---@field endpoint? table
+---@field name? string
+---@field status? string
+---@field version? string
 
 local M = {}
 

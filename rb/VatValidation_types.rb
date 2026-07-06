@@ -65,7 +65,7 @@ Country = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Country#list (any subset of Country fields).
+# Request payload for Country#list.
 #
 # @!attribute [rw] capital
 #   @return [String, nil]
@@ -135,7 +135,7 @@ Currency = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Currency#load (any subset of Currency fields).
+# Request payload for Currency#load.
 #
 # @!attribute [rw] name
 #   @return [String, nil]
@@ -213,7 +213,7 @@ Geolocate = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Geolocate#load (any subset of Geolocate fields).
+# Request payload for Geolocate#load.
 #
 # @!attribute [rw] capital
 #   @return [String, nil]
@@ -295,7 +295,7 @@ Rate = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Rate#load (any subset of Rate fields).
+# Request payload for Rate#load.
 #
 # @!attribute [rw] base
 #   @return [String, nil]
@@ -365,7 +365,7 @@ ValidateIbanResponseSchema = Struct.new(
   keyword_init: true
 )
 
-# Match filter for ValidateIbanResponseSchema#load (any subset of ValidateIbanResponseSchema fields).
+# Request payload for ValidateIbanResponseSchema#load.
 #
 # @!attribute [rw] account_number
 #   @return [String, nil]
@@ -443,7 +443,7 @@ ValidateVatResponseSchema = Struct.new(
   keyword_init: true
 )
 
-# Match filter for ValidateVatResponseSchema#load (any subset of ValidateVatResponseSchema fields).
+# Request payload for ValidateVatResponseSchema#load.
 #
 # @!attribute [rw] address
 #   @return [String, nil]
@@ -501,7 +501,7 @@ VatcomplyApiRoot = Struct.new(
   keyword_init: true
 )
 
-# Match filter for VatcomplyApiRoot#load (any subset of VatcomplyApiRoot fields).
+# Request payload for VatcomplyApiRoot#load.
 #
 # @!attribute [rw] contact
 #   @return [String, nil]

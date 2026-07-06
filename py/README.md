@@ -4,6 +4,11 @@
 
 The Python SDK for the VatValidation API — an entity-oriented client following Pythonic conventions.
 
+The SDK exposes the API as capitalised, semantic **Entities** — for example `client.Country()` — each
+carrying a small, uniform set of operations (`list`, `load`) instead of raw URL
+paths and query strings. You work with named resources and verbs, which
+keeps the cognitive load low.
+
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
 
@@ -38,11 +43,39 @@ error — iterate it directly.
 
 ```python
 try:
-    countrys = client.Country().list({})
+    countrys = client.Country().list()
     for country in countrys:
         print(country)
 except Exception as err:
     print(f"list failed: {err}")
+```
+
+
+## Error handling
+
+Entity operations raise on failure, so wrap them in `try` / `except`:
+
+```python
+try:
+    countrys = client.Country().list()
+    print(countrys)
+except Exception as err:
+    print(f"list failed: {err}")
+```
+
+`direct()` does **not** raise — it returns the result envelope. Branch
+on `ok`; on failure `status` holds the HTTP status (for error responses)
+and `err` holds a transport error, so read both defensively:
+
+```python
+result = client.direct({
+    "path": "/api/resource/{id}",
+    "method": "GET",
+    "params": {"id": "example_id"},
+})
+
+if not result["ok"]:
+    print("request failed:", result.get("status"), result.get("err"))
 ```
 
 
@@ -63,7 +96,10 @@ if result["ok"]:
     print(result["status"])  # 200
     print(result["data"])    # response body
 else:
-    print(result["err"])     # error value
+    # A non-2xx response carries status + data (the error body); a
+    # transport-level failure carries err instead. Only one is present, so
+    # read both with .get() rather than indexing a key that may be absent.
+    print(result.get("status"), result.get("err"))
 ```
 
 ### Prepare a request without sending it
@@ -89,7 +125,7 @@ Create a mock client for unit testing — no server required:
 client = VatValidationSDK.test()
 
 # Entity ops return the bare record and raise on error.
-country = client.Country().load({"id": "test01"})
+country = client.Country().list()
 # country contains the mock response record
 ```
 
@@ -182,9 +218,6 @@ All entities share the same interface.
 | --- | --- | --- |
 | `load` | `(reqmatch, ctrl) -> any` | Load a single entity by match criteria. Raises on error. |
 | `list` | `(reqmatch, ctrl) -> list` | List entities matching the criteria. Raises on error. |
-| `create` | `(reqdata, ctrl) -> any` | Create a new entity. Raises on error. |
-| `update` | `(reqdata, ctrl) -> any` | Update an existing entity. Raises on error. |
-| `remove` | `(reqmatch, ctrl) -> any` | Remove an entity. Raises on error. |
 | `data_get` | `() -> dict` | Get entity data. |
 | `data_set` | `(data)` | Set entity data. |
 | `match_get` | `() -> dict` | Get entity match criteria. |
@@ -345,30 +378,30 @@ Create an instance: `country = client.Country()`
 
 | Method | Description |
 | --- | --- |
-| `list(match)` | List entities matching the criteria. |
+| `list()` | List entities, optionally matching the given criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `capital` | ``$STRING`` |  |
-| `currency` | ``$STRING`` |  |
-| `emoji` | ``$STRING`` |  |
-| `iso2` | ``$STRING`` |  |
-| `iso3` | ``$STRING`` |  |
-| `latitude` | ``$NUMBER`` |  |
-| `longitude` | ``$NUMBER`` |  |
-| `name` | ``$STRING`` |  |
-| `numeric_code` | ``$INTEGER`` |  |
-| `phone_code` | ``$STRING`` |  |
-| `region` | ``$STRING`` |  |
-| `subregion` | ``$STRING`` |  |
-| `tld` | ``$STRING`` |  |
+| `capital` | `str` |  |
+| `currency` | `str` |  |
+| `emoji` | `str` |  |
+| `iso2` | `str` |  |
+| `iso3` | `str` |  |
+| `latitude` | `float` |  |
+| `longitude` | `float` |  |
+| `name` | `str` |  |
+| `numeric_code` | `int` |  |
+| `phone_code` | `str` |  |
+| `region` | `str` |  |
+| `subregion` | `str` |  |
+| `tld` | `str` |  |
 
 #### Example: List
 
 ```python
-countrys = client.Country().list({})
+countrys = client.Country().list()
 ```
 
 
@@ -386,13 +419,13 @@ Create an instance: `currency = client.Currency()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `name` | ``$STRING`` |  |
-| `symbol` | ``$STRING`` |  |
+| `name` | `str` |  |
+| `symbol` | `str` |  |
 
 #### Example: Load
 
 ```python
-currency = client.Currency().load({"id": "currency_id"})
+currency = client.Currency().load()
 ```
 
 
@@ -410,26 +443,26 @@ Create an instance: `geolocate = client.Geolocate()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `capital` | ``$STRING`` |  |
-| `country_code` | ``$STRING`` |  |
-| `currency` | ``$STRING`` |  |
-| `emoji` | ``$STRING`` |  |
-| `ip` | ``$ANY`` |  |
-| `iso2` | ``$STRING`` |  |
-| `iso3` | ``$STRING`` |  |
-| `latitude` | ``$NUMBER`` |  |
-| `longitude` | ``$NUMBER`` |  |
-| `name` | ``$STRING`` |  |
-| `numeric_code` | ``$INTEGER`` |  |
-| `phone_code` | ``$STRING`` |  |
-| `region` | ``$STRING`` |  |
-| `subregion` | ``$STRING`` |  |
-| `tld` | ``$STRING`` |  |
+| `capital` | `str` |  |
+| `country_code` | `str` |  |
+| `currency` | `str` |  |
+| `emoji` | `str` |  |
+| `ip` | `Any` |  |
+| `iso2` | `str` |  |
+| `iso3` | `str` |  |
+| `latitude` | `float` |  |
+| `longitude` | `float` |  |
+| `name` | `str` |  |
+| `numeric_code` | `int` |  |
+| `phone_code` | `str` |  |
+| `region` | `str` |  |
+| `subregion` | `str` |  |
+| `tld` | `str` |  |
 
 #### Example: Load
 
 ```python
-geolocate = client.Geolocate().load({"id": "geolocate_id"})
+geolocate = client.Geolocate().load()
 ```
 
 
@@ -447,14 +480,14 @@ Create an instance: `rate = client.Rate()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `base` | ``$STRING`` |  |
-| `date` | ``$STRING`` |  |
-| `rate` | ``$OBJECT`` |  |
+| `base` | `str` |  |
+| `date` | `str` |  |
+| `rate` | `dict` |  |
 
 #### Example: Load
 
 ```python
-rate = client.Rate().load({"id": "rate_id"})
+rate = client.Rate().load()
 ```
 
 
@@ -472,23 +505,23 @@ Create an instance: `validate_iban_response_schema = client.ValidateIbanResponse
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `account_number` | ``$STRING`` |  |
-| `bank_code` | ``$STRING`` |  |
-| `bank_name` | ``$STRING`` |  |
-| `bban` | ``$STRING`` |  |
-| `bic` | ``$STRING`` |  |
-| `branch_code` | ``$STRING`` |  |
-| `checksum_digit` | ``$STRING`` |  |
-| `country_code` | ``$STRING`` |  |
-| `country_name` | ``$STRING`` |  |
-| `iban` | ``$STRING`` |  |
-| `in_sepa_zone` | ``$BOOLEAN`` |  |
-| `valid` | ``$BOOLEAN`` |  |
+| `account_number` | `str` |  |
+| `bank_code` | `str` |  |
+| `bank_name` | `str` |  |
+| `bban` | `str` |  |
+| `bic` | `str` |  |
+| `branch_code` | `str` |  |
+| `checksum_digit` | `str` |  |
+| `country_code` | `str` |  |
+| `country_name` | `str` |  |
+| `iban` | `str` |  |
+| `in_sepa_zone` | `bool` |  |
+| `valid` | `bool` |  |
 
 #### Example: Load
 
 ```python
-validate_iban_response_schema = client.ValidateIbanResponseSchema().load({"id": "validate_iban_response_schema_id"})
+validate_iban_response_schema = client.ValidateIbanResponseSchema().load()
 ```
 
 
@@ -506,16 +539,16 @@ Create an instance: `validate_vat_response_schema = client.ValidateVatResponseSc
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `address` | ``$STRING`` |  |
-| `country_code` | ``$STRING`` |  |
-| `name` | ``$STRING`` |  |
-| `valid` | ``$BOOLEAN`` |  |
-| `vat_number` | ``$STRING`` |  |
+| `address` | `str` |  |
+| `country_code` | `str` |  |
+| `name` | `str` |  |
+| `valid` | `bool` |  |
+| `vat_number` | `str` |  |
 
 #### Example: Load
 
 ```python
-validate_vat_response_schema = client.ValidateVatResponseSchema().load({"id": "validate_vat_response_schema_id"})
+validate_vat_response_schema = client.ValidateVatResponseSchema().load()
 ```
 
 
@@ -533,27 +566,31 @@ Create an instance: `vatcomply_api_root = client.VatcomplyApiRoot()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `contact` | ``$STRING`` |  |
-| `description` | ``$STRING`` |  |
-| `documentation` | ``$STRING`` |  |
-| `endpoint` | ``$OBJECT`` |  |
-| `name` | ``$STRING`` |  |
-| `status` | ``$STRING`` |  |
-| `version` | ``$STRING`` |  |
+| `contact` | `str` |  |
+| `description` | `str` |  |
+| `documentation` | `str` |  |
+| `endpoint` | `dict` |  |
+| `name` | `str` |  |
+| `status` | `str` |  |
+| `version` | `str` |  |
 
 #### Example: Load
 
 ```python
-vatcomply_api_root = client.VatcomplyApiRoot().load({"id": "vatcomply_api_root_id"})
+vatcomply_api_root = client.VatcomplyApiRoot().load()
 ```
 
 
-## Explanation
+## Advanced
+
+> The sections above cover everyday use. The material below explains the
+> SDK's internals — useful when extending it with custom features, but not
+> needed for normal use.
 
 ### The operation pipeline
 
-Every entity operation (load, list, create, update, remove) follows a
-six-stage pipeline. Each stage fires a feature hook before executing:
+Every entity operation follows a six-stage pipeline. Each stage fires a
+feature hook before executing:
 
 ```
 PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
@@ -570,8 +607,9 @@ PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
 - **PreDone**: Final stage before returning to the caller. Entity
   state (match, data) is updated here.
 
-If any stage returns an error, the pipeline short-circuits and the
-error is returned to the caller as the second element in the return tuple.
+If any stage errors, the pipeline short-circuits and the error surfaces
+to the caller — see [Error handling](#error-handling) for how that looks
+in this language.
 
 ### Features and hooks
 
@@ -614,14 +652,14 @@ Import entity or utility modules directly only when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `load`, the entity
+Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```python
 country = client.Country()
-country.load({"id": "example_id"})
+country.list()
 
-# country.data_get() now returns the loaded country data
+# country.data_get() now returns the country data from the last list
 # country.match_get() returns the last match criteria
 ```
 

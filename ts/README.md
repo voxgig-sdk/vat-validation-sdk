@@ -4,6 +4,11 @@
 
 The TypeScript SDK for the VatValidation API — a type-safe, entity-oriented client with full async/await support.
 
+The API is exposed as capitalised, semantic **Entities** — e.g.
+`client.Country()` — each with a small set of operations (`list`, `load`)
+instead of raw URL paths and query parameters. This keeps the surface
+predictable and low-friction for both humans and AI agents.
+
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
 
@@ -37,6 +42,35 @@ const countrys = await client.Country().list()
 
 for (const country of countrys) {
   console.log(country)
+}
+```
+
+
+## Error handling
+
+Entity operations reject on failure, so wrap them in `try` / `catch`:
+
+```ts
+try {
+  const countrys = await client.Country().list()
+  console.log(countrys)
+} catch (err) {
+  console.error('list failed:', err)
+}
+```
+
+The low-level `direct()` method does **not** throw — it returns the
+value or an `Error`, so check the result before using it:
+
+```ts
+const result = await client.direct({
+  path: '/api/resource/{id}',
+  method: 'GET',
+  params: { id: 'example_id' },
+})
+
+if (result instanceof Error) {
+  throw result
 }
 ```
 
@@ -85,7 +119,7 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = VatValidationSDK.test()
 
-const country = await client.Country().load({ id: 'test01' })
+const country = await client.Country().list()
 // country is a bare entity populated with mock response data
 console.log(country)
 ```
@@ -104,12 +138,12 @@ Entity instances remember their last match and data:
 ```ts
 const entity = client.Country()
 
-// First call sets internal match
-await entity.load({ id: 'example' })
+// First call runs the operation and stores its result
+await entity.list()
 
-// Subsequent calls reuse the stored match
+// Subsequent calls reuse the stored state
 const data = entity.data()
-console.log(data.id) // 'example'
+console.log(data)
 ```
 
 ### Add custom middleware
@@ -205,11 +239,8 @@ All entities share the same interface.
 | --- | --- | --- |
 | `load` | `load(reqmatch?, ctrl?): Promise<Entity>` | Load a single entity by match criteria. |
 | `list` | `list(reqmatch?, ctrl?): Promise<Entity[]>` | List entities matching the criteria. |
-| `create` | `create(reqdata?, ctrl?): Promise<Entity>` | Create a new entity. |
-| `update` | `update(reqdata?, ctrl?): Promise<Entity>` | Update an existing entity. |
-| `remove` | `remove(reqmatch?, ctrl?): Promise<void>` | Remove an entity. |
-| `data` | `data(data?): any` | Get or set entity data. |
-| `match` | `match(match?): any` | Get or set entity match criteria. |
+| `data` | `data(data?: Partial<Entity>): Entity` | Get or set entity data. |
+| `match` | `match(match?: Partial<Entity>): Partial<Entity>` | Get or set entity match criteria. |
 | `make` | `make(): Entity` | Create a new instance with the same options. |
 | `client` | `client(): VatValidationSDK` | Return the parent SDK client. |
 | `entopts` | `entopts(): object` | Return a copy of the entity options. |
@@ -219,10 +250,9 @@ All entities share the same interface.
 Entity operations resolve to the entity data directly — there is no
 result envelope:
 
-- `load`, `create` and `update` resolve to a single entity object.
+- `load` resolves to a single entity object.
 - `list` resolves to an **array** of entity objects (iterate it directly;
   there is no `.data` and no `.ok`).
-- `remove` resolves to `void`.
 
 On a failed request these methods **throw**, so wrap calls in
 `try`/`catch` to handle errors. Only `direct()` returns the result
@@ -397,19 +427,19 @@ Create an instance: `const country = client.Country()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `capital` | ``$STRING`` |  |
-| `currency` | ``$STRING`` |  |
-| `emoji` | ``$STRING`` |  |
-| `iso2` | ``$STRING`` |  |
-| `iso3` | ``$STRING`` |  |
-| `latitude` | ``$NUMBER`` |  |
-| `longitude` | ``$NUMBER`` |  |
-| `name` | ``$STRING`` |  |
-| `numeric_code` | ``$INTEGER`` |  |
-| `phone_code` | ``$STRING`` |  |
-| `region` | ``$STRING`` |  |
-| `subregion` | ``$STRING`` |  |
-| `tld` | ``$STRING`` |  |
+| `capital` | `string` |  |
+| `currency` | `string` |  |
+| `emoji` | `string` |  |
+| `iso2` | `string` |  |
+| `iso3` | `string` |  |
+| `latitude` | `number` |  |
+| `longitude` | `number` |  |
+| `name` | `string` |  |
+| `numeric_code` | `number` |  |
+| `phone_code` | `string` |  |
+| `region` | `string` |  |
+| `subregion` | `string` |  |
+| `tld` | `string` |  |
 
 #### Example: List
 
@@ -432,13 +462,13 @@ Create an instance: `const currency = client.Currency()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `name` | ``$STRING`` |  |
-| `symbol` | ``$STRING`` |  |
+| `name` | `string` |  |
+| `symbol` | `string` |  |
 
 #### Example: Load
 
 ```ts
-const currency = await client.Currency().load({ id: 'currency_id' })
+const currency = await client.Currency().load()
 ```
 
 
@@ -456,26 +486,26 @@ Create an instance: `const geolocate = client.Geolocate()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `capital` | ``$STRING`` |  |
-| `country_code` | ``$STRING`` |  |
-| `currency` | ``$STRING`` |  |
-| `emoji` | ``$STRING`` |  |
-| `ip` | ``$ANY`` |  |
-| `iso2` | ``$STRING`` |  |
-| `iso3` | ``$STRING`` |  |
-| `latitude` | ``$NUMBER`` |  |
-| `longitude` | ``$NUMBER`` |  |
-| `name` | ``$STRING`` |  |
-| `numeric_code` | ``$INTEGER`` |  |
-| `phone_code` | ``$STRING`` |  |
-| `region` | ``$STRING`` |  |
-| `subregion` | ``$STRING`` |  |
-| `tld` | ``$STRING`` |  |
+| `capital` | `string` |  |
+| `country_code` | `string` |  |
+| `currency` | `string` |  |
+| `emoji` | `string` |  |
+| `ip` | `any` |  |
+| `iso2` | `string` |  |
+| `iso3` | `string` |  |
+| `latitude` | `number` |  |
+| `longitude` | `number` |  |
+| `name` | `string` |  |
+| `numeric_code` | `number` |  |
+| `phone_code` | `string` |  |
+| `region` | `string` |  |
+| `subregion` | `string` |  |
+| `tld` | `string` |  |
 
 #### Example: Load
 
 ```ts
-const geolocate = await client.Geolocate().load({ id: 'geolocate_id' })
+const geolocate = await client.Geolocate().load()
 ```
 
 
@@ -493,14 +523,14 @@ Create an instance: `const rate = client.Rate()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `base` | ``$STRING`` |  |
-| `date` | ``$STRING`` |  |
-| `rate` | ``$OBJECT`` |  |
+| `base` | `string` |  |
+| `date` | `string` |  |
+| `rate` | `Record<string, any>` |  |
 
 #### Example: Load
 
 ```ts
-const rate = await client.Rate().load({ id: 'rate_id' })
+const rate = await client.Rate().load()
 ```
 
 
@@ -518,23 +548,23 @@ Create an instance: `const validate_iban_response_schema = client.ValidateIbanRe
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `account_number` | ``$STRING`` |  |
-| `bank_code` | ``$STRING`` |  |
-| `bank_name` | ``$STRING`` |  |
-| `bban` | ``$STRING`` |  |
-| `bic` | ``$STRING`` |  |
-| `branch_code` | ``$STRING`` |  |
-| `checksum_digit` | ``$STRING`` |  |
-| `country_code` | ``$STRING`` |  |
-| `country_name` | ``$STRING`` |  |
-| `iban` | ``$STRING`` |  |
-| `in_sepa_zone` | ``$BOOLEAN`` |  |
-| `valid` | ``$BOOLEAN`` |  |
+| `account_number` | `string` |  |
+| `bank_code` | `string` |  |
+| `bank_name` | `string` |  |
+| `bban` | `string` |  |
+| `bic` | `string` |  |
+| `branch_code` | `string` |  |
+| `checksum_digit` | `string` |  |
+| `country_code` | `string` |  |
+| `country_name` | `string` |  |
+| `iban` | `string` |  |
+| `in_sepa_zone` | `boolean` |  |
+| `valid` | `boolean` |  |
 
 #### Example: Load
 
 ```ts
-const validate_iban_response_schema = await client.ValidateIbanResponseSchema().load({ id: 'validate_iban_response_schema_id' })
+const validate_iban_response_schema = await client.ValidateIbanResponseSchema().load()
 ```
 
 
@@ -552,16 +582,16 @@ Create an instance: `const validate_vat_response_schema = client.ValidateVatResp
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `address` | ``$STRING`` |  |
-| `country_code` | ``$STRING`` |  |
-| `name` | ``$STRING`` |  |
-| `valid` | ``$BOOLEAN`` |  |
-| `vat_number` | ``$STRING`` |  |
+| `address` | `string` |  |
+| `country_code` | `string` |  |
+| `name` | `string` |  |
+| `valid` | `boolean` |  |
+| `vat_number` | `string` |  |
 
 #### Example: Load
 
 ```ts
-const validate_vat_response_schema = await client.ValidateVatResponseSchema().load({ id: 'validate_vat_response_schema_id' })
+const validate_vat_response_schema = await client.ValidateVatResponseSchema().load()
 ```
 
 
@@ -579,27 +609,31 @@ Create an instance: `const vatcomply_api_root = client.VatcomplyApiRoot()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `contact` | ``$STRING`` |  |
-| `description` | ``$STRING`` |  |
-| `documentation` | ``$STRING`` |  |
-| `endpoint` | ``$OBJECT`` |  |
-| `name` | ``$STRING`` |  |
-| `status` | ``$STRING`` |  |
-| `version` | ``$STRING`` |  |
+| `contact` | `string` |  |
+| `description` | `string` |  |
+| `documentation` | `string` |  |
+| `endpoint` | `Record<string, any>` |  |
+| `name` | `string` |  |
+| `status` | `string` |  |
+| `version` | `string` |  |
 
 #### Example: Load
 
 ```ts
-const vatcomply_api_root = await client.VatcomplyApiRoot().load({ id: 'vatcomply_api_root_id' })
+const vatcomply_api_root = await client.VatcomplyApiRoot().load()
 ```
 
 
-## Explanation
+## Advanced
+
+> The sections above cover everyday use. The material below explains the
+> SDK's internals — useful when extending it with custom features, but not
+> needed for normal use.
 
 ### The operation pipeline
 
-Every entity operation (load, list, create, update, remove) follows a
-six-stage pipeline. Each stage fires a feature hook before executing:
+Every entity operation follows a six-stage pipeline. Each stage fires a
+feature hook before executing:
 
 ```
 PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
@@ -616,11 +650,9 @@ PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
 - **PreDone**: Final stage before returning to the caller. Entity
   state (match, data) is updated here.
 
-If any stage returns an error, the pipeline short-circuits and the
-error is returned to the caller.
-
-An unexpected exception triggers the `PreUnexpected` hook before
-propagating.
+If any stage errors, the pipeline short-circuits and the error surfaces
+to the caller — see [Error handling](#error-handling) for how that looks
+in this language.
 
 ### Features and hooks
 
@@ -656,16 +688,16 @@ import { VatValidationSDK } from '@voxgig-sdk/vat-validation'
 
 ### Entity state
 
-Entity instances are stateful. After a successful `load`, the entity
+Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
 const country = client.Country()
-await country.load({ id: "example_id" })
+await country.list()
 
-// country.data() now returns the loaded country data
-// country.match() returns { id: "example_id" }
+// country.data() now returns the country data from the last `list`
+// country.match() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration
