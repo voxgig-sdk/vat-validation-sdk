@@ -20,9 +20,9 @@ main: {
           url: "https://api.vatcomply.com"
         }
       ]
+      summary: "API for automated VAT compliance and currency conversion."
       title: "Vatcomply API"
       version: "1.0.0"
+      website: "https://github.com/madisvain/vatcomply/issues"
     }
   }
-}
-

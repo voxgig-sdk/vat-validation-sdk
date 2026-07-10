@@ -1,9 +1,0 @@
-# Flows
-
-@"BasicCountryFlow.jsonic"
-@"BasicCurrencyFlow.jsonic"
-@"BasicGeolocateFlow.jsonic"
-@"BasicRateFlow.jsonic"
-@"BasicValidateIbanResponseSchemaFlow.jsonic"
-@"BasicValidateVatResponseSchemaFlow.jsonic"
-@"BasicVatcomplyApiRootFlow.jsonic"

@@ -115,6 +115,7 @@ same parameters as `Direct()`.
 
 ```go
 country := client.Country(nil)
+fmt.Println(country.GetName()) // "country"
 ```
 
 ### Fields
@@ -143,6 +144,10 @@ List entities matching the given criteria. Returns an array.
 
 ```go
 results, err := client.Country(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(results)
 ```
 
 ### Common Methods
@@ -173,6 +178,7 @@ Return the entity name.
 
 ```go
 currency := client.Currency(nil)
+fmt.Println(currency.GetName()) // "currency"
 ```
 
 ### Fields
@@ -190,6 +196,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.Currency(nil).Load(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -220,6 +230,7 @@ Return the entity name.
 
 ```go
 geolocate := client.Geolocate(nil)
+fmt.Println(geolocate.GetName()) // "geolocate"
 ```
 
 ### Fields
@@ -250,6 +261,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.Geolocate(nil).Load(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -280,6 +295,7 @@ Return the entity name.
 
 ```go
 rate := client.Rate(nil)
+fmt.Println(rate.GetName()) // "rate"
 ```
 
 ### Fields
@@ -298,6 +314,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.Rate(nil).Load(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -327,7 +347,8 @@ Return the entity name.
 ## ValidateIbanResponseSchemaEntity
 
 ```go
-validate_iban_response_schema := client.ValidateIbanResponseSchema(nil)
+validateIbanResponseSchema := client.ValidateIbanResponseSchema(nil)
+fmt.Println(validateIbanResponseSchema.GetName()) // "validate_iban_response_schema"
 ```
 
 ### Fields
@@ -355,6 +376,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.ValidateIbanResponseSchema(nil).Load(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -384,7 +409,8 @@ Return the entity name.
 ## ValidateVatResponseSchemaEntity
 
 ```go
-validate_vat_response_schema := client.ValidateVatResponseSchema(nil)
+validateVatResponseSchema := client.ValidateVatResponseSchema(nil)
+fmt.Println(validateVatResponseSchema.GetName()) // "validate_vat_response_schema"
 ```
 
 ### Fields
@@ -405,6 +431,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.ValidateVatResponseSchema(nil).Load(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -434,7 +464,8 @@ Return the entity name.
 ## VatcomplyApiRootEntity
 
 ```go
-vatcomply_api_root := client.VatcomplyApiRoot(nil)
+vatcomplyApiRoot := client.VatcomplyApiRoot(nil)
+fmt.Println(vatcomplyApiRoot.GetName()) // "vatcomply_api_root"
 ```
 
 ### Fields
@@ -457,6 +488,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.VatcomplyApiRoot(nil).Load(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods

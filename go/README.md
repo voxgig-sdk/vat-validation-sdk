@@ -528,7 +528,7 @@ fmt.Println(rate) // the loaded record
 
 ### ValidateIbanResponseSchema
 
-Create an instance: `validate_iban_response_schema := client.ValidateIbanResponseSchema(nil)`
+Create an instance: `validateIbanResponseSchema := client.ValidateIbanResponseSchema(nil)`
 
 #### Operations
 
@@ -556,17 +556,17 @@ Create an instance: `validate_iban_response_schema := client.ValidateIbanRespons
 #### Example: Load
 
 ```go
-validate_iban_response_schema, err := client.ValidateIbanResponseSchema(nil).Load(nil, nil)
+validateIbanResponseSchema, err := client.ValidateIbanResponseSchema(nil).Load(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(validate_iban_response_schema) // the loaded record
+fmt.Println(validateIbanResponseSchema) // the loaded record
 ```
 
 
 ### ValidateVatResponseSchema
 
-Create an instance: `validate_vat_response_schema := client.ValidateVatResponseSchema(nil)`
+Create an instance: `validateVatResponseSchema := client.ValidateVatResponseSchema(nil)`
 
 #### Operations
 
@@ -587,17 +587,17 @@ Create an instance: `validate_vat_response_schema := client.ValidateVatResponseS
 #### Example: Load
 
 ```go
-validate_vat_response_schema, err := client.ValidateVatResponseSchema(nil).Load(nil, nil)
+validateVatResponseSchema, err := client.ValidateVatResponseSchema(nil).Load(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(validate_vat_response_schema) // the loaded record
+fmt.Println(validateVatResponseSchema) // the loaded record
 ```
 
 
 ### VatcomplyApiRoot
 
-Create an instance: `vatcomply_api_root := client.VatcomplyApiRoot(nil)`
+Create an instance: `vatcomplyApiRoot := client.VatcomplyApiRoot(nil)`
 
 #### Operations
 
@@ -620,11 +620,11 @@ Create an instance: `vatcomply_api_root := client.VatcomplyApiRoot(nil)`
 #### Example: Load
 
 ```go
-vatcomply_api_root, err := client.VatcomplyApiRoot(nil).Load(nil, nil)
+vatcomplyApiRoot, err := client.VatcomplyApiRoot(nil).Load(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(vatcomply_api_root) // the loaded record
+fmt.Println(vatcomplyApiRoot) // the loaded record
 ```
 
 

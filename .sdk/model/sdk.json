@@ -6,9 +6,6 @@
     },
     "kit": {
       "config": {
-        "auth": {
-          "prefix": "Bearer"
-        },
         "docs_order": [
           "ts",
           "py",
@@ -978,13 +975,16 @@
           "name": "MIT License",
           "url": "https://github.com/madisvain/vatcomply/blob/master/LICENSE"
         },
+        "meta_source": "https://www.freepublicapis.com",
         "servers": [
           {
             "url": "https://api.vatcomply.com"
           }
         ],
+        "summary": "API for automated VAT compliance and currency conversion.",
         "title": "Vatcomply API",
-        "version": "1.0.0"
+        "version": "1.0.0",
+        "website": "https://github.com/madisvain/vatcomply/issues"
       },
       "option": {},
       "target": {
@@ -1037,6 +1037,9 @@
           },
           "name": "go-cli",
           "phase": {
+            "agentguide": {
+              "active": false
+            },
             "entity": {
               "active": false
             },
@@ -1087,6 +1090,9 @@
           },
           "name": "go-mcp",
           "phase": {
+            "agentguide": {
+              "active": false
+            },
             "entity": {
               "active": false
             },
