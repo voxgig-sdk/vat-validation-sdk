@@ -1,4 +1,4 @@
--- ProjectName SDK exists test
+-- VatValidation SDK exists test
 
 local sdk = require("vat-validation_sdk")
 
