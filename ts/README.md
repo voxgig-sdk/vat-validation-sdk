@@ -35,7 +35,9 @@ const client = new VatValidationSDK()
 
 ### 2. List country records
 
-`list()` resolves to an array of Country objects — iterate it directly:
+`list()` resolves to an array of Country ENTITIES — every operation
+resolves to entities, not raw records. Iterate them directly, and call
+`.data()` on one for the record it holds:
 
 ```ts
 const countrys = await client.Country().list()
@@ -52,10 +54,10 @@ Entity operations reject on failure, so wrap them in `try` / `catch`:
 
 ```ts
 try {
-  const countrys = await client.Country().list()
-  console.log(countrys)
+  const geolocate = await client.Geolocate().load()
+  console.log(geolocate)
 } catch (err) {
-  console.error('list failed:', err)
+  console.error('load failed:', err)
 }
 ```
 
@@ -119,9 +121,10 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = VatValidationSDK.test()
 
-const country = await client.Country().list()
-// country is a bare entity populated with mock response data
-console.log(country)
+const geolocate = await client.Geolocate().load()
+// geolocate is the entity, populated with mock response data
+// — call geolocate.data() for the record itself
+console.log(geolocate)
 ```
 
 You can also use the instance method:
@@ -136,10 +139,10 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.Country()
+const entity = client.Geolocate()
 
 // First call runs the operation and stores its result
-await entity.list()
+await entity.load()
 
 // Subsequent calls reuse the stored state
 const data = entity.data()
@@ -325,21 +328,6 @@ API path: `/currencies`
 
 | Field | Description |
 | --- | --- |
-| `capital` |  |
-| `country_code` |  |
-| `currency` |  |
-| `emoji` |  |
-| `ip` |  |
-| `iso2` |  |
-| `iso3` |  |
-| `latitude` |  |
-| `longitude` |  |
-| `name` |  |
-| `numeric_code` |  |
-| `phone_code` |  |
-| `region` |  |
-| `subregion` |  |
-| `tld` |  |
 
 Operations: load.
 
@@ -349,9 +337,6 @@ API path: `/geolocate`
 
 | Field | Description |
 | --- | --- |
-| `base` |  |
-| `date` |  |
-| `rate` |  |
 
 Operations: load.
 
@@ -367,7 +352,7 @@ API path: `/rates`
 | `bban` |  |
 | `bic` |  |
 | `branch_code` |  |
-| `checksum_digit` |  |
+| `checksum_digits` |  |
 | `country_code` |  |
 | `country_name` |  |
 | `iban` |  |
@@ -382,11 +367,6 @@ API path: `/iban`
 
 | Field | Description |
 | --- | --- |
-| `address` |  |
-| `country_code` |  |
-| `name` |  |
-| `valid` |  |
-| `vat_number` |  |
 
 Operations: load.
 
@@ -396,13 +376,6 @@ API path: `/vat`
 
 | Field | Description |
 | --- | --- |
-| `contact` |  |
-| `description` |  |
-| `documentation` |  |
-| `endpoint` |  |
-| `name` |  |
-| `status` |  |
-| `version` |  |
 
 Operations: load.
 
@@ -482,26 +455,6 @@ Create an instance: `const geolocate = client.Geolocate()`
 | --- | --- |
 | `load(match)` | Load a single entity by match criteria. |
 
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `capital` | `string` |  |
-| `country_code` | `string` |  |
-| `currency` | `string` |  |
-| `emoji` | `string` |  |
-| `ip` | `any` |  |
-| `iso2` | `string` |  |
-| `iso3` | `string` |  |
-| `latitude` | `number` |  |
-| `longitude` | `number` |  |
-| `name` | `string` |  |
-| `numeric_code` | `number` |  |
-| `phone_code` | `string` |  |
-| `region` | `string` |  |
-| `subregion` | `string` |  |
-| `tld` | `string` |  |
-
 #### Example: Load
 
 ```ts
@@ -518,14 +471,6 @@ Create an instance: `const rate = client.Rate()`
 | Method | Description |
 | --- | --- |
 | `load(match)` | Load a single entity by match criteria. |
-
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `base` | `string` |  |
-| `date` | `string` |  |
-| `rate` | `Record<string, any>` |  |
 
 #### Example: Load
 
@@ -554,7 +499,7 @@ Create an instance: `const validate_iban_response_schema = client.ValidateIbanRe
 | `bban` | `string` |  |
 | `bic` | `string` |  |
 | `branch_code` | `string` |  |
-| `checksum_digit` | `string` |  |
+| `checksum_digits` | `string` |  |
 | `country_code` | `string` |  |
 | `country_name` | `string` |  |
 | `iban` | `string` |  |
@@ -578,16 +523,6 @@ Create an instance: `const validate_vat_response_schema = client.ValidateVatResp
 | --- | --- |
 | `load(match)` | Load a single entity by match criteria. |
 
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `address` | `string` |  |
-| `country_code` | `string` |  |
-| `name` | `string` |  |
-| `valid` | `boolean` |  |
-| `vat_number` | `string` |  |
-
 #### Example: Load
 
 ```ts
@@ -604,18 +539,6 @@ Create an instance: `const vatcomply_api_root = client.VatcomplyApiRoot()`
 | Method | Description |
 | --- | --- |
 | `load(match)` | Load a single entity by match criteria. |
-
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `contact` | `string` |  |
-| `description` | `string` |  |
-| `documentation` | `string` |  |
-| `endpoint` | `Record<string, any>` |  |
-| `name` | `string` |  |
-| `status` | `string` |  |
-| `version` | `string` |  |
 
 #### Example: Load
 
@@ -688,16 +611,16 @@ import { VatValidationSDK } from '@voxgig-sdk/vat-validation'
 
 ### Entity state
 
-Entity instances are stateful. After a successful `list`, the entity
+Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const country = client.Country()
-await country.list()
+const geolocate = client.Geolocate()
+await geolocate.load()
 
-// country.data() now returns the country data from the last `list`
-// country.match() returns the last match criteria
+// geolocate.data() now returns the geolocate data from the last `load`
+// geolocate.match() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

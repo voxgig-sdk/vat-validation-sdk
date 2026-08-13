@@ -131,6 +131,7 @@ func MakeConfig() map[string]any {
 							map[string]any{
 								"active": true,
 								"args": map[string]any{},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/countries",
 								"parts": []any{
@@ -144,7 +145,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "list",
 					},
 				},
 				"relations": map[string]any{
@@ -177,6 +177,7 @@ func MakeConfig() map[string]any {
 							map[string]any{
 								"active": true,
 								"args": map[string]any{},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/currencies",
 								"parts": []any{
@@ -190,7 +191,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "load",
 					},
 				},
 				"relations": map[string]any{
@@ -198,113 +198,7 @@ func MakeConfig() map[string]any {
 				},
 			},
 			"geolocate": map[string]any{
-				"fields": []any{
-					map[string]any{
-						"active": true,
-						"name": "capital",
-						"req": true,
-						"type": "`$STRING`",
-						"index$": 0,
-					},
-					map[string]any{
-						"active": true,
-						"name": "country_code",
-						"req": true,
-						"type": "`$STRING`",
-						"index$": 1,
-					},
-					map[string]any{
-						"active": true,
-						"name": "currency",
-						"req": true,
-						"type": "`$STRING`",
-						"index$": 2,
-					},
-					map[string]any{
-						"active": true,
-						"name": "emoji",
-						"req": true,
-						"type": "`$STRING`",
-						"index$": 3,
-					},
-					map[string]any{
-						"active": true,
-						"name": "ip",
-						"req": true,
-						"type": "`$ANY`",
-						"index$": 4,
-					},
-					map[string]any{
-						"active": true,
-						"name": "iso2",
-						"req": true,
-						"type": "`$STRING`",
-						"index$": 5,
-					},
-					map[string]any{
-						"active": true,
-						"name": "iso3",
-						"req": true,
-						"type": "`$STRING`",
-						"index$": 6,
-					},
-					map[string]any{
-						"active": true,
-						"name": "latitude",
-						"req": true,
-						"type": "`$NUMBER`",
-						"index$": 7,
-					},
-					map[string]any{
-						"active": true,
-						"name": "longitude",
-						"req": true,
-						"type": "`$NUMBER`",
-						"index$": 8,
-					},
-					map[string]any{
-						"active": true,
-						"name": "name",
-						"req": true,
-						"type": "`$STRING`",
-						"index$": 9,
-					},
-					map[string]any{
-						"active": true,
-						"name": "numeric_code",
-						"req": true,
-						"type": "`$INTEGER`",
-						"index$": 10,
-					},
-					map[string]any{
-						"active": true,
-						"name": "phone_code",
-						"req": true,
-						"type": "`$STRING`",
-						"index$": 11,
-					},
-					map[string]any{
-						"active": true,
-						"name": "region",
-						"req": true,
-						"type": "`$STRING`",
-						"index$": 12,
-					},
-					map[string]any{
-						"active": true,
-						"name": "subregion",
-						"req": true,
-						"type": "`$STRING`",
-						"index$": 13,
-					},
-					map[string]any{
-						"active": true,
-						"name": "tld",
-						"req": true,
-						"type": "`$STRING`",
-						"index$": 14,
-					},
-				},
+				"fields": []any{},
 				"name": "geolocate",
 				"op": map[string]any{
 					"load": map[string]any{
@@ -314,6 +208,7 @@ func MakeConfig() map[string]any {
 							map[string]any{
 								"active": true,
 								"args": map[string]any{},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/geolocate",
 								"parts": []any{
@@ -322,12 +217,11 @@ func MakeConfig() map[string]any {
 								"select": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body`",
+									"res": "`body.ip`",
 								},
 								"index$": 0,
 							},
 						},
-						"key$": "load",
 					},
 				},
 				"relations": map[string]any{
@@ -335,29 +229,7 @@ func MakeConfig() map[string]any {
 				},
 			},
 			"rate": map[string]any{
-				"fields": []any{
-					map[string]any{
-						"active": true,
-						"name": "base",
-						"req": true,
-						"type": "`$STRING`",
-						"index$": 0,
-					},
-					map[string]any{
-						"active": true,
-						"name": "date",
-						"req": true,
-						"type": "`$STRING`",
-						"index$": 1,
-					},
-					map[string]any{
-						"active": true,
-						"name": "rate",
-						"req": true,
-						"type": "`$OBJECT`",
-						"index$": 2,
-					},
-				},
+				"fields": []any{},
 				"name": "rate",
 				"op": map[string]any{
 					"load": map[string]any{
@@ -395,6 +267,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/rates",
 								"parts": []any{
@@ -409,12 +282,11 @@ func MakeConfig() map[string]any {
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body`",
+									"res": "`body.rates`",
 								},
 								"index$": 0,
 							},
 						},
-						"key$": "load",
 					},
 				},
 				"relations": map[string]any{
@@ -467,7 +339,7 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"active": true,
-						"name": "checksum_digit",
+						"name": "checksum_digits",
 						"req": true,
 						"type": "`$STRING`",
 						"index$": 6,
@@ -528,6 +400,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/iban",
 								"parts": []any{
@@ -545,7 +418,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "load",
 					},
 				},
 				"relations": map[string]any{
@@ -553,43 +425,7 @@ func MakeConfig() map[string]any {
 				},
 			},
 			"validate_vat_response_schema": map[string]any{
-				"fields": []any{
-					map[string]any{
-						"active": true,
-						"name": "address",
-						"req": false,
-						"type": "`$STRING`",
-						"index$": 0,
-					},
-					map[string]any{
-						"active": true,
-						"name": "country_code",
-						"req": true,
-						"type": "`$STRING`",
-						"index$": 1,
-					},
-					map[string]any{
-						"active": true,
-						"name": "name",
-						"req": false,
-						"type": "`$STRING`",
-						"index$": 2,
-					},
-					map[string]any{
-						"active": true,
-						"name": "valid",
-						"req": true,
-						"type": "`$BOOLEAN`",
-						"index$": 3,
-					},
-					map[string]any{
-						"active": true,
-						"name": "vat_number",
-						"req": true,
-						"type": "`$STRING`",
-						"index$": 4,
-					},
-				},
+				"fields": []any{},
 				"name": "validate_vat_response_schema",
 				"op": map[string]any{
 					"load": map[string]any{
@@ -610,6 +446,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/vat",
 								"parts": []any{
@@ -622,12 +459,11 @@ func MakeConfig() map[string]any {
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body`",
+									"res": "`body.name`",
 								},
 								"index$": 0,
 							},
 						},
-						"key$": "load",
 					},
 				},
 				"relations": map[string]any{
@@ -635,57 +471,7 @@ func MakeConfig() map[string]any {
 				},
 			},
 			"vatcomply_api_root": map[string]any{
-				"fields": []any{
-					map[string]any{
-						"active": true,
-						"name": "contact",
-						"req": true,
-						"type": "`$STRING`",
-						"index$": 0,
-					},
-					map[string]any{
-						"active": true,
-						"name": "description",
-						"req": true,
-						"type": "`$STRING`",
-						"index$": 1,
-					},
-					map[string]any{
-						"active": true,
-						"name": "documentation",
-						"req": true,
-						"type": "`$STRING`",
-						"index$": 2,
-					},
-					map[string]any{
-						"active": true,
-						"name": "endpoint",
-						"req": true,
-						"type": "`$OBJECT`",
-						"index$": 3,
-					},
-					map[string]any{
-						"active": true,
-						"name": "name",
-						"req": true,
-						"type": "`$STRING`",
-						"index$": 4,
-					},
-					map[string]any{
-						"active": true,
-						"name": "status",
-						"req": true,
-						"type": "`$STRING`",
-						"index$": 5,
-					},
-					map[string]any{
-						"active": true,
-						"name": "version",
-						"req": true,
-						"type": "`$STRING`",
-						"index$": 6,
-					},
-				},
+				"fields": []any{},
 				"name": "vatcomply_api_root",
 				"op": map[string]any{
 					"load": map[string]any{
@@ -695,18 +481,18 @@ func MakeConfig() map[string]any {
 							map[string]any{
 								"active": true,
 								"args": map[string]any{},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/",
 								"parts": []any{},
 								"select": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body`",
+									"res": "`body.endpoints`",
 								},
 								"index$": 0,
 							},
 						},
-						"key$": "load",
 					},
 				},
 				"relations": map[string]any{

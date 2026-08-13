@@ -65,11 +65,11 @@ function validate_iban_response_schema_direct_setup($mockres)
     $calls = new \ArrayObject();
 
     $env = Runner::env_override([
-        "VATVALIDATION_TEST_VALIDATE_IBAN_RESPONSE_SCHEMA_ENTID" => [],
-        "VATVALIDATION_TEST_LIVE" => "FALSE",
+        "VAT_VALIDATION_TEST_VALIDATE_IBAN_RESPONSE_SCHEMA_ENTID" => [],
+        "VAT_VALIDATION_TEST_LIVE" => "FALSE",
     ]);
 
-    $live = $env["VATVALIDATION_TEST_LIVE"] === "TRUE";
+    $live = $env["VAT_VALIDATION_TEST_LIVE"] === "TRUE";
 
     if ($live) {
         $merged_opts = [

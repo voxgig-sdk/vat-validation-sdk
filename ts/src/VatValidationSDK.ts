@@ -152,8 +152,29 @@ class VatValidationSDK {
   }
 
 
+  // Raw endpoint access is operator-controllable, like every entity op.
+  // Blocking it means denying BOTH the 'direct' and 'graphql' tokens, since
+  // either one reaches the same endpoint.
   async direct(fetchargs?: any) {
+    if (!this._options.allow.op.includes('direct')) {
+      return {
+        ok: false,
+        err: new Error('VatValidationSDK: direct: operation not allowed by' +
+          ' SDK option allow.op value: "' + this._options.allow.op + '"'),
+      }
+    }
+
+    return this._rawRequest(fetchargs)
+  }
+
+
+  // Ungated request path shared by direct() and graphql(), each of which
+  // checks its own allow.op token first. Private, rather than a flag on
+  // fetchargs: a caller-supplied marker would let anyone opt straight back
+  // out of the gate by passing it.
+  async _rawRequest(fetchargs?: any) {
     const utility = this._utility
+
     const fetcher = utility.fetcher
     const makeContext = utility.makeContext
 
@@ -214,52 +235,120 @@ class VatValidationSDK {
 
 
 
+  // Raw GraphQL access: the pressure valve that makes the generated
+  // surface's deliberate omissions (per-call selection sets, typed filter
+  // builders, batching, subscriptions) livable — the whole schema stays
+  // reachable.
+  //
+  // Thin wrapper over the same prepare/fetch path `direct` uses, with the
+  // one thing raw `direct` cannot do for GraphQL: a GraphQL failure rides
+  // HTTP 200 as a top-level `errors` array, so status alone would report a
+  // failed query as ok.
+  //
+  // NOTE: like `direct`, this bypasses the feature pipeline — no retry,
+  // ratelimit or paging features apply.
+  async graphql(query: string, variables?: any, ctrl?: any) {
+    const options = this._options
+
+    if (!options.allow.op.includes('graphql')) {
+      return {
+        ok: false,
+        err: new Error('VatValidationSDK: graphql: operation not allowed by' +
+          ' SDK option allow.op value: "' + options.allow.op + '"'),
+      }
+    }
+
+    const res: any = await this._rawRequest({
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: { query, variables: variables || {} },
+      ctrl,
+    })
+
+    if (res instanceof Error) {
+      return res
+    }
+
+    // Errors are read BEFORE any status check: a GraphQL parse or validation
+    // failure comes back as HTTP 400 carrying the standard { errors: [...] }
+    // body, and the raw path represents a non-2xx as { ok: false } with no
+    // err — so returning early on status would discard the server's own
+    // diagnostics, which are the only useful part of that response.
+    const errors = null == res.data ? undefined : res.data.errors
+
+    if (null != errors && Array.isArray(errors) && 0 < errors.length) {
+      const first = errors[0] || {}
+      const err: any = new Error('VatValidationSDK: graphql: ' +
+        (first.message || 'graphql error'))
+      err.graphql = errors
+      return { ok: false, status: res.status, headers: res.headers, err, data: res.data }
+    }
+
+    return res
+  }
+
+
+
   // Entity access: `client.Country().list()` / `client.Country().load({ id })`.
-  Country(data?: any) {
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  Country(entopts?: Record<string, any>) {
     const self = this
-    return new CountryEntity(self,data)
+    return new CountryEntity(self, entopts)
   }
 
 
   // Entity access: `client.Currency().list()` / `client.Currency().load({ id })`.
-  Currency(data?: any) {
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  Currency(entopts?: Record<string, any>) {
     const self = this
-    return new CurrencyEntity(self,data)
+    return new CurrencyEntity(self, entopts)
   }
 
 
   // Entity access: `client.Geolocate().list()` / `client.Geolocate().load({ id })`.
-  Geolocate(data?: any) {
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  Geolocate(entopts?: Record<string, any>) {
     const self = this
-    return new GeolocateEntity(self,data)
+    return new GeolocateEntity(self, entopts)
   }
 
 
   // Entity access: `client.Rate().list()` / `client.Rate().load({ id })`.
-  Rate(data?: any) {
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  Rate(entopts?: Record<string, any>) {
     const self = this
-    return new RateEntity(self,data)
+    return new RateEntity(self, entopts)
   }
 
 
   // Entity access: `client.ValidateIbanResponseSchema().list()` / `client.ValidateIbanResponseSchema().load({ id })`.
-  ValidateIbanResponseSchema(data?: any) {
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  ValidateIbanResponseSchema(entopts?: Record<string, any>) {
     const self = this
-    return new ValidateIbanResponseSchemaEntity(self,data)
+    return new ValidateIbanResponseSchemaEntity(self, entopts)
   }
 
 
   // Entity access: `client.ValidateVatResponseSchema().list()` / `client.ValidateVatResponseSchema().load({ id })`.
-  ValidateVatResponseSchema(data?: any) {
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  ValidateVatResponseSchema(entopts?: Record<string, any>) {
     const self = this
-    return new ValidateVatResponseSchemaEntity(self,data)
+    return new ValidateVatResponseSchemaEntity(self, entopts)
   }
 
 
   // Entity access: `client.VatcomplyApiRoot().list()` / `client.VatcomplyApiRoot().load({ id })`.
-  VatcomplyApiRoot(data?: any) {
+  // The argument is the entity OPTIONS object (passed to the entity
+  // constructor as entopts), not initial entity data.
+  VatcomplyApiRoot(entopts?: Record<string, any>) {
     const self = this
-    return new VatcomplyApiRootEntity(self,data)
+    return new VatcomplyApiRootEntity(self, entopts)
   }
 
 

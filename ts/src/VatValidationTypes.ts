@@ -48,51 +48,15 @@ export interface CurrencyLoadMatch {
 }
 
 export interface Geolocate {
-  capital: string
-  country_code: string
-  currency: string
-  emoji: string
-  ip: any
-  iso2: string
-  iso3: string
-  latitude: number
-  longitude: number
-  name: string
-  numeric_code: number
-  phone_code: string
-  region: string
-  subregion: string
-  tld: string
 }
 
 export interface GeolocateLoadMatch {
-  capital?: string
-  country_code?: string
-  currency?: string
-  emoji?: string
-  ip?: any
-  iso2?: string
-  iso3?: string
-  latitude?: number
-  longitude?: number
-  name?: string
-  numeric_code?: number
-  phone_code?: string
-  region?: string
-  subregion?: string
-  tld?: string
 }
 
 export interface Rate {
-  base: string
-  date: string
-  rate: Record<string, any>
 }
 
 export interface RateLoadMatch {
-  base?: string
-  date?: string
-  rate?: Record<string, any>
 }
 
 export interface ValidateIbanResponseSchema {
@@ -102,7 +66,7 @@ export interface ValidateIbanResponseSchema {
   bban: string
   bic: string
   branch_code: string
-  checksum_digit: string
+  checksum_digits: string
   country_code: string
   country_name: string
   iban: string
@@ -117,7 +81,7 @@ export interface ValidateIbanResponseSchemaLoadMatch {
   bban?: string
   bic?: string
   branch_code?: string
-  checksum_digit?: string
+  checksum_digits?: string
   country_code?: string
   country_name?: string
   iban?: string
@@ -126,38 +90,14 @@ export interface ValidateIbanResponseSchemaLoadMatch {
 }
 
 export interface ValidateVatResponseSchema {
-  address?: string
-  country_code: string
-  name?: string
-  valid: boolean
-  vat_number: string
 }
 
 export interface ValidateVatResponseSchemaLoadMatch {
-  address?: string
-  country_code?: string
-  name?: string
-  valid?: boolean
-  vat_number?: string
 }
 
 export interface VatcomplyApiRoot {
-  contact: string
-  description: string
-  documentation: string
-  endpoint: Record<string, any>
-  name: string
-  status: string
-  version: string
 }
 
 export interface VatcomplyApiRootLoadMatch {
-  contact?: string
-  description?: string
-  documentation?: string
-  endpoint?: Record<string, any>
-  name?: string
-  status?: string
-  version?: string
 }
 

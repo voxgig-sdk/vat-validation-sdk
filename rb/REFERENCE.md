@@ -230,26 +230,6 @@ Return the entity name.
 geolocate = client.Geolocate
 ```
 
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `capital` | `String` | Yes |  |
-| `country_code` | `String` | Yes |  |
-| `currency` | `String` | Yes |  |
-| `emoji` | `String` | Yes |  |
-| `ip` | `Object` | Yes |  |
-| `iso2` | `String` | Yes |  |
-| `iso3` | `String` | Yes |  |
-| `latitude` | `Float` | Yes |  |
-| `longitude` | `Float` | Yes |  |
-| `name` | `String` | Yes |  |
-| `numeric_code` | `Integer` | Yes |  |
-| `phone_code` | `String` | Yes |  |
-| `region` | `String` | Yes |  |
-| `subregion` | `String` | Yes |  |
-| `tld` | `String` | Yes |  |
-
 ### Operations
 
 #### `load(reqmatch, ctrl = nil) -> result`
@@ -295,14 +275,6 @@ Return the entity name.
 ```ruby
 rate = client.Rate
 ```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `base` | `String` | Yes |  |
-| `date` | `String` | Yes |  |
-| `rate` | `Hash` | Yes |  |
 
 ### Operations
 
@@ -360,7 +332,7 @@ validate_iban_response_schema = client.ValidateIbanResponseSchema
 | `bban` | `String` | Yes |  |
 | `bic` | `String` | Yes |  |
 | `branch_code` | `String` | Yes |  |
-| `checksum_digit` | `String` | Yes |  |
+| `checksum_digits` | `String` | Yes |  |
 | `country_code` | `String` | Yes |  |
 | `country_name` | `String` | Yes |  |
 | `iban` | `String` | Yes |  |
@@ -413,16 +385,6 @@ Return the entity name.
 validate_vat_response_schema = client.ValidateVatResponseSchema
 ```
 
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `address` | `String` | No |  |
-| `country_code` | `String` | Yes |  |
-| `name` | `String` | No |  |
-| `valid` | `Boolean` | Yes |  |
-| `vat_number` | `String` | Yes |  |
-
 ### Operations
 
 #### `load(reqmatch, ctrl = nil) -> result`
@@ -468,18 +430,6 @@ Return the entity name.
 ```ruby
 vatcomply_api_root = client.VatcomplyApiRoot
 ```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `contact` | `String` | Yes |  |
-| `description` | `String` | Yes |  |
-| `documentation` | `String` | Yes |  |
-| `endpoint` | `Hash` | Yes |  |
-| `name` | `String` | Yes |  |
-| `status` | `String` | Yes |  |
-| `version` | `String` | Yes |  |
 
 ### Operations
 

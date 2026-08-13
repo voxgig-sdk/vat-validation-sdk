@@ -132,6 +132,7 @@ module VatValidationConfig
                 {
                   "active" => true,
                   "args" => {},
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/countries",
                   "parts" => [
@@ -178,6 +179,7 @@ module VatValidationConfig
                 {
                   "active" => true,
                   "args" => {},
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/currencies",
                   "parts" => [
@@ -199,113 +201,7 @@ module VatValidationConfig
           },
         },
         "geolocate" => {
-          "fields" => [
-            {
-              "active" => true,
-              "name" => "capital",
-              "req" => true,
-              "type" => "`$STRING`",
-              "index$" => 0,
-            },
-            {
-              "active" => true,
-              "name" => "country_code",
-              "req" => true,
-              "type" => "`$STRING`",
-              "index$" => 1,
-            },
-            {
-              "active" => true,
-              "name" => "currency",
-              "req" => true,
-              "type" => "`$STRING`",
-              "index$" => 2,
-            },
-            {
-              "active" => true,
-              "name" => "emoji",
-              "req" => true,
-              "type" => "`$STRING`",
-              "index$" => 3,
-            },
-            {
-              "active" => true,
-              "name" => "ip",
-              "req" => true,
-              "type" => "`$ANY`",
-              "index$" => 4,
-            },
-            {
-              "active" => true,
-              "name" => "iso2",
-              "req" => true,
-              "type" => "`$STRING`",
-              "index$" => 5,
-            },
-            {
-              "active" => true,
-              "name" => "iso3",
-              "req" => true,
-              "type" => "`$STRING`",
-              "index$" => 6,
-            },
-            {
-              "active" => true,
-              "name" => "latitude",
-              "req" => true,
-              "type" => "`$NUMBER`",
-              "index$" => 7,
-            },
-            {
-              "active" => true,
-              "name" => "longitude",
-              "req" => true,
-              "type" => "`$NUMBER`",
-              "index$" => 8,
-            },
-            {
-              "active" => true,
-              "name" => "name",
-              "req" => true,
-              "type" => "`$STRING`",
-              "index$" => 9,
-            },
-            {
-              "active" => true,
-              "name" => "numeric_code",
-              "req" => true,
-              "type" => "`$INTEGER`",
-              "index$" => 10,
-            },
-            {
-              "active" => true,
-              "name" => "phone_code",
-              "req" => true,
-              "type" => "`$STRING`",
-              "index$" => 11,
-            },
-            {
-              "active" => true,
-              "name" => "region",
-              "req" => true,
-              "type" => "`$STRING`",
-              "index$" => 12,
-            },
-            {
-              "active" => true,
-              "name" => "subregion",
-              "req" => true,
-              "type" => "`$STRING`",
-              "index$" => 13,
-            },
-            {
-              "active" => true,
-              "name" => "tld",
-              "req" => true,
-              "type" => "`$STRING`",
-              "index$" => 14,
-            },
-          ],
+          "fields" => [],
           "name" => "geolocate",
           "op" => {
             "load" => {
@@ -315,6 +211,7 @@ module VatValidationConfig
                 {
                   "active" => true,
                   "args" => {},
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/geolocate",
                   "parts" => [
@@ -323,7 +220,7 @@ module VatValidationConfig
                   "select" => {},
                   "transform" => {
                     "req" => "`reqdata`",
-                    "res" => "`body`",
+                    "res" => "`body.ip`",
                   },
                   "index$" => 0,
                 },
@@ -336,29 +233,7 @@ module VatValidationConfig
           },
         },
         "rate" => {
-          "fields" => [
-            {
-              "active" => true,
-              "name" => "base",
-              "req" => true,
-              "type" => "`$STRING`",
-              "index$" => 0,
-            },
-            {
-              "active" => true,
-              "name" => "date",
-              "req" => true,
-              "type" => "`$STRING`",
-              "index$" => 1,
-            },
-            {
-              "active" => true,
-              "name" => "rate",
-              "req" => true,
-              "type" => "`$OBJECT`",
-              "index$" => 2,
-            },
-          ],
+          "fields" => [],
           "name" => "rate",
           "op" => {
             "load" => {
@@ -396,6 +271,7 @@ module VatValidationConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/rates",
                   "parts" => [
@@ -410,7 +286,7 @@ module VatValidationConfig
                   },
                   "transform" => {
                     "req" => "`reqdata`",
-                    "res" => "`body`",
+                    "res" => "`body.rates`",
                   },
                   "index$" => 0,
                 },
@@ -468,7 +344,7 @@ module VatValidationConfig
             },
             {
               "active" => true,
-              "name" => "checksum_digit",
+              "name" => "checksum_digits",
               "req" => true,
               "type" => "`$STRING`",
               "index$" => 6,
@@ -529,6 +405,7 @@ module VatValidationConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/iban",
                   "parts" => [
@@ -554,43 +431,7 @@ module VatValidationConfig
           },
         },
         "validate_vat_response_schema" => {
-          "fields" => [
-            {
-              "active" => true,
-              "name" => "address",
-              "req" => false,
-              "type" => "`$STRING`",
-              "index$" => 0,
-            },
-            {
-              "active" => true,
-              "name" => "country_code",
-              "req" => true,
-              "type" => "`$STRING`",
-              "index$" => 1,
-            },
-            {
-              "active" => true,
-              "name" => "name",
-              "req" => false,
-              "type" => "`$STRING`",
-              "index$" => 2,
-            },
-            {
-              "active" => true,
-              "name" => "valid",
-              "req" => true,
-              "type" => "`$BOOLEAN`",
-              "index$" => 3,
-            },
-            {
-              "active" => true,
-              "name" => "vat_number",
-              "req" => true,
-              "type" => "`$STRING`",
-              "index$" => 4,
-            },
-          ],
+          "fields" => [],
           "name" => "validate_vat_response_schema",
           "op" => {
             "load" => {
@@ -611,6 +452,7 @@ module VatValidationConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/vat",
                   "parts" => [
@@ -623,7 +465,7 @@ module VatValidationConfig
                   },
                   "transform" => {
                     "req" => "`reqdata`",
-                    "res" => "`body`",
+                    "res" => "`body.name`",
                   },
                   "index$" => 0,
                 },
@@ -636,57 +478,7 @@ module VatValidationConfig
           },
         },
         "vatcomply_api_root" => {
-          "fields" => [
-            {
-              "active" => true,
-              "name" => "contact",
-              "req" => true,
-              "type" => "`$STRING`",
-              "index$" => 0,
-            },
-            {
-              "active" => true,
-              "name" => "description",
-              "req" => true,
-              "type" => "`$STRING`",
-              "index$" => 1,
-            },
-            {
-              "active" => true,
-              "name" => "documentation",
-              "req" => true,
-              "type" => "`$STRING`",
-              "index$" => 2,
-            },
-            {
-              "active" => true,
-              "name" => "endpoint",
-              "req" => true,
-              "type" => "`$OBJECT`",
-              "index$" => 3,
-            },
-            {
-              "active" => true,
-              "name" => "name",
-              "req" => true,
-              "type" => "`$STRING`",
-              "index$" => 4,
-            },
-            {
-              "active" => true,
-              "name" => "status",
-              "req" => true,
-              "type" => "`$STRING`",
-              "index$" => 5,
-            },
-            {
-              "active" => true,
-              "name" => "version",
-              "req" => true,
-              "type" => "`$STRING`",
-              "index$" => 6,
-            },
-          ],
+          "fields" => [],
           "name" => "vatcomply_api_root",
           "op" => {
             "load" => {
@@ -696,13 +488,14 @@ module VatValidationConfig
                 {
                   "active" => true,
                   "args" => {},
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/",
                   "parts" => [],
                   "select" => {},
                   "transform" => {
                     "req" => "`reqdata`",
-                    "res" => "`body`",
+                    "res" => "`body.endpoints`",
                   },
                   "index$" => 0,
                 },

@@ -68,12 +68,12 @@ Every entity operation returns `(value, error)`. Check `err` before
 using the value — there is no exception to catch:
 
 ```go
-countrys, err := client.Country(nil).List(nil, nil)
+geolocate, err := client.Geolocate(nil).Load(nil, nil)
 if err != nil {
     // handle err
     return
 }
-_ = countrys
+_ = geolocate
 ```
 
 `Direct` follows the same `(value, error)` convention:
@@ -137,13 +137,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-country, err := client.Country(nil).List(
+geolocate, err := client.Geolocate(nil).Load(
     nil, nil,
 )
 if err != nil {
     panic(err)
 }
-fmt.Println(country) // the returned mock data
+fmt.Println(geolocate) // the returned mock data
 ```
 
 ### Use a custom fetch function
@@ -301,21 +301,6 @@ API path: `/currencies`
 
 | Field | Description |
 | --- | --- |
-| `"capital"` |  |
-| `"country_code"` |  |
-| `"currency"` |  |
-| `"emoji"` |  |
-| `"ip"` |  |
-| `"iso2"` |  |
-| `"iso3"` |  |
-| `"latitude"` |  |
-| `"longitude"` |  |
-| `"name"` |  |
-| `"numeric_code"` |  |
-| `"phone_code"` |  |
-| `"region"` |  |
-| `"subregion"` |  |
-| `"tld"` |  |
 
 Operations: Load.
 
@@ -325,9 +310,6 @@ API path: `/geolocate`
 
 | Field | Description |
 | --- | --- |
-| `"base"` |  |
-| `"date"` |  |
-| `"rate"` |  |
 
 Operations: Load.
 
@@ -343,7 +325,7 @@ API path: `/rates`
 | `"bban"` |  |
 | `"bic"` |  |
 | `"branch_code"` |  |
-| `"checksum_digit"` |  |
+| `"checksum_digits"` |  |
 | `"country_code"` |  |
 | `"country_name"` |  |
 | `"iban"` |  |
@@ -358,11 +340,6 @@ API path: `/iban`
 
 | Field | Description |
 | --- | --- |
-| `"address"` |  |
-| `"country_code"` |  |
-| `"name"` |  |
-| `"valid"` |  |
-| `"vat_number"` |  |
 
 Operations: Load.
 
@@ -372,13 +349,6 @@ API path: `/vat`
 
 | Field | Description |
 | --- | --- |
-| `"contact"` |  |
-| `"description"` |  |
-| `"documentation"` |  |
-| `"endpoint"` |  |
-| `"name"` |  |
-| `"status"` |  |
-| `"version"` |  |
 
 Operations: Load.
 
@@ -466,26 +436,6 @@ Create an instance: `geolocate := client.Geolocate(nil)`
 | --- | --- |
 | `Load(match, ctrl)` | Load a single entity by match criteria. |
 
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `capital` | `string` |  |
-| `country_code` | `string` |  |
-| `currency` | `string` |  |
-| `emoji` | `string` |  |
-| `ip` | `any` |  |
-| `iso2` | `string` |  |
-| `iso3` | `string` |  |
-| `latitude` | `float64` |  |
-| `longitude` | `float64` |  |
-| `name` | `string` |  |
-| `numeric_code` | `int` |  |
-| `phone_code` | `string` |  |
-| `region` | `string` |  |
-| `subregion` | `string` |  |
-| `tld` | `string` |  |
-
 #### Example: Load
 
 ```go
@@ -506,14 +456,6 @@ Create an instance: `rate := client.Rate(nil)`
 | Method | Description |
 | --- | --- |
 | `Load(match, ctrl)` | Load a single entity by match criteria. |
-
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `base` | `string` |  |
-| `date` | `string` |  |
-| `rate` | `map[string]any` |  |
 
 #### Example: Load
 
@@ -546,7 +488,7 @@ Create an instance: `validateIbanResponseSchema := client.ValidateIbanResponseSc
 | `bban` | `string` |  |
 | `bic` | `string` |  |
 | `branch_code` | `string` |  |
-| `checksum_digit` | `string` |  |
+| `checksum_digits` | `string` |  |
 | `country_code` | `string` |  |
 | `country_name` | `string` |  |
 | `iban` | `string` |  |
@@ -574,16 +516,6 @@ Create an instance: `validateVatResponseSchema := client.ValidateVatResponseSche
 | --- | --- |
 | `Load(match, ctrl)` | Load a single entity by match criteria. |
 
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `address` | `string` |  |
-| `country_code` | `string` |  |
-| `name` | `string` |  |
-| `valid` | `bool` |  |
-| `vat_number` | `string` |  |
-
 #### Example: Load
 
 ```go
@@ -604,18 +536,6 @@ Create an instance: `vatcomplyApiRoot := client.VatcomplyApiRoot(nil)`
 | Method | Description |
 | --- | --- |
 | `Load(match, ctrl)` | Load a single entity by match criteria. |
-
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `contact` | `string` |  |
-| `description` | `string` |  |
-| `documentation` | `string` |  |
-| `endpoint` | `map[string]any` |  |
-| `name` | `string` |  |
-| `status` | `string` |  |
-| `version` | `string` |  |
 
 #### Example: Load
 
@@ -697,15 +617,15 @@ like `core.ToMapAny`.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `List`, the entity
+Entity instances are stateful. After a successful `Load`, the entity
 stores the returned data and match criteria internally.
 
 ```go
-country := client.Country(nil)
-country.List(nil, nil)
+geolocate := client.Geolocate(nil)
+geolocate.Load(nil, nil)
 
-// country.Data() now returns the country data from the last list
-// country.Match() returns the last match criteria
+// geolocate.Data() now returns the geolocate data from the last load
+// geolocate.Match() returns the last match criteria
 ```
 
 Call `Make()` to create a fresh instance with the same configuration

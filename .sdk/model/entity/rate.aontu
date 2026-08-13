@@ -4,24 +4,6 @@ main: kit: entity: rate: {
 
   alias: field: {}
 
-  fields: [
-    {
-      name: "base"
-      req: true
-      type: "`$STRING`"
-    }
-    {
-      name: "date"
-      req: true
-      type: "`$STRING`"
-    }
-    {
-      name: "rate"
-      req: true
-      type: "`$OBJECT`"
-    }
-  ]
-
   name: "rate"
   op: {
     load: {
@@ -68,7 +50,7 @@ main: kit: entity: rate: {
           }
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.rates`"
           }
         }
       ]

@@ -60,11 +60,11 @@ function validate_vat_response_schema_direct_setup(mockres)
   local calls = {}
 
   local env = runner.env_override({
-    ["VATVALIDATION_TEST_VALIDATE_VAT_RESPONSE_SCHEMA_ENTID"] = {},
-    ["VATVALIDATION_TEST_LIVE"] = "FALSE",
+    ["VAT_VALIDATION_TEST_VALIDATE_VAT_RESPONSE_SCHEMA_ENTID"] = {},
+    ["VAT_VALIDATION_TEST_LIVE"] = "FALSE",
   })
 
-  local live = env["VATVALIDATION_TEST_LIVE"] == "TRUE"
+  local live = env["VAT_VALIDATION_TEST_LIVE"] == "TRUE"
 
   if live then
     local merged_opts = {

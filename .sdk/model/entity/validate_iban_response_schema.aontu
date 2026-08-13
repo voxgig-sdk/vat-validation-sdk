@@ -36,7 +36,7 @@ main: kit: entity: validate_iban_response_schema: {
       type: "`$STRING`"
     }
     {
-      name: "checksum_digit"
+      name: "checksum_digits"
       req: true
       type: "`$STRING`"
     }

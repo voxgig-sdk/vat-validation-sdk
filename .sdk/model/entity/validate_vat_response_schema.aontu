@@ -4,34 +4,6 @@ main: kit: entity: validate_vat_response_schema: {
 
   alias: field: {}
 
-  fields: [
-    {
-      name: "address"
-      req: false
-      type: "`$STRING`"
-    }
-    {
-      name: "country_code"
-      req: true
-      type: "`$STRING`"
-    }
-    {
-      name: "name"
-      req: false
-      type: "`$STRING`"
-    }
-    {
-      name: "valid"
-      req: true
-      type: "`$BOOLEAN`"
-    }
-    {
-      name: "vat_number"
-      req: true
-      type: "`$STRING`"
-    }
-  ]
-
   name: "validate_vat_response_schema"
   op: {
     load: {
@@ -61,7 +33,7 @@ main: kit: entity: validate_vat_response_schema: {
           }
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.name`"
           }
         }
       ]

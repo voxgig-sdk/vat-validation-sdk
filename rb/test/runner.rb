@@ -23,8 +23,8 @@ module VatValidationTestRunner
   end
 
   def self.env_override(m)
-    live = getenv("VATVALIDATION_TEST_LIVE")
-    override = getenv("VATVALIDATION_TEST_OVERRIDE")
+    live = getenv("VAT_VALIDATION_TEST_LIVE")
+    override = getenv("VAT_VALIDATION_TEST_OVERRIDE")
 
     if live == "TRUE" || override == "TRUE"
       m.each_key do |key|
@@ -44,8 +44,8 @@ module VatValidationTestRunner
       end
     end
 
-    explain = getenv("VATVALIDATION_TEST_EXPLAIN")
-    m["VATVALIDATION_TEST_EXPLAIN"] = explain if explain && !explain.empty?
+    explain = getenv("VAT_VALIDATION_TEST_EXPLAIN")
+    m["VAT_VALIDATION_TEST_EXPLAIN"] = explain if explain && !explain.empty?
 
     m
   end

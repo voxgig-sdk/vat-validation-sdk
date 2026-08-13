@@ -20,12 +20,14 @@ guide: {
   entity: geolocate: {
     path: "/geolocate": {
       op: load: method: *GET
+      op: load: transform: res: *("`body.ip`")|top
     }
   }
 
   entity: rate: {
     path: "/rates": {
       op: load: method: *GET
+      op: load: transform: res: *("`body.rates`")|top
     }
   }
 
@@ -38,12 +40,14 @@ guide: {
   entity: validate_vat_response_schema: {
     path: "/vat": {
       op: load: method: *GET
+      op: load: transform: res: *("`body.name`")|top
     }
   }
 
   entity: vatcomply_api_root: {
     path: "/": {
       op: load: method: *GET
+      op: load: transform: res: *("`body.endpoints`")|top
     }
   }
 

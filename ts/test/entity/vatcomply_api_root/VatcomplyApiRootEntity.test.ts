@@ -26,8 +26,8 @@ import {
 describe('VatcomplyApiRootEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when VATVALIDATION_TEST_LIVE=TRUE.
-  afterEach(liveDelay('VATVALIDATION_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when VAT_VALIDATION_TEST_LIVE=TRUE.
+  afterEach(liveDelay('VAT_VALIDATION_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = VatValidationSDK.test()
@@ -62,7 +62,7 @@ describe('VatcomplyApiRootEntity', async () => {
     // LOAD
     const vatcomply_api_root_ref01_ent = client.VatcomplyApiRoot()
     const vatcomply_api_root_ref01_match_dt0: any = {}
-    const vatcomply_api_root_ref01_data_dt0 = await vatcomply_api_root_ref01_ent.load(vatcomply_api_root_ref01_match_dt0)
+    const vatcomply_api_root_ref01_data_dt0 = (await vatcomply_api_root_ref01_ent.load(vatcomply_api_root_ref01_match_dt0)).data()
     assert(null != vatcomply_api_root_ref01_data_dt0)
 
 

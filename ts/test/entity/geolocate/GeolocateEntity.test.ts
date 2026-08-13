@@ -26,8 +26,8 @@ import {
 describe('GeolocateEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when VATVALIDATION_TEST_LIVE=TRUE.
-  afterEach(liveDelay('VATVALIDATION_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when VAT_VALIDATION_TEST_LIVE=TRUE.
+  afterEach(liveDelay('VAT_VALIDATION_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = VatValidationSDK.test()
@@ -62,7 +62,7 @@ describe('GeolocateEntity', async () => {
     // LOAD
     const geolocate_ref01_ent = client.Geolocate()
     const geolocate_ref01_match_dt0: any = {}
-    const geolocate_ref01_data_dt0 = await geolocate_ref01_ent.load(geolocate_ref01_match_dt0)
+    const geolocate_ref01_data_dt0 = (await geolocate_ref01_ent.load(geolocate_ref01_match_dt0)).data()
     assert(null != geolocate_ref01_data_dt0)
 
 

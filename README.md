@@ -38,18 +38,27 @@ network, and no credentials:
 ### TypeScript
 
 ```ts
-const client = VatValidationSDK.test()
-const countrys = await client.Country().list()
-// countrys is an array of bare Country records populated with mock data
-console.log(countrys)
+// The offline mock starts EMPTY — seed it with the records the test needs.
+// Shape: { entity: { <entity-name>: { <id>: <record> } } }
+const client = VatValidationSDK.test({
+  entity: {
+    geolocate: {
+      test01: { id: 'test01' },
+    },
+  },
+})
+const geolocate = await client.Geolocate().load()
+// geolocate is the Geolocate entity, populated with mock data
+// — call geolocate.data() for the record itself
+console.log(geolocate)
 ```
 
 ### Python
 
 ```python
 client = VatValidationSDK.test()
-countrys = client.Country().list()
-print(countrys)
+geolocate = client.Geolocate().load()
+print(geolocate)
 ```
 
 ### PHP
@@ -57,16 +66,16 @@ print(countrys)
 ```php
 // Seed fixture data so offline calls resolve without a live server.
 $client = VatValidationSDK::test([
-    "entity" => ["country" => ["test01" => []]],
+    "entity" => ["geolocate" => ["test01" => []]],
 ]);
-$countrys = $client->Country()->list();
+$geolocate = $client->Geolocate()->load();
 ```
 
 ### Golang
 
 ```go
 client := sdk.Test()
-result, err := client.Country(nil).List(
+result, err := client.Geolocate(nil).Load(
     nil, nil,
 )
 ```
@@ -76,16 +85,16 @@ result, err := client.Country(nil).List(
 ```ruby
 # Seed fixture data so offline calls resolve without a live server.
 client = VatValidationSDK.test({
-  "entity" => { "country" => { "test01" => {} } },
+  "entity" => { "geolocate" => { "test01" => {} } },
 })
-countrys = client.Country.list()
+geolocate = client.Geolocate.load()
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local results, err = client:Country():list()
+local result, err = client:Geolocate():load()
 ```
 
 ## Packages
@@ -110,7 +119,7 @@ import { VatValidationSDK } from '@voxgig-sdk/vat-validation'
 
 const client = new VatValidationSDK()
 
-// List all countrys (returns Country[])
+// List all countrys (returns CountryEntity[] — .data() for the record)
 const countrys = await client.Country().list()
 for (const country of countrys) {
   console.log(country)
@@ -349,6 +358,9 @@ Pass custom features via the `extend` option at construction time.
 
 This SDK is generated from the upstream OpenAPI specification. It is an
 unofficial client and is not affiliated with the API provider.
+
+The OpenAPI spec(s) this SDK was generated from are kept in the
+[`.sdk/def/`](.sdk/def/) folder.
 
 - Upstream API: [https://www.vatcomply.com](https://www.vatcomply.com)
 

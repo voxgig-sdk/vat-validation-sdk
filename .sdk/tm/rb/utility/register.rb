@@ -24,6 +24,7 @@ require_relative 'prepare_method'
 require_relative 'prepare_params'
 require_relative 'prepare_path'
 require_relative 'prepare_query'
+require_relative 'graphql'
 require_relative 'result_basic'
 require_relative 'result_body'
 require_relative 'result_headers'
@@ -55,6 +56,8 @@ VatValidationUtility.registrar = ->(u) {
   u.prepare_params = VatValidationUtilities::PrepareParams
   u.prepare_path = VatValidationUtilities::PreparePath
   u.prepare_query = VatValidationUtilities::PrepareQuery
+  u.graphql_body = VatValidationUtilities::GraphqlBody
+  u.graphql_errors = VatValidationUtilities::GraphqlErrors
   u.result_basic = VatValidationUtilities::ResultBasic
   u.result_body = VatValidationUtilities::ResultBody
   u.result_headers = VatValidationUtilities::ResultHeaders

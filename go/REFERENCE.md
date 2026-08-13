@@ -233,26 +233,6 @@ geolocate := client.Geolocate(nil)
 fmt.Println(geolocate.GetName()) // "geolocate"
 ```
 
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `capital` | `string` | Yes |  |
-| `country_code` | `string` | Yes |  |
-| `currency` | `string` | Yes |  |
-| `emoji` | `string` | Yes |  |
-| `ip` | `any` | Yes |  |
-| `iso2` | `string` | Yes |  |
-| `iso3` | `string` | Yes |  |
-| `latitude` | `float64` | Yes |  |
-| `longitude` | `float64` | Yes |  |
-| `name` | `string` | Yes |  |
-| `numeric_code` | `int` | Yes |  |
-| `phone_code` | `string` | Yes |  |
-| `region` | `string` | Yes |  |
-| `subregion` | `string` | Yes |  |
-| `tld` | `string` | Yes |  |
-
 ### Operations
 
 #### `Load(reqmatch, ctrl map[string]any) (any, error)`
@@ -297,14 +277,6 @@ Return the entity name.
 rate := client.Rate(nil)
 fmt.Println(rate.GetName()) // "rate"
 ```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `base` | `string` | Yes |  |
-| `date` | `string` | Yes |  |
-| `rate` | `map[string]any` | Yes |  |
 
 ### Operations
 
@@ -361,7 +333,7 @@ fmt.Println(validateIbanResponseSchema.GetName()) // "validate_iban_response_sch
 | `bban` | `string` | Yes |  |
 | `bic` | `string` | Yes |  |
 | `branch_code` | `string` | Yes |  |
-| `checksum_digit` | `string` | Yes |  |
+| `checksum_digits` | `string` | Yes |  |
 | `country_code` | `string` | Yes |  |
 | `country_name` | `string` | Yes |  |
 | `iban` | `string` | Yes |  |
@@ -413,16 +385,6 @@ validateVatResponseSchema := client.ValidateVatResponseSchema(nil)
 fmt.Println(validateVatResponseSchema.GetName()) // "validate_vat_response_schema"
 ```
 
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `address` | `string` | No |  |
-| `country_code` | `string` | Yes |  |
-| `name` | `string` | No |  |
-| `valid` | `bool` | Yes |  |
-| `vat_number` | `string` | Yes |  |
-
 ### Operations
 
 #### `Load(reqmatch, ctrl map[string]any) (any, error)`
@@ -467,18 +429,6 @@ Return the entity name.
 vatcomplyApiRoot := client.VatcomplyApiRoot(nil)
 fmt.Println(vatcomplyApiRoot.GetName()) // "vatcomply_api_root"
 ```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `contact` | `string` | Yes |  |
-| `description` | `string` | Yes |  |
-| `documentation` | `string` | Yes |  |
-| `endpoint` | `map[string]any` | Yes |  |
-| `name` | `string` | Yes |  |
-| `status` | `string` | Yes |  |
-| `version` | `string` | Yes |  |
 
 ### Operations
 

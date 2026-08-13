@@ -51,9 +51,9 @@ Entity operations raise on failure, so rescue them:
 
 ```ruby
 begin
-  countrys = client.Country.list()
+  geolocate = client.Geolocate.load()
 rescue => err
-  warn "list failed: #{err}"
+  warn "load failed: #{err}"
 end
 ```
 
@@ -119,9 +119,10 @@ Create a mock client for unit testing — no server required:
 ```ruby
 client = VatValidationSDK.test
 
-# Entity ops return the bare mock record (raises on error).
-country = client.Country.list()
-puts country
+# Entity ops return the ENTITY (raises on error);
+# call data_get for the mock record.
+geolocate = client.Geolocate.load()
+puts geolocate
 ```
 
 ### Use a custom fetch function
@@ -276,21 +277,6 @@ API path: `/currencies`
 
 | Field | Description |
 | --- | --- |
-| `capital` |  |
-| `country_code` |  |
-| `currency` |  |
-| `emoji` |  |
-| `ip` |  |
-| `iso2` |  |
-| `iso3` |  |
-| `latitude` |  |
-| `longitude` |  |
-| `name` |  |
-| `numeric_code` |  |
-| `phone_code` |  |
-| `region` |  |
-| `subregion` |  |
-| `tld` |  |
 
 Operations: Load.
 
@@ -300,9 +286,6 @@ API path: `/geolocate`
 
 | Field | Description |
 | --- | --- |
-| `base` |  |
-| `date` |  |
-| `rate` |  |
 
 Operations: Load.
 
@@ -318,7 +301,7 @@ API path: `/rates`
 | `bban` |  |
 | `bic` |  |
 | `branch_code` |  |
-| `checksum_digit` |  |
+| `checksum_digits` |  |
 | `country_code` |  |
 | `country_name` |  |
 | `iban` |  |
@@ -333,11 +316,6 @@ API path: `/iban`
 
 | Field | Description |
 | --- | --- |
-| `address` |  |
-| `country_code` |  |
-| `name` |  |
-| `valid` |  |
-| `vat_number` |  |
 
 Operations: Load.
 
@@ -347,13 +325,6 @@ API path: `/vat`
 
 | Field | Description |
 | --- | --- |
-| `contact` |  |
-| `description` |  |
-| `documentation` |  |
-| `endpoint` |  |
-| `name` |  |
-| `status` |  |
-| `version` |  |
 
 Operations: Load.
 
@@ -420,7 +391,7 @@ Create an instance: `currency = client.Currency`
 #### Example: Load
 
 ```ruby
-# load returns the bare Currency record (raises on error).
+# load returns the ENTITY — call data_get for the Currency record (raises on error).
 currency = client.Currency.load()
 ```
 
@@ -435,30 +406,10 @@ Create an instance: `geolocate = client.Geolocate`
 | --- | --- |
 | `load(match)` | Load a single entity by match criteria. |
 
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `capital` | `String` |  |
-| `country_code` | `String` |  |
-| `currency` | `String` |  |
-| `emoji` | `String` |  |
-| `ip` | `Object` |  |
-| `iso2` | `String` |  |
-| `iso3` | `String` |  |
-| `latitude` | `Float` |  |
-| `longitude` | `Float` |  |
-| `name` | `String` |  |
-| `numeric_code` | `Integer` |  |
-| `phone_code` | `String` |  |
-| `region` | `String` |  |
-| `subregion` | `String` |  |
-| `tld` | `String` |  |
-
 #### Example: Load
 
 ```ruby
-# load returns the bare Geolocate record (raises on error).
+# load returns the ENTITY — call data_get for the Geolocate record (raises on error).
 geolocate = client.Geolocate.load()
 ```
 
@@ -473,18 +424,10 @@ Create an instance: `rate = client.Rate`
 | --- | --- |
 | `load(match)` | Load a single entity by match criteria. |
 
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `base` | `String` |  |
-| `date` | `String` |  |
-| `rate` | `Hash` |  |
-
 #### Example: Load
 
 ```ruby
-# load returns the bare Rate record (raises on error).
+# load returns the ENTITY — call data_get for the Rate record (raises on error).
 rate = client.Rate.load()
 ```
 
@@ -509,7 +452,7 @@ Create an instance: `validate_iban_response_schema = client.ValidateIbanResponse
 | `bban` | `String` |  |
 | `bic` | `String` |  |
 | `branch_code` | `String` |  |
-| `checksum_digit` | `String` |  |
+| `checksum_digits` | `String` |  |
 | `country_code` | `String` |  |
 | `country_name` | `String` |  |
 | `iban` | `String` |  |
@@ -519,7 +462,7 @@ Create an instance: `validate_iban_response_schema = client.ValidateIbanResponse
 #### Example: Load
 
 ```ruby
-# load returns the bare ValidateIbanResponseSchema record (raises on error).
+# load returns the ENTITY — call data_get for the ValidateIbanResponseSchema record (raises on error).
 validate_iban_response_schema = client.ValidateIbanResponseSchema.load()
 ```
 
@@ -534,20 +477,10 @@ Create an instance: `validate_vat_response_schema = client.ValidateVatResponseSc
 | --- | --- |
 | `load(match)` | Load a single entity by match criteria. |
 
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `address` | `String` |  |
-| `country_code` | `String` |  |
-| `name` | `String` |  |
-| `valid` | `Boolean` |  |
-| `vat_number` | `String` |  |
-
 #### Example: Load
 
 ```ruby
-# load returns the bare ValidateVatResponseSchema record (raises on error).
+# load returns the ENTITY — call data_get for the ValidateVatResponseSchema record (raises on error).
 validate_vat_response_schema = client.ValidateVatResponseSchema.load()
 ```
 
@@ -562,22 +495,10 @@ Create an instance: `vatcomply_api_root = client.VatcomplyApiRoot`
 | --- | --- |
 | `load(match)` | Load a single entity by match criteria. |
 
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `contact` | `String` |  |
-| `description` | `String` |  |
-| `documentation` | `String` |  |
-| `endpoint` | `Hash` |  |
-| `name` | `String` |  |
-| `status` | `String` |  |
-| `version` | `String` |  |
-
 #### Example: Load
 
 ```ruby
-# load returns the bare VatcomplyApiRoot record (raises on error).
+# load returns the ENTITY — call data_get for the VatcomplyApiRoot record (raises on error).
 vatcomply_api_root = client.VatcomplyApiRoot.load()
 ```
 
@@ -654,15 +575,15 @@ when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `list`, the entity
+Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-country = client.Country
-country.list()
+geolocate = client.Geolocate
+geolocate.load()
 
-# country.data_get now returns the country data from the last list
-# country.match_get returns the last match criteria
+# geolocate.data_get now returns the geolocate data from the last load
+# geolocate.match_get returns the last match criteria
 ```
 
 Call `make` to create a fresh instance with the same configuration

@@ -1,4 +1,4 @@
-# ProjectName SDK exists test
+# VatValidation SDK exists test
 
 import pytest
 from vatvalidation_sdk import VatValidationSDK

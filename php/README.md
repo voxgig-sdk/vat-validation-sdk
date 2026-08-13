@@ -53,7 +53,7 @@ Entity operations throw a `\Throwable` on failure, so wrap them in
 
 ```php
 try {
-    $countrys = $client->Country()->list();
+    $geolocate = $client->Geolocate()->load();
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
@@ -125,9 +125,10 @@ Create a mock client for unit testing — no server required:
 ```php
 $client = VatValidationSDK::test();
 
-// Entity ops return the bare mock record (throws on error).
-$country = $client->Country()->list();
-print_r($country);
+// Entity ops return the ENTITY (throws on error);
+// call data_get() for the mock record.
+$geolocate = $client->Geolocate()->load();
+print_r($geolocate);
 ```
 
 ### Use a custom fetch function
@@ -231,7 +232,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (an `array` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (an `array` for single-entity
 ops, a `list` for `list`) and throw on error. Wrap calls in
 `try`/`catch` to handle failures.
 
@@ -286,21 +287,6 @@ API path: `/currencies`
 
 | Field | Description |
 | --- | --- |
-| `capital` |  |
-| `country_code` |  |
-| `currency` |  |
-| `emoji` |  |
-| `ip` |  |
-| `iso2` |  |
-| `iso3` |  |
-| `latitude` |  |
-| `longitude` |  |
-| `name` |  |
-| `numeric_code` |  |
-| `phone_code` |  |
-| `region` |  |
-| `subregion` |  |
-| `tld` |  |
 
 Operations: Load.
 
@@ -310,9 +296,6 @@ API path: `/geolocate`
 
 | Field | Description |
 | --- | --- |
-| `base` |  |
-| `date` |  |
-| `rate` |  |
 
 Operations: Load.
 
@@ -328,7 +311,7 @@ API path: `/rates`
 | `bban` |  |
 | `bic` |  |
 | `branch_code` |  |
-| `checksum_digit` |  |
+| `checksum_digits` |  |
 | `country_code` |  |
 | `country_name` |  |
 | `iban` |  |
@@ -343,11 +326,6 @@ API path: `/iban`
 
 | Field | Description |
 | --- | --- |
-| `address` |  |
-| `country_code` |  |
-| `name` |  |
-| `valid` |  |
-| `vat_number` |  |
 
 Operations: Load.
 
@@ -357,13 +335,6 @@ API path: `/vat`
 
 | Field | Description |
 | --- | --- |
-| `contact` |  |
-| `description` |  |
-| `documentation` |  |
-| `endpoint` |  |
-| `name` |  |
-| `status` |  |
-| `version` |  |
 
 Operations: Load.
 
@@ -430,7 +401,7 @@ Create an instance: `$currency = $client->Currency();`
 #### Example: Load
 
 ```php
-// load() returns the bare Currency record (throws on error).
+// load() returns the ENTITY — call data_get() for the Currency record (throws on error).
 $currency = $client->Currency()->load();
 ```
 
@@ -445,30 +416,10 @@ Create an instance: `$geolocate = $client->Geolocate();`
 | --- | --- |
 | `load(match)` | Load a single entity by match criteria. |
 
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `capital` | `string` |  |
-| `country_code` | `string` |  |
-| `currency` | `string` |  |
-| `emoji` | `string` |  |
-| `ip` | `mixed` |  |
-| `iso2` | `string` |  |
-| `iso3` | `string` |  |
-| `latitude` | `float` |  |
-| `longitude` | `float` |  |
-| `name` | `string` |  |
-| `numeric_code` | `int` |  |
-| `phone_code` | `string` |  |
-| `region` | `string` |  |
-| `subregion` | `string` |  |
-| `tld` | `string` |  |
-
 #### Example: Load
 
 ```php
-// load() returns the bare Geolocate record (throws on error).
+// load() returns the ENTITY — call data_get() for the Geolocate record (throws on error).
 $geolocate = $client->Geolocate()->load();
 ```
 
@@ -483,18 +434,10 @@ Create an instance: `$rate = $client->Rate();`
 | --- | --- |
 | `load(match)` | Load a single entity by match criteria. |
 
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `base` | `string` |  |
-| `date` | `string` |  |
-| `rate` | `array` |  |
-
 #### Example: Load
 
 ```php
-// load() returns the bare Rate record (throws on error).
+// load() returns the ENTITY — call data_get() for the Rate record (throws on error).
 $rate = $client->Rate()->load();
 ```
 
@@ -519,7 +462,7 @@ Create an instance: `$validate_iban_response_schema = $client->ValidateIbanRespo
 | `bban` | `string` |  |
 | `bic` | `string` |  |
 | `branch_code` | `string` |  |
-| `checksum_digit` | `string` |  |
+| `checksum_digits` | `string` |  |
 | `country_code` | `string` |  |
 | `country_name` | `string` |  |
 | `iban` | `string` |  |
@@ -529,7 +472,7 @@ Create an instance: `$validate_iban_response_schema = $client->ValidateIbanRespo
 #### Example: Load
 
 ```php
-// load() returns the bare ValidateIbanResponseSchema record (throws on error).
+// load() returns the ENTITY — call data_get() for the ValidateIbanResponseSchema record (throws on error).
 $validate_iban_response_schema = $client->ValidateIbanResponseSchema()->load();
 ```
 
@@ -544,20 +487,10 @@ Create an instance: `$validate_vat_response_schema = $client->ValidateVatRespons
 | --- | --- |
 | `load(match)` | Load a single entity by match criteria. |
 
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `address` | `string` |  |
-| `country_code` | `string` |  |
-| `name` | `string` |  |
-| `valid` | `bool` |  |
-| `vat_number` | `string` |  |
-
 #### Example: Load
 
 ```php
-// load() returns the bare ValidateVatResponseSchema record (throws on error).
+// load() returns the ENTITY — call data_get() for the ValidateVatResponseSchema record (throws on error).
 $validate_vat_response_schema = $client->ValidateVatResponseSchema()->load();
 ```
 
@@ -572,22 +505,10 @@ Create an instance: `$vatcomply_api_root = $client->VatcomplyApiRoot();`
 | --- | --- |
 | `load(match)` | Load a single entity by match criteria. |
 
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `contact` | `string` |  |
-| `description` | `string` |  |
-| `documentation` | `string` |  |
-| `endpoint` | `array` |  |
-| `name` | `string` |  |
-| `status` | `string` |  |
-| `version` | `string` |  |
-
 #### Example: Load
 
 ```php
-// load() returns the bare VatcomplyApiRoot record (throws on error).
+// load() returns the ENTITY — call data_get() for the VatcomplyApiRoot record (throws on error).
 $vatcomply_api_root = $client->VatcomplyApiRoot()->load();
 ```
 
@@ -664,15 +585,15 @@ when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `list`, the entity
+Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$country = $client->Country();
-$country->list();
+$geolocate = $client->Geolocate();
+$geolocate->load();
 
-// $country->data_get() now returns the country data from the last list
-// $country->match_get() returns the last match criteria
+// $geolocate->data_get() now returns the geolocate data from the last load
+// $geolocate->match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

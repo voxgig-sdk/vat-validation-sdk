@@ -3,9 +3,9 @@
 import json
 import pytest
 
-from utility.voxgig_struct import voxgig_struct as vs
+from vatvalidation_sdk.utility.voxgig_struct import voxgig_struct as vs
 from vatvalidation_sdk import VatValidationSDK
-from core import helpers
+from vatvalidation_sdk.core import helpers
 from test import runner
 
 
@@ -56,11 +56,11 @@ def _validate_vat_response_schema_direct_setup(mockres):
     calls = []
 
     env = runner.env_override({
-        "VATVALIDATION_TEST_VALIDATE_VAT_RESPONSE_SCHEMA_ENTID": {},
-        "VATVALIDATION_TEST_LIVE": "FALSE",
+        "VAT_VALIDATION_TEST_VALIDATE_VAT_RESPONSE_SCHEMA_ENTID": {},
+        "VAT_VALIDATION_TEST_LIVE": "FALSE",
     })
 
-    live = env.get("VATVALIDATION_TEST_LIVE") == "TRUE"
+    live = env.get("VAT_VALIDATION_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {

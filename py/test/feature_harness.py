@@ -14,12 +14,12 @@ from __future__ import annotations
 
 from urllib.parse import quote
 
-from config import make_config
-from features import _make_feature
-from core.control import VatValidationControl
-from core.error import VatValidationError
-from core.result import VatValidationResult
-from core.spec import VatValidationSpec
+from vatvalidation_sdk.config import make_config
+from vatvalidation_sdk.features import _make_feature
+from vatvalidation_sdk.core.control import VatValidationControl
+from vatvalidation_sdk.core.error import VatValidationError
+from vatvalidation_sdk.core.result import VatValidationResult
+from vatvalidation_sdk.core.spec import VatValidationSpec
 
 
 # True when this SDK was generated with the named feature.

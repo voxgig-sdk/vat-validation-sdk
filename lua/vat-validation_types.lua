@@ -45,48 +45,12 @@
 ---@field symbol? string
 
 ---@class Geolocate
----@field capital string
----@field country_code string
----@field currency string
----@field emoji string
----@field ip any
----@field iso2 string
----@field iso3 string
----@field latitude number
----@field longitude number
----@field name string
----@field numeric_code number
----@field phone_code string
----@field region string
----@field subregion string
----@field tld string
 
 ---@class GeolocateLoadMatch
----@field capital? string
----@field country_code? string
----@field currency? string
----@field emoji? string
----@field ip? any
----@field iso2? string
----@field iso3? string
----@field latitude? number
----@field longitude? number
----@field name? string
----@field numeric_code? number
----@field phone_code? string
----@field region? string
----@field subregion? string
----@field tld? string
 
 ---@class Rate
----@field base string
----@field date string
----@field rate table
 
 ---@class RateLoadMatch
----@field base? string
----@field date? string
----@field rate? table
 
 ---@class ValidateIbanResponseSchema
 ---@field account_number string
@@ -95,7 +59,7 @@
 ---@field bban string
 ---@field bic string
 ---@field branch_code string
----@field checksum_digit string
+---@field checksum_digits string
 ---@field country_code string
 ---@field country_name string
 ---@field iban string
@@ -109,7 +73,7 @@
 ---@field bban? string
 ---@field bic? string
 ---@field branch_code? string
----@field checksum_digit? string
+---@field checksum_digits? string
 ---@field country_code? string
 ---@field country_name? string
 ---@field iban? string
@@ -117,36 +81,12 @@
 ---@field valid? boolean
 
 ---@class ValidateVatResponseSchema
----@field address? string
----@field country_code string
----@field name? string
----@field valid boolean
----@field vat_number string
 
 ---@class ValidateVatResponseSchemaLoadMatch
----@field address? string
----@field country_code? string
----@field name? string
----@field valid? boolean
----@field vat_number? string
 
 ---@class VatcomplyApiRoot
----@field contact string
----@field description string
----@field documentation string
----@field endpoint table
----@field name string
----@field status string
----@field version string
 
 ---@class VatcomplyApiRootLoadMatch
----@field contact? string
----@field description? string
----@field documentation? string
----@field endpoint? table
----@field name? string
----@field status? string
----@field version? string
 
 local M = {}
 

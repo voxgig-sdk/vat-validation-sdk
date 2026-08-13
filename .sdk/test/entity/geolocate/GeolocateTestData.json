@@ -2,80 +2,19 @@
   "existing": {
     "geolocate": {
       "GEOLOCATE00": {
-        "capital": "s96",
-        "country_code": "s97",
-        "currency": "s98",
-        "emoji": "s99",
-        "ip": "s9a",
-        "iso2": "s9b",
-        "iso3": "s9c",
-        "latitude": 157,
-        "longitude": 158,
-        "name": "s9f",
-        "numeric_code": "sa0",
-        "phone_code": "sa1",
-        "region": "sa2",
-        "subregion": "sa3",
-        "tld": "sa4",
         "id": "GEOLOCATE00"
       },
       "GEOLOCATE01": {
-        "capital": "s12c",
-        "country_code": "s12d",
-        "currency": "s12e",
-        "emoji": "s12f",
-        "ip": "s130",
-        "iso2": "s131",
-        "iso3": "s132",
-        "latitude": 307,
-        "longitude": 308,
-        "name": "s135",
-        "numeric_code": "s136",
-        "phone_code": "s137",
-        "region": "s138",
-        "subregion": "s139",
-        "tld": "s13a",
         "id": "GEOLOCATE01"
       },
       "GEOLOCATE02": {
-        "capital": "s1c2",
-        "country_code": "s1c3",
-        "currency": "s1c4",
-        "emoji": "s1c5",
-        "ip": "s1c6",
-        "iso2": "s1c7",
-        "iso3": "s1c8",
-        "latitude": 457,
-        "longitude": 458,
-        "name": "s1cb",
-        "numeric_code": "s1cc",
-        "phone_code": "s1cd",
-        "region": "s1ce",
-        "subregion": "s1cf",
-        "tld": "s1d0",
         "id": "GEOLOCATE02"
       }
     }
   },
   "new": {
     "geolocate": {
-      "geolocate_ref01": {
-        "capital": "s258",
-        "country_code": "s259",
-        "currency": "s25a",
-        "emoji": "s25b",
-        "ip": "s25c",
-        "iso2": "s25d",
-        "iso3": "s25e",
-        "latitude": 607,
-        "longitude": 608,
-        "name": "s261",
-        "numeric_code": "s262",
-        "phone_code": "s263",
-        "region": "s264",
-        "subregion": "s265",
-        "tld": "s266"
-      }
+      "geolocate_ref01": {}
     }
   }
 }

@@ -26,8 +26,8 @@ import {
 describe('ValidateIbanResponseSchemaEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when VATVALIDATION_TEST_LIVE=TRUE.
-  afterEach(liveDelay('VATVALIDATION_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when VAT_VALIDATION_TEST_LIVE=TRUE.
+  afterEach(liveDelay('VAT_VALIDATION_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = VatValidationSDK.test()
@@ -62,7 +62,7 @@ describe('ValidateIbanResponseSchemaEntity', async () => {
     // LOAD
     const validate_iban_response_schema_ref01_ent = client.ValidateIbanResponseSchema()
     const validate_iban_response_schema_ref01_match_dt0: any = {}
-    const validate_iban_response_schema_ref01_data_dt0 = await validate_iban_response_schema_ref01_ent.load(validate_iban_response_schema_ref01_match_dt0)
+    const validate_iban_response_schema_ref01_data_dt0 = (await validate_iban_response_schema_ref01_ent.load(validate_iban_response_schema_ref01_match_dt0)).data()
     assert(null != validate_iban_response_schema_ref01_data_dt0)
 
 

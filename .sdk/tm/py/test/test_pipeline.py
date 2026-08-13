@@ -16,11 +16,11 @@
 import pytest
 
 from projectname_sdk import VatValidationSDK
-from core.error import VatValidationError
-from core.result import VatValidationResult
-from core.response import VatValidationResponse
-from core.spec import VatValidationSpec
-from feature.base_feature import VatValidationBaseFeature
+from projectname_sdk.core.error import VatValidationError
+from projectname_sdk.core.result import VatValidationResult
+from projectname_sdk.core.response import VatValidationResponse
+from projectname_sdk.core.spec import VatValidationSpec
+from projectname_sdk.feature.base_feature import VatValidationBaseFeature
 
 
 def _client():
