@@ -1,5 +1,8 @@
 -- VatValidation SDK configuration
 
+-- Build a fresh, fully materialised config table. Every call rebuilds the
+-- whole structure, so prefer require("config_shared") unless you need a
+-- private copy you intend to mutate.
 local function make_config()
   return {
     main = {
@@ -31,95 +34,79 @@ local function make_config()
       ["country"] = {
         ["fields"] = {
           {
-            ["active"] = true,
             ["name"] = "capital",
             ["req"] = true,
             ["type"] = "`$STRING`",
-            ["index$"] = 0,
           },
           {
-            ["active"] = true,
             ["name"] = "currency",
             ["req"] = true,
             ["type"] = "`$STRING`",
-            ["index$"] = 1,
           },
           {
-            ["active"] = true,
             ["name"] = "emoji",
             ["req"] = true,
             ["type"] = "`$STRING`",
-            ["index$"] = 2,
           },
           {
-            ["active"] = true,
             ["name"] = "iso2",
             ["req"] = true,
             ["type"] = "`$STRING`",
-            ["index$"] = 3,
           },
           {
-            ["active"] = true,
             ["name"] = "iso3",
             ["req"] = true,
             ["type"] = "`$STRING`",
-            ["index$"] = 4,
           },
           {
-            ["active"] = true,
             ["name"] = "latitude",
             ["req"] = true,
             ["type"] = "`$NUMBER`",
-            ["index$"] = 5,
+            ["union"] = {
+              ["branches"] = 2,
+              ["count"] = 1,
+              ["depth"] = 0,
+            },
           },
           {
-            ["active"] = true,
             ["name"] = "longitude",
             ["req"] = true,
             ["type"] = "`$NUMBER`",
-            ["index$"] = 6,
+            ["union"] = {
+              ["branches"] = 2,
+              ["count"] = 1,
+              ["depth"] = 0,
+            },
           },
           {
-            ["active"] = true,
             ["name"] = "name",
             ["req"] = true,
             ["type"] = "`$STRING`",
-            ["index$"] = 7,
           },
           {
-            ["active"] = true,
             ["name"] = "numeric_code",
             ["req"] = true,
             ["type"] = "`$INTEGER`",
-            ["index$"] = 8,
           },
           {
-            ["active"] = true,
             ["name"] = "phone_code",
             ["req"] = true,
             ["type"] = "`$STRING`",
-            ["index$"] = 9,
           },
           {
-            ["active"] = true,
             ["name"] = "region",
             ["req"] = true,
             ["type"] = "`$STRING`",
-            ["index$"] = 10,
           },
           {
-            ["active"] = true,
             ["name"] = "subregion",
             ["req"] = true,
             ["type"] = "`$STRING`",
-            ["index$"] = 11,
           },
           {
-            ["active"] = true,
             ["name"] = "tld",
             ["req"] = true,
             ["type"] = "`$STRING`",
-            ["index$"] = 12,
           },
         },
         ["name"] = "country",
@@ -129,7 +116,6 @@ local function make_config()
             ["name"] = "list",
             ["points"] = {
               {
-                ["active"] = true,
                 ["args"] = {},
                 ["kind"] = "http",
                 ["method"] = "GET",
@@ -142,10 +128,8 @@ local function make_config()
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
-                ["index$"] = 0,
               },
             },
-            ["key$"] = "list",
           },
         },
         ["relations"] = {
@@ -155,18 +139,14 @@ local function make_config()
       ["currency"] = {
         ["fields"] = {
           {
-            ["active"] = true,
             ["name"] = "name",
             ["req"] = true,
             ["type"] = "`$STRING`",
-            ["index$"] = 0,
           },
           {
-            ["active"] = true,
             ["name"] = "symbol",
             ["req"] = true,
             ["type"] = "`$STRING`",
-            ["index$"] = 1,
           },
         },
         ["name"] = "currency",
@@ -176,7 +156,6 @@ local function make_config()
             ["name"] = "load",
             ["points"] = {
               {
-                ["active"] = true,
                 ["args"] = {},
                 ["kind"] = "http",
                 ["method"] = "GET",
@@ -189,10 +168,8 @@ local function make_config()
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
-                ["index$"] = 0,
               },
             },
-            ["key$"] = "load",
           },
         },
         ["relations"] = {
@@ -208,7 +185,6 @@ local function make_config()
             ["name"] = "load",
             ["points"] = {
               {
-                ["active"] = true,
                 ["args"] = {},
                 ["kind"] = "http",
                 ["method"] = "GET",
@@ -221,10 +197,8 @@ local function make_config()
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.ip`",
                 },
-                ["index$"] = 0,
               },
             },
-            ["key$"] = "load",
           },
         },
         ["relations"] = {
@@ -240,32 +214,25 @@ local function make_config()
             ["name"] = "load",
             ["points"] = {
               {
-                ["active"] = true,
                 ["args"] = {
                   ["query"] = {
                     {
-                      ["active"] = true,
                       ["example"] = "EUR",
                       ["kind"] = "query",
                       ["name"] = "base",
                       ["orig"] = "base",
-                      ["reqd"] = false,
                       ["type"] = "`$ANY`",
                     },
                     {
-                      ["active"] = true,
                       ["kind"] = "query",
                       ["name"] = "date",
                       ["orig"] = "date",
-                      ["reqd"] = false,
                       ["type"] = "`$ANY`",
                     },
                     {
-                      ["active"] = true,
                       ["kind"] = "query",
                       ["name"] = "symbol",
                       ["orig"] = "symbol",
-                      ["reqd"] = false,
                       ["type"] = "`$ANY`",
                     },
                   },
@@ -287,10 +254,8 @@ local function make_config()
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.rates`",
                 },
-                ["index$"] = 0,
               },
             },
-            ["key$"] = "load",
           },
         },
         ["relations"] = {
@@ -300,88 +265,64 @@ local function make_config()
       ["validate_iban_response_schema"] = {
         ["fields"] = {
           {
-            ["active"] = true,
             ["name"] = "account_number",
             ["req"] = true,
             ["type"] = "`$STRING`",
-            ["index$"] = 0,
           },
           {
-            ["active"] = true,
             ["name"] = "bank_code",
             ["req"] = true,
             ["type"] = "`$STRING`",
-            ["index$"] = 1,
           },
           {
-            ["active"] = true,
             ["name"] = "bank_name",
             ["req"] = true,
             ["type"] = "`$STRING`",
-            ["index$"] = 2,
           },
           {
-            ["active"] = true,
             ["name"] = "bban",
             ["req"] = true,
             ["type"] = "`$STRING`",
-            ["index$"] = 3,
           },
           {
-            ["active"] = true,
             ["name"] = "bic",
             ["req"] = true,
             ["type"] = "`$STRING`",
-            ["index$"] = 4,
           },
           {
-            ["active"] = true,
             ["name"] = "branch_code",
             ["req"] = true,
             ["type"] = "`$STRING`",
-            ["index$"] = 5,
           },
           {
-            ["active"] = true,
             ["name"] = "checksum_digits",
             ["req"] = true,
             ["type"] = "`$STRING`",
-            ["index$"] = 6,
           },
           {
-            ["active"] = true,
             ["name"] = "country_code",
             ["req"] = true,
             ["type"] = "`$STRING`",
-            ["index$"] = 7,
           },
           {
-            ["active"] = true,
             ["name"] = "country_name",
             ["req"] = true,
             ["type"] = "`$STRING`",
-            ["index$"] = 8,
           },
           {
-            ["active"] = true,
             ["name"] = "iban",
             ["req"] = true,
             ["type"] = "`$STRING`",
-            ["index$"] = 9,
           },
           {
-            ["active"] = true,
             ["name"] = "in_sepa_zone",
             ["req"] = true,
             ["type"] = "`$BOOLEAN`",
-            ["index$"] = 10,
           },
           {
-            ["active"] = true,
             ["name"] = "valid",
             ["req"] = true,
             ["type"] = "`$BOOLEAN`",
-            ["index$"] = 11,
           },
         },
         ["name"] = "validate_iban_response_schema",
@@ -391,11 +332,9 @@ local function make_config()
             ["name"] = "load",
             ["points"] = {
               {
-                ["active"] = true,
                 ["args"] = {
                   ["query"] = {
                     {
-                      ["active"] = true,
                       ["kind"] = "query",
                       ["name"] = "iban",
                       ["orig"] = "iban",
@@ -419,10 +358,8 @@ local function make_config()
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
-                ["index$"] = 0,
               },
             },
-            ["key$"] = "load",
           },
         },
         ["relations"] = {
@@ -438,11 +375,9 @@ local function make_config()
             ["name"] = "load",
             ["points"] = {
               {
-                ["active"] = true,
                 ["args"] = {
                   ["query"] = {
                     {
-                      ["active"] = true,
                       ["kind"] = "query",
                       ["name"] = "vat_number",
                       ["orig"] = "vat_number",
@@ -466,10 +401,8 @@ local function make_config()
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.name`",
                 },
-                ["index$"] = 0,
               },
             },
-            ["key$"] = "load",
           },
         },
         ["relations"] = {
@@ -485,7 +418,6 @@ local function make_config()
             ["name"] = "load",
             ["points"] = {
               {
-                ["active"] = true,
                 ["args"] = {},
                 ["kind"] = "http",
                 ["method"] = "GET",
@@ -496,10 +428,8 @@ local function make_config()
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.endpoints`",
                 },
-                ["index$"] = 0,
               },
             },
-            ["key$"] = "load",
           },
         },
         ["relations"] = {

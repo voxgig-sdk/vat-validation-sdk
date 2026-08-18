@@ -40,7 +40,7 @@ class VatValidationSDK
         $utility = new VatValidationUtility();
         $this->_utility = $utility;
 
-        $config = VatValidationConfig::make_config();
+        $config = VatValidationConfig::shared_config();
 
         $this->_rootctx = ($utility->make_context)([
             "client" => $this,

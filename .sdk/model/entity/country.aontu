@@ -34,11 +34,21 @@ main: kit: entity: country: {
       name: "latitude"
       req: true
       type: "`$NUMBER`"
+      union: {
+        branches: 2
+        count: 1
+        depth: 0
+      }
     }
     {
       name: "longitude"
       req: true
       type: "`$NUMBER`"
+      union: {
+        branches: 2
+        count: 1
+        depth: 0
+      }
     }
     {
       name: "name"

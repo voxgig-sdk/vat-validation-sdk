@@ -28,7 +28,7 @@ class VatValidationSDK
     utility = VatValidationUtility.new
     @_utility = utility
 
-    config = VatValidationConfig.make_config
+    config = VatValidationConfig.shared_config
 
     @_rootctx = utility.make_context.call({
       "client" => self,
