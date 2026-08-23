@@ -1,9 +1,0 @@
-# Entity Models
-
-@"country.aontu"
-@"currency.aontu"
-@"geolocate.aontu"
-@"rate.aontu"
-@"validate_iban_response_schema.aontu"
-@"validate_vat_response_schema.aontu"
-@"vatcomply_api_root.aontu"

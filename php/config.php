@@ -33,6 +33,9 @@ class VatValidationConfig
         return [
             "main" => [
                 "name" => "VatValidation",
+                "slug" => "vat-validation",
+                "version" => "0.0.1",
+                "target" => "php",
             ],
             "feature" => [
                 "test" => [

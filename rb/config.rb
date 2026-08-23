@@ -19,6 +19,9 @@ module VatValidationConfig
     {
       "main" => {
         "name" => "VatValidation",
+        "slug" => "vat-validation",
+        "version" => "0.0.1",
+        "target" => "rb",
       },
       "feature" => {
         "test" => {

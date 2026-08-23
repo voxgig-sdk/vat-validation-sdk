@@ -1,9 +1,0 @@
-# Flows
-
-@"BasicCountryFlow.aontu"
-@"BasicCurrencyFlow.aontu"
-@"BasicGeolocateFlow.aontu"
-@"BasicRateFlow.aontu"
-@"BasicValidateIbanResponseSchemaFlow.aontu"
-@"BasicValidateVatResponseSchemaFlow.aontu"
-@"BasicVatcomplyApiRootFlow.aontu"

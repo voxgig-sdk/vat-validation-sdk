@@ -1,0 +1,9 @@
+# Flows
+
+@"BasicCountryFlow.aon"
+@"BasicCurrencyFlow.aon"
+@"BasicGeolocateFlow.aon"
+@"BasicRateFlow.aon"
+@"BasicValidateIbanResponseSchemaFlow.aon"
+@"BasicValidateVatResponseSchemaFlow.aon"
+@"BasicVatcomplyApiRootFlow.aon"
