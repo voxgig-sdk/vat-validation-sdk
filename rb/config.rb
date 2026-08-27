@@ -28,6 +28,7 @@ module VatValidationConfig
           "options" => {
             "active" => false,
           },
+          "transport" => "base",
         },
       },
       "options" => {
