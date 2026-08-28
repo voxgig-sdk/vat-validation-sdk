@@ -161,8 +161,21 @@ class Rate
 end
 
 # Request payload for Rate#load.
-class RateLoadMatch
-end
+#
+# @!attribute [rw] base
+#   @return [Object, nil]
+#
+# @!attribute [rw] date
+#   @return [Object, nil]
+#
+# @!attribute [rw] symbol
+#   @return [Object, nil]
+RateLoadMatch = Struct.new(
+  :base,
+  :date,
+  :symbol,
+  keyword_init: true
+)
 
 # ValidateIbanResponseSchema entity data model.
 #
@@ -219,54 +232,10 @@ ValidateIbanResponseSchema = Struct.new(
 
 # Request payload for ValidateIbanResponseSchema#load.
 #
-# @!attribute [rw] account_number
-#   @return [String, nil]
-#
-# @!attribute [rw] bank_code
-#   @return [String, nil]
-#
-# @!attribute [rw] bank_name
-#   @return [String, nil]
-#
-# @!attribute [rw] bban
-#   @return [String, nil]
-#
-# @!attribute [rw] bic
-#   @return [String, nil]
-#
-# @!attribute [rw] branch_code
-#   @return [String, nil]
-#
-# @!attribute [rw] checksum_digits
-#   @return [String, nil]
-#
-# @!attribute [rw] country_code
-#   @return [String, nil]
-#
-# @!attribute [rw] country_name
-#   @return [String, nil]
-#
 # @!attribute [rw] iban
-#   @return [String, nil]
-#
-# @!attribute [rw] in_sepa_zone
-#   @return [Boolean, nil]
-#
-# @!attribute [rw] valid
-#   @return [Boolean, nil]
+#   @return [String]
 ValidateIbanResponseSchemaLoadMatch = Struct.new(
-  :account_number,
-  :bank_code,
-  :bank_name,
-  :bban,
-  :bic,
-  :branch_code,
-  :checksum_digits,
-  :country_code,
-  :country_name,
   :iban,
-  :in_sepa_zone,
-  :valid,
   keyword_init: true
 )
 
@@ -275,8 +244,13 @@ class ValidateVatResponseSchema
 end
 
 # Request payload for ValidateVatResponseSchema#load.
-class ValidateVatResponseSchemaLoadMatch
-end
+#
+# @!attribute [rw] vat_number
+#   @return [String]
+ValidateVatResponseSchemaLoadMatch = Struct.new(
+  :vat_number,
+  keyword_init: true
+)
 
 # VatcomplyApiRoot entity data model.
 class VatcomplyApiRoot

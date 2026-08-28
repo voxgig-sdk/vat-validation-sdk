@@ -57,6 +57,9 @@ export interface Rate {
 }
 
 export interface RateLoadMatch {
+  base?: any
+  date?: any
+  symbol?: any
 }
 
 export interface ValidateIbanResponseSchema {
@@ -75,24 +78,14 @@ export interface ValidateIbanResponseSchema {
 }
 
 export interface ValidateIbanResponseSchemaLoadMatch {
-  account_number?: string
-  bank_code?: string
-  bank_name?: string
-  bban?: string
-  bic?: string
-  branch_code?: string
-  checksum_digits?: string
-  country_code?: string
-  country_name?: string
-  iban?: string
-  in_sepa_zone?: boolean
-  valid?: boolean
+  iban: string
 }
 
 export interface ValidateVatResponseSchema {
 }
 
 export interface ValidateVatResponseSchemaLoadMatch {
+  vat_number: string
 }
 
 export interface VatcomplyApiRoot {

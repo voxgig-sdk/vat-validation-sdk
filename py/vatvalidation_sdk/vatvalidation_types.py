@@ -70,8 +70,10 @@ class Rate(TypedDict):
     pass
 
 
-class RateLoadMatch(TypedDict):
-    pass
+class RateLoadMatch(TypedDict, total=False):
+    base: Any
+    date: Any
+    symbol: Any
 
 
 class ValidateIbanResponseSchema(TypedDict):
@@ -89,19 +91,8 @@ class ValidateIbanResponseSchema(TypedDict):
     valid: bool
 
 
-class ValidateIbanResponseSchemaLoadMatch(TypedDict, total=False):
-    account_number: str
-    bank_code: str
-    bank_name: str
-    bban: str
-    bic: str
-    branch_code: str
-    checksum_digits: str
-    country_code: str
-    country_name: str
+class ValidateIbanResponseSchemaLoadMatch(TypedDict):
     iban: str
-    in_sepa_zone: bool
-    valid: bool
 
 
 class ValidateVatResponseSchema(TypedDict):
@@ -109,7 +100,7 @@ class ValidateVatResponseSchema(TypedDict):
 
 
 class ValidateVatResponseSchemaLoadMatch(TypedDict):
-    pass
+    vat_number: str
 
 
 class VatcomplyApiRoot(TypedDict):

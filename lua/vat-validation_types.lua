@@ -51,6 +51,9 @@
 ---@class Rate
 
 ---@class RateLoadMatch
+---@field base? any
+---@field date? any
+---@field symbol? any
 
 ---@class ValidateIbanResponseSchema
 ---@field account_number string
@@ -67,22 +70,12 @@
 ---@field valid boolean
 
 ---@class ValidateIbanResponseSchemaLoadMatch
----@field account_number? string
----@field bank_code? string
----@field bank_name? string
----@field bban? string
----@field bic? string
----@field branch_code? string
----@field checksum_digits? string
----@field country_code? string
----@field country_name? string
----@field iban? string
----@field in_sepa_zone? boolean
----@field valid? boolean
+---@field iban string
 
 ---@class ValidateVatResponseSchema
 
 ---@class ValidateVatResponseSchemaLoadMatch
+---@field vat_number string
 
 ---@class VatcomplyApiRoot
 

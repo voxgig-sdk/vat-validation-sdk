@@ -72,6 +72,9 @@ type Rate struct {
 
 // RateLoadMatch is the typed request payload for Rate.LoadTyped.
 type RateLoadMatch struct {
+	Base *any `json:"base,omitempty"`
+	Date *any `json:"date,omitempty"`
+	Symbol *any `json:"symbol,omitempty"`
 }
 
 // ValidateIbanResponseSchema is the typed data model for the validate_iban_response_schema entity.
@@ -92,18 +95,7 @@ type ValidateIbanResponseSchema struct {
 
 // ValidateIbanResponseSchemaLoadMatch is the typed request payload for ValidateIbanResponseSchema.LoadTyped.
 type ValidateIbanResponseSchemaLoadMatch struct {
-	AccountNumber *string `json:"account_number,omitempty"`
-	BankCode *string `json:"bank_code,omitempty"`
-	BankName *string `json:"bank_name,omitempty"`
-	Bban *string `json:"bban,omitempty"`
-	Bic *string `json:"bic,omitempty"`
-	BranchCode *string `json:"branch_code,omitempty"`
-	ChecksumDigits *string `json:"checksum_digits,omitempty"`
-	CountryCode *string `json:"country_code,omitempty"`
-	CountryName *string `json:"country_name,omitempty"`
-	Iban *string `json:"iban,omitempty"`
-	InSepaZone *bool `json:"in_sepa_zone,omitempty"`
-	Valid *bool `json:"valid,omitempty"`
+	Iban string `json:"iban"`
 }
 
 // ValidateVatResponseSchema is the typed data model for the validate_vat_response_schema entity.
@@ -112,6 +104,7 @@ type ValidateVatResponseSchema struct {
 
 // ValidateVatResponseSchemaLoadMatch is the typed request payload for ValidateVatResponseSchema.LoadTyped.
 type ValidateVatResponseSchemaLoadMatch struct {
+	VatNumber string `json:"vat_number"`
 }
 
 // VatcomplyApiRoot is the typed data model for the vatcomply_api_root entity.

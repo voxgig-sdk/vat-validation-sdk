@@ -80,6 +80,9 @@ class Rate
 /** Request payload for Rate#load. */
 class RateLoadMatch
 {
+    public mixed $base = null;
+    public mixed $date = null;
+    public mixed $symbol = null;
 }
 
 /** ValidateIbanResponseSchema entity data model. */
@@ -102,18 +105,7 @@ class ValidateIbanResponseSchema
 /** Request payload for ValidateIbanResponseSchema#load. */
 class ValidateIbanResponseSchemaLoadMatch
 {
-    public ?string $account_number = null;
-    public ?string $bank_code = null;
-    public ?string $bank_name = null;
-    public ?string $bban = null;
-    public ?string $bic = null;
-    public ?string $branch_code = null;
-    public ?string $checksum_digits = null;
-    public ?string $country_code = null;
-    public ?string $country_name = null;
-    public ?string $iban = null;
-    public ?bool $in_sepa_zone = null;
-    public ?bool $valid = null;
+    public string $iban;
 }
 
 /** ValidateVatResponseSchema entity data model. */
@@ -124,6 +116,7 @@ class ValidateVatResponseSchema
 /** Request payload for ValidateVatResponseSchema#load. */
 class ValidateVatResponseSchemaLoadMatch
 {
+    public string $vat_number;
 }
 
 /** VatcomplyApiRoot entity data model. */
