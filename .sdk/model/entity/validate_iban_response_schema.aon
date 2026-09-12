@@ -86,8 +86,10 @@ main: kit: entity: validate_iban_response_schema: {
           }
           method: "GET"
           orig: "/iban"
-          parts: [
-            "iban"
+          segments: [
+            {
+              lit: "iban"
+            }
           ]
           select: {
             exist: [

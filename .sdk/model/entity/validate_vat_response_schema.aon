@@ -23,8 +23,10 @@ main: kit: entity: validate_vat_response_schema: {
           }
           method: "GET"
           orig: "/vat"
-          parts: [
-            "vat"
+          segments: [
+            {
+              lit: "vat"
+            }
           ]
           select: {
             exist: [

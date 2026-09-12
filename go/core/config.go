@@ -128,13 +128,18 @@ func MakeConfig() map[string]any {
 								"kind": "http",
 								"method": "GET",
 								"orig": "/countries",
-								"parts": []any{
-									"countries",
+								"segments": []any{
+									map[string]any{
+										"lit": "countries",
+									},
 								},
 								"select": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
+								},
+								"parts": []any{
+									"countries",
 								},
 							},
 						},
@@ -168,13 +173,18 @@ func MakeConfig() map[string]any {
 								"kind": "http",
 								"method": "GET",
 								"orig": "/currencies",
-								"parts": []any{
-									"currencies",
+								"segments": []any{
+									map[string]any{
+										"lit": "currencies",
+									},
 								},
 								"select": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
+								},
+								"parts": []any{
+									"currencies",
 								},
 							},
 						},
@@ -197,13 +207,18 @@ func MakeConfig() map[string]any {
 								"kind": "http",
 								"method": "GET",
 								"orig": "/geolocate",
-								"parts": []any{
-									"geolocate",
+								"segments": []any{
+									map[string]any{
+										"lit": "geolocate",
+									},
 								},
 								"select": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body.ip`",
+								},
+								"parts": []any{
+									"geolocate",
 								},
 							},
 						},
@@ -248,8 +263,10 @@ func MakeConfig() map[string]any {
 								"kind": "http",
 								"method": "GET",
 								"orig": "/rates",
-								"parts": []any{
-									"rates",
+								"segments": []any{
+									map[string]any{
+										"lit": "rates",
+									},
 								},
 								"select": map[string]any{
 									"exist": []any{
@@ -261,6 +278,9 @@ func MakeConfig() map[string]any {
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body.rates`",
+								},
+								"parts": []any{
+									"rates",
 								},
 							},
 						},
@@ -354,8 +374,10 @@ func MakeConfig() map[string]any {
 								"kind": "http",
 								"method": "GET",
 								"orig": "/iban",
-								"parts": []any{
-									"iban",
+								"segments": []any{
+									map[string]any{
+										"lit": "iban",
+									},
 								},
 								"select": map[string]any{
 									"exist": []any{
@@ -365,6 +387,9 @@ func MakeConfig() map[string]any {
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
+								},
+								"parts": []any{
+									"iban",
 								},
 							},
 						},
@@ -397,8 +422,10 @@ func MakeConfig() map[string]any {
 								"kind": "http",
 								"method": "GET",
 								"orig": "/vat",
-								"parts": []any{
-									"vat",
+								"segments": []any{
+									map[string]any{
+										"lit": "vat",
+									},
 								},
 								"select": map[string]any{
 									"exist": []any{
@@ -408,6 +435,9 @@ func MakeConfig() map[string]any {
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body.name`",
+								},
+								"parts": []any{
+									"vat",
 								},
 							},
 						},
@@ -430,12 +460,13 @@ func MakeConfig() map[string]any {
 								"kind": "http",
 								"method": "GET",
 								"orig": "/",
-								"parts": []any{},
+								"segments": []any{},
 								"select": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body.endpoints`",
 								},
+								"parts": []any{},
 							},
 						},
 					},
@@ -446,6 +477,17 @@ func MakeConfig() map[string]any {
 			},
 		},
 	}
+}
+
+// The plugin definitions the model selected per feature, as []any so a
+// feature package can consume them without core naming its types. Empty
+// when no active feature declares active plugin groups for this target.
+var featurePlugins = map[string][]any{
+}
+
+// FeaturePlugins is the definitions list for one feature's chain.
+func FeaturePlugins(name string) []any {
+	return featurePlugins[name]
 }
 
 var (

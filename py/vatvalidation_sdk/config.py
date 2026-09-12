@@ -1,6 +1,14 @@
 # VatValidation SDK configuration
 
 
+# The sekreto plugin DEFINITIONS the model selected per feature, imported
+# above by name from the modules the catalogue's active `plugin.def`
+# entries declare. Handed to each feature (secrets builds its Sekreto
+# with them): a provider kind not listed here is unknown to that SDK.
+FEATURE_PLUGINS = {
+}
+
+
 _shared_config = None
 
 
@@ -145,14 +153,19 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/countries",
-                "parts": [
-                  "countries",
+                "segments": [
+                  {
+                    "lit": "countries",
+                  },
                 ],
                 "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "countries",
+                ],
               },
             ],
           },
@@ -185,14 +198,19 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/currencies",
-                "parts": [
-                  "currencies",
+                "segments": [
+                  {
+                    "lit": "currencies",
+                  },
                 ],
                 "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "currencies",
+                ],
               },
             ],
           },
@@ -214,14 +232,19 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/geolocate",
-                "parts": [
-                  "geolocate",
+                "segments": [
+                  {
+                    "lit": "geolocate",
+                  },
                 ],
                 "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body.ip`",
                 },
+                "parts": [
+                  "geolocate",
+                ],
               },
             ],
           },
@@ -265,8 +288,10 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/rates",
-                "parts": [
-                  "rates",
+                "segments": [
+                  {
+                    "lit": "rates",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -279,6 +304,9 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.rates`",
                 },
+                "parts": [
+                  "rates",
+                ],
               },
             ],
           },
@@ -371,8 +399,10 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/iban",
-                "parts": [
-                  "iban",
+                "segments": [
+                  {
+                    "lit": "iban",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -383,6 +413,9 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "iban",
+                ],
               },
             ],
           },
@@ -414,8 +447,10 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/vat",
-                "parts": [
-                  "vat",
+                "segments": [
+                  {
+                    "lit": "vat",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -426,6 +461,9 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.name`",
                 },
+                "parts": [
+                  "vat",
+                ],
               },
             ],
           },
@@ -447,12 +485,13 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/",
-                "parts": [],
+                "segments": [],
                 "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body.endpoints`",
                 },
+                "parts": [],
               },
             ],
           },

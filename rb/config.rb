@@ -136,14 +136,19 @@ module VatValidationConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/countries",
-                  "parts" => [
-                    "countries",
+                  "segments" => [
+                    {
+                      "lit" => "countries",
+                    },
                   ],
                   "select" => {},
                   "transform" => {
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "countries",
+                  ],
                 },
               ],
             },
@@ -176,14 +181,19 @@ module VatValidationConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/currencies",
-                  "parts" => [
-                    "currencies",
+                  "segments" => [
+                    {
+                      "lit" => "currencies",
+                    },
                   ],
                   "select" => {},
                   "transform" => {
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "currencies",
+                  ],
                 },
               ],
             },
@@ -205,14 +215,19 @@ module VatValidationConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/geolocate",
-                  "parts" => [
-                    "geolocate",
+                  "segments" => [
+                    {
+                      "lit" => "geolocate",
+                    },
                   ],
                   "select" => {},
                   "transform" => {
                     "req" => "`reqdata`",
                     "res" => "`body.ip`",
                   },
+                  "parts" => [
+                    "geolocate",
+                  ],
                 },
               ],
             },
@@ -256,8 +271,10 @@ module VatValidationConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/rates",
-                  "parts" => [
-                    "rates",
+                  "segments" => [
+                    {
+                      "lit" => "rates",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -270,6 +287,9 @@ module VatValidationConfig
                     "req" => "`reqdata`",
                     "res" => "`body.rates`",
                   },
+                  "parts" => [
+                    "rates",
+                  ],
                 },
               ],
             },
@@ -362,8 +382,10 @@ module VatValidationConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/iban",
-                  "parts" => [
-                    "iban",
+                  "segments" => [
+                    {
+                      "lit" => "iban",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -374,6 +396,9 @@ module VatValidationConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "iban",
+                  ],
                 },
               ],
             },
@@ -405,8 +430,10 @@ module VatValidationConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/vat",
-                  "parts" => [
-                    "vat",
+                  "segments" => [
+                    {
+                      "lit" => "vat",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -417,6 +444,9 @@ module VatValidationConfig
                     "req" => "`reqdata`",
                     "res" => "`body.name`",
                   },
+                  "parts" => [
+                    "vat",
+                  ],
                 },
               ],
             },
@@ -438,12 +468,13 @@ module VatValidationConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/",
-                  "parts" => [],
+                  "segments" => [],
                   "select" => {},
                   "transform" => {
                     "req" => "`reqdata`",
                     "res" => "`body.endpoints`",
                   },
+                  "parts" => [],
                 },
               ],
             },

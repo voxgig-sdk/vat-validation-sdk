@@ -25,8 +25,10 @@ main: kit: entity: currency: {
         {
           method: "GET"
           orig: "/currencies"
-          parts: [
-            "currencies"
+          segments: [
+            {
+              lit: "currencies"
+            }
           ]
           transform: {
             req: "`reqdata`"

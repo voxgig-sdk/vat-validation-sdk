@@ -38,8 +38,10 @@ main: kit: entity: rate: {
           }
           method: "GET"
           orig: "/rates"
-          parts: [
-            "rates"
+          segments: [
+            {
+              lit: "rates"
+            }
           ]
           select: {
             exist: [

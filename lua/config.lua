@@ -124,13 +124,18 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/countries",
-                ["parts"] = {
-                  "countries",
+                ["segments"] = {
+                  {
+                    ["lit"] = "countries",
+                  },
                 },
                 ["select"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "countries",
                 },
               },
             },
@@ -164,13 +169,18 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/currencies",
-                ["parts"] = {
-                  "currencies",
+                ["segments"] = {
+                  {
+                    ["lit"] = "currencies",
+                  },
                 },
                 ["select"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "currencies",
                 },
               },
             },
@@ -193,13 +203,18 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/geolocate",
-                ["parts"] = {
-                  "geolocate",
+                ["segments"] = {
+                  {
+                    ["lit"] = "geolocate",
+                  },
                 },
                 ["select"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.ip`",
+                },
+                ["parts"] = {
+                  "geolocate",
                 },
               },
             },
@@ -244,8 +259,10 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/rates",
-                ["parts"] = {
-                  "rates",
+                ["segments"] = {
+                  {
+                    ["lit"] = "rates",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -257,6 +274,9 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.rates`",
+                },
+                ["parts"] = {
+                  "rates",
                 },
               },
             },
@@ -350,8 +370,10 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/iban",
-                ["parts"] = {
-                  "iban",
+                ["segments"] = {
+                  {
+                    ["lit"] = "iban",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -361,6 +383,9 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "iban",
                 },
               },
             },
@@ -393,8 +418,10 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/vat",
-                ["parts"] = {
-                  "vat",
+                ["segments"] = {
+                  {
+                    ["lit"] = "vat",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -404,6 +431,9 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.name`",
+                },
+                ["parts"] = {
+                  "vat",
                 },
               },
             },
@@ -426,12 +456,13 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/",
-                ["parts"] = {},
+                ["segments"] = {},
                 ["select"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.endpoints`",
                 },
+                ["parts"] = {},
               },
             },
           },
