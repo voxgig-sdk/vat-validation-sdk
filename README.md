@@ -105,7 +105,7 @@ local result, err = client:Geolocate():load()
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/vat-validation` | publish pending — [install from git tag](https://github.com/voxgig-sdk/vat-validation-sdk/releases) |
+| TypeScript | `@voxgig-sdk/vat-validation-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/vat-validation-sdk/releases) |
 | Python | `voxgig-sdk-vat-validation` | publish pending — [install from git tag](https://github.com/voxgig-sdk/vat-validation-sdk/releases) |
 | PHP | `voxgig-sdk/vat-validation` | publish pending — [install from git tag](https://github.com/voxgig-sdk/vat-validation-sdk/releases) |
 | Golang | `github.com/voxgig-sdk/vat-validation-sdk/go` | `go get github.com/voxgig-sdk/vat-validation-sdk/go@latest` |
@@ -119,7 +119,7 @@ local result, err = client:Geolocate():load()
 ### TypeScript
 
 ```ts
-import { VatValidationSDK } from '@voxgig-sdk/vat-validation'
+import { VatValidationSDK } from '@voxgig-sdk/vat-validation-sdk'
 
 const client = new VatValidationSDK()
 

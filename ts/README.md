@@ -28,7 +28,7 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { VatValidationSDK } from '@voxgig-sdk/vat-validation'
+import { VatValidationSDK } from '@voxgig-sdk/vat-validation-sdk'
 
 const client = new VatValidationSDK()
 ```
@@ -629,7 +629,7 @@ vat-validation/
 Import the SDK from the package root:
 
 ```ts
-import { VatValidationSDK } from '@voxgig-sdk/vat-validation'
+import { VatValidationSDK } from '@voxgig-sdk/vat-validation-sdk'
 ```
 
 ### Entity state
