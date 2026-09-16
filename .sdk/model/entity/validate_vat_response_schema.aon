@@ -21,6 +21,12 @@ main: kit: entity: validate_vat_response_schema: {
               }
             ]
           }
+          contract: {
+            id: "GET /vat"
+            json: "{\"operationId\":\"vatcomply_api_validate_vat\",\"parameters\":[{\"in\":\"query\",\"name\":\"vat_number\",\"required\":true,\"schema\":{\"title\":\"Vat Number\",\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"address\":{\"default\":\"\",\"title\":\"Address\",\"type\":\"string\"},\"country_code\":{\"title\":\"Country Code\",\"type\":\"string\"},\"name\":{\"anyOf\":[{\"type\":\"string\"},{\"type\":\"null\"}],\"title\":\"Name\"},\"valid\":{\"title\":\"Valid\",\"type\":\"boolean\"},\"vat_number\":{\"title\":\"Vat Number\",\"type\":\"string\"}},\"required\":[\"valid\",\"vat_number\",\"country_code\"],\"title\":\"ValidateVATResponseSchema\",\"type\":\"object\"}}},\"description\":\"OK\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"title\":\"Error\",\"type\":\"string\"}},\"required\":[\"error\"],\"title\":\"ErrorResponse\",\"type\":\"object\"}}},\"description\":\"Bad Request\"}},\"securitySource\":\"unspecified\"}"
+            source: "openapi3"
+            version: 1
+          }
           method: "GET"
           orig: "/vat"
           segments: [

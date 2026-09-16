@@ -36,6 +36,12 @@ main: kit: entity: rate: {
               }
             ]
           }
+          contract: {
+            id: "GET /rates"
+            json: "{\"operationId\":\"vatcomply_api_rates\",\"parameters\":[{\"in\":\"query\",\"name\":\"base\",\"required\":false,\"schema\":{\"anyOf\":[{\"type\":\"string\"},{\"type\":\"null\"}],\"default\":\"EUR\",\"title\":\"Base\"}},{\"in\":\"query\",\"name\":\"symbols\",\"required\":false,\"schema\":{\"anyOf\":[{\"type\":\"string\"},{\"type\":\"null\"}],\"title\":\"Symbols\"}},{\"in\":\"query\",\"name\":\"date\",\"required\":false,\"schema\":{\"anyOf\":[{\"format\":\"date\",\"type\":\"string\"},{\"type\":\"null\"}],\"title\":\"Date\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"base\":{\"enum\":[\"EUR\",\"USD\",\"JPY\",\"BGN\",\"CZK\",\"DKK\",\"GBP\",\"HUF\",\"PLN\",\"RON\",\"SEK\",\"CHF\",\"ISK\",\"NOK\",\"HRK\",\"RUB\",\"TRY\",\"AUD\",\"BRL\",\"CAD\",\"CNY\",\"HKD\",\"IDR\",\"ILS\",\"INR\",\"KRW\",\"MXN\",\"MYR\",\"NZD\",\"PHP\",\"SGD\",\"THB\",\"ZAR\"],\"title\":\"CurrencySymbol\",\"type\":\"string\"},\"date\":{\"title\":\"Date\",\"type\":\"string\"},\"rates\":{\"additionalProperties\":{\"type\":\"number\"},\"title\":\"Rates\",\"type\":\"object\"}},\"required\":[\"date\",\"base\",\"rates\"],\"title\":\"RatesResponseSchema\",\"type\":\"object\"}}},\"description\":\"OK\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"title\":\"Error\",\"type\":\"string\"}},\"required\":[\"error\"],\"title\":\"ErrorResponse\",\"type\":\"object\"}}},\"description\":\"Bad Request\"}},\"securitySource\":\"unspecified\"}"
+            source: "openapi3"
+            version: 1
+          }
           method: "GET"
           orig: "/rates"
           segments: [

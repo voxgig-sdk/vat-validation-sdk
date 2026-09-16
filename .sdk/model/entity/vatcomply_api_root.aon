@@ -10,6 +10,12 @@ main: kit: entity: vatcomply_api_root: {
       name: "load"
       points: [
         {
+          contract: {
+            id: "GET /"
+            json: "{\"operationId\":\"vatcomply_api_root\",\"parameters\":[],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"contact\":{\"title\":\"Contact\",\"type\":\"string\"},\"description\":{\"title\":\"Description\",\"type\":\"string\"},\"documentation\":{\"title\":\"Documentation\",\"type\":\"string\"},\"endpoints\":{\"additionalProperties\":{\"type\":\"string\"},\"title\":\"Endpoints\",\"type\":\"object\"},\"name\":{\"title\":\"Name\",\"type\":\"string\"},\"status\":{\"title\":\"Status\",\"type\":\"string\"},\"version\":{\"title\":\"Version\",\"type\":\"string\"}},\"required\":[\"name\",\"version\",\"status\",\"description\",\"documentation\",\"endpoints\",\"contact\"],\"title\":\"RootResponseSchema\",\"type\":\"object\"}}},\"description\":\"OK\"}},\"securitySource\":\"unspecified\"}"
+            source: "openapi3"
+            version: 1
+          }
           method: "GET"
           orig: "/"
           transform: {

@@ -5,6 +5,8 @@ import * as Fs from 'node:fs'
 
 import { test, describe, afterEach } from 'node:test'
 import assert from 'node:assert'
+import { createLiveTransport } from '../../live-runner'
+import { runLiveEntity } from '../../live-entity'
 
 
 import { VatValidationSDK, BaseFeature, stdutil } from '../../..'
@@ -47,16 +49,13 @@ describe('CountryEntity', async () => {
 
     const live = 'TRUE' === process.env.VAT_VALIDATION_TEST_LIVE
     for (const op of ['list']) {
-      if (maybeSkipControl(t, 'entityOp', 'country.' + op, live)) return
+      if (!live && maybeSkipControl(t, 'entityOp', 'country.' + op, live)) return
     }
 
+    
     const setup = basicSetup()
-    // The basic flow consumes synthetic IDs and field values from the
-    // fixture (entity TestData.json). Those don't exist on the live API.
-    // Skip live runs unless the user provided a real ENTID env override.
-    if (setup.syntheticOnly) {
-      t.skip('live entity test uses synthetic IDs from fixture — set VAT_VALIDATION_TEST_COUNTRY_ENTID JSON to run live')
-      return
+    if (setup.live) {
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":[{"active":true,"name":"capital","req":true,"type":"`$STRING`","index$":0},{"active":true,"name":"currency","req":true,"type":"`$STRING`","index$":1},{"active":true,"name":"emoji","req":true,"type":"`$STRING`","index$":2},{"active":true,"name":"iso2","req":true,"type":"`$STRING`","index$":3},{"active":true,"name":"iso3","req":true,"type":"`$STRING`","index$":4},{"active":true,"name":"latitude","req":true,"type":"`$NUMBER`","union":{"branches":2,"count":1,"depth":0},"index$":5},{"active":true,"name":"longitude","req":true,"type":"`$NUMBER`","union":{"branches":2,"count":1,"depth":0},"index$":6},{"active":true,"name":"name","req":true,"type":"`$STRING`","index$":7},{"active":true,"name":"numeric_code","req":true,"type":"`$INTEGER`","index$":8},{"active":true,"name":"phone_code","req":true,"type":"`$STRING`","index$":9},{"active":true,"name":"region","req":true,"type":"`$STRING`","index$":10},{"active":true,"name":"subregion","req":true,"type":"`$STRING`","index$":11},{"active":true,"name":"tld","req":true,"type":"`$STRING`","index$":12}],"name":"country","op":{"list":{"input":"data","name":"list","points":[{"active":true,"args":{},"contract":{"id":"GET /countries","json":"{\"operationId\":\"vatcomply_api_countries\",\"parameters\":[],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"items\":{\"properties\":{\"capital\":{\"title\":\"Capital\",\"type\":\"string\"},\"currency\":{\"title\":\"Currency\",\"type\":\"string\"},\"emoji\":{\"title\":\"Emoji\",\"type\":\"string\"},\"iso2\":{\"title\":\"Iso2\",\"type\":\"string\"},\"iso3\":{\"title\":\"Iso3\",\"type\":\"string\"},\"latitude\":{\"anyOf\":[{\"type\":\"number\"},{\"type\":\"string\"}],\"title\":\"Latitude\"},\"longitude\":{\"anyOf\":[{\"type\":\"number\"},{\"type\":\"string\"}],\"title\":\"Longitude\"},\"name\":{\"title\":\"Name\",\"type\":\"string\"},\"numeric_code\":{\"title\":\"Numeric Code\",\"type\":\"integer\"},\"phone_code\":{\"title\":\"Phone Code\",\"type\":\"string\"},\"region\":{\"title\":\"Region\",\"type\":\"string\"},\"subregion\":{\"title\":\"Subregion\",\"type\":\"string\"},\"tld\":{\"title\":\"Tld\",\"type\":\"string\"}},\"required\":[\"iso2\",\"iso3\",\"name\",\"numeric_code\",\"phone_code\",\"capital\",\"currency\",\"tld\",\"region\",\"subregion\",\"latitude\",\"longitude\",\"emoji\"],\"title\":\"CountrySchema\",\"type\":\"object\"},\"title\":\"Response\",\"type\":\"array\"}}},\"description\":\"OK\"}},\"securitySource\":\"unspecified\"}","source":"openapi3","version":1},"kind":"http","method":"GET","orig":"/countries","segments":[{"lit":"countries"}],"select":{},"transform":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"list"}},"relations":{"ancestors":[]},"key$":"country","name__orig":"country","Name":"Country","name_":"country","name-":"country","NAME":"COUNTRY","index$":0}, {"active":true,"entity":"country","key$":"BasicCountryFlow","kind":"basic","name":"BasicCountryFlow","param":{},"step":[{"active":true,"data":{},"input":{},"match":{},"op":"list","spec":[],"valid":[{"apply":"ItemExists","def":{"ref":"country_ref01"}}],"index$":0}]}, 'Country')
     }
     const client = setup.client
     const struct = setup.struct
@@ -109,13 +108,6 @@ function basicSetup(extra?: any) {
       }]
     })
 
-  // Detect whether the user provided a real ENTID JSON via env var. The
-  // basic flow consumes synthetic IDs from the fixture file; without an
-  // override those synthetic IDs reach the live API and 4xx. Surface this
-  // to the test so it can skip rather than fail.
-  const idmapEnvVal = process.env['VAT_VALIDATION_TEST_COUNTRY_ENTID']
-  const idmapOverridden = null != idmapEnvVal && idmapEnvVal.trim().startsWith('{')
-
   const env = envOverride({
     'VAT_VALIDATION_TEST_COUNTRY_ENTID': idmap,
     'VAT_VALIDATION_TEST_LIVE': 'FALSE',
@@ -126,7 +118,13 @@ function basicSetup(extra?: any) {
 
   const live = 'TRUE' === env.VAT_VALIDATION_TEST_LIVE
 
+  const transport = createLiveTransport()
   if (live) {
+    const rawIds = process.env['VAT_VALIDATION_TEST_COUNTRY_ENTID']
+    idmap = rawIds && rawIds.trim() ? JSON.parse(rawIds) : {}
+    if (!idmap || Array.isArray(idmap) || typeof idmap !== 'object') {
+      throw new Error('Live ENTID must be a JSON object')
+    }
     client = new VatValidationSDK(merge([
       // FIRST, so the generated fields below win: sdk-test-control.json's
       // test.client.options adds to the live client, it does not redirect it.
@@ -138,7 +136,8 @@ function basicSetup(extra?: any) {
       // argument at all - so a bare 'extra' silently discarded the apikey
       // and server values above and handed the SDK undefined. Harmless
       // while there was nothing in that object; not harmless now.
-      extra || {}
+      extra || {},
+      { system: { fetch: transport.fetch } }
     ]))
   }
 
@@ -151,7 +150,7 @@ function basicSetup(extra?: any) {
     data: entityData,
     explain: 'TRUE' === env.VAT_VALIDATION_TEST_EXPLAIN,
     live,
-    syntheticOnly: live && !idmapOverridden,
+    transport,
     now: Date.now(),
   }
 

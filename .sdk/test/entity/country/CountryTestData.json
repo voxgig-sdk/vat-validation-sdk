@@ -10,7 +10,7 @@
         "latitude": 135,
         "longitude": 136,
         "name": "s89",
-        "numeric_code": "s8a",
+        "numeric_code": 138,
         "phone_code": "s8b",
         "region": "s8c",
         "subregion": "s8d",
@@ -25,7 +25,7 @@
         "latitude": 265,
         "longitude": 266,
         "name": "s10b",
-        "numeric_code": "s10c",
+        "numeric_code": 268,
         "phone_code": "s10d",
         "region": "s10e",
         "subregion": "s10f",
@@ -40,7 +40,7 @@
         "latitude": 395,
         "longitude": 396,
         "name": "s18d",
-        "numeric_code": "s18e",
+        "numeric_code": 398,
         "phone_code": "s18f",
         "region": "s190",
         "subregion": "s191",
@@ -59,11 +59,122 @@
         "latitude": 525,
         "longitude": 526,
         "name": "s20f",
-        "numeric_code": "s210",
+        "numeric_code": 528,
         "phone_code": "s211",
         "region": "s212",
         "subregion": "s213",
         "tld": "s214"
+      }
+    }
+  },
+  "requests": {
+    "GET /countries": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "vatcomply_api_countries",
+        "parameters": [],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "properties": {
+                      "capital": {
+                        "title": "Capital",
+                        "type": "string"
+                      },
+                      "currency": {
+                        "title": "Currency",
+                        "type": "string"
+                      },
+                      "emoji": {
+                        "title": "Emoji",
+                        "type": "string"
+                      },
+                      "iso2": {
+                        "title": "Iso2",
+                        "type": "string"
+                      },
+                      "iso3": {
+                        "title": "Iso3",
+                        "type": "string"
+                      },
+                      "latitude": {
+                        "anyOf": [
+                          {
+                            "type": "number"
+                          },
+                          {
+                            "type": "string"
+                          }
+                        ],
+                        "title": "Latitude"
+                      },
+                      "longitude": {
+                        "anyOf": [
+                          {
+                            "type": "number"
+                          },
+                          {
+                            "type": "string"
+                          }
+                        ],
+                        "title": "Longitude"
+                      },
+                      "name": {
+                        "title": "Name",
+                        "type": "string"
+                      },
+                      "numeric_code": {
+                        "title": "Numeric Code",
+                        "type": "integer"
+                      },
+                      "phone_code": {
+                        "title": "Phone Code",
+                        "type": "string"
+                      },
+                      "region": {
+                        "title": "Region",
+                        "type": "string"
+                      },
+                      "subregion": {
+                        "title": "Subregion",
+                        "type": "string"
+                      },
+                      "tld": {
+                        "title": "Tld",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "iso2",
+                      "iso3",
+                      "name",
+                      "numeric_code",
+                      "phone_code",
+                      "capital",
+                      "currency",
+                      "tld",
+                      "region",
+                      "subregion",
+                      "latitude",
+                      "longitude",
+                      "emoji"
+                    ],
+                    "title": "CountrySchema",
+                    "type": "object"
+                  },
+                  "title": "Response",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "securitySource": "unspecified"
       }
     }
   }

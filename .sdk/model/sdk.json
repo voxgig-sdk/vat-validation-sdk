@@ -24,7 +24,71 @@
         "repr": "auto"
       },
       "contributor": {},
-      "docs": {},
+      "doc": {
+        "active": true,
+        "assets": {
+          "path": ".sdk/doc/assets"
+        },
+        "brand": {
+          "label": "",
+          "notice": "",
+          "shortNotice": "",
+          "url": ""
+        },
+        "ci": {
+          "active": true,
+          "branch": "main"
+        },
+        "content": {
+          "path": ".sdk/doc/content"
+        },
+        "edition": {
+          "summary": {
+            "active": true,
+            "base": "node_modules/@voxgig/docgen/project/.sdk",
+            "brand": {},
+            "filter": {
+              "entities": [],
+              "features": [],
+              "targets": []
+            },
+            "kind": "summary",
+            "name": "summary",
+            "origname": "",
+            "output": {
+              "path": "SUMMARY.md"
+            },
+            "package": "@voxgig/docgen",
+            "site": {
+              "active": true
+            },
+            "style": {},
+            "title": ""
+          }
+        },
+        "qa": {
+          "vocabulary": []
+        },
+        "style": {
+          "color": {
+            "accent": "#00c6d8",
+            "background": "#f5f5f9",
+            "darkBackground": "#0f1117",
+            "darkText": "#e6edf3",
+            "primary": "#e70042",
+            "text": "#0a0a0a"
+          },
+          "font": "Nunito, system-ui, sans-serif",
+          "fontFile": "",
+          "headingFont": "Nunito, system-ui, sans-serif",
+          "headingFontFile": "",
+          "logo": "",
+          "mode": "light",
+          "mono": "ui-monospace, monospace",
+          "monoFile": ""
+        },
+        "target": {}
+      },
       "entity": {
         "country": {
           "active": true,
@@ -130,6 +194,12 @@
                 {
                   "active": true,
                   "args": {},
+                  "contract": {
+                    "id": "GET /countries",
+                    "json": "{\"operationId\":\"vatcomply_api_countries\",\"parameters\":[],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"items\":{\"properties\":{\"capital\":{\"title\":\"Capital\",\"type\":\"string\"},\"currency\":{\"title\":\"Currency\",\"type\":\"string\"},\"emoji\":{\"title\":\"Emoji\",\"type\":\"string\"},\"iso2\":{\"title\":\"Iso2\",\"type\":\"string\"},\"iso3\":{\"title\":\"Iso3\",\"type\":\"string\"},\"latitude\":{\"anyOf\":[{\"type\":\"number\"},{\"type\":\"string\"}],\"title\":\"Latitude\"},\"longitude\":{\"anyOf\":[{\"type\":\"number\"},{\"type\":\"string\"}],\"title\":\"Longitude\"},\"name\":{\"title\":\"Name\",\"type\":\"string\"},\"numeric_code\":{\"title\":\"Numeric Code\",\"type\":\"integer\"},\"phone_code\":{\"title\":\"Phone Code\",\"type\":\"string\"},\"region\":{\"title\":\"Region\",\"type\":\"string\"},\"subregion\":{\"title\":\"Subregion\",\"type\":\"string\"},\"tld\":{\"title\":\"Tld\",\"type\":\"string\"}},\"required\":[\"iso2\",\"iso3\",\"name\",\"numeric_code\",\"phone_code\",\"capital\",\"currency\",\"tld\",\"region\",\"subregion\",\"latitude\",\"longitude\",\"emoji\"],\"title\":\"CountrySchema\",\"type\":\"object\"},\"title\":\"Response\",\"type\":\"array\"}}},\"description\":\"OK\"}},\"securitySource\":\"unspecified\"}",
+                    "source": "openapi3",
+                    "version": 1
+                  },
                   "kind": "http",
                   "method": "GET",
                   "orig": "/countries",
@@ -179,6 +249,12 @@
                 {
                   "active": true,
                   "args": {},
+                  "contract": {
+                    "id": "GET /currencies",
+                    "json": "{\"operationId\":\"vatcomply_api_get_currencies\",\"parameters\":[],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"additionalProperties\":{\"properties\":{\"name\":{\"title\":\"Name\",\"type\":\"string\"},\"symbol\":{\"enum\":[\"EUR\",\"USD\",\"JPY\",\"BGN\",\"CZK\",\"DKK\",\"GBP\",\"HUF\",\"PLN\",\"RON\",\"SEK\",\"CHF\",\"ISK\",\"NOK\",\"HRK\",\"RUB\",\"TRY\",\"AUD\",\"BRL\",\"CAD\",\"CNY\",\"HKD\",\"IDR\",\"ILS\",\"INR\",\"KRW\",\"MXN\",\"MYR\",\"NZD\",\"PHP\",\"SGD\",\"THB\",\"ZAR\"],\"title\":\"CurrencySymbol\",\"type\":\"string\"}},\"required\":[\"name\",\"symbol\"],\"title\":\"CurrencySchema\",\"type\":\"object\"},\"title\":\"Response\",\"type\":\"object\"}}},\"description\":\"OK\"}},\"securitySource\":\"unspecified\"}",
+                    "source": "openapi3",
+                    "version": 1
+                  },
                   "kind": "http",
                   "method": "GET",
                   "orig": "/currencies",
@@ -215,6 +291,12 @@
                 {
                   "active": true,
                   "args": {},
+                  "contract": {
+                    "id": "GET /geolocate",
+                    "json": "{\"operationId\":\"vatcomply_api_geolocate\",\"parameters\":[],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"capital\":{\"title\":\"Capital\",\"type\":\"string\"},\"country_code\":{\"title\":\"Country Code\",\"type\":\"string\"},\"currency\":{\"title\":\"Currency\",\"type\":\"string\"},\"emoji\":{\"title\":\"Emoji\",\"type\":\"string\"},\"ip\":{\"anyOf\":[{\"type\":\"string\"},{\"type\":\"null\"}],\"title\":\"Ip\"},\"iso2\":{\"title\":\"Iso2\",\"type\":\"string\"},\"iso3\":{\"title\":\"Iso3\",\"type\":\"string\"},\"latitude\":{\"title\":\"Latitude\",\"type\":\"number\"},\"longitude\":{\"title\":\"Longitude\",\"type\":\"number\"},\"name\":{\"title\":\"Name\",\"type\":\"string\"},\"numeric_code\":{\"title\":\"Numeric Code\",\"type\":\"integer\"},\"phone_code\":{\"title\":\"Phone Code\",\"type\":\"string\"},\"region\":{\"title\":\"Region\",\"type\":\"string\"},\"subregion\":{\"title\":\"Subregion\",\"type\":\"string\"},\"tld\":{\"title\":\"Tld\",\"type\":\"string\"}},\"required\":[\"iso2\",\"iso3\",\"country_code\",\"name\",\"numeric_code\",\"phone_code\",\"capital\",\"currency\",\"tld\",\"region\",\"subregion\",\"latitude\",\"longitude\",\"emoji\",\"ip\"],\"title\":\"GeolocateResponse\",\"type\":\"object\"}}},\"description\":\"OK\"},\"404\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"title\":\"Error\",\"type\":\"string\"}},\"required\":[\"error\"],\"title\":\"ErrorResponse\",\"type\":\"object\"}}},\"description\":\"Not Found\"}},\"securitySource\":\"unspecified\"}",
+                    "source": "openapi3",
+                    "version": 1
+                  },
                   "kind": "http",
                   "method": "GET",
                   "orig": "/geolocate",
@@ -278,6 +360,12 @@
                         "type": "`$ANY`"
                       }
                     ]
+                  },
+                  "contract": {
+                    "id": "GET /rates",
+                    "json": "{\"operationId\":\"vatcomply_api_rates\",\"parameters\":[{\"in\":\"query\",\"name\":\"base\",\"required\":false,\"schema\":{\"anyOf\":[{\"type\":\"string\"},{\"type\":\"null\"}],\"default\":\"EUR\",\"title\":\"Base\"}},{\"in\":\"query\",\"name\":\"symbols\",\"required\":false,\"schema\":{\"anyOf\":[{\"type\":\"string\"},{\"type\":\"null\"}],\"title\":\"Symbols\"}},{\"in\":\"query\",\"name\":\"date\",\"required\":false,\"schema\":{\"anyOf\":[{\"format\":\"date\",\"type\":\"string\"},{\"type\":\"null\"}],\"title\":\"Date\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"base\":{\"enum\":[\"EUR\",\"USD\",\"JPY\",\"BGN\",\"CZK\",\"DKK\",\"GBP\",\"HUF\",\"PLN\",\"RON\",\"SEK\",\"CHF\",\"ISK\",\"NOK\",\"HRK\",\"RUB\",\"TRY\",\"AUD\",\"BRL\",\"CAD\",\"CNY\",\"HKD\",\"IDR\",\"ILS\",\"INR\",\"KRW\",\"MXN\",\"MYR\",\"NZD\",\"PHP\",\"SGD\",\"THB\",\"ZAR\"],\"title\":\"CurrencySymbol\",\"type\":\"string\"},\"date\":{\"title\":\"Date\",\"type\":\"string\"},\"rates\":{\"additionalProperties\":{\"type\":\"number\"},\"title\":\"Rates\",\"type\":\"object\"}},\"required\":[\"date\",\"base\",\"rates\"],\"title\":\"RatesResponseSchema\",\"type\":\"object\"}}},\"description\":\"OK\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"title\":\"Error\",\"type\":\"string\"}},\"required\":[\"error\"],\"title\":\"ErrorResponse\",\"type\":\"object\"}}},\"description\":\"Bad Request\"}},\"securitySource\":\"unspecified\"}",
+                    "source": "openapi3",
+                    "version": 1
                   },
                   "kind": "http",
                   "method": "GET",
@@ -405,6 +493,12 @@
                       }
                     ]
                   },
+                  "contract": {
+                    "id": "GET /iban",
+                    "json": "{\"operationId\":\"vatcomply_api_validate_iban\",\"parameters\":[{\"in\":\"query\",\"name\":\"iban\",\"required\":true,\"schema\":{\"maxLength\":34,\"title\":\"IBAN\",\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"account_number\":{\"title\":\"Account Number\",\"type\":\"string\"},\"bank_code\":{\"title\":\"Bank Code\",\"type\":\"string\"},\"bank_name\":{\"title\":\"Bank Name\",\"type\":\"string\"},\"bban\":{\"title\":\"Bban\",\"type\":\"string\"},\"bic\":{\"title\":\"Bic\",\"type\":\"string\"},\"branch_code\":{\"title\":\"Branch Code\",\"type\":\"string\"},\"checksum_digits\":{\"title\":\"Checksum Digits\",\"type\":\"string\"},\"country_code\":{\"title\":\"Country Code\",\"type\":\"string\"},\"country_name\":{\"title\":\"Country Name\",\"type\":\"string\"},\"iban\":{\"maxLength\":34,\"title\":\"IBAN\",\"type\":\"string\"},\"in_sepa_zone\":{\"title\":\"In Sepa Zone\",\"type\":\"boolean\"},\"valid\":{\"title\":\"Valid\",\"type\":\"boolean\"}},\"required\":[\"valid\",\"iban\",\"bank_name\",\"bic\",\"country_code\",\"country_name\",\"checksum_digits\",\"bank_code\",\"branch_code\",\"account_number\",\"bban\",\"in_sepa_zone\"],\"title\":\"ValidateIBANResponseSchema\",\"type\":\"object\"}}},\"description\":\"OK\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"title\":\"Error\",\"type\":\"string\"}},\"required\":[\"error\"],\"title\":\"ErrorResponse\",\"type\":\"object\"}}},\"description\":\"Bad Request\"}},\"securitySource\":\"unspecified\"}",
+                    "source": "openapi3",
+                    "version": 1
+                  },
                   "kind": "http",
                   "method": "GET",
                   "orig": "/iban",
@@ -456,6 +550,12 @@
                       }
                     ]
                   },
+                  "contract": {
+                    "id": "GET /vat",
+                    "json": "{\"operationId\":\"vatcomply_api_validate_vat\",\"parameters\":[{\"in\":\"query\",\"name\":\"vat_number\",\"required\":true,\"schema\":{\"title\":\"Vat Number\",\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"address\":{\"default\":\"\",\"title\":\"Address\",\"type\":\"string\"},\"country_code\":{\"title\":\"Country Code\",\"type\":\"string\"},\"name\":{\"anyOf\":[{\"type\":\"string\"},{\"type\":\"null\"}],\"title\":\"Name\"},\"valid\":{\"title\":\"Valid\",\"type\":\"boolean\"},\"vat_number\":{\"title\":\"Vat Number\",\"type\":\"string\"}},\"required\":[\"valid\",\"vat_number\",\"country_code\"],\"title\":\"ValidateVATResponseSchema\",\"type\":\"object\"}}},\"description\":\"OK\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"title\":\"Error\",\"type\":\"string\"}},\"required\":[\"error\"],\"title\":\"ErrorResponse\",\"type\":\"object\"}}},\"description\":\"Bad Request\"}},\"securitySource\":\"unspecified\"}",
+                    "source": "openapi3",
+                    "version": 1
+                  },
                   "kind": "http",
                   "method": "GET",
                   "orig": "/vat",
@@ -496,6 +596,12 @@
                 {
                   "active": true,
                   "args": {},
+                  "contract": {
+                    "id": "GET /",
+                    "json": "{\"operationId\":\"vatcomply_api_root\",\"parameters\":[],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"contact\":{\"title\":\"Contact\",\"type\":\"string\"},\"description\":{\"title\":\"Description\",\"type\":\"string\"},\"documentation\":{\"title\":\"Documentation\",\"type\":\"string\"},\"endpoints\":{\"additionalProperties\":{\"type\":\"string\"},\"title\":\"Endpoints\",\"type\":\"object\"},\"name\":{\"title\":\"Name\",\"type\":\"string\"},\"status\":{\"title\":\"Status\",\"type\":\"string\"},\"version\":{\"title\":\"Version\",\"type\":\"string\"}},\"required\":[\"name\",\"version\",\"status\",\"description\",\"documentation\",\"endpoints\",\"contact\"],\"title\":\"RootResponseSchema\",\"type\":\"object\"}}},\"description\":\"OK\"}},\"securitySource\":\"unspecified\"}",
+                    "source": "openapi3",
+                    "version": 1
+                  },
                   "kind": "http",
                   "method": "GET",
                   "orig": "/",
@@ -515,13 +621,223 @@
         }
       },
       "feature": {
+        "ratelimit": {
+          "active": true,
+          "base": "node_modules/@voxgig/sdkgen/project/.sdk",
+          "config": {
+            "options": {
+              "active": false,
+              "burst": 5,
+              "rate": 5
+            },
+            "optspec": {
+              "now": "`$FUNCTION`",
+              "sleep": "`$FUNCTION`"
+            },
+            "strict": false
+          },
+          "hook": {
+            "GetData": {
+              "active": false,
+              "await": false
+            },
+            "GetMatch": {
+              "active": false,
+              "await": false
+            },
+            "PostConstruct": {
+              "active": false,
+              "await": false
+            },
+            "PostConstructEntity": {
+              "active": false,
+              "await": false
+            },
+            "PostOperation": {
+              "active": false,
+              "await": false
+            },
+            "PreRequest": {
+              "active": false,
+              "await": false
+            },
+            "PreResponse": {
+              "active": false,
+              "await": false
+            },
+            "PreResult": {
+              "active": false,
+              "await": false
+            },
+            "PreSpec": {
+              "active": false,
+              "await": false
+            },
+            "PreTarget": {
+              "active": false,
+              "await": false
+            },
+            "SetData": {
+              "active": false,
+              "await": false
+            }
+          },
+          "name": "ratelimit",
+          "needs": {},
+          "origname": "",
+          "package": "@voxgig/sdkgen",
+          "plugin": {},
+          "spec": {},
+          "target": {
+            "go": {
+              "deps": {}
+            },
+            "go-cli": {
+              "deps": {}
+            },
+            "go-mcp": {
+              "deps": {}
+            },
+            "lua": {
+              "deps": {}
+            },
+            "php": {
+              "deps": {}
+            },
+            "py": {
+              "deps": {}
+            },
+            "rb": {
+              "deps": {}
+            },
+            "ts": {
+              "deps": {}
+            }
+          },
+          "title": "Client-side rate limiting via a token bucket",
+          "transport": "wrap",
+          "version": "0.0.1"
+        },
+        "retry": {
+          "active": true,
+          "base": "node_modules/@voxgig/sdkgen/project/.sdk",
+          "config": {
+            "options": {
+              "active": false,
+              "factor": 2,
+              "maxDelay": 2000,
+              "minDelay": 50,
+              "retries": 2,
+              "statuses": [
+                408,
+                425,
+                429,
+                500,
+                502,
+                503,
+                504
+              ]
+            },
+            "optspec": {
+              "jitter": "`$BOOLEAN`",
+              "sleep": "`$FUNCTION`"
+            },
+            "strict": false
+          },
+          "hook": {
+            "GetData": {
+              "active": false,
+              "await": false
+            },
+            "GetMatch": {
+              "active": false,
+              "await": false
+            },
+            "PostConstruct": {
+              "active": false,
+              "await": false
+            },
+            "PostConstructEntity": {
+              "active": false,
+              "await": false
+            },
+            "PostOperation": {
+              "active": false,
+              "await": false
+            },
+            "PreRequest": {
+              "active": false,
+              "await": false
+            },
+            "PreResponse": {
+              "active": false,
+              "await": false
+            },
+            "PreResult": {
+              "active": false,
+              "await": false
+            },
+            "PreSpec": {
+              "active": false,
+              "await": false
+            },
+            "PreTarget": {
+              "active": false,
+              "await": false
+            },
+            "SetData": {
+              "active": false,
+              "await": false
+            }
+          },
+          "name": "retry",
+          "needs": {},
+          "origname": "",
+          "package": "@voxgig/sdkgen",
+          "plugin": {},
+          "spec": {},
+          "target": {
+            "go": {
+              "deps": {}
+            },
+            "go-cli": {
+              "deps": {}
+            },
+            "go-mcp": {
+              "deps": {}
+            },
+            "lua": {
+              "deps": {}
+            },
+            "php": {
+              "deps": {}
+            },
+            "py": {
+              "deps": {}
+            },
+            "rb": {
+              "deps": {}
+            },
+            "ts": {
+              "deps": {}
+            }
+          },
+          "title": "Automatic retry of transient failures with exponential backoff",
+          "transport": "wrap",
+          "version": "0.0.1"
+        },
         "test": {
           "active": true,
           "base": "node_modules/@voxgig/sdkgen/project/.sdk",
           "config": {
             "options": {
               "active": false
-            }
+            },
+            "optspec": {
+              "entity": "`$MAP`",
+              "net": "`$MAP`"
+            },
+            "strict": false
           },
           "hook": {
             "GetData": {
@@ -611,6 +927,102 @@
           },
           "title": "In-memory mock transport for testing without a live server",
           "transport": "base",
+          "version": "0.0.1"
+        },
+        "timeout": {
+          "active": true,
+          "base": "node_modules/@voxgig/sdkgen/project/.sdk",
+          "config": {
+            "options": {
+              "active": false,
+              "ms": 30000
+            },
+            "optspec": {
+              "clearTimer": "`$FUNCTION`",
+              "setTimer": "`$FUNCTION`"
+            },
+            "strict": false
+          },
+          "hook": {
+            "GetData": {
+              "active": false,
+              "await": false
+            },
+            "GetMatch": {
+              "active": false,
+              "await": false
+            },
+            "PostConstruct": {
+              "active": false,
+              "await": false
+            },
+            "PostConstructEntity": {
+              "active": false,
+              "await": false
+            },
+            "PostOperation": {
+              "active": false,
+              "await": false
+            },
+            "PreRequest": {
+              "active": false,
+              "await": false
+            },
+            "PreResponse": {
+              "active": false,
+              "await": false
+            },
+            "PreResult": {
+              "active": false,
+              "await": false
+            },
+            "PreSpec": {
+              "active": false,
+              "await": false
+            },
+            "PreTarget": {
+              "active": false,
+              "await": false
+            },
+            "SetData": {
+              "active": false,
+              "await": false
+            }
+          },
+          "name": "timeout",
+          "needs": {},
+          "origname": "",
+          "package": "@voxgig/sdkgen",
+          "plugin": {},
+          "spec": {},
+          "target": {
+            "go": {
+              "deps": {}
+            },
+            "go-cli": {
+              "deps": {}
+            },
+            "go-mcp": {
+              "deps": {}
+            },
+            "lua": {
+              "deps": {}
+            },
+            "php": {
+              "deps": {}
+            },
+            "py": {
+              "deps": {}
+            },
+            "rb": {
+              "deps": {}
+            },
+            "ts": {
+              "deps": {}
+            }
+          },
+          "title": "Per-request timeout with transport abort",
+          "transport": "wrap",
           "version": "0.0.1"
         }
       },
@@ -846,6 +1258,48 @@
         "website": "https://github.com/madisvain/vatcomply/issues"
       },
       "option": {},
+      "optspec": {
+        "allow": {
+          "method": "GET,PUT,POST,PATCH,DELETE,OPTIONS",
+          "op": "create,update,load,list,remove,command,direct,graphql"
+        },
+        "apikey": "",
+        "auth": {
+          "basic": false,
+          "prefix": ""
+        },
+        "base": "http://localhost:8000",
+        "clean": {
+          "keys": "key,token,id"
+        },
+        "entity": {
+          "`$CHILD`": {
+            "`$OPEN`": true,
+            "active": false,
+            "alias": {}
+          }
+        },
+        "extend": "`$ANY`",
+        "headers": {
+          "`$CHILD`": "`$STRING`"
+        },
+        "prefix": "",
+        "secret": "",
+        "server": {
+          "`$CHILD`": ""
+        },
+        "suffix": "",
+        "system": {
+          "fetch": "`$ANY`"
+        },
+        "test": {
+          "active": false,
+          "entity": {
+            "`$OPEN`": true
+          }
+        },
+        "utility": {}
+      },
       "repo": {
         "host": "github.com",
         "path": ""
@@ -1400,6 +1854,7 @@
           },
           "package": "@voxgig/sdkgen",
           "provides": {
+            "schema": true,
             "sekreto": true
           },
           "publish": {
@@ -1441,7 +1896,7 @@
         "live": {
           "app": false,
           "base": "",
-          "strict": false
+          "strict": true
         }
       }
     }

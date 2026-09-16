@@ -4,7 +4,10 @@ declare(strict_types=1);
 // VatValidation SDK feature factory
 
 require_once __DIR__ . '/feature/BaseFeature.php';
+require_once __DIR__ . '/feature/RatelimitFeature.php';
+require_once __DIR__ . '/feature/RetryFeature.php';
 require_once __DIR__ . '/feature/TestFeature.php';
+require_once __DIR__ . '/feature/TimeoutFeature.php';
 
 
 class VatValidationFeatures
@@ -14,8 +17,14 @@ class VatValidationFeatures
         switch ($name) {
             case "base":
                 return new VatValidationBaseFeature();
+            case "ratelimit":
+                return new VatValidationRatelimitFeature();
+            case "retry":
+                return new VatValidationRetryFeature();
             case "test":
                 return new VatValidationTestFeature();
+            case "timeout":
+                return new VatValidationTimeoutFeature();
             default:
                 return new VatValidationBaseFeature();
         }
@@ -31,7 +40,10 @@ class VatValidationFeatures
     {
         switch ($name) {
             case "base":
+            case "ratelimit":
+            case "retry":
             case "test":
+            case "timeout":
                 return true;
             default:
                 return false;

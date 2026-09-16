@@ -1,12 +1,18 @@
 # VatValidation SDK feature factory
 
 from vatvalidation_sdk.feature.base_feature import VatValidationBaseFeature
+from vatvalidation_sdk.feature.ratelimit_feature import VatValidationRatelimitFeature
+from vatvalidation_sdk.feature.retry_feature import VatValidationRetryFeature
 from vatvalidation_sdk.feature.test_feature import VatValidationTestFeature
+from vatvalidation_sdk.feature.timeout_feature import VatValidationTimeoutFeature
 
 
 _FEATURES = {
     "base": lambda: VatValidationBaseFeature(),
+    "ratelimit": lambda: VatValidationRatelimitFeature(),
+    "retry": lambda: VatValidationRetryFeature(),
     "test": lambda: VatValidationTestFeature(),
+    "timeout": lambda: VatValidationTimeoutFeature(),
 }
 
 

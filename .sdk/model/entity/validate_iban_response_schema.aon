@@ -84,6 +84,12 @@ main: kit: entity: validate_iban_response_schema: {
               }
             ]
           }
+          contract: {
+            id: "GET /iban"
+            json: "{\"operationId\":\"vatcomply_api_validate_iban\",\"parameters\":[{\"in\":\"query\",\"name\":\"iban\",\"required\":true,\"schema\":{\"maxLength\":34,\"title\":\"IBAN\",\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"account_number\":{\"title\":\"Account Number\",\"type\":\"string\"},\"bank_code\":{\"title\":\"Bank Code\",\"type\":\"string\"},\"bank_name\":{\"title\":\"Bank Name\",\"type\":\"string\"},\"bban\":{\"title\":\"Bban\",\"type\":\"string\"},\"bic\":{\"title\":\"Bic\",\"type\":\"string\"},\"branch_code\":{\"title\":\"Branch Code\",\"type\":\"string\"},\"checksum_digits\":{\"title\":\"Checksum Digits\",\"type\":\"string\"},\"country_code\":{\"title\":\"Country Code\",\"type\":\"string\"},\"country_name\":{\"title\":\"Country Name\",\"type\":\"string\"},\"iban\":{\"maxLength\":34,\"title\":\"IBAN\",\"type\":\"string\"},\"in_sepa_zone\":{\"title\":\"In Sepa Zone\",\"type\":\"boolean\"},\"valid\":{\"title\":\"Valid\",\"type\":\"boolean\"}},\"required\":[\"valid\",\"iban\",\"bank_name\",\"bic\",\"country_code\",\"country_name\",\"checksum_digits\",\"bank_code\",\"branch_code\",\"account_number\",\"bban\",\"in_sepa_zone\"],\"title\":\"ValidateIBANResponseSchema\",\"type\":\"object\"}}},\"description\":\"OK\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"title\":\"Error\",\"type\":\"string\"}},\"required\":[\"error\"],\"title\":\"ErrorResponse\",\"type\":\"object\"}}},\"description\":\"Bad Request\"}},\"securitySource\":\"unspecified\"}"
+            source: "openapi3"
+            version: 1
+          }
           method: "GET"
           orig: "/iban"
           segments: [

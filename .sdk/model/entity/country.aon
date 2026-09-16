@@ -88,6 +88,12 @@ main: kit: entity: country: {
       name: "list"
       points: [
         {
+          contract: {
+            id: "GET /countries"
+            json: "{\"operationId\":\"vatcomply_api_countries\",\"parameters\":[],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"items\":{\"properties\":{\"capital\":{\"title\":\"Capital\",\"type\":\"string\"},\"currency\":{\"title\":\"Currency\",\"type\":\"string\"},\"emoji\":{\"title\":\"Emoji\",\"type\":\"string\"},\"iso2\":{\"title\":\"Iso2\",\"type\":\"string\"},\"iso3\":{\"title\":\"Iso3\",\"type\":\"string\"},\"latitude\":{\"anyOf\":[{\"type\":\"number\"},{\"type\":\"string\"}],\"title\":\"Latitude\"},\"longitude\":{\"anyOf\":[{\"type\":\"number\"},{\"type\":\"string\"}],\"title\":\"Longitude\"},\"name\":{\"title\":\"Name\",\"type\":\"string\"},\"numeric_code\":{\"title\":\"Numeric Code\",\"type\":\"integer\"},\"phone_code\":{\"title\":\"Phone Code\",\"type\":\"string\"},\"region\":{\"title\":\"Region\",\"type\":\"string\"},\"subregion\":{\"title\":\"Subregion\",\"type\":\"string\"},\"tld\":{\"title\":\"Tld\",\"type\":\"string\"}},\"required\":[\"iso2\",\"iso3\",\"name\",\"numeric_code\",\"phone_code\",\"capital\",\"currency\",\"tld\",\"region\",\"subregion\",\"latitude\",\"longitude\",\"emoji\"],\"title\":\"CountrySchema\",\"type\":\"object\"},\"title\":\"Response\",\"type\":\"array\"}}},\"description\":\"OK\"}},\"securitySource\":\"unspecified\"}"
+            source: "openapi3"
+            version: 1
+          }
           method: "GET"
           orig: "/countries"
           segments: [

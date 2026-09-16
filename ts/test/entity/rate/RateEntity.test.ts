@@ -5,6 +5,8 @@ import * as Fs from 'node:fs'
 
 import { test, describe, afterEach } from 'node:test'
 import assert from 'node:assert'
+import { createLiveTransport } from '../../live-runner'
+import { runLiveEntity } from '../../live-entity'
 
 
 import { VatValidationSDK, BaseFeature, stdutil } from '../../..'
@@ -47,16 +49,13 @@ describe('RateEntity', async () => {
 
     const live = 'TRUE' === process.env.VAT_VALIDATION_TEST_LIVE
     for (const op of ['load']) {
-      if (maybeSkipControl(t, 'entityOp', 'rate.' + op, live)) return
+      if (!live && maybeSkipControl(t, 'entityOp', 'rate.' + op, live)) return
     }
 
+    
     const setup = basicSetup()
-    // The basic flow consumes synthetic IDs and field values from the
-    // fixture (entity TestData.json). Those don't exist on the live API.
-    // Skip live runs unless the user provided a real ENTID env override.
-    if (setup.syntheticOnly) {
-      t.skip('live entity test uses synthetic IDs from fixture — set VAT_VALIDATION_TEST_RATE_ENTID JSON to run live')
-      return
+    if (setup.live) {
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":[],"name":"rate","op":{"load":{"input":"data","name":"load","points":[{"active":true,"args":{"query":[{"active":true,"example":"EUR","kind":"query","name":"base","orig":"base","reqd":false,"type":"`$ANY`","index$":0},{"active":true,"kind":"query","name":"date","orig":"date","reqd":false,"type":"`$ANY`","index$":1},{"active":true,"kind":"query","name":"symbol","orig":"symbol","reqd":false,"type":"`$ANY`","index$":2}]},"contract":{"id":"GET /rates","json":"{\"operationId\":\"vatcomply_api_rates\",\"parameters\":[{\"in\":\"query\",\"name\":\"base\",\"required\":false,\"schema\":{\"anyOf\":[{\"type\":\"string\"},{\"type\":\"null\"}],\"default\":\"EUR\",\"title\":\"Base\"}},{\"in\":\"query\",\"name\":\"symbols\",\"required\":false,\"schema\":{\"anyOf\":[{\"type\":\"string\"},{\"type\":\"null\"}],\"title\":\"Symbols\"}},{\"in\":\"query\",\"name\":\"date\",\"required\":false,\"schema\":{\"anyOf\":[{\"format\":\"date\",\"type\":\"string\"},{\"type\":\"null\"}],\"title\":\"Date\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"base\":{\"enum\":[\"EUR\",\"USD\",\"JPY\",\"BGN\",\"CZK\",\"DKK\",\"GBP\",\"HUF\",\"PLN\",\"RON\",\"SEK\",\"CHF\",\"ISK\",\"NOK\",\"HRK\",\"RUB\",\"TRY\",\"AUD\",\"BRL\",\"CAD\",\"CNY\",\"HKD\",\"IDR\",\"ILS\",\"INR\",\"KRW\",\"MXN\",\"MYR\",\"NZD\",\"PHP\",\"SGD\",\"THB\",\"ZAR\"],\"title\":\"CurrencySymbol\",\"type\":\"string\"},\"date\":{\"title\":\"Date\",\"type\":\"string\"},\"rates\":{\"additionalProperties\":{\"type\":\"number\"},\"title\":\"Rates\",\"type\":\"object\"}},\"required\":[\"date\",\"base\",\"rates\"],\"title\":\"RatesResponseSchema\",\"type\":\"object\"}}},\"description\":\"OK\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"title\":\"Error\",\"type\":\"string\"}},\"required\":[\"error\"],\"title\":\"ErrorResponse\",\"type\":\"object\"}}},\"description\":\"Bad Request\"}},\"securitySource\":\"unspecified\"}","source":"openapi3","version":1},"kind":"http","method":"GET","orig":"/rates","segments":[{"lit":"rates"}],"select":{"exist":["base","date","symbol"]},"transform":{"req":"`reqdata`","res":"`body.rates`"},"index$":0}],"key$":"load"}},"relations":{"ancestors":[]},"key$":"rate","name__orig":"rate","Name":"Rate","name_":"rate","name-":"rate","NAME":"RATE","index$":3}, {"active":true,"entity":"rate","key$":"BasicRateFlow","kind":"basic","name":"BasicRateFlow","param":{},"step":[{"active":true,"data":{},"input":{"ref":"rate_ref01","srcdatavar":"rate_ref01_data","suffix":"_dt0"},"match":{},"op":"load","spec":[],"valid":[{"apply":"TextFieldMark","def":{"mark":"Mark01-rate_ref01"}}],"index$":0}]}, 'Rate')
     }
     const client = setup.client
     const struct = setup.struct
@@ -109,13 +108,6 @@ function basicSetup(extra?: any) {
       }]
     })
 
-  // Detect whether the user provided a real ENTID JSON via env var. The
-  // basic flow consumes synthetic IDs from the fixture file; without an
-  // override those synthetic IDs reach the live API and 4xx. Surface this
-  // to the test so it can skip rather than fail.
-  const idmapEnvVal = process.env['VAT_VALIDATION_TEST_RATE_ENTID']
-  const idmapOverridden = null != idmapEnvVal && idmapEnvVal.trim().startsWith('{')
-
   const env = envOverride({
     'VAT_VALIDATION_TEST_RATE_ENTID': idmap,
     'VAT_VALIDATION_TEST_LIVE': 'FALSE',
@@ -126,7 +118,13 @@ function basicSetup(extra?: any) {
 
   const live = 'TRUE' === env.VAT_VALIDATION_TEST_LIVE
 
+  const transport = createLiveTransport()
   if (live) {
+    const rawIds = process.env['VAT_VALIDATION_TEST_RATE_ENTID']
+    idmap = rawIds && rawIds.trim() ? JSON.parse(rawIds) : {}
+    if (!idmap || Array.isArray(idmap) || typeof idmap !== 'object') {
+      throw new Error('Live ENTID must be a JSON object')
+    }
     client = new VatValidationSDK(merge([
       // FIRST, so the generated fields below win: sdk-test-control.json's
       // test.client.options adds to the live client, it does not redirect it.
@@ -138,7 +136,8 @@ function basicSetup(extra?: any) {
       // argument at all - so a bare 'extra' silently discarded the apikey
       // and server values above and handed the SDK undefined. Harmless
       // while there was nothing in that object; not harmless now.
-      extra || {}
+      extra || {},
+      { system: { fetch: transport.fetch } }
     ]))
   }
 
@@ -151,7 +150,7 @@ function basicSetup(extra?: any) {
     data: entityData,
     explain: 'TRUE' === env.VAT_VALIDATION_TEST_EXPLAIN,
     live,
-    syntheticOnly: live && !idmapOverridden,
+    transport,
     now: Date.now(),
   }
 

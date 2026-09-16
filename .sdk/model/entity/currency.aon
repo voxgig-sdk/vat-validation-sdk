@@ -23,6 +23,12 @@ main: kit: entity: currency: {
       name: "load"
       points: [
         {
+          contract: {
+            id: "GET /currencies"
+            json: "{\"operationId\":\"vatcomply_api_get_currencies\",\"parameters\":[],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"additionalProperties\":{\"properties\":{\"name\":{\"title\":\"Name\",\"type\":\"string\"},\"symbol\":{\"enum\":[\"EUR\",\"USD\",\"JPY\",\"BGN\",\"CZK\",\"DKK\",\"GBP\",\"HUF\",\"PLN\",\"RON\",\"SEK\",\"CHF\",\"ISK\",\"NOK\",\"HRK\",\"RUB\",\"TRY\",\"AUD\",\"BRL\",\"CAD\",\"CNY\",\"HKD\",\"IDR\",\"ILS\",\"INR\",\"KRW\",\"MXN\",\"MYR\",\"NZD\",\"PHP\",\"SGD\",\"THB\",\"ZAR\"],\"title\":\"CurrencySymbol\",\"type\":\"string\"}},\"required\":[\"name\",\"symbol\"],\"title\":\"CurrencySchema\",\"type\":\"object\"},\"title\":\"Response\",\"type\":\"object\"}}},\"description\":\"OK\"}},\"securitySource\":\"unspecified\"}"
+            source: "openapi3"
+            version: 1
+          }
           method: "GET"
           orig: "/currencies"
           segments: [
