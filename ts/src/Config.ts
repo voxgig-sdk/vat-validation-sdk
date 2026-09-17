@@ -127,27 +127,27 @@ class Config {
 
     entity: {
       
-      country: {
-      },
-
-      currency: {
-      },
-
-      geolocate: {
-      },
-
-      rate: {
-      },
-
-      validate_iban_response_schema: {
-      },
-
-      validate_vat_response_schema: {
-      },
-
-      vatcomply_api_root: {
-      },
-
+        country: {
+        },
+  
+        currency: {
+        },
+  
+        geolocate: {
+        },
+  
+        rate: {
+        },
+  
+        validate_iban_response_schema: {
+        },
+  
+        validate_vat_response_schema: {
+        },
+  
+        vatcomply_api_root: {
+        },
+  
     }
   }
 

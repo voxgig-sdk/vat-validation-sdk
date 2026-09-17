@@ -105,12 +105,12 @@ local result, err = client:Geolocate():load()
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/vat-validation-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/vat-validation-sdk/releases) |
-| Python | `voxgig-sdk-vat-validation` | publish pending — [install from git tag](https://github.com/voxgig-sdk/vat-validation-sdk/releases) |
-| PHP | `voxgig-sdk/vat-validation` | publish pending — [install from git tag](https://github.com/voxgig-sdk/vat-validation-sdk/releases) |
+| TypeScript | `@voxgig-sdk/vat-validation-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/vat-validation-sdk/tags) |
+| Python | `voxgig-sdk-vat-validation` | publish pending — [install from git tag](https://github.com/voxgig-sdk/vat-validation-sdk/tags) |
+| PHP | `voxgig-sdk/vat-validation` | publish pending — [install from git tag](https://github.com/voxgig-sdk/vat-validation-sdk/tags) |
 | Golang | `github.com/voxgig-sdk/vat-validation-sdk/go` | `go get github.com/voxgig-sdk/vat-validation-sdk/go@latest` |
-| Ruby | `voxgig-sdk-vat-validation` | publish pending — [install from git tag](https://github.com/voxgig-sdk/vat-validation-sdk/releases) |
-| Lua | `voxgig-sdk-vat-validation` | publish pending — [install from git tag](https://github.com/voxgig-sdk/vat-validation-sdk/releases) |
+| Ruby | `voxgig-sdk-vat-validation` | publish pending — [install from git tag](https://github.com/voxgig-sdk/vat-validation-sdk/tags) |
+| Lua | `voxgig-sdk-vat-validation` | publish pending — [install from git tag](https://github.com/voxgig-sdk/vat-validation-sdk/tags) |
 | Go CLI | `github.com/voxgig-sdk/vat-validation-sdk/go-cli` | `go install github.com/voxgig-sdk/vat-validation-sdk/go-cli/cmd/vat-validation@latest` |
 | Go MCP server | `github.com/voxgig-sdk/vat-validation-sdk/go-mcp` | `go get github.com/voxgig-sdk/vat-validation-sdk/go-mcp@latest` |
 
