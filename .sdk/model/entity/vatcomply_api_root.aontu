@@ -1,0 +1,34 @@
+# Entity: vatcomply_api_root
+
+main: kit: entity: vatcomply_api_root: {
+
+  alias: field: {}
+
+  name: "vatcomply_api_root"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/"
+          t: {
+            req: "`reqdata`"
+            res: "`body.endpoints`"
+          }
+        }
+      ]
+    }
+  }
+
+  fields: {
+  }
+
+
+
+}

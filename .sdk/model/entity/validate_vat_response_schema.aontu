@@ -1,0 +1,55 @@
+# Entity: validate_vat_response_schema
+
+main: kit: entity: validate_vat_response_schema: {
+
+  alias: field: {}
+
+  name: "validate_vat_response_schema"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /vat"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "vat_number"
+                or: "vat_number"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/vat"
+          q: {
+            exist: [
+              "vat_number"
+            ]
+          }
+          s: [
+            {
+              lit: "vat"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.name`"
+          }
+        }
+      ]
+    }
+  }
+
+  fields: {
+  }
+
+
+
+}

@@ -122,78 +122,81 @@ def make_config():
         "fields": [
           {
             "name": "capital",
-            "req": True,
+            "title": "Capital",
             "type": "`$STRING`",
+            "req": True,
           },
           {
             "name": "currency",
-            "req": True,
+            "title": "Currency",
             "type": "`$STRING`",
+            "req": True,
           },
           {
             "name": "emoji",
-            "req": True,
+            "title": "Emoji",
             "type": "`$STRING`",
+            "req": True,
           },
           {
             "name": "iso2",
-            "req": True,
+            "title": "Iso2",
             "type": "`$STRING`",
+            "req": True,
           },
           {
             "name": "iso3",
-            "req": True,
+            "title": "Iso3",
             "type": "`$STRING`",
+            "req": True,
           },
           {
             "name": "latitude",
-            "req": True,
+            "title": "Latitude",
             "type": "`$NUMBER`",
-            "union": {
-              "branches": 2,
-              "count": 1,
-              "depth": 0,
-            },
+            "req": True,
           },
           {
             "name": "longitude",
-            "req": True,
+            "title": "Longitude",
             "type": "`$NUMBER`",
-            "union": {
-              "branches": 2,
-              "count": 1,
-              "depth": 0,
-            },
+            "req": True,
           },
           {
             "name": "name",
-            "req": True,
+            "title": "Name",
             "type": "`$STRING`",
+            "req": True,
           },
           {
             "name": "numeric_code",
-            "req": True,
+            "title": "Numeric Code",
             "type": "`$INTEGER`",
+            "req": True,
           },
           {
             "name": "phone_code",
-            "req": True,
+            "title": "Phone Code",
             "type": "`$STRING`",
+            "req": True,
           },
           {
             "name": "region",
-            "req": True,
+            "title": "Region",
             "type": "`$STRING`",
+            "req": True,
           },
           {
             "name": "subregion",
-            "req": True,
+            "title": "Subregion",
             "type": "`$STRING`",
+            "req": True,
           },
           {
             "name": "tld",
-            "req": True,
+            "title": "Tld",
             "type": "`$STRING`",
+            "req": True,
           },
         ],
         "name": "country",
@@ -203,7 +206,6 @@ def make_config():
             "name": "list",
             "points": [
               {
-                "args": {},
                 "kind": "http",
                 "method": "GET",
                 "orig": "/countries",
@@ -212,14 +214,16 @@ def make_config():
                     "lit": "countries",
                   },
                 ],
-                "select": {},
+                "parts": [
+                  "countries",
+                ],
+                "rename": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "parts": [
-                  "countries",
-                ],
+                "args": {},
+                "select": {},
               },
             ],
           },
@@ -232,13 +236,15 @@ def make_config():
         "fields": [
           {
             "name": "name",
-            "req": True,
+            "title": "Name",
             "type": "`$STRING`",
+            "req": True,
           },
           {
             "name": "symbol",
-            "req": True,
+            "title": "Symbol",
             "type": "`$STRING`",
+            "req": True,
           },
         ],
         "name": "currency",
@@ -248,7 +254,6 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "args": {},
                 "kind": "http",
                 "method": "GET",
                 "orig": "/currencies",
@@ -257,14 +262,16 @@ def make_config():
                     "lit": "currencies",
                   },
                 ],
-                "select": {},
+                "parts": [
+                  "currencies",
+                ],
+                "rename": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "parts": [
-                  "currencies",
-                ],
+                "args": {},
+                "select": {},
               },
             ],
           },
@@ -282,7 +289,6 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "args": {},
                 "kind": "http",
                 "method": "GET",
                 "orig": "/geolocate",
@@ -291,14 +297,16 @@ def make_config():
                     "lit": "geolocate",
                   },
                 ],
-                "select": {},
+                "parts": [
+                  "geolocate",
+                ],
+                "rename": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body.ip`",
                 },
-                "parts": [
-                  "geolocate",
-                ],
+                "args": {},
+                "select": {},
               },
             ],
           },
@@ -316,29 +324,6 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "args": {
-                  "query": [
-                    {
-                      "example": "EUR",
-                      "kind": "query",
-                      "name": "base",
-                      "orig": "base",
-                      "type": "`$ANY`",
-                    },
-                    {
-                      "kind": "query",
-                      "name": "date",
-                      "orig": "date",
-                      "type": "`$ANY`",
-                    },
-                    {
-                      "kind": "query",
-                      "name": "symbol",
-                      "orig": "symbol",
-                      "type": "`$ANY`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "GET",
                 "orig": "/rates",
@@ -347,6 +332,37 @@ def make_config():
                     "lit": "rates",
                   },
                 ],
+                "parts": [
+                  "rates",
+                ],
+                "rename": {},
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body.rates`",
+                },
+                "args": {
+                  "query": [
+                    {
+                      "name": "base",
+                      "orig": "base",
+                      "type": "`$ANY`",
+                      "kind": "query",
+                      "example": "EUR",
+                    },
+                    {
+                      "name": "date",
+                      "orig": "date",
+                      "type": "`$ANY`",
+                      "kind": "query",
+                    },
+                    {
+                      "name": "symbol",
+                      "orig": "symbol",
+                      "type": "`$ANY`",
+                      "kind": "query",
+                    },
+                  ],
+                },
                 "select": {
                   "exist": [
                     "base",
@@ -354,13 +370,6 @@ def make_config():
                     "symbol",
                   ],
                 },
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body.rates`",
-                },
-                "parts": [
-                  "rates",
-                ],
               },
             ],
           },
@@ -373,63 +382,75 @@ def make_config():
         "fields": [
           {
             "name": "account_number",
-            "req": True,
+            "title": "Account Number",
             "type": "`$STRING`",
+            "req": True,
           },
           {
             "name": "bank_code",
-            "req": True,
+            "title": "Bank Code",
             "type": "`$STRING`",
+            "req": True,
           },
           {
             "name": "bank_name",
-            "req": True,
+            "title": "Bank Name",
             "type": "`$STRING`",
+            "req": True,
           },
           {
             "name": "bban",
-            "req": True,
+            "title": "Bban",
             "type": "`$STRING`",
+            "req": True,
           },
           {
             "name": "bic",
-            "req": True,
+            "title": "Bic",
             "type": "`$STRING`",
+            "req": True,
           },
           {
             "name": "branch_code",
-            "req": True,
+            "title": "Branch Code",
             "type": "`$STRING`",
+            "req": True,
           },
           {
             "name": "checksum_digits",
-            "req": True,
+            "title": "Checksum Digits",
             "type": "`$STRING`",
+            "req": True,
           },
           {
             "name": "country_code",
-            "req": True,
+            "title": "Country Code",
             "type": "`$STRING`",
+            "req": True,
           },
           {
             "name": "country_name",
-            "req": True,
+            "title": "Country Name",
             "type": "`$STRING`",
+            "req": True,
           },
           {
             "name": "iban",
-            "req": True,
+            "title": "Iban",
             "type": "`$STRING`",
+            "req": True,
           },
           {
             "name": "in_sepa_zone",
-            "req": True,
+            "title": "In Sepa Zone",
             "type": "`$BOOLEAN`",
+            "req": True,
           },
           {
             "name": "valid",
-            "req": True,
+            "title": "Valid",
             "type": "`$BOOLEAN`",
+            "req": True,
           },
         ],
         "name": "validate_iban_response_schema",
@@ -439,17 +460,6 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "args": {
-                  "query": [
-                    {
-                      "kind": "query",
-                      "name": "iban",
-                      "orig": "iban",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "GET",
                 "orig": "/iban",
@@ -458,18 +468,30 @@ def make_config():
                     "lit": "iban",
                   },
                 ],
+                "parts": [
+                  "iban",
+                ],
+                "rename": {},
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body`",
+                },
+                "args": {
+                  "query": [
+                    {
+                      "name": "iban",
+                      "orig": "iban",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                      "reqd": True,
+                    },
+                  ],
+                },
                 "select": {
                   "exist": [
                     "iban",
                   ],
                 },
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body`",
-                },
-                "parts": [
-                  "iban",
-                ],
               },
             ],
           },
@@ -487,17 +509,6 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "args": {
-                  "query": [
-                    {
-                      "kind": "query",
-                      "name": "vat_number",
-                      "orig": "vat_number",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "GET",
                 "orig": "/vat",
@@ -506,18 +517,30 @@ def make_config():
                     "lit": "vat",
                   },
                 ],
+                "parts": [
+                  "vat",
+                ],
+                "rename": {},
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body.name`",
+                },
+                "args": {
+                  "query": [
+                    {
+                      "name": "vat_number",
+                      "orig": "vat_number",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                      "reqd": True,
+                    },
+                  ],
+                },
                 "select": {
                   "exist": [
                     "vat_number",
                   ],
                 },
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body.name`",
-                },
-                "parts": [
-                  "vat",
-                ],
               },
             ],
           },
@@ -535,17 +558,18 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "args": {},
                 "kind": "http",
                 "method": "GET",
                 "orig": "/",
                 "segments": [],
-                "select": {},
+                "parts": [],
+                "rename": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body.endpoints`",
                 },
-                "parts": [],
+                "args": {},
+                "select": {},
               },
             ],
           },

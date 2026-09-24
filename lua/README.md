@@ -43,7 +43,7 @@ local countrys, err = client:Country():list()
 if err then error(err) end
 
 for _, item in ipairs(countrys) do
-  print(item["capital"])
+  print(item)
 end
 ```
 

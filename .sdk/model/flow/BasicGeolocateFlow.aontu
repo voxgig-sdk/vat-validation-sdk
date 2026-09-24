@@ -1,0 +1,28 @@
+# BasicGeolocateFlow
+
+main: kit: flow: BasicGeolocateFlow:
+{
+  entity: "geolocate",
+  kind: "basic",
+  name: "BasicGeolocateFlow",
+  step: [
+    {
+      i: {
+        ref: "geolocate_ref01",
+        srcdatavar: "geolocate_ref01_data",
+        suffix: "_dt0"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-geolocate_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicGeolocateFlow"
+}

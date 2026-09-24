@@ -24,102 +24,181 @@
         "repr": "auto"
       },
       "contributor": {},
+      "doc": {
+        "active": true,
+        "assets": {
+          "path": ".sdk/doc/assets"
+        },
+        "brand": {
+          "label": "",
+          "notice": "",
+          "shortNotice": "",
+          "url": ""
+        },
+        "ci": {
+          "active": true,
+          "branch": "main"
+        },
+        "content": {
+          "path": ".sdk/doc/content"
+        },
+        "edition": {
+          "summary": {
+            "active": true,
+            "base": "node_modules/@voxgig/docgen/project/.sdk",
+            "brand": {},
+            "filter": {
+              "entities": [],
+              "features": [],
+              "targets": []
+            },
+            "kind": "summary",
+            "name": "summary",
+            "origname": "",
+            "output": {
+              "path": "SUMMARY.md"
+            },
+            "package": "@voxgig/docgen",
+            "published": false,
+            "site": {
+              "active": true
+            },
+            "style": {},
+            "title": ""
+          }
+        },
+        "qa": {
+          "vocabulary": []
+        },
+        "style": {
+          "color": {
+            "accent": "#00c6d8",
+            "background": "#f5f5f9",
+            "darkBackground": "#0f1117",
+            "darkText": "#e6edf3",
+            "primary": "#e70042",
+            "text": "#0a0a0a"
+          },
+          "font": "Nunito, system-ui, sans-serif",
+          "fontFile": "",
+          "headingFont": "Nunito, system-ui, sans-serif",
+          "headingFontFile": "",
+          "logo": "",
+          "mode": "light",
+          "mono": "ui-monospace, monospace",
+          "monoFile": ""
+        },
+        "target": {}
+      },
       "entity": {
         "country": {
           "active": true,
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "name": "capital",
-              "req": true,
-              "type": "`$STRING`"
+          "fields": {
+            "capital": {
+              "a": true,
+              "h": "Capital",
+              "n": "capital",
+              "r": true,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "currency",
-              "req": true,
-              "type": "`$STRING`"
+            "currency": {
+              "a": true,
+              "h": "Currency",
+              "n": "currency",
+              "r": true,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "emoji",
-              "req": true,
-              "type": "`$STRING`"
+            "emoji": {
+              "a": true,
+              "h": "Emoji",
+              "n": "emoji",
+              "r": true,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "iso2",
-              "req": true,
-              "type": "`$STRING`"
+            "iso2": {
+              "a": true,
+              "h": "Iso2",
+              "n": "iso2",
+              "r": true,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "iso3",
-              "req": true,
-              "type": "`$STRING`"
+            "iso3": {
+              "a": true,
+              "h": "Iso3",
+              "n": "iso3",
+              "r": true,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "latitude",
-              "req": true,
-              "type": "`$NUMBER`",
+            "latitude": {
+              "a": true,
+              "h": "Latitude",
+              "n": "latitude",
+              "r": true,
+              "t": "`$NUMBER`",
               "union": {
                 "branches": 2,
                 "count": 1,
                 "depth": 0
               }
             },
-            {
-              "active": true,
-              "name": "longitude",
-              "req": true,
-              "type": "`$NUMBER`",
+            "longitude": {
+              "a": true,
+              "h": "Longitude",
+              "n": "longitude",
+              "r": true,
+              "t": "`$NUMBER`",
               "union": {
                 "branches": 2,
                 "count": 1,
                 "depth": 0
               }
             },
-            {
-              "active": true,
-              "name": "name",
-              "req": true,
-              "type": "`$STRING`"
+            "name": {
+              "a": true,
+              "h": "Name",
+              "n": "name",
+              "r": true,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "numeric_code",
-              "req": true,
-              "type": "`$INTEGER`"
+            "numeric_code": {
+              "a": true,
+              "h": "Numeric Code",
+              "n": "numeric_code",
+              "r": true,
+              "t": "`$INTEGER`"
             },
-            {
-              "active": true,
-              "name": "phone_code",
-              "req": true,
-              "type": "`$STRING`"
+            "phone_code": {
+              "a": true,
+              "h": "Phone Code",
+              "n": "phone_code",
+              "r": true,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "region",
-              "req": true,
-              "type": "`$STRING`"
+            "region": {
+              "a": true,
+              "h": "Region",
+              "n": "region",
+              "r": true,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "subregion",
-              "req": true,
-              "type": "`$STRING`"
+            "subregion": {
+              "a": true,
+              "h": "Subregion",
+              "n": "subregion",
+              "r": true,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "tld",
-              "req": true,
-              "type": "`$STRING`"
+            "tld": {
+              "a": true,
+              "h": "Tld",
+              "n": "tld",
+              "r": true,
+              "t": "`$STRING`"
             }
-          ],
+          },
           "name": "country",
           "op": {
             "list": {
@@ -127,24 +206,24 @@
               "name": "list",
               "points": [
                 {
-                  "active": true,
-                  "args": {},
-                  "contract": {
+                  "a": true,
+                  "co": {
                     "id": "GET /countries",
-                    "json": "{\"operationId\":\"vatcomply_api_countries\",\"parameters\":[],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"items\":{\"properties\":{\"capital\":{\"title\":\"Capital\",\"type\":\"string\"},\"currency\":{\"title\":\"Currency\",\"type\":\"string\"},\"emoji\":{\"title\":\"Emoji\",\"type\":\"string\"},\"iso2\":{\"title\":\"Iso2\",\"type\":\"string\"},\"iso3\":{\"title\":\"Iso3\",\"type\":\"string\"},\"latitude\":{\"anyOf\":[{\"type\":\"number\"},{\"type\":\"string\"}],\"title\":\"Latitude\"},\"longitude\":{\"anyOf\":[{\"type\":\"number\"},{\"type\":\"string\"}],\"title\":\"Longitude\"},\"name\":{\"title\":\"Name\",\"type\":\"string\"},\"numeric_code\":{\"title\":\"Numeric Code\",\"type\":\"integer\"},\"phone_code\":{\"title\":\"Phone Code\",\"type\":\"string\"},\"region\":{\"title\":\"Region\",\"type\":\"string\"},\"subregion\":{\"title\":\"Subregion\",\"type\":\"string\"},\"tld\":{\"title\":\"Tld\",\"type\":\"string\"}},\"required\":[\"iso2\",\"iso3\",\"name\",\"numeric_code\",\"phone_code\",\"capital\",\"currency\",\"tld\",\"region\",\"subregion\",\"latitude\",\"longitude\",\"emoji\"],\"title\":\"CountrySchema\",\"type\":\"object\"},\"title\":\"Response\",\"type\":\"array\"}}},\"description\":\"OK\"}},\"securitySource\":\"unspecified\"}",
                     "source": "openapi3",
-                    "version": 1
+                    "version": 2
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/countries",
-                  "segments": [
+                  "g": {},
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/countries",
+                  "q": {},
+                  "r": {},
+                  "s": [
                     {
                       "lit": "countries"
                     }
                   ],
-                  "select": {},
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -161,20 +240,22 @@
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "name": "name",
-              "req": true,
-              "type": "`$STRING`"
+          "fields": {
+            "name": {
+              "a": true,
+              "h": "Name",
+              "n": "name",
+              "r": true,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "symbol",
-              "req": true,
-              "type": "`$STRING`"
+            "symbol": {
+              "a": true,
+              "h": "Symbol",
+              "n": "symbol",
+              "r": true,
+              "t": "`$STRING`"
             }
-          ],
+          },
           "name": "currency",
           "op": {
             "load": {
@@ -182,24 +263,24 @@
               "name": "load",
               "points": [
                 {
-                  "active": true,
-                  "args": {},
-                  "contract": {
+                  "a": true,
+                  "co": {
                     "id": "GET /currencies",
-                    "json": "{\"operationId\":\"vatcomply_api_get_currencies\",\"parameters\":[],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"additionalProperties\":{\"properties\":{\"name\":{\"title\":\"Name\",\"type\":\"string\"},\"symbol\":{\"enum\":[\"EUR\",\"USD\",\"JPY\",\"BGN\",\"CZK\",\"DKK\",\"GBP\",\"HUF\",\"PLN\",\"RON\",\"SEK\",\"CHF\",\"ISK\",\"NOK\",\"HRK\",\"RUB\",\"TRY\",\"AUD\",\"BRL\",\"CAD\",\"CNY\",\"HKD\",\"IDR\",\"ILS\",\"INR\",\"KRW\",\"MXN\",\"MYR\",\"NZD\",\"PHP\",\"SGD\",\"THB\",\"ZAR\"],\"title\":\"CurrencySymbol\",\"type\":\"string\"}},\"required\":[\"name\",\"symbol\"],\"title\":\"CurrencySchema\",\"type\":\"object\"},\"title\":\"Response\",\"type\":\"object\"}}},\"description\":\"OK\"}},\"securitySource\":\"unspecified\"}",
                     "source": "openapi3",
-                    "version": 1
+                    "version": 2
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/currencies",
-                  "segments": [
+                  "g": {},
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/currencies",
+                  "q": {},
+                  "r": {},
+                  "s": [
                     {
                       "lit": "currencies"
                     }
                   ],
-                  "select": {},
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -216,7 +297,7 @@
           "alias": {
             "field": {}
           },
-          "fields": [],
+          "fields": {},
           "name": "geolocate",
           "op": {
             "load": {
@@ -224,24 +305,24 @@
               "name": "load",
               "points": [
                 {
-                  "active": true,
-                  "args": {},
-                  "contract": {
+                  "a": true,
+                  "co": {
                     "id": "GET /geolocate",
-                    "json": "{\"operationId\":\"vatcomply_api_geolocate\",\"parameters\":[],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"capital\":{\"title\":\"Capital\",\"type\":\"string\"},\"country_code\":{\"title\":\"Country Code\",\"type\":\"string\"},\"currency\":{\"title\":\"Currency\",\"type\":\"string\"},\"emoji\":{\"title\":\"Emoji\",\"type\":\"string\"},\"ip\":{\"anyOf\":[{\"type\":\"string\"},{\"type\":\"null\"}],\"title\":\"Ip\"},\"iso2\":{\"title\":\"Iso2\",\"type\":\"string\"},\"iso3\":{\"title\":\"Iso3\",\"type\":\"string\"},\"latitude\":{\"title\":\"Latitude\",\"type\":\"number\"},\"longitude\":{\"title\":\"Longitude\",\"type\":\"number\"},\"name\":{\"title\":\"Name\",\"type\":\"string\"},\"numeric_code\":{\"title\":\"Numeric Code\",\"type\":\"integer\"},\"phone_code\":{\"title\":\"Phone Code\",\"type\":\"string\"},\"region\":{\"title\":\"Region\",\"type\":\"string\"},\"subregion\":{\"title\":\"Subregion\",\"type\":\"string\"},\"tld\":{\"title\":\"Tld\",\"type\":\"string\"}},\"required\":[\"iso2\",\"iso3\",\"country_code\",\"name\",\"numeric_code\",\"phone_code\",\"capital\",\"currency\",\"tld\",\"region\",\"subregion\",\"latitude\",\"longitude\",\"emoji\",\"ip\"],\"title\":\"GeolocateResponse\",\"type\":\"object\"}}},\"description\":\"OK\"},\"404\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"title\":\"Error\",\"type\":\"string\"}},\"required\":[\"error\"],\"title\":\"ErrorResponse\",\"type\":\"object\"}}},\"description\":\"Not Found\"}},\"securitySource\":\"unspecified\"}",
                     "source": "openapi3",
-                    "version": 1
+                    "version": 2
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/geolocate",
-                  "segments": [
+                  "g": {},
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/geolocate",
+                  "q": {},
+                  "r": {},
+                  "s": [
                     {
                       "lit": "geolocate"
                     }
                   ],
-                  "select": {},
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body.ip`"
                   }
@@ -258,7 +339,7 @@
           "alias": {
             "field": {}
           },
-          "fields": [],
+          "fields": {},
           "name": "rate",
           "op": {
             "load": {
@@ -266,58 +347,58 @@
               "name": "load",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /rates",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "query": [
                       {
-                        "active": true,
-                        "example": "EUR",
-                        "kind": "query",
-                        "name": "base",
-                        "orig": "base",
-                        "reqd": false,
-                        "type": "`$ANY`"
+                        "a": true,
+                        "ex": "EUR",
+                        "k": "query",
+                        "n": "base",
+                        "or": "base",
+                        "r": false,
+                        "t": "`$ANY`"
                       },
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "date",
-                        "orig": "date",
-                        "reqd": false,
-                        "type": "`$ANY`"
+                        "a": true,
+                        "k": "query",
+                        "n": "date",
+                        "or": "date",
+                        "r": false,
+                        "t": "`$ANY`"
                       },
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "symbol",
-                        "orig": "symbol",
-                        "reqd": false,
-                        "type": "`$ANY`"
+                        "a": true,
+                        "k": "query",
+                        "n": "symbol",
+                        "or": "symbol",
+                        "r": false,
+                        "t": "`$ANY`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /rates",
-                    "json": "{\"operationId\":\"vatcomply_api_rates\",\"parameters\":[{\"in\":\"query\",\"name\":\"base\",\"required\":false,\"schema\":{\"anyOf\":[{\"type\":\"string\"},{\"type\":\"null\"}],\"default\":\"EUR\",\"title\":\"Base\"}},{\"in\":\"query\",\"name\":\"symbols\",\"required\":false,\"schema\":{\"anyOf\":[{\"type\":\"string\"},{\"type\":\"null\"}],\"title\":\"Symbols\"}},{\"in\":\"query\",\"name\":\"date\",\"required\":false,\"schema\":{\"anyOf\":[{\"format\":\"date\",\"type\":\"string\"},{\"type\":\"null\"}],\"title\":\"Date\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"base\":{\"enum\":[\"EUR\",\"USD\",\"JPY\",\"BGN\",\"CZK\",\"DKK\",\"GBP\",\"HUF\",\"PLN\",\"RON\",\"SEK\",\"CHF\",\"ISK\",\"NOK\",\"HRK\",\"RUB\",\"TRY\",\"AUD\",\"BRL\",\"CAD\",\"CNY\",\"HKD\",\"IDR\",\"ILS\",\"INR\",\"KRW\",\"MXN\",\"MYR\",\"NZD\",\"PHP\",\"SGD\",\"THB\",\"ZAR\"],\"title\":\"CurrencySymbol\",\"type\":\"string\"},\"date\":{\"title\":\"Date\",\"type\":\"string\"},\"rates\":{\"additionalProperties\":{\"type\":\"number\"},\"title\":\"Rates\",\"type\":\"object\"}},\"required\":[\"date\",\"base\",\"rates\"],\"title\":\"RatesResponseSchema\",\"type\":\"object\"}}},\"description\":\"OK\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"title\":\"Error\",\"type\":\"string\"}},\"required\":[\"error\"],\"title\":\"ErrorResponse\",\"type\":\"object\"}}},\"description\":\"Bad Request\"}},\"securitySource\":\"unspecified\"}",
-                    "source": "openapi3",
-                    "version": 1
-                  },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/rates",
-                  "segments": [
-                    {
-                      "lit": "rates"
-                    }
-                  ],
-                  "select": {
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/rates",
+                  "q": {
                     "exist": [
                       "base",
                       "date",
                       "symbol"
                     ]
                   },
-                  "transform": {
+                  "r": {},
+                  "s": [
+                    {
+                      "lit": "rates"
+                    }
+                  ],
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body.rates`"
                   }
@@ -334,80 +415,92 @@
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "name": "account_number",
-              "req": true,
-              "type": "`$STRING`"
+          "fields": {
+            "account_number": {
+              "a": true,
+              "h": "Account Number",
+              "n": "account_number",
+              "r": true,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "bank_code",
-              "req": true,
-              "type": "`$STRING`"
+            "bank_code": {
+              "a": true,
+              "h": "Bank Code",
+              "n": "bank_code",
+              "r": true,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "bank_name",
-              "req": true,
-              "type": "`$STRING`"
+            "bank_name": {
+              "a": true,
+              "h": "Bank Name",
+              "n": "bank_name",
+              "r": true,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "bban",
-              "req": true,
-              "type": "`$STRING`"
+            "bban": {
+              "a": true,
+              "h": "Bban",
+              "n": "bban",
+              "r": true,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "bic",
-              "req": true,
-              "type": "`$STRING`"
+            "bic": {
+              "a": true,
+              "h": "Bic",
+              "n": "bic",
+              "r": true,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "branch_code",
-              "req": true,
-              "type": "`$STRING`"
+            "branch_code": {
+              "a": true,
+              "h": "Branch Code",
+              "n": "branch_code",
+              "r": true,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "checksum_digits",
-              "req": true,
-              "type": "`$STRING`"
+            "checksum_digits": {
+              "a": true,
+              "h": "Checksum Digits",
+              "n": "checksum_digits",
+              "r": true,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "country_code",
-              "req": true,
-              "type": "`$STRING`"
+            "country_code": {
+              "a": true,
+              "h": "Country Code",
+              "n": "country_code",
+              "r": true,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "country_name",
-              "req": true,
-              "type": "`$STRING`"
+            "country_name": {
+              "a": true,
+              "h": "Country Name",
+              "n": "country_name",
+              "r": true,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "iban",
-              "req": true,
-              "type": "`$STRING`"
+            "iban": {
+              "a": true,
+              "h": "Iban",
+              "n": "iban",
+              "r": true,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "in_sepa_zone",
-              "req": true,
-              "type": "`$BOOLEAN`"
+            "in_sepa_zone": {
+              "a": true,
+              "h": "In Sepa Zone",
+              "n": "in_sepa_zone",
+              "r": true,
+              "t": "`$BOOLEAN`"
             },
-            {
-              "active": true,
-              "name": "valid",
-              "req": true,
-              "type": "`$BOOLEAN`"
+            "valid": {
+              "a": true,
+              "h": "Valid",
+              "n": "valid",
+              "r": true,
+              "t": "`$BOOLEAN`"
             }
-          ],
+          },
           "name": "validate_iban_response_schema",
           "op": {
             "load": {
@@ -415,39 +508,39 @@
               "name": "load",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /iban",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "query": [
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "iban",
-                        "orig": "iban",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "query",
+                        "n": "iban",
+                        "or": "iban",
+                        "r": true,
+                        "t": "`$STRING`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /iban",
-                    "json": "{\"operationId\":\"vatcomply_api_validate_iban\",\"parameters\":[{\"in\":\"query\",\"name\":\"iban\",\"required\":true,\"schema\":{\"maxLength\":34,\"title\":\"IBAN\",\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"account_number\":{\"title\":\"Account Number\",\"type\":\"string\"},\"bank_code\":{\"title\":\"Bank Code\",\"type\":\"string\"},\"bank_name\":{\"title\":\"Bank Name\",\"type\":\"string\"},\"bban\":{\"title\":\"Bban\",\"type\":\"string\"},\"bic\":{\"title\":\"Bic\",\"type\":\"string\"},\"branch_code\":{\"title\":\"Branch Code\",\"type\":\"string\"},\"checksum_digits\":{\"title\":\"Checksum Digits\",\"type\":\"string\"},\"country_code\":{\"title\":\"Country Code\",\"type\":\"string\"},\"country_name\":{\"title\":\"Country Name\",\"type\":\"string\"},\"iban\":{\"maxLength\":34,\"title\":\"IBAN\",\"type\":\"string\"},\"in_sepa_zone\":{\"title\":\"In Sepa Zone\",\"type\":\"boolean\"},\"valid\":{\"title\":\"Valid\",\"type\":\"boolean\"}},\"required\":[\"valid\",\"iban\",\"bank_name\",\"bic\",\"country_code\",\"country_name\",\"checksum_digits\",\"bank_code\",\"branch_code\",\"account_number\",\"bban\",\"in_sepa_zone\"],\"title\":\"ValidateIBANResponseSchema\",\"type\":\"object\"}}},\"description\":\"OK\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"title\":\"Error\",\"type\":\"string\"}},\"required\":[\"error\"],\"title\":\"ErrorResponse\",\"type\":\"object\"}}},\"description\":\"Bad Request\"}},\"securitySource\":\"unspecified\"}",
-                    "source": "openapi3",
-                    "version": 1
-                  },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/iban",
-                  "segments": [
-                    {
-                      "lit": "iban"
-                    }
-                  ],
-                  "select": {
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/iban",
+                  "q": {
                     "exist": [
                       "iban"
                     ]
                   },
-                  "transform": {
+                  "r": {},
+                  "s": [
+                    {
+                      "lit": "iban"
+                    }
+                  ],
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -464,7 +557,7 @@
           "alias": {
             "field": {}
           },
-          "fields": [],
+          "fields": {},
           "name": "validate_vat_response_schema",
           "op": {
             "load": {
@@ -472,39 +565,39 @@
               "name": "load",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /vat",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "query": [
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "vat_number",
-                        "orig": "vat_number",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "query",
+                        "n": "vat_number",
+                        "or": "vat_number",
+                        "r": true,
+                        "t": "`$STRING`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /vat",
-                    "json": "{\"operationId\":\"vatcomply_api_validate_vat\",\"parameters\":[{\"in\":\"query\",\"name\":\"vat_number\",\"required\":true,\"schema\":{\"title\":\"Vat Number\",\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"address\":{\"default\":\"\",\"title\":\"Address\",\"type\":\"string\"},\"country_code\":{\"title\":\"Country Code\",\"type\":\"string\"},\"name\":{\"anyOf\":[{\"type\":\"string\"},{\"type\":\"null\"}],\"title\":\"Name\"},\"valid\":{\"title\":\"Valid\",\"type\":\"boolean\"},\"vat_number\":{\"title\":\"Vat Number\",\"type\":\"string\"}},\"required\":[\"valid\",\"vat_number\",\"country_code\"],\"title\":\"ValidateVATResponseSchema\",\"type\":\"object\"}}},\"description\":\"OK\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"title\":\"Error\",\"type\":\"string\"}},\"required\":[\"error\"],\"title\":\"ErrorResponse\",\"type\":\"object\"}}},\"description\":\"Bad Request\"}},\"securitySource\":\"unspecified\"}",
-                    "source": "openapi3",
-                    "version": 1
-                  },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/vat",
-                  "segments": [
-                    {
-                      "lit": "vat"
-                    }
-                  ],
-                  "select": {
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/vat",
+                  "q": {
                     "exist": [
                       "vat_number"
                     ]
                   },
-                  "transform": {
+                  "r": {},
+                  "s": [
+                    {
+                      "lit": "vat"
+                    }
+                  ],
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body.name`"
                   }
@@ -521,7 +614,7 @@
           "alias": {
             "field": {}
           },
-          "fields": [],
+          "fields": {},
           "name": "vatcomply_api_root",
           "op": {
             "load": {
@@ -529,20 +622,20 @@
               "name": "load",
               "points": [
                 {
-                  "active": true,
-                  "args": {},
-                  "contract": {
+                  "a": true,
+                  "co": {
                     "id": "GET /",
-                    "json": "{\"operationId\":\"vatcomply_api_root\",\"parameters\":[],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"contact\":{\"title\":\"Contact\",\"type\":\"string\"},\"description\":{\"title\":\"Description\",\"type\":\"string\"},\"documentation\":{\"title\":\"Documentation\",\"type\":\"string\"},\"endpoints\":{\"additionalProperties\":{\"type\":\"string\"},\"title\":\"Endpoints\",\"type\":\"object\"},\"name\":{\"title\":\"Name\",\"type\":\"string\"},\"status\":{\"title\":\"Status\",\"type\":\"string\"},\"version\":{\"title\":\"Version\",\"type\":\"string\"}},\"required\":[\"name\",\"version\",\"status\",\"description\",\"documentation\",\"endpoints\",\"contact\"],\"title\":\"RootResponseSchema\",\"type\":\"object\"}}},\"description\":\"OK\"}},\"securitySource\":\"unspecified\"}",
                     "source": "openapi3",
-                    "version": 1
+                    "version": 2
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/",
-                  "segments": [],
-                  "select": {},
-                  "transform": {
+                  "g": {},
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/",
+                  "q": {},
+                  "r": {},
+                  "s": [],
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body.endpoints`"
                   }
@@ -971,13 +1064,13 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {},
-              "match": {},
-              "op": "list",
-              "spec": [],
-              "valid": [
+              "a": true,
+              "d": {},
+              "i": {},
+              "m": {},
+              "o": "list",
+              "s": [],
+              "v": [
                 {
                   "apply": "ItemExists",
                   "def": {
@@ -997,17 +1090,17 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {
+              "a": true,
+              "d": {},
+              "i": {
                 "ref": "currency_ref01",
                 "srcdatavar": "currency_ref01_data",
                 "suffix": "_dt0"
               },
-              "match": {},
-              "op": "load",
-              "spec": [],
-              "valid": [
+              "m": {},
+              "o": "load",
+              "s": [],
+              "v": [
                 {
                   "apply": "TextFieldMark",
                   "def": {
@@ -1027,17 +1120,17 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {
+              "a": true,
+              "d": {},
+              "i": {
                 "ref": "geolocate_ref01",
                 "srcdatavar": "geolocate_ref01_data",
                 "suffix": "_dt0"
               },
-              "match": {},
-              "op": "load",
-              "spec": [],
-              "valid": [
+              "m": {},
+              "o": "load",
+              "s": [],
+              "v": [
                 {
                   "apply": "TextFieldMark",
                   "def": {
@@ -1057,17 +1150,17 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {
+              "a": true,
+              "d": {},
+              "i": {
                 "ref": "rate_ref01",
                 "srcdatavar": "rate_ref01_data",
                 "suffix": "_dt0"
               },
-              "match": {},
-              "op": "load",
-              "spec": [],
-              "valid": [
+              "m": {},
+              "o": "load",
+              "s": [],
+              "v": [
                 {
                   "apply": "TextFieldMark",
                   "def": {
@@ -1087,17 +1180,17 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {
+              "a": true,
+              "d": {},
+              "i": {
                 "ref": "validate_iban_response_schema_ref01",
                 "srcdatavar": "validate_iban_response_schema_ref01_data",
                 "suffix": "_dt0"
               },
-              "match": {},
-              "op": "load",
-              "spec": [],
-              "valid": [
+              "m": {},
+              "o": "load",
+              "s": [],
+              "v": [
                 {
                   "apply": "TextFieldMark",
                   "def": {
@@ -1117,17 +1210,17 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {
+              "a": true,
+              "d": {},
+              "i": {
                 "ref": "validate_vat_response_schema_ref01",
                 "srcdatavar": "validate_vat_response_schema_ref01_data",
                 "suffix": "_dt0"
               },
-              "match": {},
-              "op": "load",
-              "spec": [],
-              "valid": [
+              "m": {},
+              "o": "load",
+              "s": [],
+              "v": [
                 {
                   "apply": "TextFieldMark",
                   "def": {
@@ -1147,17 +1240,17 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {
+              "a": true,
+              "d": {},
+              "i": {
                 "ref": "vatcomply_api_root_ref01",
                 "srcdatavar": "vatcomply_api_root_ref01_data",
                 "suffix": "_dt0"
               },
-              "match": {},
-              "op": "load",
-              "spec": [],
-              "valid": [
+              "m": {},
+              "o": "load",
+              "s": [],
+              "v": [
                 {
                   "apply": "TextFieldMark",
                   "def": {

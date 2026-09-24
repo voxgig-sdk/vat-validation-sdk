@@ -97,78 +97,81 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "capital",
-						"req": true,
+						"title": "Capital",
 						"type": "`$STRING`",
+						"req": true,
 					},
 					map[string]any{
 						"name": "currency",
-						"req": true,
+						"title": "Currency",
 						"type": "`$STRING`",
+						"req": true,
 					},
 					map[string]any{
 						"name": "emoji",
-						"req": true,
+						"title": "Emoji",
 						"type": "`$STRING`",
+						"req": true,
 					},
 					map[string]any{
 						"name": "iso2",
-						"req": true,
+						"title": "Iso2",
 						"type": "`$STRING`",
+						"req": true,
 					},
 					map[string]any{
 						"name": "iso3",
-						"req": true,
+						"title": "Iso3",
 						"type": "`$STRING`",
+						"req": true,
 					},
 					map[string]any{
 						"name": "latitude",
-						"req": true,
+						"title": "Latitude",
 						"type": "`$NUMBER`",
-						"union": map[string]any{
-							"branches": 2,
-							"count": 1,
-							"depth": 0,
-						},
+						"req": true,
 					},
 					map[string]any{
 						"name": "longitude",
-						"req": true,
+						"title": "Longitude",
 						"type": "`$NUMBER`",
-						"union": map[string]any{
-							"branches": 2,
-							"count": 1,
-							"depth": 0,
-						},
+						"req": true,
 					},
 					map[string]any{
 						"name": "name",
-						"req": true,
+						"title": "Name",
 						"type": "`$STRING`",
+						"req": true,
 					},
 					map[string]any{
 						"name": "numeric_code",
-						"req": true,
+						"title": "Numeric Code",
 						"type": "`$INTEGER`",
+						"req": true,
 					},
 					map[string]any{
 						"name": "phone_code",
-						"req": true,
+						"title": "Phone Code",
 						"type": "`$STRING`",
+						"req": true,
 					},
 					map[string]any{
 						"name": "region",
-						"req": true,
+						"title": "Region",
 						"type": "`$STRING`",
+						"req": true,
 					},
 					map[string]any{
 						"name": "subregion",
-						"req": true,
+						"title": "Subregion",
 						"type": "`$STRING`",
+						"req": true,
 					},
 					map[string]any{
 						"name": "tld",
-						"req": true,
+						"title": "Tld",
 						"type": "`$STRING`",
+						"req": true,
 					},
 				},
 				"name": "country",
@@ -178,7 +181,6 @@ func MakeConfig() map[string]any {
 						"name": "list",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/countries",
@@ -187,14 +189,16 @@ func MakeConfig() map[string]any {
 										"lit": "countries",
 									},
 								},
-								"select": map[string]any{},
+								"parts": []any{
+									"countries",
+								},
+								"rename": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"parts": []any{
-									"countries",
-								},
+								"args": map[string]any{},
+								"select": map[string]any{},
 							},
 						},
 					},
@@ -207,13 +211,15 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "name",
-						"req": true,
+						"title": "Name",
 						"type": "`$STRING`",
+						"req": true,
 					},
 					map[string]any{
 						"name": "symbol",
-						"req": true,
+						"title": "Symbol",
 						"type": "`$STRING`",
+						"req": true,
 					},
 				},
 				"name": "currency",
@@ -223,7 +229,6 @@ func MakeConfig() map[string]any {
 						"name": "load",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/currencies",
@@ -232,14 +237,16 @@ func MakeConfig() map[string]any {
 										"lit": "currencies",
 									},
 								},
-								"select": map[string]any{},
+								"parts": []any{
+									"currencies",
+								},
+								"rename": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"parts": []any{
-									"currencies",
-								},
+								"args": map[string]any{},
+								"select": map[string]any{},
 							},
 						},
 					},
@@ -257,7 +264,6 @@ func MakeConfig() map[string]any {
 						"name": "load",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/geolocate",
@@ -266,14 +272,16 @@ func MakeConfig() map[string]any {
 										"lit": "geolocate",
 									},
 								},
-								"select": map[string]any{},
+								"parts": []any{
+									"geolocate",
+								},
+								"rename": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body.ip`",
 								},
-								"parts": []any{
-									"geolocate",
-								},
+								"args": map[string]any{},
+								"select": map[string]any{},
 							},
 						},
 					},
@@ -291,29 +299,6 @@ func MakeConfig() map[string]any {
 						"name": "load",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"example": "EUR",
-											"kind": "query",
-											"name": "base",
-											"orig": "base",
-											"type": "`$ANY`",
-										},
-										map[string]any{
-											"kind": "query",
-											"name": "date",
-											"orig": "date",
-											"type": "`$ANY`",
-										},
-										map[string]any{
-											"kind": "query",
-											"name": "symbol",
-											"orig": "symbol",
-											"type": "`$ANY`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/rates",
@@ -322,19 +307,43 @@ func MakeConfig() map[string]any {
 										"lit": "rates",
 									},
 								},
+								"parts": []any{
+									"rates",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body.rates`",
+								},
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "base",
+											"orig": "base",
+											"type": "`$ANY`",
+											"kind": "query",
+											"example": "EUR",
+										},
+										map[string]any{
+											"name": "date",
+											"orig": "date",
+											"type": "`$ANY`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "symbol",
+											"orig": "symbol",
+											"type": "`$ANY`",
+											"kind": "query",
+										},
+									},
+								},
 								"select": map[string]any{
 									"exist": []any{
 										"base",
 										"date",
 										"symbol",
 									},
-								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body.rates`",
-								},
-								"parts": []any{
-									"rates",
 								},
 							},
 						},
@@ -348,63 +357,75 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "account_number",
-						"req": true,
+						"title": "Account Number",
 						"type": "`$STRING`",
+						"req": true,
 					},
 					map[string]any{
 						"name": "bank_code",
-						"req": true,
+						"title": "Bank Code",
 						"type": "`$STRING`",
+						"req": true,
 					},
 					map[string]any{
 						"name": "bank_name",
-						"req": true,
+						"title": "Bank Name",
 						"type": "`$STRING`",
+						"req": true,
 					},
 					map[string]any{
 						"name": "bban",
-						"req": true,
+						"title": "Bban",
 						"type": "`$STRING`",
+						"req": true,
 					},
 					map[string]any{
 						"name": "bic",
-						"req": true,
+						"title": "Bic",
 						"type": "`$STRING`",
+						"req": true,
 					},
 					map[string]any{
 						"name": "branch_code",
-						"req": true,
+						"title": "Branch Code",
 						"type": "`$STRING`",
+						"req": true,
 					},
 					map[string]any{
 						"name": "checksum_digits",
-						"req": true,
+						"title": "Checksum Digits",
 						"type": "`$STRING`",
+						"req": true,
 					},
 					map[string]any{
 						"name": "country_code",
-						"req": true,
+						"title": "Country Code",
 						"type": "`$STRING`",
+						"req": true,
 					},
 					map[string]any{
 						"name": "country_name",
-						"req": true,
+						"title": "Country Name",
 						"type": "`$STRING`",
+						"req": true,
 					},
 					map[string]any{
 						"name": "iban",
-						"req": true,
+						"title": "Iban",
 						"type": "`$STRING`",
+						"req": true,
 					},
 					map[string]any{
 						"name": "in_sepa_zone",
-						"req": true,
+						"title": "In Sepa Zone",
 						"type": "`$BOOLEAN`",
+						"req": true,
 					},
 					map[string]any{
 						"name": "valid",
-						"req": true,
+						"title": "Valid",
 						"type": "`$BOOLEAN`",
+						"req": true,
 					},
 				},
 				"name": "validate_iban_response_schema",
@@ -414,17 +435,6 @@ func MakeConfig() map[string]any {
 						"name": "load",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"kind": "query",
-											"name": "iban",
-											"orig": "iban",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/iban",
@@ -433,17 +443,29 @@ func MakeConfig() map[string]any {
 										"lit": "iban",
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"iban",
-									},
+								"parts": []any{
+									"iban",
 								},
+								"rename": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"parts": []any{
-									"iban",
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "iban",
+											"orig": "iban",
+											"type": "`$STRING`",
+											"kind": "query",
+											"reqd": true,
+										},
+									},
+								},
+								"select": map[string]any{
+									"exist": []any{
+										"iban",
+									},
 								},
 							},
 						},
@@ -462,17 +484,6 @@ func MakeConfig() map[string]any {
 						"name": "load",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"kind": "query",
-											"name": "vat_number",
-											"orig": "vat_number",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/vat",
@@ -481,17 +492,29 @@ func MakeConfig() map[string]any {
 										"lit": "vat",
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"vat_number",
-									},
+								"parts": []any{
+									"vat",
 								},
+								"rename": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body.name`",
 								},
-								"parts": []any{
-									"vat",
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "vat_number",
+											"orig": "vat_number",
+											"type": "`$STRING`",
+											"kind": "query",
+											"reqd": true,
+										},
+									},
+								},
+								"select": map[string]any{
+									"exist": []any{
+										"vat_number",
+									},
 								},
 							},
 						},
@@ -510,17 +533,18 @@ func MakeConfig() map[string]any {
 						"name": "load",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/",
 								"segments": []any{},
-								"select": map[string]any{},
+								"parts": []any{},
+								"rename": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body.endpoints`",
 								},
-								"parts": []any{},
+								"args": map[string]any{},
+								"select": map[string]any{},
 							},
 						},
 					},

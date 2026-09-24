@@ -1,0 +1,28 @@
+# BasicValidateVatResponseSchemaFlow
+
+main: kit: flow: BasicValidateVatResponseSchemaFlow:
+{
+  entity: "validate_vat_response_schema",
+  kind: "basic",
+  name: "BasicValidateVatResponseSchemaFlow",
+  step: [
+    {
+      i: {
+        ref: "validate_vat_response_schema_ref01",
+        srcdatavar: "validate_vat_response_schema_ref01_data",
+        suffix: "_dt0"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-validate_vat_response_schema_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicValidateVatResponseSchemaFlow"
+}

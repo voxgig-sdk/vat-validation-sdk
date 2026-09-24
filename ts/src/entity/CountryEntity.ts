@@ -19,7 +19,6 @@ import type {
   CountryListMatch,
 } from '../VatValidationTypes'
 
-// TODO: needs Entity superclass
 class CountryEntity extends VatValidationEntityBase<Country> {
 
   constructor(client: VatValidationSDK, entopts: any) {

@@ -11,19 +11,12 @@ const FEATURE_CLASS = {
     test: TestFeature_1.TestFeature,
     timeout: TimeoutFeature_1.TimeoutFeature,
 };
-// Per-feature plugin DEFINITIONS (voxgig/plugin `Definition` values), from
-// the model's active plugin groups. A feature that takes a `plugins` option
-// (secrets over sekreto) reads its own entry; a feature with no plugins has
-// none. Named imports above make each definition statically reachable, so
-// an SDK carries exactly the plugin modules its model selects — the same
-// leanness the old side-effect registry imports bought, without a registry.
 const FEATURE_PLUGINS = {};
 exports.FEATURE_PLUGINS = FEATURE_PLUGINS;
 class Config {
     makeFeature(fn) {
         const fc = FEATURE_CLASS[fn];
         const fi = new fc();
-        // TODO: errors etc
         return fi;
     }
     // False for a feature added at runtime via options.extend (station's
@@ -120,78 +113,81 @@ class Config {
             "fields": [
                 {
                     "name": "capital",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Capital",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "currency",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Currency",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "emoji",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Emoji",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "iso2",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Iso2",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "iso3",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Iso3",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "latitude",
-                    "req": true,
+                    "title": "Latitude",
                     "type": "`$NUMBER`",
-                    "union": {
-                        "branches": 2,
-                        "count": 1,
-                        "depth": 0
-                    }
+                    "req": true
                 },
                 {
                     "name": "longitude",
-                    "req": true,
+                    "title": "Longitude",
                     "type": "`$NUMBER`",
-                    "union": {
-                        "branches": 2,
-                        "count": 1,
-                        "depth": 0
-                    }
+                    "req": true
                 },
                 {
                     "name": "name",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Name",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "numeric_code",
-                    "req": true,
-                    "type": "`$INTEGER`"
+                    "title": "Numeric Code",
+                    "type": "`$INTEGER`",
+                    "req": true
                 },
                 {
                     "name": "phone_code",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Phone Code",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "region",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Region",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "subregion",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Subregion",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "tld",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Tld",
+                    "type": "`$STRING`",
+                    "req": true
                 }
             ],
             "name": "country",
@@ -201,7 +197,6 @@ class Config {
                     "name": "list",
                     "points": [
                         {
-                            "args": {},
                             "kind": "http",
                             "method": "GET",
                             "orig": "/countries",
@@ -210,14 +205,16 @@ class Config {
                                     "lit": "countries"
                                 }
                             ],
-                            "select": {},
+                            "parts": [
+                                "countries"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "countries"
-                            ]
+                            "args": {},
+                            "select": {}
                         }
                     ]
                 }
@@ -230,13 +227,15 @@ class Config {
             "fields": [
                 {
                     "name": "name",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Name",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "symbol",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Symbol",
+                    "type": "`$STRING`",
+                    "req": true
                 }
             ],
             "name": "currency",
@@ -246,7 +245,6 @@ class Config {
                     "name": "load",
                     "points": [
                         {
-                            "args": {},
                             "kind": "http",
                             "method": "GET",
                             "orig": "/currencies",
@@ -255,14 +253,16 @@ class Config {
                                     "lit": "currencies"
                                 }
                             ],
-                            "select": {},
+                            "parts": [
+                                "currencies"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "currencies"
-                            ]
+                            "args": {},
+                            "select": {}
                         }
                     ]
                 }
@@ -280,7 +280,6 @@ class Config {
                     "name": "load",
                     "points": [
                         {
-                            "args": {},
                             "kind": "http",
                             "method": "GET",
                             "orig": "/geolocate",
@@ -289,14 +288,16 @@ class Config {
                                     "lit": "geolocate"
                                 }
                             ],
-                            "select": {},
+                            "parts": [
+                                "geolocate"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body.ip`"
                             },
-                            "parts": [
-                                "geolocate"
-                            ]
+                            "args": {},
+                            "select": {}
                         }
                     ]
                 }
@@ -314,29 +315,6 @@ class Config {
                     "name": "load",
                     "points": [
                         {
-                            "args": {
-                                "query": [
-                                    {
-                                        "example": "EUR",
-                                        "kind": "query",
-                                        "name": "base",
-                                        "orig": "base",
-                                        "type": "`$ANY`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "date",
-                                        "orig": "date",
-                                        "type": "`$ANY`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "symbol",
-                                        "orig": "symbol",
-                                        "type": "`$ANY`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/rates",
@@ -345,20 +323,44 @@ class Config {
                                     "lit": "rates"
                                 }
                             ],
+                            "parts": [
+                                "rates"
+                            ],
+                            "rename": {},
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body.rates`"
+                            },
+                            "args": {
+                                "query": [
+                                    {
+                                        "name": "base",
+                                        "orig": "base",
+                                        "type": "`$ANY`",
+                                        "kind": "query",
+                                        "example": "EUR"
+                                    },
+                                    {
+                                        "name": "date",
+                                        "orig": "date",
+                                        "type": "`$ANY`",
+                                        "kind": "query"
+                                    },
+                                    {
+                                        "name": "symbol",
+                                        "orig": "symbol",
+                                        "type": "`$ANY`",
+                                        "kind": "query"
+                                    }
+                                ]
+                            },
                             "select": {
                                 "exist": [
                                     "base",
                                     "date",
                                     "symbol"
                                 ]
-                            },
-                            "transform": {
-                                "req": "`reqdata`",
-                                "res": "`body.rates`"
-                            },
-                            "parts": [
-                                "rates"
-                            ]
+                            }
                         }
                     ]
                 }
@@ -371,63 +373,75 @@ class Config {
             "fields": [
                 {
                     "name": "account_number",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Account Number",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "bank_code",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Bank Code",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "bank_name",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Bank Name",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "bban",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Bban",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "bic",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Bic",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "branch_code",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Branch Code",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "checksum_digits",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Checksum Digits",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "country_code",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Country Code",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "country_name",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Country Name",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "iban",
-                    "req": true,
-                    "type": "`$STRING`"
+                    "title": "Iban",
+                    "type": "`$STRING`",
+                    "req": true
                 },
                 {
                     "name": "in_sepa_zone",
-                    "req": true,
-                    "type": "`$BOOLEAN`"
+                    "title": "In Sepa Zone",
+                    "type": "`$BOOLEAN`",
+                    "req": true
                 },
                 {
                     "name": "valid",
-                    "req": true,
-                    "type": "`$BOOLEAN`"
+                    "title": "Valid",
+                    "type": "`$BOOLEAN`",
+                    "req": true
                 }
             ],
             "name": "validate_iban_response_schema",
@@ -437,17 +451,6 @@ class Config {
                     "name": "load",
                     "points": [
                         {
-                            "args": {
-                                "query": [
-                                    {
-                                        "kind": "query",
-                                        "name": "iban",
-                                        "orig": "iban",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/iban",
@@ -456,18 +459,30 @@ class Config {
                                     "lit": "iban"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "iban"
-                                ]
-                            },
+                            "parts": [
+                                "iban"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "iban"
-                            ]
+                            "args": {
+                                "query": [
+                                    {
+                                        "name": "iban",
+                                        "orig": "iban",
+                                        "type": "`$STRING`",
+                                        "kind": "query",
+                                        "reqd": true
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "exist": [
+                                    "iban"
+                                ]
+                            }
                         }
                     ]
                 }
@@ -485,17 +500,6 @@ class Config {
                     "name": "load",
                     "points": [
                         {
-                            "args": {
-                                "query": [
-                                    {
-                                        "kind": "query",
-                                        "name": "vat_number",
-                                        "orig": "vat_number",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/vat",
@@ -504,18 +508,30 @@ class Config {
                                     "lit": "vat"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "vat_number"
-                                ]
-                            },
+                            "parts": [
+                                "vat"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body.name`"
                             },
-                            "parts": [
-                                "vat"
-                            ]
+                            "args": {
+                                "query": [
+                                    {
+                                        "name": "vat_number",
+                                        "orig": "vat_number",
+                                        "type": "`$STRING`",
+                                        "kind": "query",
+                                        "reqd": true
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "exist": [
+                                    "vat_number"
+                                ]
+                            }
                         }
                     ]
                 }
@@ -533,17 +549,18 @@ class Config {
                     "name": "load",
                     "points": [
                         {
-                            "args": {},
                             "kind": "http",
                             "method": "GET",
                             "orig": "/",
                             "segments": [],
-                            "select": {},
+                            "parts": [],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body.endpoints`"
                             },
-                            "parts": []
+                            "args": {},
+                            "select": {}
                         }
                     ]
                 }

@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CountryEntity = void 0;
 const VatValidationEntityBase_1 = require("../VatValidationEntityBase");
-// TODO: needs Entity superclass
 class CountryEntity extends VatValidationEntityBase_1.VatValidationEntityBase {
     constructor(client, entopts) {
         super(client, entopts);

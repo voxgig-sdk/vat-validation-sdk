@@ -1,0 +1,72 @@
+# Entity: rate
+
+main: kit: entity: rate: {
+
+  alias: field: {}
+
+  name: "rate"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /rates"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                ex: "EUR"
+                k: "query"
+                n: "base"
+                or: "base"
+                r: false
+                t: "`$ANY`"
+              }
+              {
+                k: "query"
+                n: "date"
+                or: "date"
+                r: false
+                t: "`$ANY`"
+              }
+              {
+                k: "query"
+                n: "symbol"
+                or: "symbol"
+                r: false
+                t: "`$ANY`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/rates"
+          q: {
+            exist: [
+              "base"
+              "date"
+              "symbol"
+            ]
+          }
+          s: [
+            {
+              lit: "rates"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.rates`"
+          }
+        }
+      ]
+    }
+  }
+
+  fields: {
+  }
+
+
+
+}

@@ -119,78 +119,81 @@ class VatValidationConfig
           'fields' => [
             [
               'name' => 'capital',
-              'req' => true,
+              'title' => 'Capital',
               'type' => '`$STRING`',
+              'req' => true,
             ],
             [
               'name' => 'currency',
-              'req' => true,
+              'title' => 'Currency',
               'type' => '`$STRING`',
+              'req' => true,
             ],
             [
               'name' => 'emoji',
-              'req' => true,
+              'title' => 'Emoji',
               'type' => '`$STRING`',
+              'req' => true,
             ],
             [
               'name' => 'iso2',
-              'req' => true,
+              'title' => 'Iso2',
               'type' => '`$STRING`',
+              'req' => true,
             ],
             [
               'name' => 'iso3',
-              'req' => true,
+              'title' => 'Iso3',
               'type' => '`$STRING`',
+              'req' => true,
             ],
             [
               'name' => 'latitude',
-              'req' => true,
+              'title' => 'Latitude',
               'type' => '`$NUMBER`',
-              'union' => [
-                'branches' => 2,
-                'count' => 1,
-                'depth' => 0,
-              ],
+              'req' => true,
             ],
             [
               'name' => 'longitude',
-              'req' => true,
+              'title' => 'Longitude',
               'type' => '`$NUMBER`',
-              'union' => [
-                'branches' => 2,
-                'count' => 1,
-                'depth' => 0,
-              ],
+              'req' => true,
             ],
             [
               'name' => 'name',
-              'req' => true,
+              'title' => 'Name',
               'type' => '`$STRING`',
+              'req' => true,
             ],
             [
               'name' => 'numeric_code',
-              'req' => true,
+              'title' => 'Numeric Code',
               'type' => '`$INTEGER`',
+              'req' => true,
             ],
             [
               'name' => 'phone_code',
-              'req' => true,
+              'title' => 'Phone Code',
               'type' => '`$STRING`',
+              'req' => true,
             ],
             [
               'name' => 'region',
-              'req' => true,
+              'title' => 'Region',
               'type' => '`$STRING`',
+              'req' => true,
             ],
             [
               'name' => 'subregion',
-              'req' => true,
+              'title' => 'Subregion',
               'type' => '`$STRING`',
+              'req' => true,
             ],
             [
               'name' => 'tld',
-              'req' => true,
+              'title' => 'Tld',
               'type' => '`$STRING`',
+              'req' => true,
             ],
           ],
           'name' => 'country',
@@ -200,7 +203,6 @@ class VatValidationConfig
               'name' => 'list',
               'points' => [
                 [
-                  'args' => [],
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/countries',
@@ -209,14 +211,16 @@ class VatValidationConfig
                       'lit' => 'countries',
                     ],
                   ],
-                  'select' => [],
+                  'parts' => [
+                    'countries',
+                  ],
+                  'rename' => [],
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
                   ],
-                  'parts' => [
-                    'countries',
-                  ],
+                  'args' => [],
+                  'select' => [],
                 ],
               ],
             ],
@@ -229,13 +233,15 @@ class VatValidationConfig
           'fields' => [
             [
               'name' => 'name',
-              'req' => true,
+              'title' => 'Name',
               'type' => '`$STRING`',
+              'req' => true,
             ],
             [
               'name' => 'symbol',
-              'req' => true,
+              'title' => 'Symbol',
               'type' => '`$STRING`',
+              'req' => true,
             ],
           ],
           'name' => 'currency',
@@ -245,7 +251,6 @@ class VatValidationConfig
               'name' => 'load',
               'points' => [
                 [
-                  'args' => [],
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/currencies',
@@ -254,14 +259,16 @@ class VatValidationConfig
                       'lit' => 'currencies',
                     ],
                   ],
-                  'select' => [],
+                  'parts' => [
+                    'currencies',
+                  ],
+                  'rename' => [],
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
                   ],
-                  'parts' => [
-                    'currencies',
-                  ],
+                  'args' => [],
+                  'select' => [],
                 ],
               ],
             ],
@@ -279,7 +286,6 @@ class VatValidationConfig
               'name' => 'load',
               'points' => [
                 [
-                  'args' => [],
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/geolocate',
@@ -288,14 +294,16 @@ class VatValidationConfig
                       'lit' => 'geolocate',
                     ],
                   ],
-                  'select' => [],
+                  'parts' => [
+                    'geolocate',
+                  ],
+                  'rename' => [],
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.ip`',
                   ],
-                  'parts' => [
-                    'geolocate',
-                  ],
+                  'args' => [],
+                  'select' => [],
                 ],
               ],
             ],
@@ -313,29 +321,6 @@ class VatValidationConfig
               'name' => 'load',
               'points' => [
                 [
-                  'args' => [
-                    'query' => [
-                      [
-                        'example' => 'EUR',
-                        'kind' => 'query',
-                        'name' => 'base',
-                        'orig' => 'base',
-                        'type' => '`$ANY`',
-                      ],
-                      [
-                        'kind' => 'query',
-                        'name' => 'date',
-                        'orig' => 'date',
-                        'type' => '`$ANY`',
-                      ],
-                      [
-                        'kind' => 'query',
-                        'name' => 'symbol',
-                        'orig' => 'symbol',
-                        'type' => '`$ANY`',
-                      ],
-                    ],
-                  ],
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/rates',
@@ -344,19 +329,43 @@ class VatValidationConfig
                       'lit' => 'rates',
                     ],
                   ],
+                  'parts' => [
+                    'rates',
+                  ],
+                  'rename' => [],
+                  'transform' => [
+                    'req' => '`reqdata`',
+                    'res' => '`body.rates`',
+                  ],
+                  'args' => [
+                    'query' => [
+                      [
+                        'name' => 'base',
+                        'orig' => 'base',
+                        'type' => '`$ANY`',
+                        'kind' => 'query',
+                        'example' => 'EUR',
+                      ],
+                      [
+                        'name' => 'date',
+                        'orig' => 'date',
+                        'type' => '`$ANY`',
+                        'kind' => 'query',
+                      ],
+                      [
+                        'name' => 'symbol',
+                        'orig' => 'symbol',
+                        'type' => '`$ANY`',
+                        'kind' => 'query',
+                      ],
+                    ],
+                  ],
                   'select' => [
                     'exist' => [
                       'base',
                       'date',
                       'symbol',
                     ],
-                  ],
-                  'transform' => [
-                    'req' => '`reqdata`',
-                    'res' => '`body.rates`',
-                  ],
-                  'parts' => [
-                    'rates',
                   ],
                 ],
               ],
@@ -370,63 +379,75 @@ class VatValidationConfig
           'fields' => [
             [
               'name' => 'account_number',
-              'req' => true,
+              'title' => 'Account Number',
               'type' => '`$STRING`',
+              'req' => true,
             ],
             [
               'name' => 'bank_code',
-              'req' => true,
+              'title' => 'Bank Code',
               'type' => '`$STRING`',
+              'req' => true,
             ],
             [
               'name' => 'bank_name',
-              'req' => true,
+              'title' => 'Bank Name',
               'type' => '`$STRING`',
+              'req' => true,
             ],
             [
               'name' => 'bban',
-              'req' => true,
+              'title' => 'Bban',
               'type' => '`$STRING`',
+              'req' => true,
             ],
             [
               'name' => 'bic',
-              'req' => true,
+              'title' => 'Bic',
               'type' => '`$STRING`',
+              'req' => true,
             ],
             [
               'name' => 'branch_code',
-              'req' => true,
+              'title' => 'Branch Code',
               'type' => '`$STRING`',
+              'req' => true,
             ],
             [
               'name' => 'checksum_digits',
-              'req' => true,
+              'title' => 'Checksum Digits',
               'type' => '`$STRING`',
+              'req' => true,
             ],
             [
               'name' => 'country_code',
-              'req' => true,
+              'title' => 'Country Code',
               'type' => '`$STRING`',
+              'req' => true,
             ],
             [
               'name' => 'country_name',
-              'req' => true,
+              'title' => 'Country Name',
               'type' => '`$STRING`',
+              'req' => true,
             ],
             [
               'name' => 'iban',
-              'req' => true,
+              'title' => 'Iban',
               'type' => '`$STRING`',
+              'req' => true,
             ],
             [
               'name' => 'in_sepa_zone',
-              'req' => true,
+              'title' => 'In Sepa Zone',
               'type' => '`$BOOLEAN`',
+              'req' => true,
             ],
             [
               'name' => 'valid',
-              'req' => true,
+              'title' => 'Valid',
               'type' => '`$BOOLEAN`',
+              'req' => true,
             ],
           ],
           'name' => 'validate_iban_response_schema',
@@ -436,17 +457,6 @@ class VatValidationConfig
               'name' => 'load',
               'points' => [
                 [
-                  'args' => [
-                    'query' => [
-                      [
-                        'kind' => 'query',
-                        'name' => 'iban',
-                        'orig' => 'iban',
-                        'reqd' => true,
-                        'type' => '`$STRING`',
-                      ],
-                    ],
-                  ],
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/iban',
@@ -455,17 +465,29 @@ class VatValidationConfig
                       'lit' => 'iban',
                     ],
                   ],
-                  'select' => [
-                    'exist' => [
-                      'iban',
-                    ],
+                  'parts' => [
+                    'iban',
                   ],
+                  'rename' => [],
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
                   ],
-                  'parts' => [
-                    'iban',
+                  'args' => [
+                    'query' => [
+                      [
+                        'name' => 'iban',
+                        'orig' => 'iban',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                        'reqd' => true,
+                      ],
+                    ],
+                  ],
+                  'select' => [
+                    'exist' => [
+                      'iban',
+                    ],
                   ],
                 ],
               ],
@@ -484,17 +506,6 @@ class VatValidationConfig
               'name' => 'load',
               'points' => [
                 [
-                  'args' => [
-                    'query' => [
-                      [
-                        'kind' => 'query',
-                        'name' => 'vat_number',
-                        'orig' => 'vat_number',
-                        'reqd' => true,
-                        'type' => '`$STRING`',
-                      ],
-                    ],
-                  ],
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/vat',
@@ -503,17 +514,29 @@ class VatValidationConfig
                       'lit' => 'vat',
                     ],
                   ],
-                  'select' => [
-                    'exist' => [
-                      'vat_number',
-                    ],
+                  'parts' => [
+                    'vat',
                   ],
+                  'rename' => [],
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.name`',
                   ],
-                  'parts' => [
-                    'vat',
+                  'args' => [
+                    'query' => [
+                      [
+                        'name' => 'vat_number',
+                        'orig' => 'vat_number',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                        'reqd' => true,
+                      ],
+                    ],
+                  ],
+                  'select' => [
+                    'exist' => [
+                      'vat_number',
+                    ],
                   ],
                 ],
               ],
@@ -532,17 +555,18 @@ class VatValidationConfig
               'name' => 'load',
               'points' => [
                 [
-                  'args' => [],
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/',
                   'segments' => [],
-                  'select' => [],
+                  'parts' => [],
+                  'rename' => [],
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.endpoints`',
                   ],
-                  'parts' => [],
+                  'args' => [],
+                  'select' => [],
                 ],
               ],
             ],

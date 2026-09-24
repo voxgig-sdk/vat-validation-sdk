@@ -1,0 +1,39 @@
+# Entity: geolocate
+
+main: kit: entity: geolocate: {
+
+  alias: field: {}
+
+  name: "geolocate"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /geolocate"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/geolocate"
+          s: [
+            {
+              lit: "geolocate"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.ip`"
+          }
+        }
+      ]
+    }
+  }
+
+  fields: {
+  }
+
+
+
+}

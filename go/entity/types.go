@@ -1,7 +1,7 @@
 // Typed models for the VatValidation SDK.
 //
-// GENERATED from the API model: main.kit.entity.<e>.fields[] and per-op
-// params (op.<name>.points[].args.params[]). Field/param types come from the
+// GENERATED from the API model: main.kit.entity.<e>.fields{} and per-op
+// params (op.<name>.points[].g.params[]). Field/param types come from the
 // canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 package entity
@@ -14,19 +14,6 @@ import (
 
 // Country is the typed data model for the country entity.
 type Country struct {
-	Capital string `json:"capital"`
-	Currency string `json:"currency"`
-	Emoji string `json:"emoji"`
-	Iso2 string `json:"iso2"`
-	Iso3 string `json:"iso3"`
-	Latitude float64 `json:"latitude"`
-	Longitude float64 `json:"longitude"`
-	Name string `json:"name"`
-	NumericCode int `json:"numeric_code"`
-	PhoneCode string `json:"phone_code"`
-	Region string `json:"region"`
-	Subregion string `json:"subregion"`
-	Tld string `json:"tld"`
 }
 
 // CountryListMatch is the typed request payload for Country.ListTyped.
@@ -48,8 +35,6 @@ type CountryListMatch struct {
 
 // Currency is the typed data model for the currency entity.
 type Currency struct {
-	Name string `json:"name"`
-	Symbol string `json:"symbol"`
 }
 
 // CurrencyLoadMatch is the typed request payload for Currency.LoadTyped.
@@ -79,18 +64,6 @@ type RateLoadMatch struct {
 
 // ValidateIbanResponseSchema is the typed data model for the validate_iban_response_schema entity.
 type ValidateIbanResponseSchema struct {
-	AccountNumber string `json:"account_number"`
-	BankCode string `json:"bank_code"`
-	BankName string `json:"bank_name"`
-	Bban string `json:"bban"`
-	Bic string `json:"bic"`
-	BranchCode string `json:"branch_code"`
-	ChecksumDigits string `json:"checksum_digits"`
-	CountryCode string `json:"country_code"`
-	CountryName string `json:"country_name"`
-	Iban string `json:"iban"`
-	InSepaZone bool `json:"in_sepa_zone"`
-	Valid bool `json:"valid"`
 }
 
 // ValidateIbanResponseSchemaLoadMatch is the typed request payload for ValidateIbanResponseSchema.LoadTyped.

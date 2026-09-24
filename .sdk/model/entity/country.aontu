@@ -1,0 +1,127 @@
+# Entity: country
+
+main: kit: entity: country: {
+
+  alias: field: {}
+
+  fields: {
+    capital: {
+      h: "Capital"
+      n: "capital"
+      r: true
+      t: "`$STRING`"
+    }
+    currency: {
+      h: "Currency"
+      n: "currency"
+      r: true
+      t: "`$STRING`"
+    }
+    emoji: {
+      h: "Emoji"
+      n: "emoji"
+      r: true
+      t: "`$STRING`"
+    }
+    iso2: {
+      h: "Iso2"
+      n: "iso2"
+      r: true
+      t: "`$STRING`"
+    }
+    iso3: {
+      h: "Iso3"
+      n: "iso3"
+      r: true
+      t: "`$STRING`"
+    }
+    latitude: {
+      h: "Latitude"
+      n: "latitude"
+      r: true
+      t: "`$NUMBER`"
+      union: {
+        branches: 2
+        count: 1
+        depth: 0
+      }
+    }
+    longitude: {
+      h: "Longitude"
+      n: "longitude"
+      r: true
+      t: "`$NUMBER`"
+      union: {
+        branches: 2
+        count: 1
+        depth: 0
+      }
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: true
+      t: "`$STRING`"
+    }
+    numeric_code: {
+      h: "Numeric Code"
+      n: "numeric_code"
+      r: true
+      t: "`$INTEGER`"
+    }
+    phone_code: {
+      h: "Phone Code"
+      n: "phone_code"
+      r: true
+      t: "`$STRING`"
+    }
+    region: {
+      h: "Region"
+      n: "region"
+      r: true
+      t: "`$STRING`"
+    }
+    subregion: {
+      h: "Subregion"
+      n: "subregion"
+      r: true
+      t: "`$STRING`"
+    }
+    tld: {
+      h: "Tld"
+      n: "tld"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
+  name: "country"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /countries"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/countries"
+          s: [
+            {
+              lit: "countries"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

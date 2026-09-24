@@ -1,0 +1,127 @@
+# Entity: validate_iban_response_schema
+
+main: kit: entity: validate_iban_response_schema: {
+
+  alias: field: {}
+
+  fields: {
+    account_number: {
+      h: "Account Number"
+      n: "account_number"
+      r: true
+      t: "`$STRING`"
+    }
+    bank_code: {
+      h: "Bank Code"
+      n: "bank_code"
+      r: true
+      t: "`$STRING`"
+    }
+    bank_name: {
+      h: "Bank Name"
+      n: "bank_name"
+      r: true
+      t: "`$STRING`"
+    }
+    bban: {
+      h: "Bban"
+      n: "bban"
+      r: true
+      t: "`$STRING`"
+    }
+    bic: {
+      h: "Bic"
+      n: "bic"
+      r: true
+      t: "`$STRING`"
+    }
+    branch_code: {
+      h: "Branch Code"
+      n: "branch_code"
+      r: true
+      t: "`$STRING`"
+    }
+    checksum_digits: {
+      h: "Checksum Digits"
+      n: "checksum_digits"
+      r: true
+      t: "`$STRING`"
+    }
+    country_code: {
+      h: "Country Code"
+      n: "country_code"
+      r: true
+      t: "`$STRING`"
+    }
+    country_name: {
+      h: "Country Name"
+      n: "country_name"
+      r: true
+      t: "`$STRING`"
+    }
+    iban: {
+      h: "Iban"
+      n: "iban"
+      r: true
+      t: "`$STRING`"
+    }
+    in_sepa_zone: {
+      h: "In Sepa Zone"
+      n: "in_sepa_zone"
+      r: true
+      t: "`$BOOLEAN`"
+    }
+    valid: {
+      h: "Valid"
+      n: "valid"
+      r: true
+      t: "`$BOOLEAN`"
+    }
+  }
+
+  name: "validate_iban_response_schema"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /iban"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "iban"
+                or: "iban"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/iban"
+          q: {
+            exist: [
+              "iban"
+            ]
+          }
+          s: [
+            {
+              lit: "iban"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}
