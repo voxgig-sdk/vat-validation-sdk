@@ -229,6 +229,26 @@ Return the entity name.
 $geolocate = $client->Geolocate();
 ```
 
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `capital` | `string` | Yes |  |
+| `country_code` | `string` | Yes |  |
+| `currency` | `string` | Yes |  |
+| `emoji` | `string` | Yes |  |
+| `ip` | `mixed` | Yes |  |
+| `iso2` | `string` | Yes |  |
+| `iso3` | `string` | Yes |  |
+| `latitude` | `float` | Yes |  |
+| `longitude` | `float` | Yes |  |
+| `name` | `string` | Yes |  |
+| `numeric_code` | `int` | Yes |  |
+| `phone_code` | `string` | Yes |  |
+| `region` | `string` | Yes |  |
+| `subregion` | `string` | Yes |  |
+| `tld` | `string` | Yes |  |
+
 ### Operations
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
@@ -274,6 +294,14 @@ Return the entity name.
 ```php
 $rate = $client->Rate();
 ```
+
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `base` | `string` | Yes |  |
+| `date` | `string` | Yes |  |
+| `rates` | `array` | Yes |  |
 
 ### Operations
 
@@ -384,6 +412,16 @@ Return the entity name.
 $validate_vat_response_schema = $client->ValidateVatResponseSchema();
 ```
 
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `address` | `string` | No |  |
+| `country_code` | `string` | Yes |  |
+| `name` | `string` | No |  |
+| `valid` | `bool` | Yes |  |
+| `vat_number` | `string` | Yes |  |
+
 ### Operations
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
@@ -429,6 +467,18 @@ Return the entity name.
 ```php
 $vatcomply_api_root = $client->VatcomplyApiRoot();
 ```
+
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `contact` | `string` | Yes |  |
+| `description` | `string` | Yes |  |
+| `documentation` | `string` | Yes |  |
+| `endpoints` | `array` | Yes |  |
+| `name` | `string` | Yes |  |
+| `status` | `string` | Yes |  |
+| `version` | `string` | Yes |  |
 
 ### Operations
 

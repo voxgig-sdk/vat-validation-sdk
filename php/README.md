@@ -12,9 +12,14 @@ The SDK exposes the API as capitalised, semantic **Entities** — for example `$
 
 ## Install
 This package is not yet published to Packagist. Install it from the
-GitHub release tag (`php/vX.Y.Z`):
+GitHub release tag (`php/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/vat-validation-sdk/releases)), or
+from a clone as a Composer path repository:
 
-- Releases: [https://github.com/voxgig-sdk/vat-validation-sdk/releases](https://github.com/voxgig-sdk/vat-validation-sdk/releases)
+```bash
+git clone https://github.com/voxgig-sdk/vat-validation-sdk
+composer config repositories.vat-validation-sdk path ./vat-validation-sdk/php
+composer require voxgig-sdk/vat-validation-sdk:@dev
+```
 
 
 ## Tutorial: your first API call
@@ -54,7 +59,7 @@ Entity operations throw a `\Throwable` on failure, so wrap them in
 
 ```php
 try {
-    $geolocate = $client->Geolocate()->load();
+    $currency = $client->Currency()->load();
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
@@ -128,8 +133,8 @@ $client = VatValidationSDK::test();
 
 // Entity ops return the ENTITY (throws on error);
 // call data_get() for the mock record.
-$geolocate = $client->Geolocate()->load();
-print_r($geolocate->data_get());
+$currency = $client->Currency()->load();
+print_r($currency->data_get());
 ```
 
 ### Use a custom fetch function
@@ -288,6 +293,21 @@ API path: `/currencies`
 
 | Field | Description |
 | --- | --- |
+| `capital` |  |
+| `country_code` |  |
+| `currency` |  |
+| `emoji` |  |
+| `ip` |  |
+| `iso2` |  |
+| `iso3` |  |
+| `latitude` |  |
+| `longitude` |  |
+| `name` |  |
+| `numeric_code` |  |
+| `phone_code` |  |
+| `region` |  |
+| `subregion` |  |
+| `tld` |  |
 
 Operations: Load.
 
@@ -297,6 +317,9 @@ API path: `/geolocate`
 
 | Field | Description |
 | --- | --- |
+| `base` |  |
+| `date` |  |
+| `rates` |  |
 
 Operations: Load.
 
@@ -327,6 +350,11 @@ API path: `/iban`
 
 | Field | Description |
 | --- | --- |
+| `address` |  |
+| `country_code` |  |
+| `name` |  |
+| `valid` |  |
+| `vat_number` |  |
 
 Operations: Load.
 
@@ -336,6 +364,13 @@ API path: `/vat`
 
 | Field | Description |
 | --- | --- |
+| `contact` |  |
+| `description` |  |
+| `documentation` |  |
+| `endpoints` |  |
+| `name` |  |
+| `status` |  |
+| `version` |  |
 
 Operations: Load.
 
@@ -417,6 +452,26 @@ Create an instance: `$geolocate = $client->Geolocate();`
 | --- | --- |
 | `load(match)` | Load a single entity by match criteria. |
 
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `capital` | `string` |  |
+| `country_code` | `string` |  |
+| `currency` | `string` |  |
+| `emoji` | `string` |  |
+| `ip` | `mixed` |  |
+| `iso2` | `string` |  |
+| `iso3` | `string` |  |
+| `latitude` | `float` |  |
+| `longitude` | `float` |  |
+| `name` | `string` |  |
+| `numeric_code` | `int` |  |
+| `phone_code` | `string` |  |
+| `region` | `string` |  |
+| `subregion` | `string` |  |
+| `tld` | `string` |  |
+
 #### Example: Load
 
 ```php
@@ -434,6 +489,14 @@ Create an instance: `$rate = $client->Rate();`
 | Method | Description |
 | --- | --- |
 | `load(match)` | Load a single entity by match criteria. |
+
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `base` | `string` |  |
+| `date` | `string` |  |
+| `rates` | `array` |  |
 
 #### Example: Load
 
@@ -488,6 +551,16 @@ Create an instance: `$validate_vat_response_schema = $client->ValidateVatRespons
 | --- | --- |
 | `load(match)` | Load a single entity by match criteria. |
 
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `address` | `string` |  |
+| `country_code` | `string` |  |
+| `name` | `string` |  |
+| `valid` | `bool` |  |
+| `vat_number` | `string` |  |
+
 #### Example: Load
 
 ```php
@@ -505,6 +578,18 @@ Create an instance: `$vatcomply_api_root = $client->VatcomplyApiRoot();`
 | Method | Description |
 | --- | --- |
 | `load(match)` | Load a single entity by match criteria. |
+
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `contact` | `string` |  |
+| `description` | `string` |  |
+| `documentation` | `string` |  |
+| `endpoints` | `array` |  |
+| `name` | `string` |  |
+| `status` | `string` |  |
+| `version` | `string` |  |
 
 #### Example: Load
 
@@ -675,11 +760,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$geolocate = $client->Geolocate();
-$geolocate->load();
+$currency = $client->Currency();
+$currency->load();
 
-// $geolocate->data_get() now returns the geolocate data from the last load
-// $geolocate->match_get() returns the last match criteria
+// $currency->data_get() now returns the currency data from the last load
+// $currency->match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

@@ -49,6 +49,21 @@ type Geolocate struct {
 
 // GeolocateLoadMatch is the typed request payload for Geolocate.LoadTyped.
 type GeolocateLoadMatch struct {
+	Capital *string `json:"capital,omitempty"`
+	CountryCode *string `json:"country_code,omitempty"`
+	Currency *string `json:"currency,omitempty"`
+	Emoji *string `json:"emoji,omitempty"`
+	Ip *any `json:"ip,omitempty"`
+	Iso2 *string `json:"iso2,omitempty"`
+	Iso3 *string `json:"iso3,omitempty"`
+	Latitude *float64 `json:"latitude,omitempty"`
+	Longitude *float64 `json:"longitude,omitempty"`
+	Name *string `json:"name,omitempty"`
+	NumericCode *int `json:"numeric_code,omitempty"`
+	PhoneCode *string `json:"phone_code,omitempty"`
+	Region *string `json:"region,omitempty"`
+	Subregion *string `json:"subregion,omitempty"`
+	Tld *string `json:"tld,omitempty"`
 }
 
 // Rate is the typed data model for the rate entity.
@@ -86,6 +101,13 @@ type VatcomplyApiRoot struct {
 
 // VatcomplyApiRootLoadMatch is the typed request payload for VatcomplyApiRoot.LoadTyped.
 type VatcomplyApiRootLoadMatch struct {
+	Contact *string `json:"contact,omitempty"`
+	Description *string `json:"description,omitempty"`
+	Documentation *string `json:"documentation,omitempty"`
+	Endpoints *map[string]any `json:"endpoints,omitempty"`
+	Name *string `json:"name,omitempty"`
+	Status *string `json:"status,omitempty"`
+	Version *string `json:"version,omitempty"`
 }
 
 // asMap turns a typed request/data struct into the map[string]any the

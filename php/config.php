@@ -278,7 +278,98 @@ class VatValidationConfig
           ],
         ],
         'geolocate' => [
-          'fields' => [],
+          'fields' => [
+            [
+              'name' => 'capital',
+              'title' => 'Capital',
+              'type' => '`$STRING`',
+              'req' => true,
+            ],
+            [
+              'name' => 'country_code',
+              'title' => 'Country Code',
+              'type' => '`$STRING`',
+              'req' => true,
+            ],
+            [
+              'name' => 'currency',
+              'title' => 'Currency',
+              'type' => '`$STRING`',
+              'req' => true,
+            ],
+            [
+              'name' => 'emoji',
+              'title' => 'Emoji',
+              'type' => '`$STRING`',
+              'req' => true,
+            ],
+            [
+              'name' => 'ip',
+              'title' => 'Ip',
+              'type' => '`$ANY`',
+              'req' => true,
+            ],
+            [
+              'name' => 'iso2',
+              'title' => 'Iso2',
+              'type' => '`$STRING`',
+              'req' => true,
+            ],
+            [
+              'name' => 'iso3',
+              'title' => 'Iso3',
+              'type' => '`$STRING`',
+              'req' => true,
+            ],
+            [
+              'name' => 'latitude',
+              'title' => 'Latitude',
+              'type' => '`$NUMBER`',
+              'req' => true,
+            ],
+            [
+              'name' => 'longitude',
+              'title' => 'Longitude',
+              'type' => '`$NUMBER`',
+              'req' => true,
+            ],
+            [
+              'name' => 'name',
+              'title' => 'Name',
+              'type' => '`$STRING`',
+              'req' => true,
+            ],
+            [
+              'name' => 'numeric_code',
+              'title' => 'Numeric Code',
+              'type' => '`$INTEGER`',
+              'req' => true,
+            ],
+            [
+              'name' => 'phone_code',
+              'title' => 'Phone Code',
+              'type' => '`$STRING`',
+              'req' => true,
+            ],
+            [
+              'name' => 'region',
+              'title' => 'Region',
+              'type' => '`$STRING`',
+              'req' => true,
+            ],
+            [
+              'name' => 'subregion',
+              'title' => 'Subregion',
+              'type' => '`$STRING`',
+              'req' => true,
+            ],
+            [
+              'name' => 'tld',
+              'title' => 'Tld',
+              'type' => '`$STRING`',
+              'req' => true,
+            ],
+          ],
           'name' => 'geolocate',
           'op' => [
             'load' => [
@@ -300,7 +391,7 @@ class VatValidationConfig
                   'rename' => [],
                   'transform' => [
                     'req' => '`reqdata`',
-                    'res' => '`body.ip`',
+                    'res' => '`body`',
                   ],
                   'args' => [],
                   'select' => [],
@@ -313,7 +404,26 @@ class VatValidationConfig
           ],
         ],
         'rate' => [
-          'fields' => [],
+          'fields' => [
+            [
+              'name' => 'base',
+              'title' => 'Base',
+              'type' => '`$STRING`',
+              'req' => true,
+            ],
+            [
+              'name' => 'date',
+              'title' => 'Date',
+              'type' => '`$STRING`',
+              'req' => true,
+            ],
+            [
+              'name' => 'rates',
+              'title' => 'Rates',
+              'type' => '`$OBJECT`',
+              'req' => true,
+            ],
+          ],
           'name' => 'rate',
           'op' => [
             'load' => [
@@ -335,7 +445,7 @@ class VatValidationConfig
                   'rename' => [],
                   'transform' => [
                     'req' => '`reqdata`',
-                    'res' => '`body.rates`',
+                    'res' => '`body`',
                   ],
                   'args' => [
                     'query' => [
@@ -354,7 +464,7 @@ class VatValidationConfig
                       ],
                       [
                         'name' => 'symbol',
-                        'orig' => 'symbol',
+                        'orig' => 'symbols',
                         'type' => '`$ANY`',
                         'kind' => 'query',
                       ],
@@ -498,7 +608,36 @@ class VatValidationConfig
           ],
         ],
         'validate_vat_response_schema' => [
-          'fields' => [],
+          'fields' => [
+            [
+              'name' => 'address',
+              'title' => 'Address',
+              'type' => '`$STRING`',
+            ],
+            [
+              'name' => 'country_code',
+              'title' => 'Country Code',
+              'type' => '`$STRING`',
+              'req' => true,
+            ],
+            [
+              'name' => 'name',
+              'title' => 'Name',
+              'type' => '`$STRING`',
+            ],
+            [
+              'name' => 'valid',
+              'title' => 'Valid',
+              'type' => '`$BOOLEAN`',
+              'req' => true,
+            ],
+            [
+              'name' => 'vat_number',
+              'title' => 'Vat Number',
+              'type' => '`$STRING`',
+              'req' => true,
+            ],
+          ],
           'name' => 'validate_vat_response_schema',
           'op' => [
             'load' => [
@@ -520,7 +659,7 @@ class VatValidationConfig
                   'rename' => [],
                   'transform' => [
                     'req' => '`reqdata`',
-                    'res' => '`body.name`',
+                    'res' => '`body`',
                   ],
                   'args' => [
                     'query' => [
@@ -547,7 +686,50 @@ class VatValidationConfig
           ],
         ],
         'vatcomply_api_root' => [
-          'fields' => [],
+          'fields' => [
+            [
+              'name' => 'contact',
+              'title' => 'Contact',
+              'type' => '`$STRING`',
+              'req' => true,
+            ],
+            [
+              'name' => 'description',
+              'title' => 'Description',
+              'type' => '`$STRING`',
+              'req' => true,
+            ],
+            [
+              'name' => 'documentation',
+              'title' => 'Documentation',
+              'type' => '`$STRING`',
+              'req' => true,
+            ],
+            [
+              'name' => 'endpoints',
+              'title' => 'Endpoints',
+              'type' => '`$OBJECT`',
+              'req' => true,
+            ],
+            [
+              'name' => 'name',
+              'title' => 'Name',
+              'type' => '`$STRING`',
+              'req' => true,
+            ],
+            [
+              'name' => 'status',
+              'title' => 'Status',
+              'type' => '`$STRING`',
+              'req' => true,
+            ],
+            [
+              'name' => 'version',
+              'title' => 'Version',
+              'type' => '`$STRING`',
+              'req' => true,
+            ],
+          ],
           'name' => 'vatcomply_api_root',
           'op' => [
             'load' => [
@@ -563,7 +745,7 @@ class VatValidationConfig
                   'rename' => [],
                   'transform' => [
                     'req' => '`reqdata`',
-                    'res' => '`body.endpoints`',
+                    'res' => '`body`',
                   ],
                   'args' => [],
                   'select' => [],

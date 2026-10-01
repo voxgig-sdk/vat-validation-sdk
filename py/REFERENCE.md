@@ -224,6 +224,26 @@ Return the entity name.
 geolocate = client.Geolocate()
 ```
 
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `capital` | `str` | Yes |  |
+| `country_code` | `str` | Yes |  |
+| `currency` | `str` | Yes |  |
+| `emoji` | `str` | Yes |  |
+| `ip` | `Any` | Yes |  |
+| `iso2` | `str` | Yes |  |
+| `iso3` | `str` | Yes |  |
+| `latitude` | `float` | Yes |  |
+| `longitude` | `float` | Yes |  |
+| `name` | `str` | Yes |  |
+| `numeric_code` | `int` | Yes |  |
+| `phone_code` | `str` | Yes |  |
+| `region` | `str` | Yes |  |
+| `subregion` | `str` | Yes |  |
+| `tld` | `str` | Yes |  |
+
 ### Operations
 
 #### `load(reqmatch, ctrl=None) -> dict`
@@ -268,6 +288,14 @@ Return the entity name.
 ```python
 rate = client.Rate()
 ```
+
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `base` | `str` | Yes |  |
+| `date` | `str` | Yes |  |
+| `rates` | `dict` | Yes |  |
 
 ### Operations
 
@@ -376,6 +404,16 @@ Return the entity name.
 validate_vat_response_schema = client.ValidateVatResponseSchema()
 ```
 
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `address` | `str` | No |  |
+| `country_code` | `str` | Yes |  |
+| `name` | `str` | No |  |
+| `valid` | `bool` | Yes |  |
+| `vat_number` | `str` | Yes |  |
+
 ### Operations
 
 #### `load(reqmatch, ctrl=None) -> dict`
@@ -420,6 +458,18 @@ Return the entity name.
 ```python
 vatcomply_api_root = client.VatcomplyApiRoot()
 ```
+
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `contact` | `str` | Yes |  |
+| `description` | `str` | Yes |  |
+| `documentation` | `str` | Yes |  |
+| `endpoints` | `dict` | Yes |  |
+| `name` | `str` | Yes |  |
+| `status` | `str` | Yes |  |
+| `version` | `str` | Yes |  |
 
 ### Operations
 

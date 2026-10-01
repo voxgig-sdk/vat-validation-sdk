@@ -256,7 +256,98 @@ func MakeConfig() map[string]any {
 				},
 			},
 			"geolocate": map[string]any{
-				"fields": []any{},
+				"fields": []any{
+					map[string]any{
+						"name": "capital",
+						"title": "Capital",
+						"type": "`$STRING`",
+						"req": true,
+					},
+					map[string]any{
+						"name": "country_code",
+						"title": "Country Code",
+						"type": "`$STRING`",
+						"req": true,
+					},
+					map[string]any{
+						"name": "currency",
+						"title": "Currency",
+						"type": "`$STRING`",
+						"req": true,
+					},
+					map[string]any{
+						"name": "emoji",
+						"title": "Emoji",
+						"type": "`$STRING`",
+						"req": true,
+					},
+					map[string]any{
+						"name": "ip",
+						"title": "Ip",
+						"type": "`$ANY`",
+						"req": true,
+					},
+					map[string]any{
+						"name": "iso2",
+						"title": "Iso2",
+						"type": "`$STRING`",
+						"req": true,
+					},
+					map[string]any{
+						"name": "iso3",
+						"title": "Iso3",
+						"type": "`$STRING`",
+						"req": true,
+					},
+					map[string]any{
+						"name": "latitude",
+						"title": "Latitude",
+						"type": "`$NUMBER`",
+						"req": true,
+					},
+					map[string]any{
+						"name": "longitude",
+						"title": "Longitude",
+						"type": "`$NUMBER`",
+						"req": true,
+					},
+					map[string]any{
+						"name": "name",
+						"title": "Name",
+						"type": "`$STRING`",
+						"req": true,
+					},
+					map[string]any{
+						"name": "numeric_code",
+						"title": "Numeric Code",
+						"type": "`$INTEGER`",
+						"req": true,
+					},
+					map[string]any{
+						"name": "phone_code",
+						"title": "Phone Code",
+						"type": "`$STRING`",
+						"req": true,
+					},
+					map[string]any{
+						"name": "region",
+						"title": "Region",
+						"type": "`$STRING`",
+						"req": true,
+					},
+					map[string]any{
+						"name": "subregion",
+						"title": "Subregion",
+						"type": "`$STRING`",
+						"req": true,
+					},
+					map[string]any{
+						"name": "tld",
+						"title": "Tld",
+						"type": "`$STRING`",
+						"req": true,
+					},
+				},
 				"name": "geolocate",
 				"op": map[string]any{
 					"load": map[string]any{
@@ -278,7 +369,7 @@ func MakeConfig() map[string]any {
 								"rename": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body.ip`",
+									"res": "`body`",
 								},
 								"args": map[string]any{},
 								"select": map[string]any{},
@@ -291,7 +382,26 @@ func MakeConfig() map[string]any {
 				},
 			},
 			"rate": map[string]any{
-				"fields": []any{},
+				"fields": []any{
+					map[string]any{
+						"name": "base",
+						"title": "Base",
+						"type": "`$STRING`",
+						"req": true,
+					},
+					map[string]any{
+						"name": "date",
+						"title": "Date",
+						"type": "`$STRING`",
+						"req": true,
+					},
+					map[string]any{
+						"name": "rates",
+						"title": "Rates",
+						"type": "`$OBJECT`",
+						"req": true,
+					},
+				},
 				"name": "rate",
 				"op": map[string]any{
 					"load": map[string]any{
@@ -313,7 +423,7 @@ func MakeConfig() map[string]any {
 								"rename": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body.rates`",
+									"res": "`body`",
 								},
 								"args": map[string]any{
 									"query": []any{
@@ -332,7 +442,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "symbol",
-											"orig": "symbol",
+											"orig": "symbols",
 											"type": "`$ANY`",
 											"kind": "query",
 										},
@@ -476,7 +586,36 @@ func MakeConfig() map[string]any {
 				},
 			},
 			"validate_vat_response_schema": map[string]any{
-				"fields": []any{},
+				"fields": []any{
+					map[string]any{
+						"name": "address",
+						"title": "Address",
+						"type": "`$STRING`",
+					},
+					map[string]any{
+						"name": "country_code",
+						"title": "Country Code",
+						"type": "`$STRING`",
+						"req": true,
+					},
+					map[string]any{
+						"name": "name",
+						"title": "Name",
+						"type": "`$STRING`",
+					},
+					map[string]any{
+						"name": "valid",
+						"title": "Valid",
+						"type": "`$BOOLEAN`",
+						"req": true,
+					},
+					map[string]any{
+						"name": "vat_number",
+						"title": "Vat Number",
+						"type": "`$STRING`",
+						"req": true,
+					},
+				},
 				"name": "validate_vat_response_schema",
 				"op": map[string]any{
 					"load": map[string]any{
@@ -498,7 +637,7 @@ func MakeConfig() map[string]any {
 								"rename": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body.name`",
+									"res": "`body`",
 								},
 								"args": map[string]any{
 									"query": []any{
@@ -525,7 +664,50 @@ func MakeConfig() map[string]any {
 				},
 			},
 			"vatcomply_api_root": map[string]any{
-				"fields": []any{},
+				"fields": []any{
+					map[string]any{
+						"name": "contact",
+						"title": "Contact",
+						"type": "`$STRING`",
+						"req": true,
+					},
+					map[string]any{
+						"name": "description",
+						"title": "Description",
+						"type": "`$STRING`",
+						"req": true,
+					},
+					map[string]any{
+						"name": "documentation",
+						"title": "Documentation",
+						"type": "`$STRING`",
+						"req": true,
+					},
+					map[string]any{
+						"name": "endpoints",
+						"title": "Endpoints",
+						"type": "`$OBJECT`",
+						"req": true,
+					},
+					map[string]any{
+						"name": "name",
+						"title": "Name",
+						"type": "`$STRING`",
+						"req": true,
+					},
+					map[string]any{
+						"name": "status",
+						"title": "Status",
+						"type": "`$STRING`",
+						"req": true,
+					},
+					map[string]any{
+						"name": "version",
+						"title": "Version",
+						"type": "`$STRING`",
+						"req": true,
+					},
+				},
 				"name": "vatcomply_api_root",
 				"op": map[string]any{
 					"load": map[string]any{
@@ -541,7 +723,7 @@ func MakeConfig() map[string]any {
 								"rename": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body.endpoints`",
+									"res": "`body`",
 								},
 								"args": map[string]any{},
 								"select": map[string]any{},

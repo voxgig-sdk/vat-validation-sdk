@@ -68,12 +68,12 @@ Every entity operation returns `(value, error)`. Check `err` before
 using the value — there is no exception to catch:
 
 ```go
-geolocate, err := client.Geolocate(nil).Load(nil, nil)
+currency, err := client.Currency(nil).Load(nil, nil)
 if err != nil {
     // handle err
     return
 }
-_ = geolocate
+_ = currency
 ```
 
 `Direct` follows the same `(value, error)` convention:
@@ -137,13 +137,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-geolocate, err := client.Geolocate(nil).Load(
+currency, err := client.Currency(nil).Load(
     nil, nil,
 )
 if err != nil {
     panic(err)
 }
-fmt.Println(geolocate) // the returned mock data
+fmt.Println(currency) // the returned mock data
 ```
 
 ### Use a custom fetch function
@@ -301,6 +301,21 @@ API path: `/currencies`
 
 | Field | Description |
 | --- | --- |
+| `"capital"` |  |
+| `"country_code"` |  |
+| `"currency"` |  |
+| `"emoji"` |  |
+| `"ip"` |  |
+| `"iso2"` |  |
+| `"iso3"` |  |
+| `"latitude"` |  |
+| `"longitude"` |  |
+| `"name"` |  |
+| `"numeric_code"` |  |
+| `"phone_code"` |  |
+| `"region"` |  |
+| `"subregion"` |  |
+| `"tld"` |  |
 
 Operations: Load.
 
@@ -310,6 +325,9 @@ API path: `/geolocate`
 
 | Field | Description |
 | --- | --- |
+| `"base"` |  |
+| `"date"` |  |
+| `"rates"` |  |
 
 Operations: Load.
 
@@ -340,6 +358,11 @@ API path: `/iban`
 
 | Field | Description |
 | --- | --- |
+| `"address"` |  |
+| `"country_code"` |  |
+| `"name"` |  |
+| `"valid"` |  |
+| `"vat_number"` |  |
 
 Operations: Load.
 
@@ -349,6 +372,13 @@ API path: `/vat`
 
 | Field | Description |
 | --- | --- |
+| `"contact"` |  |
+| `"description"` |  |
+| `"documentation"` |  |
+| `"endpoints"` |  |
+| `"name"` |  |
+| `"status"` |  |
+| `"version"` |  |
 
 Operations: Load.
 
@@ -436,6 +466,26 @@ Create an instance: `geolocate := client.Geolocate(nil)`
 | --- | --- |
 | `Load(match, ctrl)` | Load a single entity by match criteria. |
 
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `capital` | `string` |  |
+| `country_code` | `string` |  |
+| `currency` | `string` |  |
+| `emoji` | `string` |  |
+| `ip` | `any` |  |
+| `iso2` | `string` |  |
+| `iso3` | `string` |  |
+| `latitude` | `float64` |  |
+| `longitude` | `float64` |  |
+| `name` | `string` |  |
+| `numeric_code` | `int` |  |
+| `phone_code` | `string` |  |
+| `region` | `string` |  |
+| `subregion` | `string` |  |
+| `tld` | `string` |  |
+
 #### Example: Load
 
 ```go
@@ -456,6 +506,14 @@ Create an instance: `rate := client.Rate(nil)`
 | Method | Description |
 | --- | --- |
 | `Load(match, ctrl)` | Load a single entity by match criteria. |
+
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `base` | `string` |  |
+| `date` | `string` |  |
+| `rates` | `map[string]any` |  |
 
 #### Example: Load
 
@@ -516,6 +574,16 @@ Create an instance: `validateVatResponseSchema := client.ValidateVatResponseSche
 | --- | --- |
 | `Load(match, ctrl)` | Load a single entity by match criteria. |
 
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `address` | `string` |  |
+| `country_code` | `string` |  |
+| `name` | `string` |  |
+| `valid` | `bool` |  |
+| `vat_number` | `string` |  |
+
 #### Example: Load
 
 ```go
@@ -536,6 +604,18 @@ Create an instance: `vatcomplyApiRoot := client.VatcomplyApiRoot(nil)`
 | Method | Description |
 | --- | --- |
 | `Load(match, ctrl)` | Load a single entity by match criteria. |
+
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `contact` | `string` |  |
+| `description` | `string` |  |
+| `documentation` | `string` |  |
+| `endpoints` | `map[string]any` |  |
+| `name` | `string` |  |
+| `status` | `string` |  |
+| `version` | `string` |  |
 
 #### Example: Load
 
@@ -705,11 +785,11 @@ Entity instances are stateful. After a successful `Load`, the entity
 stores the returned data and match criteria internally.
 
 ```go
-geolocate := client.Geolocate(nil)
-geolocate.Load(nil, nil)
+currency := client.Currency(nil)
+currency.Load(nil, nil)
 
-// geolocate.Data() now returns the geolocate data from the last load
-// geolocate.Match() returns the last match criteria
+// currency.Data() now returns the currency data from the last load
+// currency.Match() returns the last match criteria
 ```
 
 Call `Make()` to create a fresh instance with the same configuration

@@ -54,7 +54,7 @@ Entity operations return `(value, err)`. Check `err` before using
 the value:
 
 ```lua
-local geolocate, err = client:Geolocate():load()
+local currency, err = client:Currency():load()
 if err then error(err) end
 ```
 
@@ -112,7 +112,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:Geolocate():load()
+local result, err = client:Currency():load()
 -- result is the returned data; err is set on failure
 ```
 
@@ -272,6 +272,21 @@ API path: `/currencies`
 
 | Field | Description |
 | --- | --- |
+| `capital` |  |
+| `country_code` |  |
+| `currency` |  |
+| `emoji` |  |
+| `ip` |  |
+| `iso2` |  |
+| `iso3` |  |
+| `latitude` |  |
+| `longitude` |  |
+| `name` |  |
+| `numeric_code` |  |
+| `phone_code` |  |
+| `region` |  |
+| `subregion` |  |
+| `tld` |  |
 
 Operations: Load.
 
@@ -281,6 +296,9 @@ API path: `/geolocate`
 
 | Field | Description |
 | --- | --- |
+| `base` |  |
+| `date` |  |
+| `rates` |  |
 
 Operations: Load.
 
@@ -311,6 +329,11 @@ API path: `/iban`
 
 | Field | Description |
 | --- | --- |
+| `address` |  |
+| `country_code` |  |
+| `name` |  |
+| `valid` |  |
+| `vat_number` |  |
 
 Operations: Load.
 
@@ -320,6 +343,13 @@ API path: `/vat`
 
 | Field | Description |
 | --- | --- |
+| `contact` |  |
+| `description` |  |
+| `documentation` |  |
+| `endpoints` |  |
+| `name` |  |
+| `status` |  |
+| `version` |  |
 
 Operations: Load.
 
@@ -399,6 +429,26 @@ Create an instance: `local geolocate = client:Geolocate(nil)`
 | --- | --- |
 | `load(match)` | Load a single entity by match criteria. |
 
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `capital` | `string` |  |
+| `country_code` | `string` |  |
+| `currency` | `string` |  |
+| `emoji` | `string` |  |
+| `ip` | `any` |  |
+| `iso2` | `string` |  |
+| `iso3` | `string` |  |
+| `latitude` | `number` |  |
+| `longitude` | `number` |  |
+| `name` | `string` |  |
+| `numeric_code` | `number` |  |
+| `phone_code` | `string` |  |
+| `region` | `string` |  |
+| `subregion` | `string` |  |
+| `tld` | `string` |  |
+
 #### Example: Load
 
 ```lua
@@ -415,6 +465,14 @@ Create an instance: `local rate = client:Rate(nil)`
 | Method | Description |
 | --- | --- |
 | `load(match)` | Load a single entity by match criteria. |
+
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `base` | `string` |  |
+| `date` | `string` |  |
+| `rates` | `table` |  |
 
 #### Example: Load
 
@@ -467,6 +525,16 @@ Create an instance: `local validate_vat_response_schema = client:ValidateVatResp
 | --- | --- |
 | `load(match)` | Load a single entity by match criteria. |
 
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `address` | `string` |  |
+| `country_code` | `string` |  |
+| `name` | `string` |  |
+| `valid` | `boolean` |  |
+| `vat_number` | `string` |  |
+
 #### Example: Load
 
 ```lua
@@ -483,6 +551,18 @@ Create an instance: `local vatcomply_api_root = client:VatcomplyApiRoot(nil)`
 | Method | Description |
 | --- | --- |
 | `load(match)` | Load a single entity by match criteria. |
+
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `contact` | `string` |  |
+| `description` | `string` |  |
+| `documentation` | `string` |  |
+| `endpoints` | `table` |  |
+| `name` | `string` |  |
+| `status` | `string` |  |
+| `version` | `string` |  |
 
 #### Example: Load
 
@@ -652,11 +732,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local geolocate = client:Geolocate()
-geolocate:load()
+local currency = client:Currency()
+currency:load()
 
--- geolocate:data_get() now returns the geolocate data from the last load
--- geolocate:match_get() returns the last match criteria
+-- currency:data_get() now returns the currency data from the last load
+-- currency:match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

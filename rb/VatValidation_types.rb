@@ -149,16 +149,151 @@ CurrencyLoadMatch = Struct.new(
 )
 
 # Geolocate entity data model.
-class Geolocate
-end
+#
+# @!attribute [rw] capital
+#   @return [String]
+#
+# @!attribute [rw] country_code
+#   @return [String]
+#
+# @!attribute [rw] currency
+#   @return [String]
+#
+# @!attribute [rw] emoji
+#   @return [String]
+#
+# @!attribute [rw] ip
+#   @return [Object]
+#
+# @!attribute [rw] iso2
+#   @return [String]
+#
+# @!attribute [rw] iso3
+#   @return [String]
+#
+# @!attribute [rw] latitude
+#   @return [Float]
+#
+# @!attribute [rw] longitude
+#   @return [Float]
+#
+# @!attribute [rw] name
+#   @return [String]
+#
+# @!attribute [rw] numeric_code
+#   @return [Integer]
+#
+# @!attribute [rw] phone_code
+#   @return [String]
+#
+# @!attribute [rw] region
+#   @return [String]
+#
+# @!attribute [rw] subregion
+#   @return [String]
+#
+# @!attribute [rw] tld
+#   @return [String]
+Geolocate = Struct.new(
+  :capital,
+  :country_code,
+  :currency,
+  :emoji,
+  :ip,
+  :iso2,
+  :iso3,
+  :latitude,
+  :longitude,
+  :name,
+  :numeric_code,
+  :phone_code,
+  :region,
+  :subregion,
+  :tld,
+  keyword_init: true
+)
 
 # Request payload for Geolocate#load.
-class GeolocateLoadMatch
-end
+#
+# @!attribute [rw] capital
+#   @return [String, nil]
+#
+# @!attribute [rw] country_code
+#   @return [String, nil]
+#
+# @!attribute [rw] currency
+#   @return [String, nil]
+#
+# @!attribute [rw] emoji
+#   @return [String, nil]
+#
+# @!attribute [rw] ip
+#   @return [Object, nil]
+#
+# @!attribute [rw] iso2
+#   @return [String, nil]
+#
+# @!attribute [rw] iso3
+#   @return [String, nil]
+#
+# @!attribute [rw] latitude
+#   @return [Float, nil]
+#
+# @!attribute [rw] longitude
+#   @return [Float, nil]
+#
+# @!attribute [rw] name
+#   @return [String, nil]
+#
+# @!attribute [rw] numeric_code
+#   @return [Integer, nil]
+#
+# @!attribute [rw] phone_code
+#   @return [String, nil]
+#
+# @!attribute [rw] region
+#   @return [String, nil]
+#
+# @!attribute [rw] subregion
+#   @return [String, nil]
+#
+# @!attribute [rw] tld
+#   @return [String, nil]
+GeolocateLoadMatch = Struct.new(
+  :capital,
+  :country_code,
+  :currency,
+  :emoji,
+  :ip,
+  :iso2,
+  :iso3,
+  :latitude,
+  :longitude,
+  :name,
+  :numeric_code,
+  :phone_code,
+  :region,
+  :subregion,
+  :tld,
+  keyword_init: true
+)
 
 # Rate entity data model.
-class Rate
-end
+#
+# @!attribute [rw] base
+#   @return [String]
+#
+# @!attribute [rw] date
+#   @return [String]
+#
+# @!attribute [rw] rates
+#   @return [Hash]
+Rate = Struct.new(
+  :base,
+  :date,
+  :rates,
+  keyword_init: true
+)
 
 # Request payload for Rate#load.
 #
@@ -240,8 +375,29 @@ ValidateIbanResponseSchemaLoadMatch = Struct.new(
 )
 
 # ValidateVatResponseSchema entity data model.
-class ValidateVatResponseSchema
-end
+#
+# @!attribute [rw] address
+#   @return [String, nil]
+#
+# @!attribute [rw] country_code
+#   @return [String]
+#
+# @!attribute [rw] name
+#   @return [String, nil]
+#
+# @!attribute [rw] valid
+#   @return [Boolean]
+#
+# @!attribute [rw] vat_number
+#   @return [String]
+ValidateVatResponseSchema = Struct.new(
+  :address,
+  :country_code,
+  :name,
+  :valid,
+  :vat_number,
+  keyword_init: true
+)
 
 # Request payload for ValidateVatResponseSchema#load.
 #
@@ -253,10 +409,68 @@ ValidateVatResponseSchemaLoadMatch = Struct.new(
 )
 
 # VatcomplyApiRoot entity data model.
-class VatcomplyApiRoot
-end
+#
+# @!attribute [rw] contact
+#   @return [String]
+#
+# @!attribute [rw] description
+#   @return [String]
+#
+# @!attribute [rw] documentation
+#   @return [String]
+#
+# @!attribute [rw] endpoints
+#   @return [Hash]
+#
+# @!attribute [rw] name
+#   @return [String]
+#
+# @!attribute [rw] status
+#   @return [String]
+#
+# @!attribute [rw] version
+#   @return [String]
+VatcomplyApiRoot = Struct.new(
+  :contact,
+  :description,
+  :documentation,
+  :endpoints,
+  :name,
+  :status,
+  :version,
+  keyword_init: true
+)
 
 # Request payload for VatcomplyApiRoot#load.
-class VatcomplyApiRootLoadMatch
-end
+#
+# @!attribute [rw] contact
+#   @return [String, nil]
+#
+# @!attribute [rw] description
+#   @return [String, nil]
+#
+# @!attribute [rw] documentation
+#   @return [String, nil]
+#
+# @!attribute [rw] endpoints
+#   @return [Hash, nil]
+#
+# @!attribute [rw] name
+#   @return [String, nil]
+#
+# @!attribute [rw] status
+#   @return [String, nil]
+#
+# @!attribute [rw] version
+#   @return [String, nil]
+VatcomplyApiRootLoadMatch = Struct.new(
+  :contact,
+  :description,
+  :documentation,
+  :endpoints,
+  :name,
+  :status,
+  :version,
+  keyword_init: true
+)
 

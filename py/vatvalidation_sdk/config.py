@@ -281,7 +281,98 @@ def make_config():
         },
       },
       "geolocate": {
-        "fields": [],
+        "fields": [
+          {
+            "name": "capital",
+            "title": "Capital",
+            "type": "`$STRING`",
+            "req": True,
+          },
+          {
+            "name": "country_code",
+            "title": "Country Code",
+            "type": "`$STRING`",
+            "req": True,
+          },
+          {
+            "name": "currency",
+            "title": "Currency",
+            "type": "`$STRING`",
+            "req": True,
+          },
+          {
+            "name": "emoji",
+            "title": "Emoji",
+            "type": "`$STRING`",
+            "req": True,
+          },
+          {
+            "name": "ip",
+            "title": "Ip",
+            "type": "`$ANY`",
+            "req": True,
+          },
+          {
+            "name": "iso2",
+            "title": "Iso2",
+            "type": "`$STRING`",
+            "req": True,
+          },
+          {
+            "name": "iso3",
+            "title": "Iso3",
+            "type": "`$STRING`",
+            "req": True,
+          },
+          {
+            "name": "latitude",
+            "title": "Latitude",
+            "type": "`$NUMBER`",
+            "req": True,
+          },
+          {
+            "name": "longitude",
+            "title": "Longitude",
+            "type": "`$NUMBER`",
+            "req": True,
+          },
+          {
+            "name": "name",
+            "title": "Name",
+            "type": "`$STRING`",
+            "req": True,
+          },
+          {
+            "name": "numeric_code",
+            "title": "Numeric Code",
+            "type": "`$INTEGER`",
+            "req": True,
+          },
+          {
+            "name": "phone_code",
+            "title": "Phone Code",
+            "type": "`$STRING`",
+            "req": True,
+          },
+          {
+            "name": "region",
+            "title": "Region",
+            "type": "`$STRING`",
+            "req": True,
+          },
+          {
+            "name": "subregion",
+            "title": "Subregion",
+            "type": "`$STRING`",
+            "req": True,
+          },
+          {
+            "name": "tld",
+            "title": "Tld",
+            "type": "`$STRING`",
+            "req": True,
+          },
+        ],
         "name": "geolocate",
         "op": {
           "load": {
@@ -303,7 +394,7 @@ def make_config():
                 "rename": {},
                 "transform": {
                   "req": "`reqdata`",
-                  "res": "`body.ip`",
+                  "res": "`body`",
                 },
                 "args": {},
                 "select": {},
@@ -316,7 +407,26 @@ def make_config():
         },
       },
       "rate": {
-        "fields": [],
+        "fields": [
+          {
+            "name": "base",
+            "title": "Base",
+            "type": "`$STRING`",
+            "req": True,
+          },
+          {
+            "name": "date",
+            "title": "Date",
+            "type": "`$STRING`",
+            "req": True,
+          },
+          {
+            "name": "rates",
+            "title": "Rates",
+            "type": "`$OBJECT`",
+            "req": True,
+          },
+        ],
         "name": "rate",
         "op": {
           "load": {
@@ -338,7 +448,7 @@ def make_config():
                 "rename": {},
                 "transform": {
                   "req": "`reqdata`",
-                  "res": "`body.rates`",
+                  "res": "`body`",
                 },
                 "args": {
                   "query": [
@@ -357,7 +467,7 @@ def make_config():
                     },
                     {
                       "name": "symbol",
-                      "orig": "symbol",
+                      "orig": "symbols",
                       "type": "`$ANY`",
                       "kind": "query",
                     },
@@ -501,7 +611,36 @@ def make_config():
         },
       },
       "validate_vat_response_schema": {
-        "fields": [],
+        "fields": [
+          {
+            "name": "address",
+            "title": "Address",
+            "type": "`$STRING`",
+          },
+          {
+            "name": "country_code",
+            "title": "Country Code",
+            "type": "`$STRING`",
+            "req": True,
+          },
+          {
+            "name": "name",
+            "title": "Name",
+            "type": "`$STRING`",
+          },
+          {
+            "name": "valid",
+            "title": "Valid",
+            "type": "`$BOOLEAN`",
+            "req": True,
+          },
+          {
+            "name": "vat_number",
+            "title": "Vat Number",
+            "type": "`$STRING`",
+            "req": True,
+          },
+        ],
         "name": "validate_vat_response_schema",
         "op": {
           "load": {
@@ -523,7 +662,7 @@ def make_config():
                 "rename": {},
                 "transform": {
                   "req": "`reqdata`",
-                  "res": "`body.name`",
+                  "res": "`body`",
                 },
                 "args": {
                   "query": [
@@ -550,7 +689,50 @@ def make_config():
         },
       },
       "vatcomply_api_root": {
-        "fields": [],
+        "fields": [
+          {
+            "name": "contact",
+            "title": "Contact",
+            "type": "`$STRING`",
+            "req": True,
+          },
+          {
+            "name": "description",
+            "title": "Description",
+            "type": "`$STRING`",
+            "req": True,
+          },
+          {
+            "name": "documentation",
+            "title": "Documentation",
+            "type": "`$STRING`",
+            "req": True,
+          },
+          {
+            "name": "endpoints",
+            "title": "Endpoints",
+            "type": "`$OBJECT`",
+            "req": True,
+          },
+          {
+            "name": "name",
+            "title": "Name",
+            "type": "`$STRING`",
+            "req": True,
+          },
+          {
+            "name": "status",
+            "title": "Status",
+            "type": "`$STRING`",
+            "req": True,
+          },
+          {
+            "name": "version",
+            "title": "Version",
+            "type": "`$STRING`",
+            "req": True,
+          },
+        ],
         "name": "vatcomply_api_root",
         "op": {
           "load": {
@@ -566,7 +748,7 @@ def make_config():
                 "rename": {},
                 "transform": {
                   "req": "`reqdata`",
-                  "res": "`body.endpoints`",
+                  "res": "`body`",
                 },
                 "args": {},
                 "select": {},

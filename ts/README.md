@@ -15,9 +15,13 @@ predictable and low-friction for both humans and AI agents.
 
 ## Install
 This package is not yet published to npm. Install it from the GitHub
-release tag (`ts/vX.Y.Z`):
+release tag (`ts/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/vat-validation-sdk/releases)), or from a
+clone, which carries the compiled `dist/`:
 
-- Releases: [https://github.com/voxgig-sdk/vat-validation-sdk/releases](https://github.com/voxgig-sdk/vat-validation-sdk/releases)
+```bash
+git clone https://github.com/voxgig-sdk/vat-validation-sdk
+npm install ./vat-validation-sdk/ts
+```
 
 
 ## Tutorial: your first API call
@@ -54,8 +58,8 @@ Entity operations reject on failure, so wrap them in `try` / `catch`:
 
 ```ts
 try {
-  const geolocate = await client.Geolocate().load()
-  console.log(geolocate)
+  const currency = await client.Currency().load()
+  console.log(currency)
 } catch (err) {
   console.error('load failed:', err)
 }
@@ -121,10 +125,10 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = VatValidationSDK.test()
 
-const geolocate = await client.Geolocate().load()
-// geolocate is the entity, populated with mock response data
-// — call geolocate.data() for the record itself
-console.log(geolocate)
+const currency = await client.Currency().load()
+// currency is the entity, populated with mock response data
+// — call currency.data() for the record itself
+console.log(currency)
 ```
 
 You can also use the instance method:
@@ -139,7 +143,7 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.Geolocate()
+const entity = client.Currency()
 
 // First call runs the operation and stores its result
 await entity.load()
@@ -333,6 +337,21 @@ API path: `/currencies`
 
 | Field | Description |
 | --- | --- |
+| `capital` |  |
+| `country_code` |  |
+| `currency` |  |
+| `emoji` |  |
+| `ip` |  |
+| `iso2` |  |
+| `iso3` |  |
+| `latitude` |  |
+| `longitude` |  |
+| `name` |  |
+| `numeric_code` |  |
+| `phone_code` |  |
+| `region` |  |
+| `subregion` |  |
+| `tld` |  |
 
 Operations: load.
 
@@ -342,6 +361,9 @@ API path: `/geolocate`
 
 | Field | Description |
 | --- | --- |
+| `base` |  |
+| `date` |  |
+| `rates` |  |
 
 Operations: load.
 
@@ -372,6 +394,11 @@ API path: `/iban`
 
 | Field | Description |
 | --- | --- |
+| `address` |  |
+| `country_code` |  |
+| `name` |  |
+| `valid` |  |
+| `vat_number` |  |
 
 Operations: load.
 
@@ -381,6 +408,13 @@ API path: `/vat`
 
 | Field | Description |
 | --- | --- |
+| `contact` |  |
+| `description` |  |
+| `documentation` |  |
+| `endpoints` |  |
+| `name` |  |
+| `status` |  |
+| `version` |  |
 
 Operations: load.
 
@@ -460,6 +494,26 @@ Create an instance: `const geolocate = client.Geolocate()`
 | --- | --- |
 | `load(match)` | Load a single entity by match criteria. |
 
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `capital` | `string` |  |
+| `country_code` | `string` |  |
+| `currency` | `string` |  |
+| `emoji` | `string` |  |
+| `ip` | `any` |  |
+| `iso2` | `string` |  |
+| `iso3` | `string` |  |
+| `latitude` | `number` |  |
+| `longitude` | `number` |  |
+| `name` | `string` |  |
+| `numeric_code` | `number` |  |
+| `phone_code` | `string` |  |
+| `region` | `string` |  |
+| `subregion` | `string` |  |
+| `tld` | `string` |  |
+
 #### Example: Load
 
 ```ts
@@ -476,6 +530,14 @@ Create an instance: `const rate = client.Rate()`
 | Method | Description |
 | --- | --- |
 | `load(match)` | Load a single entity by match criteria. |
+
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `base` | `string` |  |
+| `date` | `string` |  |
+| `rates` | `Record<string, any>` |  |
 
 #### Example: Load
 
@@ -528,6 +590,16 @@ Create an instance: `const validate_vat_response_schema = client.ValidateVatResp
 | --- | --- |
 | `load(match)` | Load a single entity by match criteria. |
 
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `address` | `string` |  |
+| `country_code` | `string` |  |
+| `name` | `string` |  |
+| `valid` | `boolean` |  |
+| `vat_number` | `string` |  |
+
 #### Example: Load
 
 ```ts
@@ -544,6 +616,18 @@ Create an instance: `const vatcomply_api_root = client.VatcomplyApiRoot()`
 | Method | Description |
 | --- | --- |
 | `load(match)` | Load a single entity by match criteria. |
+
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `contact` | `string` |  |
+| `description` | `string` |  |
+| `documentation` | `string` |  |
+| `endpoints` | `Record<string, any>` |  |
+| `name` | `string` |  |
+| `status` | `string` |  |
+| `version` | `string` |  |
 
 #### Example: Load
 
@@ -705,11 +789,11 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const geolocate = client.Geolocate()
-await geolocate.load()
+const currency = client.Currency()
+await currency.load()
 
-// geolocate.data() now returns the geolocate data from the last `load`
-// geolocate.match() returns the last match criteria
+// currency.data() now returns the currency data from the last `load`
+// currency.match() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

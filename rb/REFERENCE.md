@@ -230,6 +230,26 @@ Return the entity name.
 geolocate = client.Geolocate
 ```
 
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `capital` | `String` | Yes |  |
+| `country_code` | `String` | Yes |  |
+| `currency` | `String` | Yes |  |
+| `emoji` | `String` | Yes |  |
+| `ip` | `Object` | Yes |  |
+| `iso2` | `String` | Yes |  |
+| `iso3` | `String` | Yes |  |
+| `latitude` | `Float` | Yes |  |
+| `longitude` | `Float` | Yes |  |
+| `name` | `String` | Yes |  |
+| `numeric_code` | `Integer` | Yes |  |
+| `phone_code` | `String` | Yes |  |
+| `region` | `String` | Yes |  |
+| `subregion` | `String` | Yes |  |
+| `tld` | `String` | Yes |  |
+
 ### Operations
 
 #### `load(reqmatch, ctrl = nil) -> result`
@@ -275,6 +295,14 @@ Return the entity name.
 ```ruby
 rate = client.Rate
 ```
+
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `base` | `String` | Yes |  |
+| `date` | `String` | Yes |  |
+| `rates` | `Hash` | Yes |  |
 
 ### Operations
 
@@ -385,6 +413,16 @@ Return the entity name.
 validate_vat_response_schema = client.ValidateVatResponseSchema
 ```
 
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `address` | `String` | No |  |
+| `country_code` | `String` | Yes |  |
+| `name` | `String` | No |  |
+| `valid` | `Boolean` | Yes |  |
+| `vat_number` | `String` | Yes |  |
+
 ### Operations
 
 #### `load(reqmatch, ctrl = nil) -> result`
@@ -430,6 +468,18 @@ Return the entity name.
 ```ruby
 vatcomply_api_root = client.VatcomplyApiRoot
 ```
+
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `contact` | `String` | Yes |  |
+| `description` | `String` | Yes |  |
+| `documentation` | `String` | Yes |  |
+| `endpoints` | `Hash` | Yes |  |
+| `name` | `String` | Yes |  |
+| `status` | `String` | Yes |  |
+| `version` | `String` | Yes |  |
 
 ### Operations
 

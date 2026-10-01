@@ -48,12 +48,45 @@ export interface CurrencyLoadMatch {
 }
 
 export interface Geolocate {
+  capital: string
+  country_code: string
+  currency: string
+  emoji: string
+  ip: any
+  iso2: string
+  iso3: string
+  latitude: number
+  longitude: number
+  name: string
+  numeric_code: number
+  phone_code: string
+  region: string
+  subregion: string
+  tld: string
 }
 
 export interface GeolocateLoadMatch {
+  capital?: string
+  country_code?: string
+  currency?: string
+  emoji?: string
+  ip?: any
+  iso2?: string
+  iso3?: string
+  latitude?: number
+  longitude?: number
+  name?: string
+  numeric_code?: number
+  phone_code?: string
+  region?: string
+  subregion?: string
+  tld?: string
 }
 
 export interface Rate {
+  base: string
+  date: string
+  rates: Record<string, any>
 }
 
 export interface RateLoadMatch {
@@ -82,6 +115,11 @@ export interface ValidateIbanResponseSchemaLoadMatch {
 }
 
 export interface ValidateVatResponseSchema {
+  address?: string
+  country_code: string
+  name?: string
+  valid: boolean
+  vat_number: string
 }
 
 export interface ValidateVatResponseSchemaLoadMatch {
@@ -89,8 +127,22 @@ export interface ValidateVatResponseSchemaLoadMatch {
 }
 
 export interface VatcomplyApiRoot {
+  contact: string
+  description: string
+  documentation: string
+  endpoints: Record<string, any>
+  name: string
+  status: string
+  version: string
 }
 
 export interface VatcomplyApiRootLoadMatch {
+  contact?: string
+  description?: string
+  documentation?: string
+  endpoints?: Record<string, any>
+  name?: string
+  status?: string
+  version?: string
 }
 

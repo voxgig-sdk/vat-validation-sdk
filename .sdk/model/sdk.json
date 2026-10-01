@@ -297,7 +297,113 @@
           "alias": {
             "field": {}
           },
-          "fields": {},
+          "fields": {
+            "capital": {
+              "a": true,
+              "h": "Capital",
+              "n": "capital",
+              "r": true,
+              "t": "`$STRING`"
+            },
+            "country_code": {
+              "a": true,
+              "h": "Country Code",
+              "n": "country_code",
+              "r": true,
+              "t": "`$STRING`"
+            },
+            "currency": {
+              "a": true,
+              "h": "Currency",
+              "n": "currency",
+              "r": true,
+              "t": "`$STRING`"
+            },
+            "emoji": {
+              "a": true,
+              "h": "Emoji",
+              "n": "emoji",
+              "r": true,
+              "t": "`$STRING`"
+            },
+            "ip": {
+              "a": true,
+              "h": "Ip",
+              "n": "ip",
+              "r": true,
+              "t": "`$ANY`"
+            },
+            "iso2": {
+              "a": true,
+              "h": "Iso2",
+              "n": "iso2",
+              "r": true,
+              "t": "`$STRING`"
+            },
+            "iso3": {
+              "a": true,
+              "h": "Iso3",
+              "n": "iso3",
+              "r": true,
+              "t": "`$STRING`"
+            },
+            "latitude": {
+              "a": true,
+              "h": "Latitude",
+              "n": "latitude",
+              "r": true,
+              "t": "`$NUMBER`"
+            },
+            "longitude": {
+              "a": true,
+              "h": "Longitude",
+              "n": "longitude",
+              "r": true,
+              "t": "`$NUMBER`"
+            },
+            "name": {
+              "a": true,
+              "h": "Name",
+              "n": "name",
+              "r": true,
+              "t": "`$STRING`"
+            },
+            "numeric_code": {
+              "a": true,
+              "h": "Numeric Code",
+              "n": "numeric_code",
+              "r": true,
+              "t": "`$INTEGER`"
+            },
+            "phone_code": {
+              "a": true,
+              "h": "Phone Code",
+              "n": "phone_code",
+              "r": true,
+              "t": "`$STRING`"
+            },
+            "region": {
+              "a": true,
+              "h": "Region",
+              "n": "region",
+              "r": true,
+              "t": "`$STRING`"
+            },
+            "subregion": {
+              "a": true,
+              "h": "Subregion",
+              "n": "subregion",
+              "r": true,
+              "t": "`$STRING`"
+            },
+            "tld": {
+              "a": true,
+              "h": "Tld",
+              "n": "tld",
+              "r": true,
+              "t": "`$STRING`"
+            }
+          },
           "name": "geolocate",
           "op": {
             "load": {
@@ -324,7 +430,7 @@
                   ],
                   "t": {
                     "req": "`reqdata`",
-                    "res": "`body.ip`"
+                    "res": "`body`"
                   }
                 }
               ]
@@ -339,7 +445,29 @@
           "alias": {
             "field": {}
           },
-          "fields": {},
+          "fields": {
+            "base": {
+              "a": true,
+              "h": "Base",
+              "n": "base",
+              "r": true,
+              "t": "`$STRING`"
+            },
+            "date": {
+              "a": true,
+              "h": "Date",
+              "n": "date",
+              "r": true,
+              "t": "`$STRING`"
+            },
+            "rates": {
+              "a": true,
+              "h": "Rates",
+              "n": "rates",
+              "r": true,
+              "t": "`$OBJECT`"
+            }
+          },
           "name": "rate",
           "op": {
             "load": {
@@ -376,7 +504,7 @@
                         "a": true,
                         "k": "query",
                         "n": "symbol",
-                        "or": "symbol",
+                        "or": "symbols",
                         "r": false,
                         "t": "`$ANY`"
                       }
@@ -400,7 +528,7 @@
                   ],
                   "t": {
                     "req": "`reqdata`",
-                    "res": "`body.rates`"
+                    "res": "`body`"
                   }
                 }
               ]
@@ -557,7 +685,43 @@
           "alias": {
             "field": {}
           },
-          "fields": {},
+          "fields": {
+            "address": {
+              "a": true,
+              "h": "Address",
+              "n": "address",
+              "r": false,
+              "t": "`$STRING`"
+            },
+            "country_code": {
+              "a": true,
+              "h": "Country Code",
+              "n": "country_code",
+              "r": true,
+              "t": "`$STRING`"
+            },
+            "name": {
+              "a": true,
+              "h": "Name",
+              "n": "name",
+              "r": false,
+              "t": "`$STRING`"
+            },
+            "valid": {
+              "a": true,
+              "h": "Valid",
+              "n": "valid",
+              "r": true,
+              "t": "`$BOOLEAN`"
+            },
+            "vat_number": {
+              "a": true,
+              "h": "Vat Number",
+              "n": "vat_number",
+              "r": true,
+              "t": "`$STRING`"
+            }
+          },
           "name": "validate_vat_response_schema",
           "op": {
             "load": {
@@ -599,7 +763,7 @@
                   ],
                   "t": {
                     "req": "`reqdata`",
-                    "res": "`body.name`"
+                    "res": "`body`"
                   }
                 }
               ]
@@ -614,7 +778,57 @@
           "alias": {
             "field": {}
           },
-          "fields": {},
+          "fields": {
+            "contact": {
+              "a": true,
+              "h": "Contact",
+              "n": "contact",
+              "r": true,
+              "t": "`$STRING`"
+            },
+            "description": {
+              "a": true,
+              "h": "Description",
+              "n": "description",
+              "r": true,
+              "t": "`$STRING`"
+            },
+            "documentation": {
+              "a": true,
+              "h": "Documentation",
+              "n": "documentation",
+              "r": true,
+              "t": "`$STRING`"
+            },
+            "endpoints": {
+              "a": true,
+              "h": "Endpoints",
+              "n": "endpoints",
+              "r": true,
+              "t": "`$OBJECT`"
+            },
+            "name": {
+              "a": true,
+              "h": "Name",
+              "n": "name",
+              "r": true,
+              "t": "`$STRING`"
+            },
+            "status": {
+              "a": true,
+              "h": "Status",
+              "n": "status",
+              "r": true,
+              "t": "`$STRING`"
+            },
+            "version": {
+              "a": true,
+              "h": "Version",
+              "n": "version",
+              "r": true,
+              "t": "`$STRING`"
+            }
+          },
           "name": "vatcomply_api_root",
           "op": {
             "load": {
@@ -637,7 +851,7 @@
                   "s": [],
                   "t": {
                     "req": "`reqdata`",
-                    "res": "`body.endpoints`"
+                    "res": "`body`"
                   }
                 }
               ]
@@ -1304,7 +1518,12 @@
         },
         "base": "http://localhost:8000",
         "clean": {
-          "keys": "key,token,id"
+          "active": true,
+          "hint": "0",
+          "keys": "key,secret,token,password,passwd,authorization,cookie,credential,signature",
+          "mask": "[redacted]",
+          "min": "4",
+          "values": ""
         },
         "entity": {
           "`$CHILD`": {

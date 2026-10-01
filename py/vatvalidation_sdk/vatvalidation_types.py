@@ -59,15 +59,45 @@ class CurrencyLoadMatch(TypedDict, total=False):
 
 
 class Geolocate(TypedDict):
-    pass
+    capital: str
+    country_code: str
+    currency: str
+    emoji: str
+    ip: Any
+    iso2: str
+    iso3: str
+    latitude: float
+    longitude: float
+    name: str
+    numeric_code: int
+    phone_code: str
+    region: str
+    subregion: str
+    tld: str
 
 
-class GeolocateLoadMatch(TypedDict):
-    pass
+class GeolocateLoadMatch(TypedDict, total=False):
+    capital: str
+    country_code: str
+    currency: str
+    emoji: str
+    ip: Any
+    iso2: str
+    iso3: str
+    latitude: float
+    longitude: float
+    name: str
+    numeric_code: int
+    phone_code: str
+    region: str
+    subregion: str
+    tld: str
 
 
 class Rate(TypedDict):
-    pass
+    base: str
+    date: str
+    rates: dict
 
 
 class RateLoadMatch(TypedDict, total=False):
@@ -95,8 +125,15 @@ class ValidateIbanResponseSchemaLoadMatch(TypedDict):
     iban: str
 
 
-class ValidateVatResponseSchema(TypedDict):
-    pass
+class ValidateVatResponseSchemaRequired(TypedDict):
+    country_code: str
+    valid: bool
+    vat_number: str
+
+
+class ValidateVatResponseSchema(ValidateVatResponseSchemaRequired, total=False):
+    address: str
+    name: str
 
 
 class ValidateVatResponseSchemaLoadMatch(TypedDict):
@@ -104,8 +141,20 @@ class ValidateVatResponseSchemaLoadMatch(TypedDict):
 
 
 class VatcomplyApiRoot(TypedDict):
-    pass
+    contact: str
+    description: str
+    documentation: str
+    endpoints: dict
+    name: str
+    status: str
+    version: str
 
 
-class VatcomplyApiRootLoadMatch(TypedDict):
-    pass
+class VatcomplyApiRootLoadMatch(TypedDict, total=False):
+    contact: str
+    description: str
+    documentation: str
+    endpoints: dict
+    name: str
+    status: str
+    version: str

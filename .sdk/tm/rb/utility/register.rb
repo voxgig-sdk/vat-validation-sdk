@@ -33,6 +33,8 @@ require_relative 'transform_response'
 
 VatValidationUtility.registrar = ->(u) {
   u.clean = VatValidationUtilities::Clean
+  u.clean_add = VatValidationUtilities::CleanAdd
+  u.clean_explain = VatValidationUtilities::CleanExplain
   u.done = VatValidationUtilities::Done
   u.make_error = VatValidationUtilities::MakeError
   u.feature_add = VatValidationUtilities::FeatureAdd

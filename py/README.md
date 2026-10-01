@@ -57,8 +57,8 @@ Entity operations raise on failure, so wrap them in `try` / `except`:
 
 ```python
 try:
-    geolocate = client.Geolocate().load()
-    print(geolocate)
+    currency = client.Currency().load()
+    print(currency)
 except Exception as err:
     print(f"load failed: {err}")
 ```
@@ -126,8 +126,8 @@ client = VatValidationSDK.test()
 
 # Entity ops return the ENTITY and raises on error;
 # call data_get() for the record.
-geolocate = client.Geolocate().load()
-# geolocate contains the mock response record
+currency = client.Currency().load()
+# currency contains the mock response record
 ```
 
 ### Use a custom fetch function
@@ -283,6 +283,21 @@ API path: `/currencies`
 
 | Field | Description |
 | --- | --- |
+| `capital` |  |
+| `country_code` |  |
+| `currency` |  |
+| `emoji` |  |
+| `ip` |  |
+| `iso2` |  |
+| `iso3` |  |
+| `latitude` |  |
+| `longitude` |  |
+| `name` |  |
+| `numeric_code` |  |
+| `phone_code` |  |
+| `region` |  |
+| `subregion` |  |
+| `tld` |  |
 
 Operations: Load.
 
@@ -292,6 +307,9 @@ API path: `/geolocate`
 
 | Field | Description |
 | --- | --- |
+| `base` |  |
+| `date` |  |
+| `rates` |  |
 
 Operations: Load.
 
@@ -322,6 +340,11 @@ API path: `/iban`
 
 | Field | Description |
 | --- | --- |
+| `address` |  |
+| `country_code` |  |
+| `name` |  |
+| `valid` |  |
+| `vat_number` |  |
 
 Operations: Load.
 
@@ -331,6 +354,13 @@ API path: `/vat`
 
 | Field | Description |
 | --- | --- |
+| `contact` |  |
+| `description` |  |
+| `documentation` |  |
+| `endpoints` |  |
+| `name` |  |
+| `status` |  |
+| `version` |  |
 
 Operations: Load.
 
@@ -410,6 +440,26 @@ Create an instance: `geolocate = client.Geolocate()`
 | --- | --- |
 | `load(match)` | Load a single entity by match criteria. |
 
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `capital` | `str` |  |
+| `country_code` | `str` |  |
+| `currency` | `str` |  |
+| `emoji` | `str` |  |
+| `ip` | `Any` |  |
+| `iso2` | `str` |  |
+| `iso3` | `str` |  |
+| `latitude` | `float` |  |
+| `longitude` | `float` |  |
+| `name` | `str` |  |
+| `numeric_code` | `int` |  |
+| `phone_code` | `str` |  |
+| `region` | `str` |  |
+| `subregion` | `str` |  |
+| `tld` | `str` |  |
+
 #### Example: Load
 
 ```python
@@ -426,6 +476,14 @@ Create an instance: `rate = client.Rate()`
 | Method | Description |
 | --- | --- |
 | `load(match)` | Load a single entity by match criteria. |
+
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `base` | `str` |  |
+| `date` | `str` |  |
+| `rates` | `dict` |  |
 
 #### Example: Load
 
@@ -478,6 +536,16 @@ Create an instance: `validate_vat_response_schema = client.ValidateVatResponseSc
 | --- | --- |
 | `load(match)` | Load a single entity by match criteria. |
 
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `address` | `str` |  |
+| `country_code` | `str` |  |
+| `name` | `str` |  |
+| `valid` | `bool` |  |
+| `vat_number` | `str` |  |
+
 #### Example: Load
 
 ```python
@@ -494,6 +562,18 @@ Create an instance: `vatcomply_api_root = client.VatcomplyApiRoot()`
 | Method | Description |
 | --- | --- |
 | `load(match)` | Load a single entity by match criteria. |
+
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `contact` | `str` |  |
+| `description` | `str` |  |
+| `documentation` | `str` |  |
+| `endpoints` | `dict` |  |
+| `name` | `str` |  |
+| `status` | `str` |  |
+| `version` | `str` |  |
 
 #### Example: Load
 
@@ -662,11 +742,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-geolocate = client.Geolocate()
-geolocate.load()
+currency = client.Currency()
+currency.load()
 
-# geolocate.data_get() now returns the geolocate data from the last load
-# geolocate.match_get() returns the last match criteria
+# currency.data_get() now returns the currency data from the last load
+# currency.match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

@@ -12,9 +12,18 @@ The SDK exposes the API as capitalised, semantic **Entities** — for example `c
 
 ## Install
 This package is not yet published to RubyGems. Install it from the
-GitHub release tag (`rb/vX.Y.Z`):
+GitHub release tag (`rb/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/vat-validation-sdk/releases)), or
+from a clone:
 
-- Releases: [https://github.com/voxgig-sdk/vat-validation-sdk/releases](https://github.com/voxgig-sdk/vat-validation-sdk/releases)
+```bash
+git clone https://github.com/voxgig-sdk/vat-validation-sdk
+```
+
+Then add it to your `Gemfile` by path, and run `bundle install`:
+
+```ruby
+gem "voxgig-sdk-vat-validation-sdk", path: "./vat-validation-sdk/rb"
+```
 
 
 ## Tutorial: your first API call
@@ -51,7 +60,7 @@ Entity operations raise on failure, so rescue them:
 
 ```ruby
 begin
-  geolocate = client.Geolocate.load()
+  currency = client.Currency.load()
 rescue => err
   warn "load failed: #{err}"
 end
@@ -121,8 +130,8 @@ client = VatValidationSDK.test
 
 # Entity ops return the ENTITY (raises on error);
 # call data_get for the mock record.
-geolocate = client.Geolocate.load()
-puts geolocate
+currency = client.Currency.load()
+puts currency
 ```
 
 ### Use a custom fetch function
@@ -277,6 +286,21 @@ API path: `/currencies`
 
 | Field | Description |
 | --- | --- |
+| `capital` |  |
+| `country_code` |  |
+| `currency` |  |
+| `emoji` |  |
+| `ip` |  |
+| `iso2` |  |
+| `iso3` |  |
+| `latitude` |  |
+| `longitude` |  |
+| `name` |  |
+| `numeric_code` |  |
+| `phone_code` |  |
+| `region` |  |
+| `subregion` |  |
+| `tld` |  |
 
 Operations: Load.
 
@@ -286,6 +310,9 @@ API path: `/geolocate`
 
 | Field | Description |
 | --- | --- |
+| `base` |  |
+| `date` |  |
+| `rates` |  |
 
 Operations: Load.
 
@@ -316,6 +343,11 @@ API path: `/iban`
 
 | Field | Description |
 | --- | --- |
+| `address` |  |
+| `country_code` |  |
+| `name` |  |
+| `valid` |  |
+| `vat_number` |  |
 
 Operations: Load.
 
@@ -325,6 +357,13 @@ API path: `/vat`
 
 | Field | Description |
 | --- | --- |
+| `contact` |  |
+| `description` |  |
+| `documentation` |  |
+| `endpoints` |  |
+| `name` |  |
+| `status` |  |
+| `version` |  |
 
 Operations: Load.
 
@@ -406,6 +445,26 @@ Create an instance: `geolocate = client.Geolocate`
 | --- | --- |
 | `load(match)` | Load a single entity by match criteria. |
 
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `capital` | `String` |  |
+| `country_code` | `String` |  |
+| `currency` | `String` |  |
+| `emoji` | `String` |  |
+| `ip` | `Object` |  |
+| `iso2` | `String` |  |
+| `iso3` | `String` |  |
+| `latitude` | `Float` |  |
+| `longitude` | `Float` |  |
+| `name` | `String` |  |
+| `numeric_code` | `Integer` |  |
+| `phone_code` | `String` |  |
+| `region` | `String` |  |
+| `subregion` | `String` |  |
+| `tld` | `String` |  |
+
 #### Example: Load
 
 ```ruby
@@ -423,6 +482,14 @@ Create an instance: `rate = client.Rate`
 | Method | Description |
 | --- | --- |
 | `load(match)` | Load a single entity by match criteria. |
+
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `base` | `String` |  |
+| `date` | `String` |  |
+| `rates` | `Hash` |  |
 
 #### Example: Load
 
@@ -477,6 +544,16 @@ Create an instance: `validate_vat_response_schema = client.ValidateVatResponseSc
 | --- | --- |
 | `load(match)` | Load a single entity by match criteria. |
 
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `address` | `String` |  |
+| `country_code` | `String` |  |
+| `name` | `String` |  |
+| `valid` | `Boolean` |  |
+| `vat_number` | `String` |  |
+
 #### Example: Load
 
 ```ruby
@@ -494,6 +571,18 @@ Create an instance: `vatcomply_api_root = client.VatcomplyApiRoot`
 | Method | Description |
 | --- | --- |
 | `load(match)` | Load a single entity by match criteria. |
+
+#### Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `contact` | `String` |  |
+| `description` | `String` |  |
+| `documentation` | `String` |  |
+| `endpoints` | `Hash` |  |
+| `name` | `String` |  |
+| `status` | `String` |  |
+| `version` | `String` |  |
 
 #### Example: Load
 
@@ -664,11 +753,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-geolocate = client.Geolocate
-geolocate.load()
+currency = client.Currency
+currency.load()
 
-# geolocate.data_get now returns the geolocate data from the last load
-# geolocate.match_get returns the last match criteria
+# currency.data_get now returns the currency data from the last load
+# currency.match_get returns the last match criteria
 ```
 
 Call `make` to create a fresh instance with the same configuration

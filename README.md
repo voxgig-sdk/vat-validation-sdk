@@ -14,7 +14,7 @@ Metadata kindly supplied by [www.freepublicapis.com](https://www.freepublicapis.
 
 > TypeScript, Python, PHP, Golang, Ruby, Lua SDKs, a CLI with an interactive REPL, and an MCP server for AI agents — all generated from one OpenAPI spec by [@voxgig/sdkgen](https://github.com/voxgig/sdkgen).
 
-> **Features:** `undefined`, `undefined`, `undefined`, `undefined` — opt-in,
+> **Features:** `ratelimit`, `retry`, `test`, `timeout` — opt-in,
 > inactive until switched on, and configured per client. See the Features
 > section of any SDK README below for what each one does.
 
@@ -46,23 +46,23 @@ network, and no credentials:
 // Shape: { entity: { <entity-name>: { <id>: <record> } } }
 const client = VatValidationSDK.test({
   entity: {
-    geolocate: {
+    currency: {
       test01: { id: 'test01' },
     },
   },
 })
-const geolocate = await client.Geolocate().load()
-// geolocate is the Geolocate entity, populated with mock data
-// — call geolocate.data() for the record itself
-console.log(geolocate)
+const currency = await client.Currency().load()
+// currency is the Currency entity, populated with mock data
+// — call currency.data() for the record itself
+console.log(currency)
 ```
 
 ### Python
 
 ```python
 client = VatValidationSDK.test()
-geolocate = client.Geolocate().load()
-print(geolocate)
+currency = client.Currency().load()
+print(currency)
 ```
 
 ### PHP
@@ -70,16 +70,16 @@ print(geolocate)
 ```php
 // Seed fixture data so offline calls resolve without a live server.
 $client = VatValidationSDK::test([
-    "entity" => ["geolocate" => ["test01" => []]],
+    "entity" => ["currency" => ["test01" => []]],
 ]);
-$geolocate = $client->Geolocate()->load();
+$currency = $client->Currency()->load();
 ```
 
 ### Golang
 
 ```go
 client := sdk.Test()
-result, err := client.Geolocate(nil).Load(
+result, err := client.Currency(nil).Load(
     nil, nil,
 )
 ```
@@ -89,28 +89,28 @@ result, err := client.Geolocate(nil).Load(
 ```ruby
 # Seed fixture data so offline calls resolve without a live server.
 client = VatValidationSDK.test({
-  "entity" => { "geolocate" => { "test01" => {} } },
+  "entity" => { "currency" => { "test01" => {} } },
 })
-geolocate = client.Geolocate.load()
+currency = client.Currency.load()
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local result, err = client:Geolocate():load()
+local result, err = client:Currency():load()
 ```
 
 ## Packages
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/vat-validation-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/vat-validation-sdk/tags) |
-| Python | `voxgig-sdk-vat-validation-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/vat-validation-sdk/tags) |
-| PHP | `voxgig-sdk/vat-validation-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/vat-validation-sdk/tags) |
+| TypeScript | `@voxgig-sdk/vat-validation-sdk` | publish pending — [install from source](ts/README.md#install) |
+| Python | `voxgig-sdk-vat-validation-sdk` | publish pending — [install from source](py/README.md#install) |
+| PHP | `voxgig-sdk/vat-validation-sdk` | publish pending — [install from source](php/README.md#install) |
 | Golang | `github.com/voxgig-sdk/vat-validation-sdk/go` | `go get github.com/voxgig-sdk/vat-validation-sdk/go@latest` |
-| Ruby | `voxgig-sdk-vat-validation-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/vat-validation-sdk/tags) |
-| Lua | `voxgig-sdk-vat-validation-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/vat-validation-sdk/tags) |
+| Ruby | `voxgig-sdk-vat-validation-sdk` | publish pending — [install from source](rb/README.md#install) |
+| Lua | `voxgig-sdk-vat-validation-sdk` | publish pending — [install from source](lua/README.md#install) |
 | Go CLI | `github.com/voxgig-sdk/vat-validation-sdk/go-cli` | `go install github.com/voxgig-sdk/vat-validation-sdk/go-cli/cmd/vat-validation@latest` |
 | Go MCP server | `github.com/voxgig-sdk/vat-validation-sdk/go-mcp` | `go get github.com/voxgig-sdk/vat-validation-sdk/go-mcp@latest` |
 

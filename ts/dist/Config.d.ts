@@ -148,7 +148,12 @@ declare class Config {
             };
         };
         geolocate: {
-            fields: never[];
+            fields: {
+                name: string;
+                title: string;
+                type: string;
+                req: boolean;
+            }[];
             name: string;
             op: {
                 load: {
@@ -177,7 +182,12 @@ declare class Config {
             };
         };
         rate: {
-            fields: never[];
+            fields: {
+                name: string;
+                title: string;
+                type: string;
+                req: boolean;
+            }[];
             name: string;
             op: {
                 load: {
@@ -266,7 +276,17 @@ declare class Config {
             };
         };
         validate_vat_response_schema: {
-            fields: never[];
+            fields: ({
+                name: string;
+                title: string;
+                type: string;
+                req?: undefined;
+            } | {
+                name: string;
+                title: string;
+                type: string;
+                req: boolean;
+            })[];
             name: string;
             op: {
                 load: {
@@ -305,7 +325,12 @@ declare class Config {
             };
         };
         vatcomply_api_root: {
-            fields: never[];
+            fields: {
+                name: string;
+                title: string;
+                type: string;
+                req: boolean;
+            }[];
             name: string;
             op: {
                 load: {

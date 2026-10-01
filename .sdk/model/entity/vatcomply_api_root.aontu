@@ -4,6 +4,51 @@ main: kit: entity: vatcomply_api_root: {
 
   alias: field: {}
 
+  fields: {
+    contact: {
+      h: "Contact"
+      n: "contact"
+      r: true
+      t: "`$STRING`"
+    }
+    description: {
+      h: "Description"
+      n: "description"
+      r: true
+      t: "`$STRING`"
+    }
+    documentation: {
+      h: "Documentation"
+      n: "documentation"
+      r: true
+      t: "`$STRING`"
+    }
+    endpoints: {
+      h: "Endpoints"
+      n: "endpoints"
+      r: true
+      t: "`$OBJECT`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: true
+      t: "`$STRING`"
+    }
+    status: {
+      h: "Status"
+      n: "status"
+      r: true
+      t: "`$STRING`"
+    }
+    version: {
+      h: "Version"
+      n: "version"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
   name: "vatcomply_api_root"
   op: {
     load: {
@@ -19,14 +64,11 @@ main: kit: entity: vatcomply_api_root: {
           o: "/"
           t: {
             req: "`reqdata`"
-            res: "`body.endpoints`"
+            res: "`body`"
           }
         }
       ]
     }
-  }
-
-  fields: {
   }
 
 

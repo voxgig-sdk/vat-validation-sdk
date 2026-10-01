@@ -4,6 +4,27 @@ main: kit: entity: rate: {
 
   alias: field: {}
 
+  fields: {
+    base: {
+      h: "Base"
+      n: "base"
+      r: true
+      t: "`$STRING`"
+    }
+    date: {
+      h: "Date"
+      n: "date"
+      r: true
+      t: "`$STRING`"
+    }
+    rates: {
+      h: "Rates"
+      n: "rates"
+      r: true
+      t: "`$OBJECT`"
+    }
+  }
+
   name: "rate"
   op: {
     load: {
@@ -35,7 +56,7 @@ main: kit: entity: rate: {
               {
                 k: "query"
                 n: "symbol"
-                or: "symbol"
+                or: "symbols"
                 r: false
                 t: "`$ANY`"
               }
@@ -57,14 +78,11 @@ main: kit: entity: rate: {
           ]
           t: {
             req: "`reqdata`"
-            res: "`body.rates`"
+            res: "`body`"
           }
         }
       ]
     }
-  }
-
-  fields: {
   }
 
 

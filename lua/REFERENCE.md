@@ -227,6 +227,26 @@ Return the entity name.
 local geolocate = client:Geolocate(nil)
 ```
 
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `capital` | `string` | Yes |  |
+| `country_code` | `string` | Yes |  |
+| `currency` | `string` | Yes |  |
+| `emoji` | `string` | Yes |  |
+| `ip` | `any` | Yes |  |
+| `iso2` | `string` | Yes |  |
+| `iso3` | `string` | Yes |  |
+| `latitude` | `number` | Yes |  |
+| `longitude` | `number` | Yes |  |
+| `name` | `string` | Yes |  |
+| `numeric_code` | `number` | Yes |  |
+| `phone_code` | `string` | Yes |  |
+| `region` | `string` | Yes |  |
+| `subregion` | `string` | Yes |  |
+| `tld` | `string` | Yes |  |
+
 ### Operations
 
 #### `load(reqmatch, ctrl) -> any, err`
@@ -272,6 +292,14 @@ Return the entity name.
 ```lua
 local rate = client:Rate(nil)
 ```
+
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `base` | `string` | Yes |  |
+| `date` | `string` | Yes |  |
+| `rates` | `table` | Yes |  |
 
 ### Operations
 
@@ -382,6 +410,16 @@ Return the entity name.
 local validate_vat_response_schema = client:ValidateVatResponseSchema(nil)
 ```
 
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `address` | `string` | No |  |
+| `country_code` | `string` | Yes |  |
+| `name` | `string` | No |  |
+| `valid` | `boolean` | Yes |  |
+| `vat_number` | `string` | Yes |  |
+
 ### Operations
 
 #### `load(reqmatch, ctrl) -> any, err`
@@ -427,6 +465,18 @@ Return the entity name.
 ```lua
 local vatcomply_api_root = client:VatcomplyApiRoot(nil)
 ```
+
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `contact` | `string` | Yes |  |
+| `description` | `string` | Yes |  |
+| `documentation` | `string` | Yes |  |
+| `endpoints` | `table` | Yes |  |
+| `name` | `string` | Yes |  |
+| `status` | `string` | Yes |  |
+| `version` | `string` | Yes |  |
 
 ### Operations
 

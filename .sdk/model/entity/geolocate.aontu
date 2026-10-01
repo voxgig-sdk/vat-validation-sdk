@@ -4,6 +4,99 @@ main: kit: entity: geolocate: {
 
   alias: field: {}
 
+  fields: {
+    capital: {
+      h: "Capital"
+      n: "capital"
+      r: true
+      t: "`$STRING`"
+    }
+    country_code: {
+      h: "Country Code"
+      n: "country_code"
+      r: true
+      t: "`$STRING`"
+    }
+    currency: {
+      h: "Currency"
+      n: "currency"
+      r: true
+      t: "`$STRING`"
+    }
+    emoji: {
+      h: "Emoji"
+      n: "emoji"
+      r: true
+      t: "`$STRING`"
+    }
+    ip: {
+      h: "Ip"
+      n: "ip"
+      r: true
+      t: "`$ANY`"
+    }
+    iso2: {
+      h: "Iso2"
+      n: "iso2"
+      r: true
+      t: "`$STRING`"
+    }
+    iso3: {
+      h: "Iso3"
+      n: "iso3"
+      r: true
+      t: "`$STRING`"
+    }
+    latitude: {
+      h: "Latitude"
+      n: "latitude"
+      r: true
+      t: "`$NUMBER`"
+    }
+    longitude: {
+      h: "Longitude"
+      n: "longitude"
+      r: true
+      t: "`$NUMBER`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: true
+      t: "`$STRING`"
+    }
+    numeric_code: {
+      h: "Numeric Code"
+      n: "numeric_code"
+      r: true
+      t: "`$INTEGER`"
+    }
+    phone_code: {
+      h: "Phone Code"
+      n: "phone_code"
+      r: true
+      t: "`$STRING`"
+    }
+    region: {
+      h: "Region"
+      n: "region"
+      r: true
+      t: "`$STRING`"
+    }
+    subregion: {
+      h: "Subregion"
+      n: "subregion"
+      r: true
+      t: "`$STRING`"
+    }
+    tld: {
+      h: "Tld"
+      n: "tld"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
   name: "geolocate"
   op: {
     load: {
@@ -24,14 +117,11 @@ main: kit: entity: geolocate: {
           ]
           t: {
             req: "`reqdata`"
-            res: "`body.ip`"
+            res: "`body`"
           }
         }
       ]
     }
-  }
-
-  fields: {
   }
 
 

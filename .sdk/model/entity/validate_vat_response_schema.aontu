@@ -4,6 +4,39 @@ main: kit: entity: validate_vat_response_schema: {
 
   alias: field: {}
 
+  fields: {
+    address: {
+      h: "Address"
+      n: "address"
+      r: false
+      t: "`$STRING`"
+    }
+    country_code: {
+      h: "Country Code"
+      n: "country_code"
+      r: true
+      t: "`$STRING`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: false
+      t: "`$STRING`"
+    }
+    valid: {
+      h: "Valid"
+      n: "valid"
+      r: true
+      t: "`$BOOLEAN`"
+    }
+    vat_number: {
+      h: "Vat Number"
+      n: "vat_number"
+      r: true
+      t: "`$STRING`"
+    }
+  }
+
   name: "validate_vat_response_schema"
   op: {
     load: {
@@ -40,14 +73,11 @@ main: kit: entity: validate_vat_response_schema: {
           ]
           t: {
             req: "`reqdata`"
-            res: "`body.name`"
+            res: "`body`"
           }
         }
       ]
     }
-  }
-
-  fields: {
   }
 
 

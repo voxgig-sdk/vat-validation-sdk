@@ -45,10 +45,43 @@
 ---@field symbol? string
 
 ---@class Geolocate
+---@field capital string
+---@field country_code string
+---@field currency string
+---@field emoji string
+---@field ip any
+---@field iso2 string
+---@field iso3 string
+---@field latitude number
+---@field longitude number
+---@field name string
+---@field numeric_code number
+---@field phone_code string
+---@field region string
+---@field subregion string
+---@field tld string
 
 ---@class GeolocateLoadMatch
+---@field capital? string
+---@field country_code? string
+---@field currency? string
+---@field emoji? string
+---@field ip? any
+---@field iso2? string
+---@field iso3? string
+---@field latitude? number
+---@field longitude? number
+---@field name? string
+---@field numeric_code? number
+---@field phone_code? string
+---@field region? string
+---@field subregion? string
+---@field tld? string
 
 ---@class Rate
+---@field base string
+---@field date string
+---@field rates table
 
 ---@class RateLoadMatch
 ---@field base? any
@@ -73,13 +106,32 @@
 ---@field iban string
 
 ---@class ValidateVatResponseSchema
+---@field address? string
+---@field country_code string
+---@field name? string
+---@field valid boolean
+---@field vat_number string
 
 ---@class ValidateVatResponseSchemaLoadMatch
 ---@field vat_number string
 
 ---@class VatcomplyApiRoot
+---@field contact string
+---@field description string
+---@field documentation string
+---@field endpoints table
+---@field name string
+---@field status string
+---@field version string
 
 ---@class VatcomplyApiRootLoadMatch
+---@field contact? string
+---@field description? string
+---@field documentation? string
+---@field endpoints? table
+---@field name? string
+---@field status? string
+---@field version? string
 
 local M = {}
 

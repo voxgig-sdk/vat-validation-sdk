@@ -37,6 +37,8 @@ require_once __DIR__ . '/TransformResponse.php';
 
 VatValidationUtility::setRegistrar(function (VatValidationUtility $u): void {
     $u->clean = [VatValidationClean::class, 'call'];
+    $u->clean_add = [VatValidationClean::class, 'add'];
+    $u->clean_explain = [VatValidationDone::class, 'clean_explain'];
     $u->done = [VatValidationDone::class, 'call'];
     $u->make_error = [VatValidationMakeError::class, 'call'];
     $u->feature_add = [VatValidationFeatureAdd::class, 'call'];
