@@ -87,6 +87,7 @@ class Config {
             },
             "optspec": {
                 "clearTimer": "`$FUNCTION`",
+                "now": "`$FUNCTION`",
                 "setTimer": "`$FUNCTION`"
             },
             "strict": false,
@@ -214,7 +215,11 @@ class Config {
                                 "res": "`body`"
                             },
                             "args": {},
-                            "select": {}
+                            "select": {},
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
+                            }
                         }
                     ]
                 }
@@ -262,7 +267,11 @@ class Config {
                                 "res": "`body`"
                             },
                             "args": {},
-                            "select": {}
+                            "select": {},
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
+                            }
                         }
                     ]
                 }
@@ -388,7 +397,11 @@ class Config {
                                 "res": "`body`"
                             },
                             "args": {},
-                            "select": {}
+                            "select": {},
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
+                            }
                         }
                     ]
                 }
@@ -448,13 +461,15 @@ class Config {
                                         "orig": "base",
                                         "type": "`$ANY`",
                                         "kind": "query",
-                                        "example": "EUR"
+                                        "example": "EUR",
+                                        "field": true
                                     },
                                     {
                                         "name": "date",
                                         "orig": "date",
                                         "type": "`$ANY`",
-                                        "kind": "query"
+                                        "kind": "query",
+                                        "field": true
                                     },
                                     {
                                         "name": "symbol",
@@ -464,12 +479,10 @@ class Config {
                                     }
                                 ]
                             },
-                            "select": {
-                                "exist": [
-                                    "base",
-                                    "date",
-                                    "symbol"
-                                ]
+                            "select": {},
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         }
                     ]
@@ -584,7 +597,8 @@ class Config {
                                         "orig": "iban",
                                         "type": "`$STRING`",
                                         "kind": "query",
-                                        "reqd": true
+                                        "reqd": true,
+                                        "field": true
                                     }
                                 ]
                             },
@@ -592,6 +606,10 @@ class Config {
                                 "exist": [
                                     "iban"
                                 ]
+                            },
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         }
                     ]
@@ -662,7 +680,8 @@ class Config {
                                         "orig": "vat_number",
                                         "type": "`$STRING`",
                                         "kind": "query",
-                                        "reqd": true
+                                        "reqd": true,
+                                        "field": true
                                     }
                                 ]
                             },
@@ -670,6 +689,10 @@ class Config {
                                 "exist": [
                                     "vat_number"
                                 ]
+                            },
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         }
                     ]
@@ -742,7 +765,11 @@ class Config {
                                 "res": "`body`"
                             },
                             "args": {},
-                            "select": {}
+                            "select": {},
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
+                            }
                         }
                     ]
                 }

@@ -110,6 +110,10 @@ main: kit: entity: geolocate: {
           }
           m: "GET"
           o: "/geolocate"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "geolocate"

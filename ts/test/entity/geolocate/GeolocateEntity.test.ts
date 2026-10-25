@@ -9,7 +9,7 @@ import { createLiveTransport } from '../../live-runner'
 import { runLiveEntity } from '../../live-entity'
 
 
-import { VatValidationSDK, BaseFeature, stdutil } from '../../..'
+import { VatValidationSDK, BaseFeature, config, stdutil } from '../../..'
 
 import {
   envOverride,
@@ -41,6 +41,18 @@ describe('GeolocateEntity', async () => {
   })
 
 
+  test('validate', async (t) => {
+    if (null == (config as any).feature?.validate) {
+      t.skip('feature not present in this SDK: validate')
+      return
+    }
+    const client = VatValidationSDK.test(undefined, { feature: { validate: { active: true } } })
+    await assert.rejects(client.Geolocate().load({"capital":1} as any),
+      (err: any) => 'validate_failed' === err.code)
+  })
+
+
+
   test('basic', async (t) => {
 
     const live = 'TRUE' === process.env.VAT_VALIDATION_TEST_LIVE
@@ -51,7 +63,7 @@ describe('GeolocateEntity', async () => {
     
     const setup = basicSetup()
     if (setup.live) {
-      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"capital":{"a":true,"h":"Capital","n":"capital","r":true,"t":"`$STRING`","key$":"capital","index$":0},"country_code":{"a":true,"h":"Country Code","n":"country_code","r":true,"t":"`$STRING`","key$":"country_code","index$":1},"currency":{"a":true,"h":"Currency","n":"currency","r":true,"t":"`$STRING`","key$":"currency","index$":2},"emoji":{"a":true,"h":"Emoji","n":"emoji","r":true,"t":"`$STRING`","key$":"emoji","index$":3},"ip":{"a":true,"h":"Ip","n":"ip","r":true,"t":"`$ANY`","key$":"ip","index$":4},"iso2":{"a":true,"h":"Iso2","n":"iso2","r":true,"t":"`$STRING`","key$":"iso2","index$":5},"iso3":{"a":true,"h":"Iso3","n":"iso3","r":true,"t":"`$STRING`","key$":"iso3","index$":6},"latitude":{"a":true,"h":"Latitude","n":"latitude","r":true,"t":"`$NUMBER`","key$":"latitude","index$":7},"longitude":{"a":true,"h":"Longitude","n":"longitude","r":true,"t":"`$NUMBER`","key$":"longitude","index$":8},"name":{"a":true,"h":"Name","n":"name","r":true,"t":"`$STRING`","key$":"name","index$":9},"numeric_code":{"a":true,"h":"Numeric Code","n":"numeric_code","r":true,"t":"`$INTEGER`","key$":"numeric_code","index$":10},"phone_code":{"a":true,"h":"Phone Code","n":"phone_code","r":true,"t":"`$STRING`","key$":"phone_code","index$":11},"region":{"a":true,"h":"Region","n":"region","r":true,"t":"`$STRING`","key$":"region","index$":12},"subregion":{"a":true,"h":"Subregion","n":"subregion","r":true,"t":"`$STRING`","key$":"subregion","index$":13},"tld":{"a":true,"h":"Tld","n":"tld","r":true,"t":"`$STRING`","key$":"tld","index$":14}},"name":"geolocate","op":{"load":{"input":"data","name":"load","points":[{"a":true,"co":{"id":"GET /geolocate","source":"openapi3","version":2},"g":{},"k":"http","m":"GET","o":"/geolocate","q":{},"r":{},"s":[{"lit":"geolocate"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"load"}},"relations":{"ancestors":[]},"key$":"geolocate","name__orig":"geolocate","Name":"Geolocate","name_":"geolocate","name-":"geolocate","NAME":"GEOLOCATE","index$":2}, {"active":true,"entity":"geolocate","key$":"BasicGeolocateFlow","kind":"basic","name":"BasicGeolocateFlow","param":{},"step":[{"a":true,"d":{},"i":{"ref":"geolocate_ref01","srcdatavar":"geolocate_ref01_data","suffix":"_dt0"},"m":{},"o":"load","s":[],"v":[{"apply":"TextFieldMark","def":{"mark":"Mark01-geolocate_ref01"}}],"index$":0}]}, 'Geolocate', {"GET /geolocate":{"protocol":"http","parameters":[]}})
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"capital":{"a":true,"h":"Capital","n":"capital","r":true,"t":"`$STRING`","key$":"capital","index$":0},"country_code":{"a":true,"h":"Country Code","n":"country_code","r":true,"t":"`$STRING`","key$":"country_code","index$":1},"currency":{"a":true,"h":"Currency","n":"currency","r":true,"t":"`$STRING`","key$":"currency","index$":2},"emoji":{"a":true,"h":"Emoji","n":"emoji","r":true,"t":"`$STRING`","key$":"emoji","index$":3},"ip":{"a":true,"h":"Ip","n":"ip","r":true,"t":"`$ANY`","key$":"ip","index$":4},"iso2":{"a":true,"h":"Iso2","n":"iso2","r":true,"t":"`$STRING`","key$":"iso2","index$":5},"iso3":{"a":true,"h":"Iso3","n":"iso3","r":true,"t":"`$STRING`","key$":"iso3","index$":6},"latitude":{"a":true,"h":"Latitude","n":"latitude","r":true,"t":"`$NUMBER`","key$":"latitude","index$":7},"longitude":{"a":true,"h":"Longitude","n":"longitude","r":true,"t":"`$NUMBER`","key$":"longitude","index$":8},"name":{"a":true,"h":"Name","n":"name","r":true,"t":"`$STRING`","key$":"name","index$":9},"numeric_code":{"a":true,"h":"Numeric Code","n":"numeric_code","r":true,"t":"`$INTEGER`","key$":"numeric_code","index$":10},"phone_code":{"a":true,"h":"Phone Code","n":"phone_code","r":true,"t":"`$STRING`","key$":"phone_code","index$":11},"region":{"a":true,"h":"Region","n":"region","r":true,"t":"`$STRING`","key$":"region","index$":12},"subregion":{"a":true,"h":"Subregion","n":"subregion","r":true,"t":"`$STRING`","key$":"subregion","index$":13},"tld":{"a":true,"h":"Tld","n":"tld","r":true,"t":"`$STRING`","key$":"tld","index$":14}},"name":"geolocate","op":{"load":{"input":"data","name":"load","points":[{"a":true,"co":{"id":"GET /geolocate","source":"openapi3","version":2},"g":{},"k":"http","m":"GET","o":"/geolocate","q":{},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"geolocate"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"load"}},"relations":{"ancestors":[]},"key$":"geolocate","name__orig":"geolocate","Name":"Geolocate","name_":"geolocate","name-":"geolocate","NAME":"GEOLOCATE","index$":2}, {"active":true,"entity":"geolocate","key$":"BasicGeolocateFlow","kind":"basic","name":"BasicGeolocateFlow","param":{},"step":[{"a":true,"d":{},"i":{"ref":"geolocate_ref01","srcdatavar":"geolocate_ref01_data","suffix":"_dt0"},"m":{},"o":"load","s":[],"v":[{"apply":"TextFieldMark","def":{"mark":"Mark01-geolocate_ref01"}}],"index$":0}]}, 'Geolocate', {"GET /geolocate":{"protocol":"http","parameters":[]}}, { strict: LIVE_STRICT, t })
     }
     const client = setup.client
     const struct = setup.struct
@@ -72,6 +84,12 @@ describe('GeolocateEntity', async () => {
 })
 
 
+
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true
 
 function basicSetup(extra?: any) {
   // TODO: fix test def options

@@ -93,6 +93,7 @@ class VatValidationConfig
           ],
           'optspec' => [
             'clearTimer' => '`$FUNCTION`',
+            'now' => '`$FUNCTION`',
             'setTimer' => '`$FUNCTION`',
           ],
           'strict' => false,
@@ -221,6 +222,10 @@ class VatValidationConfig
                   ],
                   'args' => [],
                   'select' => [],
+                  'response' => [
+                    'kind' => 'json',
+                    'media' => 'application/json',
+                  ],
                 ],
               ],
             ],
@@ -269,6 +274,10 @@ class VatValidationConfig
                   ],
                   'args' => [],
                   'select' => [],
+                  'response' => [
+                    'kind' => 'json',
+                    'media' => 'application/json',
+                  ],
                 ],
               ],
             ],
@@ -395,6 +404,10 @@ class VatValidationConfig
                   ],
                   'args' => [],
                   'select' => [],
+                  'response' => [
+                    'kind' => 'json',
+                    'media' => 'application/json',
+                  ],
                 ],
               ],
             ],
@@ -455,12 +468,14 @@ class VatValidationConfig
                         'type' => '`$ANY`',
                         'kind' => 'query',
                         'example' => 'EUR',
+                        'field' => true,
                       ],
                       [
                         'name' => 'date',
                         'orig' => 'date',
                         'type' => '`$ANY`',
                         'kind' => 'query',
+                        'field' => true,
                       ],
                       [
                         'name' => 'symbol',
@@ -470,12 +485,10 @@ class VatValidationConfig
                       ],
                     ],
                   ],
-                  'select' => [
-                    'exist' => [
-                      'base',
-                      'date',
-                      'symbol',
-                    ],
+                  'select' => [],
+                  'response' => [
+                    'kind' => 'json',
+                    'media' => 'application/json',
                   ],
                 ],
               ],
@@ -591,6 +604,7 @@ class VatValidationConfig
                         'type' => '`$STRING`',
                         'kind' => 'query',
                         'reqd' => true,
+                        'field' => true,
                       ],
                     ],
                   ],
@@ -598,6 +612,10 @@ class VatValidationConfig
                     'exist' => [
                       'iban',
                     ],
+                  ],
+                  'response' => [
+                    'kind' => 'json',
+                    'media' => 'application/json',
                   ],
                 ],
               ],
@@ -669,6 +687,7 @@ class VatValidationConfig
                         'type' => '`$STRING`',
                         'kind' => 'query',
                         'reqd' => true,
+                        'field' => true,
                       ],
                     ],
                   ],
@@ -676,6 +695,10 @@ class VatValidationConfig
                     'exist' => [
                       'vat_number',
                     ],
+                  ],
+                  'response' => [
+                    'kind' => 'json',
+                    'media' => 'application/json',
                   ],
                 ],
               ],
@@ -749,6 +772,10 @@ class VatValidationConfig
                   ],
                   'args' => [],
                   'select' => [],
+                  'response' => [
+                    'kind' => 'json',
+                    'media' => 'application/json',
+                  ],
                 ],
               ],
             ],

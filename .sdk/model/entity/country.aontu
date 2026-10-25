@@ -108,6 +108,10 @@ main: kit: entity: country: {
           }
           m: "GET"
           o: "/countries"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "countries"

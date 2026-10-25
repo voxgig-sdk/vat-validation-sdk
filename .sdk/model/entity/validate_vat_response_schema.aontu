@@ -66,6 +66,10 @@ main: kit: entity: validate_vat_response_schema: {
               "vat_number"
             ]
           }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "vat"

@@ -64,12 +64,9 @@ main: kit: entity: rate: {
           }
           m: "GET"
           o: "/rates"
-          q: {
-            exist: [
-              "base"
-              "date"
-              "symbol"
-            ]
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {

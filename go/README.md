@@ -16,7 +16,7 @@ go get github.com/voxgig-sdk/vat-validation-sdk/go@latest
 ```
 
 The Go module proxy resolves the version from the `go/vX.Y.Z` GitHub
-release tag — see [Releases](https://github.com/voxgig-sdk/vat-validation-sdk/releases) for the available versions.
+release tag — see [Tags](https://github.com/voxgig-sdk/vat-validation-sdk/tags) for the available versions.
 
 To vendor from a local checkout instead, clone this repo alongside your
 project and add a `replace` directive pointing at the checked-out
@@ -35,9 +35,10 @@ loading a specific record.
 ### Quickstart
 
 A complete program: create a client, then call the entity operations.
-Each operation returns `(value, error)` — the value is the data itself
-(there is no `{ok, data}` wrapper), so check `err` and use the value
-directly.
+Each operation returns `(value, error)` — the value is the entity, and for
+`List` a `[]any` of entities, one per record (there is no `{ok, data}`
+wrapper), so check `err` and read a record through the entity's
+`Data()`.
 
 ```go
 package main
@@ -50,13 +51,13 @@ import (
 func main() {
     client := sdk.New()
 
-    // List country records — the value is the array of records itself.
+    // List country records — the value is a []any of entities, one per record.
     countrys, err := client.Country(nil).List(nil, nil)
     if err != nil {
         panic(err)
     }
     for _, item := range countrys.([]any) {
-        fmt.Println(item)
+        fmt.Println(item.(sdk.Entity).Data())
     }
 }
 ```
@@ -143,7 +144,7 @@ currency, err := client.Currency(nil).Load(
 if err != nil {
     panic(err)
 }
-fmt.Println(currency) // the returned mock data
+fmt.Println(currency.(sdk.Entity).Data()) // the entity's mock record
 ```
 
 ### Use a custom fetch function
@@ -234,8 +235,8 @@ All entities implement the `VatValidationEntity` interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `Load` | `(reqmatch, ctrl map[string]any) (any, error)` | Load a single entity by match criteria. |
-| `List` | `(reqmatch, ctrl map[string]any) (any, error)` | List entities matching the criteria. |
+| `Load` | `(reqmatch, ctrl map[string]any) (any, error)` | Load a single entity by match criteria, and return it. |
+| `List` | `(reqmatch, ctrl map[string]any) (any, error)` | List entities matching the criteria, one per record. |
 | `Data` | `(args ...any) any` | Get or set entity data. |
 | `Match` | `(args ...any) any` | Get or set entity match criteria. |
 | `Make` | `() Entity` | Create a new instance with the same options. |
@@ -243,21 +244,21 @@ All entities implement the `VatValidationEntity` interface.
 
 ### Result shape
 
-Entity operations return `(value, error)`. The `value` is the
-operation's data **directly** — there is no wrapper:
+Entity operations return `(value, error)`. The `value` is the entity
+itself — there is no wrapper:
 
 | Operation | `value` |
 | --- | --- |
-| `Load` | the entity record (`map[string]any`) |
-| `List` | a `[]any` of entity records |
+| `Load` | the entity, whose `Data()` reads its record (`map[string]any`) |
+| `List` | a `[]any` of entities, one per record |
 
 Check `err` first, then use the value directly (or the typed
 `...Typed` variants, which return the entity's model struct and a typed
 slice):
 
-    country, err := client.Country(nil).List(map[string]any{/* fields */}, nil)
+    country, err := client.Country(nil).List(nil, nil)
     if err != nil { /* handle */ }
-    // country is the returned record
+    // country is a []any of entities, one per record
 
 Only `Direct()` returns a response envelope — a `map[string]any` with
 `"ok"`, `"status"`, `"headers"`, and `"data"` keys.
@@ -424,7 +425,10 @@ countrys, err := client.Country(nil).List(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(countrys) // the array of records
+// A []any of entities, one per record.
+for _, item := range countrys.([]any) {
+    fmt.Println(item.(sdk.Entity).Data())
+}
 ```
 
 
@@ -452,7 +456,7 @@ currency, err := client.Currency(nil).Load(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(currency) // the loaded record
+fmt.Println(currency.(sdk.Entity).Data()) // the loaded entity's record
 ```
 
 
@@ -493,7 +497,7 @@ geolocate, err := client.Geolocate(nil).Load(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(geolocate) // the loaded record
+fmt.Println(geolocate.(sdk.Entity).Data()) // the loaded entity's record
 ```
 
 
@@ -522,7 +526,7 @@ rate, err := client.Rate(nil).Load(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(rate) // the loaded record
+fmt.Println(rate.(sdk.Entity).Data()) // the loaded entity's record
 ```
 
 
@@ -560,7 +564,7 @@ validateIbanResponseSchema, err := client.ValidateIbanResponseSchema(nil).Load(m
 if err != nil {
     panic(err)
 }
-fmt.Println(validateIbanResponseSchema) // the loaded record
+fmt.Println(validateIbanResponseSchema.(sdk.Entity).Data()) // the loaded entity's record
 ```
 
 
@@ -591,7 +595,7 @@ validateVatResponseSchema, err := client.ValidateVatResponseSchema(nil).Load(map
 if err != nil {
     panic(err)
 }
-fmt.Println(validateVatResponseSchema) // the loaded record
+fmt.Println(validateVatResponseSchema.(sdk.Entity).Data()) // the loaded entity's record
 ```
 
 
@@ -624,7 +628,7 @@ vatcomplyApiRoot, err := client.VatcomplyApiRoot(nil).Load(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(vatcomplyApiRoot) // the loaded record
+fmt.Println(vatcomplyApiRoot.(sdk.Entity).Data()) // the loaded entity's record
 ```
 
 ## Features
@@ -761,7 +765,9 @@ The Go SDK uses `map[string]any` throughout rather than typed structs.
 This mirrors the dynamic nature of the API and keeps the SDK
 flexible — no code generation is needed when the API schema changes.
 
-Use `core.ToMapAny()` to safely cast results and nested data.
+An operation returns the entity, and its `Data()` returns the record. Use
+`core.ToMapAny()` to safely cast that record, or data nested in it, to
+`map[string]any`: it returns `nil` for anything else, an entity included.
 
 ### Package structure
 

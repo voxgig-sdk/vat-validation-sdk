@@ -13,6 +13,19 @@ import { VatValidationEntityBase } from './VatValidationEntityBase';
 import { Utility } from './utility/Utility';
 import { BaseFeature } from './feature/base/BaseFeature';
 declare const stdutil: Utility;
+type DirectResult = {
+    ok: false;
+    err: any;
+    status?: undefined;
+    headers?: undefined;
+    data?: undefined;
+} | {
+    ok: boolean;
+    status: number;
+    headers: any;
+    data: any;
+    err?: any;
+};
 declare class VatValidationSDK {
     _mode: string;
     _options: any;
@@ -23,32 +36,8 @@ declare class VatValidationSDK {
     options(): any;
     utility(): any;
     prepare(fetchargs?: any): Promise<any>;
-    direct(fetchargs?: any): Promise<Error | {
-        ok: boolean;
-        err: any;
-        status?: undefined;
-        headers?: undefined;
-        data?: undefined;
-    } | {
-        ok: boolean;
-        status: number;
-        headers: any;
-        data: any;
-        err?: undefined;
-    }>;
-    _rawRequest(fetchargs?: any): Promise<Error | {
-        ok: boolean;
-        err: any;
-        status?: undefined;
-        headers?: undefined;
-        data?: undefined;
-    } | {
-        ok: boolean;
-        status: number;
-        headers: any;
-        data: any;
-        err?: undefined;
-    }>;
+    direct(fetchargs?: any): Promise<DirectResult>;
+    _rawRequest(fetchargs?: any): Promise<DirectResult>;
     graphql(query: string, variables?: any, ctrl?: any): Promise<any>;
     Country(entopts?: Record<string, any>): CountryEntity;
     Currency(entopts?: Record<string, any>): CurrencyEntity;
@@ -67,3 +56,4 @@ declare class VatValidationSDK {
 }
 declare const SDK: typeof VatValidationSDK;
 export { stdutil, config, BaseFeature, VatValidationEntityBase, VatValidationSDK, SDK, };
+export type { DirectResult };

@@ -20,7 +20,6 @@ export VAT_VALIDATION_APIKEY=sk_live_xxx
 
 # 4. Each command line is ONE boru expression, run against the API:
 ./vat-validation-cli list country
-./vat-validation-cli list currency
 
 # 5. Override the API base URL for a single call
 VAT_VALIDATION_BASE=https://api.example.com ./vat-validation-cli list country

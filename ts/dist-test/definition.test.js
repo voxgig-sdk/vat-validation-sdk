@@ -17,7 +17,12 @@ const PLAN = [
         "args": [],
         "select": {},
         "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
         "query": [],
+        "queryArgs": [],
         "auth": null,
         "status": 200,
         "sample": [
@@ -48,7 +53,12 @@ const PLAN = [
         "args": [],
         "select": {},
         "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
         "query": [],
+        "queryArgs": [],
         "auth": null,
         "status": 200,
         "sample": {},
@@ -63,7 +73,12 @@ const PLAN = [
         "args": [],
         "select": {},
         "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
         "query": [],
+        "queryArgs": [],
         "auth": null,
         "status": 200,
         "sample": {
@@ -93,15 +108,33 @@ const PLAN = [
         "path": "/rates",
         "args": [],
         "select": {
-            "base": "v1",
+            "base": "EUR",
             "date": "v1",
             "symbol": "v1"
         },
         "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
         "query": [
             "base",
             "symbols",
             "date"
+        ],
+        "queryArgs": [
+            {
+                "name": "base",
+                "wire": "base"
+            },
+            {
+                "name": "date",
+                "wire": "date"
+            },
+            {
+                "name": "symbol",
+                "wire": "symbols"
+            }
         ],
         "auth": null,
         "status": 200,
@@ -123,8 +156,18 @@ const PLAN = [
             "iban": "v1"
         },
         "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
         "query": [
             "iban"
+        ],
+        "queryArgs": [
+            {
+                "name": "iban",
+                "wire": "iban"
+            }
         ],
         "auth": null,
         "status": 200,
@@ -155,8 +198,18 @@ const PLAN = [
             "vat_number": "v1"
         },
         "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
         "query": [
             "vat_number"
+        ],
+        "queryArgs": [
+            {
+                "name": "vat_number",
+                "wire": "vat_number"
+            }
         ],
         "auth": null,
         "status": 200,
@@ -178,7 +231,12 @@ const PLAN = [
         "args": [],
         "select": {},
         "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
         "query": [],
+        "queryArgs": [],
         "auth": null,
         "status": 200,
         "sample": {

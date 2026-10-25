@@ -96,6 +96,7 @@ def make_config():
         },
         "optspec": {
           "clearTimer": "`$FUNCTION`",
+          "now": "`$FUNCTION`",
           "setTimer": "`$FUNCTION`",
         },
         "strict": False,
@@ -224,6 +225,10 @@ def make_config():
                 },
                 "args": {},
                 "select": {},
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
+                },
               },
             ],
           },
@@ -272,6 +277,10 @@ def make_config():
                 },
                 "args": {},
                 "select": {},
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
+                },
               },
             ],
           },
@@ -398,6 +407,10 @@ def make_config():
                 },
                 "args": {},
                 "select": {},
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
+                },
               },
             ],
           },
@@ -458,12 +471,14 @@ def make_config():
                       "type": "`$ANY`",
                       "kind": "query",
                       "example": "EUR",
+                      "field": True,
                     },
                     {
                       "name": "date",
                       "orig": "date",
                       "type": "`$ANY`",
                       "kind": "query",
+                      "field": True,
                     },
                     {
                       "name": "symbol",
@@ -473,12 +488,10 @@ def make_config():
                     },
                   ],
                 },
-                "select": {
-                  "exist": [
-                    "base",
-                    "date",
-                    "symbol",
-                  ],
+                "select": {},
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
                 },
               },
             ],
@@ -594,6 +607,7 @@ def make_config():
                       "type": "`$STRING`",
                       "kind": "query",
                       "reqd": True,
+                      "field": True,
                     },
                   ],
                 },
@@ -601,6 +615,10 @@ def make_config():
                   "exist": [
                     "iban",
                   ],
+                },
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
                 },
               },
             ],
@@ -672,6 +690,7 @@ def make_config():
                       "type": "`$STRING`",
                       "kind": "query",
                       "reqd": True,
+                      "field": True,
                     },
                   ],
                 },
@@ -679,6 +698,10 @@ def make_config():
                   "exist": [
                     "vat_number",
                   ],
+                },
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
                 },
               },
             ],
@@ -752,6 +775,10 @@ def make_config():
                 },
                 "args": {},
                 "select": {},
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
+                },
               },
             ],
           },

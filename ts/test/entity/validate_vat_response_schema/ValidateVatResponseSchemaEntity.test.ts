@@ -9,7 +9,7 @@ import { createLiveTransport } from '../../live-runner'
 import { runLiveEntity } from '../../live-entity'
 
 
-import { VatValidationSDK, BaseFeature, stdutil } from '../../..'
+import { VatValidationSDK, BaseFeature, config, stdutil } from '../../..'
 
 import {
   envOverride,
@@ -41,6 +41,18 @@ describe('ValidateVatResponseSchemaEntity', async () => {
   })
 
 
+  test('validate', async (t) => {
+    if (null == (config as any).feature?.validate) {
+      t.skip('feature not present in this SDK: validate')
+      return
+    }
+    const client = VatValidationSDK.test(undefined, { feature: { validate: { active: true } } })
+    await assert.rejects(client.ValidateVatResponseSchema().load({"vat_number":1} as any),
+      (err: any) => 'validate_failed' === err.code)
+  })
+
+
+
   test('basic', async (t) => {
 
     const live = 'TRUE' === process.env.VAT_VALIDATION_TEST_LIVE
@@ -51,7 +63,7 @@ describe('ValidateVatResponseSchemaEntity', async () => {
     
     const setup = basicSetup()
     if (setup.live) {
-      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"address":{"a":true,"h":"Address","n":"address","r":false,"t":"`$STRING`","key$":"address","index$":0},"country_code":{"a":true,"h":"Country Code","n":"country_code","r":true,"t":"`$STRING`","key$":"country_code","index$":1},"name":{"a":true,"h":"Name","n":"name","r":false,"t":"`$STRING`","key$":"name","index$":2},"valid":{"a":true,"h":"Valid","n":"valid","r":true,"t":"`$BOOLEAN`","key$":"valid","index$":3},"vat_number":{"a":true,"h":"Vat Number","n":"vat_number","r":true,"t":"`$STRING`","key$":"vat_number","index$":4}},"name":"validate_vat_response_schema","op":{"load":{"input":"data","name":"load","points":[{"a":true,"co":{"id":"GET /vat","source":"openapi3","version":2},"g":{"query":[{"a":true,"k":"query","n":"vat_number","or":"vat_number","r":true,"t":"`$STRING`","index$":0}]},"k":"http","m":"GET","o":"/vat","q":{"exist":["vat_number"]},"r":{},"s":[{"lit":"vat"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"load"}},"relations":{"ancestors":[]},"key$":"validate_vat_response_schema","name__orig":"validate_vat_response_schema","Name":"ValidateVatResponseSchema","name_":"validate_vat_response_schema","name-":"validate-vat-response-schema","NAME":"VALIDATE_VAT_RESPONSE_SCHEMA","index$":5}, {"active":true,"entity":"validate_vat_response_schema","key$":"BasicValidateVatResponseSchemaFlow","kind":"basic","name":"BasicValidateVatResponseSchemaFlow","param":{},"step":[{"a":true,"d":{},"i":{"ref":"validate_vat_response_schema_ref01","srcdatavar":"validate_vat_response_schema_ref01_data","suffix":"_dt0"},"m":{},"o":"load","s":[],"v":[{"apply":"TextFieldMark","def":{"mark":"Mark01-validate_vat_response_schema_ref01"}}],"index$":0}]}, 'ValidateVatResponseSchema', {"GET /vat":{"protocol":"http","parameters":[{"in":"query","name":"vat_number","schema":{"title":"Vat Number","type":"string"},"required":true,"index$":0}]}})
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"address":{"a":true,"h":"Address","n":"address","r":false,"t":"`$STRING`","key$":"address","index$":0},"country_code":{"a":true,"h":"Country Code","n":"country_code","r":true,"t":"`$STRING`","key$":"country_code","index$":1},"name":{"a":true,"h":"Name","n":"name","r":false,"t":"`$STRING`","key$":"name","index$":2},"valid":{"a":true,"h":"Valid","n":"valid","r":true,"t":"`$BOOLEAN`","key$":"valid","index$":3},"vat_number":{"a":true,"h":"Vat Number","n":"vat_number","r":true,"t":"`$STRING`","key$":"vat_number","index$":4}},"name":"validate_vat_response_schema","op":{"load":{"input":"data","name":"load","points":[{"a":true,"co":{"id":"GET /vat","source":"openapi3","version":2},"g":{"query":[{"a":true,"k":"query","n":"vat_number","or":"vat_number","r":true,"t":"`$STRING`","index$":0}]},"k":"http","m":"GET","o":"/vat","q":{"exist":["vat_number"]},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"vat"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"load"}},"relations":{"ancestors":[]},"key$":"validate_vat_response_schema","name__orig":"validate_vat_response_schema","Name":"ValidateVatResponseSchema","name_":"validate_vat_response_schema","name-":"validate-vat-response-schema","NAME":"VALIDATE_VAT_RESPONSE_SCHEMA","index$":5}, {"active":true,"entity":"validate_vat_response_schema","key$":"BasicValidateVatResponseSchemaFlow","kind":"basic","name":"BasicValidateVatResponseSchemaFlow","param":{},"step":[{"a":true,"d":{},"i":{"ref":"validate_vat_response_schema_ref01","srcdatavar":"validate_vat_response_schema_ref01_data","suffix":"_dt0"},"m":{},"o":"load","s":[],"v":[{"apply":"TextFieldMark","def":{"mark":"Mark01-validate_vat_response_schema_ref01"}}],"index$":0}]}, 'ValidateVatResponseSchema', {"GET /vat":{"protocol":"http","parameters":[{"in":"query","name":"vat_number","schema":{"title":"Vat Number","type":"string"},"required":true,"index$":0}]}}, { strict: LIVE_STRICT, t })
     }
     const client = setup.client
     const struct = setup.struct
@@ -72,6 +84,12 @@ describe('ValidateVatResponseSchemaEntity', async () => {
 })
 
 
+
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true
 
 function basicSetup(extra?: any) {
   // TODO: fix test def options

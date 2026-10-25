@@ -79,6 +79,7 @@ module VatValidationConfig
           },
           "optspec" => {
             "clearTimer" => "`$FUNCTION`",
+            "now" => "`$FUNCTION`",
             "setTimer" => "`$FUNCTION`",
           },
           "strict" => false,
@@ -207,6 +208,10 @@ module VatValidationConfig
                   },
                   "args" => {},
                   "select" => {},
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
+                  },
                 },
               ],
             },
@@ -255,6 +260,10 @@ module VatValidationConfig
                   },
                   "args" => {},
                   "select" => {},
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
+                  },
                 },
               ],
             },
@@ -381,6 +390,10 @@ module VatValidationConfig
                   },
                   "args" => {},
                   "select" => {},
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
+                  },
                 },
               ],
             },
@@ -441,12 +454,14 @@ module VatValidationConfig
                         "type" => "`$ANY`",
                         "kind" => "query",
                         "example" => "EUR",
+                        "field" => true,
                       },
                       {
                         "name" => "date",
                         "orig" => "date",
                         "type" => "`$ANY`",
                         "kind" => "query",
+                        "field" => true,
                       },
                       {
                         "name" => "symbol",
@@ -456,12 +471,10 @@ module VatValidationConfig
                       },
                     ],
                   },
-                  "select" => {
-                    "exist" => [
-                      "base",
-                      "date",
-                      "symbol",
-                    ],
+                  "select" => {},
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
               ],
@@ -577,6 +590,7 @@ module VatValidationConfig
                         "type" => "`$STRING`",
                         "kind" => "query",
                         "reqd" => true,
+                        "field" => true,
                       },
                     ],
                   },
@@ -584,6 +598,10 @@ module VatValidationConfig
                     "exist" => [
                       "iban",
                     ],
+                  },
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
               ],
@@ -655,6 +673,7 @@ module VatValidationConfig
                         "type" => "`$STRING`",
                         "kind" => "query",
                         "reqd" => true,
+                        "field" => true,
                       },
                     ],
                   },
@@ -662,6 +681,10 @@ module VatValidationConfig
                     "exist" => [
                       "vat_number",
                     ],
+                  },
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
               ],
@@ -735,6 +758,10 @@ module VatValidationConfig
                   },
                   "args" => {},
                   "select" => {},
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
+                  },
                 },
               ],
             },

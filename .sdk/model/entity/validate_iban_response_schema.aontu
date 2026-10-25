@@ -108,6 +108,10 @@ main: kit: entity: validate_iban_response_schema: {
               "iban"
             ]
           }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "iban"

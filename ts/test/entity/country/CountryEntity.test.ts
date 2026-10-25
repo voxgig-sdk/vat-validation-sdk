@@ -9,7 +9,7 @@ import { createLiveTransport } from '../../live-runner'
 import { runLiveEntity } from '../../live-entity'
 
 
-import { VatValidationSDK, BaseFeature, stdutil } from '../../..'
+import { VatValidationSDK, BaseFeature, config, stdutil } from '../../..'
 
 import {
   envOverride,
@@ -41,6 +41,64 @@ describe('CountryEntity', async () => {
   })
 
 
+  class FailHook extends BaseFeature {
+    name = 'failhook'
+    version = '0.0.1'
+    active = true
+    unexpected = 0
+    init() { }
+    PreSpec() { throw new Error('country hook failed') }
+    PreUnexpected() { this.unexpected++ }
+  }
+
+  test('stream-error', async () => {
+    const offline = { net: { offline: true } }
+    await assert.rejects(async () => {
+      for await (const _item of VatValidationSDK.test(offline).Country().stream('list')) { }
+    }, /offline/)
+
+    for await (const _item of VatValidationSDK.test(offline).Country()
+      .stream('list', undefined, { ctrl: { throw: false } })) { }
+
+    if (null != (config as any).feature?.rbac) {
+      const denied = VatValidationSDK.test(undefined, { feature: { rbac: { active: true, deny: true } } })
+      await assert.rejects(async () => {
+        for await (const _item of denied.Country().stream('list')) { }
+      }, (err: any) => 'rbac_denied' === err.code)
+    }
+  })
+
+  test('stream-ctrl', async () => {
+    const explain: any = {}
+    const ctrl: any = { explain }
+    for await (const _item of VatValidationSDK.test().Country().stream('list', undefined, { ctrl })) { }
+    assert.deepStrictEqual(Object.keys(ctrl), ['explain'])
+    assert(explain === ctrl.explain && 0 < Object.keys(explain).length)
+  })
+
+  test('unexpected', async () => {
+    const hook = new FailHook()
+    const client = new VatValidationSDK({ feature: { test: { active: true } }, extend: [hook] })
+    await assert.rejects(client.Country().list(), /hook failed/)
+    assert(0 < hook.unexpected)
+
+    const fired = hook.unexpected
+    assert.strictEqual(await client.Country().list(undefined, { throw: false }), undefined)
+    assert(fired < hook.unexpected)
+  })
+
+  test('validate', async (t) => {
+    if (null == (config as any).feature?.validate) {
+      t.skip('feature not present in this SDK: validate')
+      return
+    }
+    const client = VatValidationSDK.test(undefined, { feature: { validate: { active: true } } })
+    await assert.rejects(client.Country().list({"capital":1} as any),
+      (err: any) => 'validate_failed' === err.code)
+  })
+
+
+
   test('basic', async (t) => {
 
     const live = 'TRUE' === process.env.VAT_VALIDATION_TEST_LIVE
@@ -51,7 +109,7 @@ describe('CountryEntity', async () => {
     
     const setup = basicSetup()
     if (setup.live) {
-      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"capital":{"a":true,"h":"Capital","n":"capital","r":true,"t":"`$STRING`","key$":"capital","index$":0},"currency":{"a":true,"h":"Currency","n":"currency","r":true,"t":"`$STRING`","key$":"currency","index$":1},"emoji":{"a":true,"h":"Emoji","n":"emoji","r":true,"t":"`$STRING`","key$":"emoji","index$":2},"iso2":{"a":true,"h":"Iso2","n":"iso2","r":true,"t":"`$STRING`","key$":"iso2","index$":3},"iso3":{"a":true,"h":"Iso3","n":"iso3","r":true,"t":"`$STRING`","key$":"iso3","index$":4},"latitude":{"a":true,"h":"Latitude","n":"latitude","r":true,"t":"`$NUMBER`","union":{"branches":2,"count":1,"depth":0},"key$":"latitude","index$":5},"longitude":{"a":true,"h":"Longitude","n":"longitude","r":true,"t":"`$NUMBER`","union":{"branches":2,"count":1,"depth":0},"key$":"longitude","index$":6},"name":{"a":true,"h":"Name","n":"name","r":true,"t":"`$STRING`","key$":"name","index$":7},"numeric_code":{"a":true,"h":"Numeric Code","n":"numeric_code","r":true,"t":"`$INTEGER`","key$":"numeric_code","index$":8},"phone_code":{"a":true,"h":"Phone Code","n":"phone_code","r":true,"t":"`$STRING`","key$":"phone_code","index$":9},"region":{"a":true,"h":"Region","n":"region","r":true,"t":"`$STRING`","key$":"region","index$":10},"subregion":{"a":true,"h":"Subregion","n":"subregion","r":true,"t":"`$STRING`","key$":"subregion","index$":11},"tld":{"a":true,"h":"Tld","n":"tld","r":true,"t":"`$STRING`","key$":"tld","index$":12}},"name":"country","op":{"list":{"input":"data","name":"list","points":[{"a":true,"co":{"id":"GET /countries","source":"openapi3","version":2},"g":{},"k":"http","m":"GET","o":"/countries","q":{},"r":{},"s":[{"lit":"countries"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"list"}},"relations":{"ancestors":[]},"key$":"country","name__orig":"country","Name":"Country","name_":"country","name-":"country","NAME":"COUNTRY","index$":0}, {"active":true,"entity":"country","key$":"BasicCountryFlow","kind":"basic","name":"BasicCountryFlow","param":{},"step":[{"a":true,"d":{},"i":{},"m":{},"o":"list","s":[],"v":[{"apply":"ItemExists","def":{"ref":"country_ref01"}}],"index$":0}]}, 'Country', {"GET /countries":{"protocol":"http","parameters":[]}})
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"capital":{"a":true,"h":"Capital","n":"capital","r":true,"t":"`$STRING`","key$":"capital","index$":0},"currency":{"a":true,"h":"Currency","n":"currency","r":true,"t":"`$STRING`","key$":"currency","index$":1},"emoji":{"a":true,"h":"Emoji","n":"emoji","r":true,"t":"`$STRING`","key$":"emoji","index$":2},"iso2":{"a":true,"h":"Iso2","n":"iso2","r":true,"t":"`$STRING`","key$":"iso2","index$":3},"iso3":{"a":true,"h":"Iso3","n":"iso3","r":true,"t":"`$STRING`","key$":"iso3","index$":4},"latitude":{"a":true,"h":"Latitude","n":"latitude","r":true,"t":"`$NUMBER`","union":{"branches":2,"count":1,"depth":0},"key$":"latitude","index$":5},"longitude":{"a":true,"h":"Longitude","n":"longitude","r":true,"t":"`$NUMBER`","union":{"branches":2,"count":1,"depth":0},"key$":"longitude","index$":6},"name":{"a":true,"h":"Name","n":"name","r":true,"t":"`$STRING`","key$":"name","index$":7},"numeric_code":{"a":true,"h":"Numeric Code","n":"numeric_code","r":true,"t":"`$INTEGER`","key$":"numeric_code","index$":8},"phone_code":{"a":true,"h":"Phone Code","n":"phone_code","r":true,"t":"`$STRING`","key$":"phone_code","index$":9},"region":{"a":true,"h":"Region","n":"region","r":true,"t":"`$STRING`","key$":"region","index$":10},"subregion":{"a":true,"h":"Subregion","n":"subregion","r":true,"t":"`$STRING`","key$":"subregion","index$":11},"tld":{"a":true,"h":"Tld","n":"tld","r":true,"t":"`$STRING`","key$":"tld","index$":12}},"name":"country","op":{"list":{"input":"data","name":"list","points":[{"a":true,"co":{"id":"GET /countries","source":"openapi3","version":2},"g":{},"k":"http","m":"GET","o":"/countries","q":{},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"countries"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"list"}},"relations":{"ancestors":[]},"key$":"country","name__orig":"country","Name":"Country","name_":"country","name-":"country","NAME":"COUNTRY","index$":0}, {"active":true,"entity":"country","key$":"BasicCountryFlow","kind":"basic","name":"BasicCountryFlow","param":{},"step":[{"a":true,"d":{},"i":{},"m":{},"o":"list","s":[],"v":[{"apply":"ItemExists","def":{"ref":"country_ref01"}}],"index$":0}]}, 'Country', {"GET /countries":{"protocol":"http","parameters":[]}}, { strict: LIVE_STRICT, t })
     }
     const client = setup.client
     const struct = setup.struct
@@ -72,6 +130,12 @@ describe('CountryEntity', async () => {
 })
 
 
+
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true
 
 function basicSetup(extra?: any) {
   // TODO: fix test def options

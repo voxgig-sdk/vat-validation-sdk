@@ -9,7 +9,7 @@ import { createLiveTransport } from '../../live-runner'
 import { runLiveEntity } from '../../live-entity'
 
 
-import { VatValidationSDK, BaseFeature, stdutil } from '../../..'
+import { VatValidationSDK, BaseFeature, config, stdutil } from '../../..'
 
 import {
   envOverride,
@@ -41,6 +41,8 @@ describe('RateEntity', async () => {
   })
 
 
+
+
   test('basic', async (t) => {
 
     const live = 'TRUE' === process.env.VAT_VALIDATION_TEST_LIVE
@@ -51,7 +53,7 @@ describe('RateEntity', async () => {
     
     const setup = basicSetup()
     if (setup.live) {
-      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"base":{"a":true,"h":"Base","n":"base","r":true,"t":"`$STRING`","key$":"base","index$":0},"date":{"a":true,"h":"Date","n":"date","r":true,"t":"`$STRING`","key$":"date","index$":1},"rates":{"a":true,"h":"Rates","n":"rates","r":true,"t":"`$OBJECT`","key$":"rates","index$":2}},"name":"rate","op":{"load":{"input":"data","name":"load","points":[{"a":true,"co":{"id":"GET /rates","source":"openapi3","version":2},"g":{"query":[{"a":true,"ex":"EUR","k":"query","n":"base","or":"base","r":false,"t":"`$ANY`","index$":0},{"a":true,"k":"query","n":"date","or":"date","r":false,"t":"`$ANY`","index$":1},{"a":true,"k":"query","n":"symbol","or":"symbols","r":false,"t":"`$ANY`","index$":2}]},"k":"http","m":"GET","o":"/rates","q":{"exist":["base","date","symbol"]},"r":{},"s":[{"lit":"rates"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"load"}},"relations":{"ancestors":[]},"key$":"rate","name__orig":"rate","Name":"Rate","name_":"rate","name-":"rate","NAME":"RATE","index$":3}, {"active":true,"entity":"rate","key$":"BasicRateFlow","kind":"basic","name":"BasicRateFlow","param":{},"step":[{"a":true,"d":{},"i":{"ref":"rate_ref01","srcdatavar":"rate_ref01_data","suffix":"_dt0"},"m":{},"o":"load","s":[],"v":[{"apply":"TextFieldMark","def":{"mark":"Mark01-rate_ref01"}}],"index$":0}]}, 'Rate', {"GET /rates":{"protocol":"http","parameters":[{"in":"query","name":"base","schema":{"anyOf":[{"type":"string"},{"type":"null"}],"default":"EUR","title":"Base"},"required":false,"index$":0},{"in":"query","name":"symbols","schema":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Symbols"},"required":false,"index$":1},{"in":"query","name":"date","schema":{"anyOf":[{"format":"date","type":"string"},{"type":"null"}],"title":"Date"},"required":false,"index$":2}]}})
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"base":{"a":true,"h":"Base","n":"base","r":true,"t":"`$STRING`","key$":"base","index$":0},"date":{"a":true,"h":"Date","n":"date","r":true,"t":"`$STRING`","key$":"date","index$":1},"rates":{"a":true,"h":"Rates","n":"rates","r":true,"t":"`$OBJECT`","key$":"rates","index$":2}},"name":"rate","op":{"load":{"input":"data","name":"load","points":[{"a":true,"co":{"id":"GET /rates","source":"openapi3","version":2},"g":{"query":[{"a":true,"ex":"EUR","k":"query","n":"base","or":"base","r":false,"t":"`$ANY`","index$":0},{"a":true,"k":"query","n":"date","or":"date","r":false,"t":"`$ANY`","index$":1},{"a":true,"k":"query","n":"symbol","or":"symbols","r":false,"t":"`$ANY`","index$":2}]},"k":"http","m":"GET","o":"/rates","q":{},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"rates"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"load"}},"relations":{"ancestors":[]},"key$":"rate","name__orig":"rate","Name":"Rate","name_":"rate","name-":"rate","NAME":"RATE","index$":3}, {"active":true,"entity":"rate","key$":"BasicRateFlow","kind":"basic","name":"BasicRateFlow","param":{},"step":[{"a":true,"d":{},"i":{"ref":"rate_ref01","srcdatavar":"rate_ref01_data","suffix":"_dt0"},"m":{},"o":"load","s":[],"v":[{"apply":"TextFieldMark","def":{"mark":"Mark01-rate_ref01"}}],"index$":0}]}, 'Rate', {"GET /rates":{"protocol":"http","parameters":[{"in":"query","name":"base","schema":{"anyOf":[{"type":"string"},{"type":"null"}],"default":"EUR","title":"Base"},"required":false,"index$":0},{"in":"query","name":"symbols","schema":{"anyOf":[{"type":"string"},{"type":"null"}],"title":"Symbols"},"required":false,"index$":1},{"in":"query","name":"date","schema":{"anyOf":[{"format":"date","type":"string"},{"type":"null"}],"title":"Date"},"required":false,"index$":2}]}}, { strict: LIVE_STRICT, t })
     }
     const client = setup.client
     const struct = setup.struct
@@ -72,6 +74,12 @@ describe('RateEntity', async () => {
 })
 
 
+
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true
 
 function basicSetup(extra?: any) {
   // TODO: fix test def options

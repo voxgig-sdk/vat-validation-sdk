@@ -3,5 +3,11 @@
     "SUMMARY.md"
   ],
   "config": ".sdk/doc/qa/vale.ini",
-  "routes": {}
+  "routes": {},
+  "quoted": {
+    "SUMMARY.md": [
+      "API for automated VAT compliance and currency conversion.",
+      "OK"
+    ]
+  }
 }
